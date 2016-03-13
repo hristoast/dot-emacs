@@ -170,32 +170,35 @@
   (defun use-pyenv-python351 ()
     "Point to Python 3.5.1 for `elpy-mode', `flycheck-mode', and `python-mode'."
     (interactive)
-    (setq
-     elpy-rpc-python-command "~/.pyenv/versions/3.5.1/bin/python3.5m"
-     elpy-rpc-pythonpath "~/.pyenv/versions/3.5.1/lib/python3.5/site-packages"
-     flycheck-python-flake8-executable "~/.pyenv/versions/3.5.1/bin/flake8"
-     python-check-command "~/.pyenv/versions/3.5.1/bin/pyflakes"
-     python-shell-interpreter "~/.pyenv/versions/3.5.1/bin/ipython3"))
+    (let ((pyenv-351 (concat (getenv "HOME") "/.pyenv/versions/3.5.1")))
+      (setq
+       elpy-rpc-python-command (concat pyenv-351 "/bin/python3.5m")
+       elpy-rpc-pythonpath (concat pyenv-351 "/lib/python3.5/site-packages")
+       flycheck-python-flake8-executable (concat pyenv-351 "/bin/flake8")
+       python-check-command (concat pyenv-351 "/bin/pyflakes")
+       python-shell-interpreter (concat pyenv-351 "/bin/ipython3"))))
 
   (defun use-pyenv-python344 ()
     "Point to Python 3.4.4 for `elpy-mode', `flycheck-mode', and `python-mode'."
     (interactive)
-    (setq
-     elpy-rpc-python-command "~/.pyenv/versions/3.4.4/bin/python3.4m"
-     elpy-rpc-pythonpath "~/.pyenv/versions/3.4.4/lib/python3.4/site-packages"
-     flycheck-python-flake8-executable "~/.pyenv/versions/3.4.4/bin/flake8"
-     python-check-command "~/.pyenv/versions/3.4.4/bin/pyflakes"
-     python-shell-interpreter "~/.pyenv/versions/3.4.4/bin/ipython3"))
+    (let ((pyenv-344 (concat (getenv "HOME") "/.pyenv/versions/3.4.4")))
+      (setq
+       elpy-rpc-python-command (concat pyenv-344 "/bin/python3.4m")
+       elpy-rpc-pythonpath (concat pyenv-344 "/lib/python3.4/site-packages")
+       flycheck-python-flake8-executable (concat pyenv-344 "/bin/flake8")
+       python-check-command (concat pyenv-344 "/bin/pyflakes")
+       python-shell-interpreter (concat pyenv-344 "/bin/ipython3"))))
 
   (defun use-pyenv-python2 ()
     "Point to Python 2 for `elpy-mode', `flycheck-mode', and `python-mode'."
     (interactive)
-    (setq
-     elpy-rpc-python-command "~/.pyenv/versions/2.7.11/bin/python2.7"
-     elpy-rpc-pythonpath "~/.pyenv/versions/2.7.11/lib/python2.7/site-packages"
-     flycheck-python-flake8-executable "~/.pyenv/versions/2.7.11/bin/flake8"
-     python-check-command "~/.pyenv/versions/2.7.11/bin/pyflakes"
-     python-shell-interpreter "~/.pyenv/versions/2.7.11/bin/ipython"))
+      (let ((pyenv-2711 (concat (getenv "HOME") "/.pyenv/versions/2.7.11")))
+        (setq
+         elpy-rpc-python-command (concat pyenv-2711 "/bin/python2.7")
+         elpy-rpc-pythonpath (concat pyenv-2711 "/lib/python2.7/site-packages")
+         flycheck-python-flake8-executable (concat pyenv-2711 "/bin/flake8")
+         python-check-command (concat pyenv-2711 "/bin/pyflakes")
+         python-shell-interpreter (concat pyenv-2711 "/bin/ipython"))))
 
   (defun use-system-python34 ()
     "Use the system python3 for `elpy-mode', `flycheck-mode', and `python-mode'."
@@ -378,8 +381,8 @@
   (semantic-mode 1)
   ;; add moar include paths like this ...
   ;; (semantic-add-system-include "/usr/include/boost" 'c++-mode)
-  ;; (semantic-add-system-include "~/linux/kernel")
-  ;; (semantic-add-system-include "~/linux/include")
+  ;; (semantic-add-system-include (concat (getenv "HOME") "/linux/kernel"))
+  ;; (semantic-add-system-include (concat (getenv "HOME") "/linux/include"))
   )
 
 ;; skewer-mode: https://github.com/skeeto/skewer-mode
