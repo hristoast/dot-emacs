@@ -606,15 +606,15 @@
 (substitute-key-definition 'kill-buffer 'kill-buffer-and-window global-map)
 
 ;;; Warm cozy fireplace -- https://github.com/johanvts/emacs-fireplace
-(let ((fireplace-el (concat (getenv "HOME") "/src/emacs-fireplace/fireplace.el"))
-      (fireplace-elc (concat (getenv "HOME") "/src/emacs-fireplace/fireplace.elc")))
-  (if (file-exists-p fireplace-elc)
-      (load fireplace-elc)
-    (if (file-exists-p fireplace-el)
-        (progn
-          (byte-compile-file fireplace-el)
-          (load fireplace-elc))
-      (message (concat "Could not find " fireplace-el " or " fireplace-elc "!!!!")))))
+(let ((fireplace-el (concat (getenv "HOME") "/src/emacs-fireplace/fireplace.el")))
+  (let ((fireplace-elc (concat fireplace-el "c")))
+    (if (file-exists-p fireplace-elc)
+        (load fireplace-elc)
+      (if (file-exists-p fireplace-el)
+          (progn
+            (byte-compile-file fireplace-el)
+            (load fireplace-elc))
+        (message (concat "Could not find " fireplace-el " or " fireplace-elc "!!!!"))))))
 
 ;; How long did we take to load?
 (when window-system
