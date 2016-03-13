@@ -44,6 +44,8 @@
 
 (use-package auto-complete-clang-async :ensure t)
 
+(use-package autorevert :diminish auto-revert-mode)
+
 ;; CC Mode is a GNU Emacs mode for editing files containing C, C++, Objective-C,
 ;; Java, CORBA IDL (and the variants PSDL and CIDL), Pike and AWK code
 ;; https://www.gnu.org/software/emacs/manual/html_mono/ccmode.html
