@@ -506,7 +506,8 @@
  ;; No default scratch
  initial-scratch-message nil
  ;; Jive with the system clipboard
- x-select-enable-clipboard t)
+ x-select-enable-clipboard t
+ use-package-verbose t)
 
 (setq-default
  ;; No tabs
@@ -548,7 +549,7 @@
         (file-exists-p "/usr/share/fonts/TTF/Symbola.ttf"))
     (set-fontset-font t 'symbol (font-spec :family "Symbola") (selected-frame) 'prepend)
   ;; Again -- proably working on a Mac right now ...
-  (set-fontset-font t 'symbol (font-spec :family "Apple Color Emoji") (select-frame) 'prepend))
+  (set-fontset-font t 'symbol (font-spec :family "Apple Color Emoji") (selected-frame) 'prepend))
 
 ;;; Define some handy functions
 
