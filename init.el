@@ -567,6 +567,13 @@
         (funcall func point mark)
       (funcall func mark point))))
 
+(defun indent-appropriately ()
+  "Appropriately indent the current line or region."
+  (interactive)
+  (if mark-active
+      (do-func-to-marked-region 'indent-region)
+    (indent-according-to-mode)))
+
 (defun toggle-comment ()
   "Toggle comments on the current line or highlighted region."
   (interactive)
@@ -579,6 +586,8 @@
 ;;; Rebind/Set several useful keybindings - many of which make Emacs behave like
 ;;; other (not vim) editors.
 
+;; UNUSED: <f6> <f7> <f12>
+
 ;; Insert a newline, then indent according to major mode
 (global-set-key (kbd "RET") 'newline-and-indent)
 ;; Build, compile, that stuff
@@ -589,8 +598,10 @@
 (global-set-key (kbd "C-/") 'toggle-comment)
 ;; Make text bigger
 (global-set-key (kbd "C-+") 'text-scale-increase)
+(global-set-key (kbd "<f9>") 'text-scale-increase)
 ;; Or make it smaller
 (global-set-key (kbd "C--") 'text-scale-decrease)
+(global-set-key (kbd "<f8>") 'text-scale-decrease)
 ;; Toggle whitespace-mode
 (global-set-key (kbd "C-c w") 'whitespace-mode)
 ;; Extra keybindings that make life fun
@@ -601,7 +612,7 @@
 (global-set-key (kbd "C-x u") 'upcase-word)
 (global-set-key (kbd "C-c u w") 'upcase-region)
 (global-set-key (kbd "C-x t m") 'menu-bar-mode)
-(global-set-key (kbd "TAB") 'indent-region)
+(global-set-key (kbd "TAB") 'indent-appropriately)
 
 ;; Kill this buffer!
 (substitute-key-definition 'kill-buffer 'kill-buffer-and-window global-map)
