@@ -327,18 +327,7 @@
     "Indent for `markdown-mode', to be used to rebind TAB - WIP."
     (interactive)
     (if mark-active
-        ;; this does not work for some reason ...
-        ;; (do-func-to-marked-region 'markdown-indent-region)
-        (let ((mark (mark))
-              (point (point)))
-          (if (> mark point)
-              (markdown-indent-region point mark nil)
-            (markdown-indent-region mark point nil)))
-      ;; nor does this ...
-      ;; (markdown-indent-region
-      ;;  (line-beginning-position)
-      ;;  (line-end-position))))
-      ;; or this even!
+        (do-func-to-marked-region 'markdown-indent-region)
       (markdown-indent-line))))
 
 (use-package markdown-mode+ :defer t :ensure t)
@@ -586,7 +575,7 @@
 ;;; Rebind/Set several useful keybindings - many of which make Emacs behave like
 ;;; other (not vim) editors.
 
-;; UNUSED: <f6> <f7> <f12>
+;; UNUSED: <f6> <f7>
 
 ;; Insert a newline, then indent according to major mode
 (global-set-key (kbd "RET") 'newline-and-indent)
@@ -604,15 +593,16 @@
 (global-set-key (kbd "<f8>") 'text-scale-decrease)
 ;; Toggle whitespace-mode
 (global-set-key (kbd "C-c w") 'whitespace-mode)
-;; Extra keybindings that make life fun
+;; Extra keybindings that make life great
 (global-set-key (kbd "C-c r") 'rgrep)
 (global-set-key (kbd "<f13>") 'rgrep)
 (global-set-key (kbd "C-c s c") 'slime-connect)
 (global-set-key (kbd "C-x r b") 'revert-buffer)
-(global-set-key (kbd "C-x u") 'upcase-word)
-(global-set-key (kbd "C-c u w") 'upcase-region)
+(global-set-key (kbd "C-c u w") 'upcase-word)
+(global-set-key (kbd "C-x u") 'upcase-region)
 (global-set-key (kbd "C-x t m") 'menu-bar-mode)
 (global-set-key (kbd "TAB") 'indent-appropriately)
+(global-set-key (kbd "<f12>") 'fireplace)
 
 ;; Kill this buffer!
 (substitute-key-definition 'kill-buffer 'kill-buffer-and-window global-map)
