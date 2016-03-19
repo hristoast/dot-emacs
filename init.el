@@ -230,8 +230,7 @@
   (add-hook 'python-mode-hook
             (lambda ()
               (when (derived-mode-p 'python-mode)
-                (add-to-list 'company-backends 'company-jedi))))
-  (elpy-enable))
+                (add-to-list 'company-backends 'company-jedi)))))
 
 ;; Emacs Package Library
 ;; https://github.com/cask/epl
