@@ -111,12 +111,13 @@
 
 ;; company-mode backend for emoji
 ;; https://github.com/dunn/company-emoji
-;; TODO: This is fun, but let's only use it with markdown-mode and friends...
-;; (use-package company-emoji
-;;   :ensure t
-;;   :config
-;;   (add-hook 'markdown-mode
-;;                 (add-to-list 'company-backends 'company-emoji)))
+(use-package company-emoji
+  :defer t
+  :ensure t)
+
+(use-package company-jedi
+  :defer t
+  :ensure t)
 
 ;; company-mode autocompletion for golang
 ;; https://github.com/nsf/gocode/tree/master/emacs-company
@@ -296,6 +297,12 @@
   :config
   (ido-mode t))
 
+(use-package jedi
+  :defer t
+  :ensure t
+  :init
+  (setq jedi:setup-keys 1))
+
 (use-package jinja2-mode :defer t :ensure t)
 
 (use-package js2-highlight-vars :ensure t)
@@ -320,9 +327,13 @@
 (use-package markdown-mode
   :ensure t
   :config
-  ;; Special indent for markdown-mode - WIP
+  ;; Special indent for markdown-mode
   (add-hook 'markdown-mode-hook
             (global-set-key (kbd "TAB") 'md-indent))
+  (add-hook 'markdown-mode-hook
+            (lambda ()
+              (when (derived-mode-p 'markdown-mode)
+                (add-to-list 'company-backends 'company-emoji))))
   (defun md-indent ()
     "Indent for `markdown-mode', to be used to rebind TAB - WIP."
     (interactive)
@@ -345,6 +356,10 @@
   (add-hook 'rust-mode-hook #'racer-mode)
   (add-hook 'racer-mode-hook #'eldoc-mode)
   (add-hook 'racer-mode-hook #'company-mode))
+
+(use-package python-mode
+  :config
+  (add-hook 'python-mode-hook 'jedi:setup))
 
 ;; Rainbow mode - #000 #fff #f00 #ff0 #00f #0f0 #800080 #00ffff #ff00ff
 ;; https://julien.danjou.info/projects/emacs-packages
