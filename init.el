@@ -115,6 +115,7 @@
   :defer t
   :ensure t)
 
+ ;; Company backend for Python jedi - https://github.com/syohex/emacs-company-jedi
 (use-package company-jedi
   :defer t
   :ensure t)
@@ -226,6 +227,10 @@
   ;; Default
   (use-pyenv-python351)
   :config
+  (add-hook 'python-mode-hook
+            (lambda ()
+              (when (derived-mode-p 'python-mode)
+                (add-to-list 'company-backends 'company-jedi))))
   (elpy-enable))
 
 ;; Emacs Package Library
@@ -297,6 +302,8 @@
   :config
   (ido-mode t))
 
+;; Python auto-completion for Emacs
+;; http://tkf.github.io/emacs-jedi/latest/
 (use-package jedi
   :defer t
   :ensure t
@@ -345,6 +352,11 @@
 
 (use-package nginx-mode :defer t :ensure t)
 
+;; Run jedi when we use python-mode
+(use-package python-mode
+  :config
+  (add-hook 'python-mode-hook 'jedi:setup))
+
 ;; rust-mode: https://github.com/rust-lang/rust-mode
 ;; and emacs-racer: https://github.com/racer-rust/emacs-racer
 (use-package racer
@@ -356,10 +368,6 @@
   (add-hook 'rust-mode-hook #'racer-mode)
   (add-hook 'racer-mode-hook #'eldoc-mode)
   (add-hook 'racer-mode-hook #'company-mode))
-
-(use-package python-mode
-  :config
-  (add-hook 'python-mode-hook 'jedi:setup))
 
 ;; Rainbow mode - #000 #fff #f00 #ff0 #00f #0f0 #800080 #00ffff #ff00ff
 ;; https://julien.danjou.info/projects/emacs-packages
