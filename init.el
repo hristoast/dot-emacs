@@ -34,6 +34,7 @@
 
 ;; Use some packages (configure them too!)
 ;; https://github.com/jwiegley/use-package/
+(defvar use-package-verbose t)
 (eval-when-compile (require 'use-package))
 
 (require 'bind-key)
@@ -231,6 +232,77 @@
             (lambda ()
               (when (derived-mode-p 'python-mode)
                 (add-to-list 'company-backends 'company-jedi)))))
+
+;; EMMS - https://www.gnu.org/software/emms/
+;; TODO: https://www.gnu.org/software/emms/manual/#Track-Information
+(use-package emms
+  :bind
+  (("<f1>" . emms-volume-lower)
+   ("<f2>" . emms-volume-raise)
+   ("<f3>" . emms-previous)
+   ("<f4>" . emms-next)
+   ("<f6>" . emms-play-directory)
+   ("<f7>" . emms-pause)
+   ("C-c m SPC" . emms-pause)
+   ("C-c m a" . emms-add-directory)
+   ("C-c m b" . emms-previous)
+   ("C-c m f" . emms-next)
+   ("C-c m l" . emms-lyrics-toggle)
+   ("C-c m n" . emms-playlist-mode-go)
+   ("C-c m p" . emms-start)
+   ("C-c m q" . emms-shuffle)
+   ("C-c m s" . emms-stop)
+   ("C-c m v d" . emms-volume-lower)
+   ("C-c m v u" . emms-volume-raise)
+   ("C-x t e" . emms-mode-line-toggle))
+  :ensure t
+  :config
+  (progn
+    (require 'emms-mode-line-cycle)
+    (require 'emms-mode-line-icon)
+    (require 'emms-player-mpv)
+    (emms-add-directory-tree (concat (getenv "HOME") "/music"))
+    (emms-mode-line 1)
+    (emms-mode-line-cycle 1)
+    (emms-playing-time 1)
+    (setq
+     emms-mode-line-cycle-additional-space-num 4
+     emms-mode-line-cycle-any-width-p t
+     emms-mode-line-cycle-current-title-function
+     (lambda ()
+       (let ((track (emms-playlist-current-selected-track)))
+         (cl-case (emms-track-type track)
+           ((streamlist)
+            (let ((stream-name (emms-stream-name
+                                (emms-track-get track 'metadata))))
+              (if stream-name stream-name (emms-track-description track))))
+           ((url) (emms-track-description track))
+           (t (file-name-nondirectory
+               (emms-track-description track))))))
+     emms-mode-line-cycle-max-width 25
+     emms-mode-line-cycle-use-icon-p t
+     emms-mode-line-cycle-velocity 2
+     emms-mode-line-format " [%s]"
+     emms-mode-line-titlebar-function
+     (lambda ()
+       '(:eval
+         (when emms-player-playing-p
+           (format " %s %s"
+                   (format emms-mode-line-format (emms-mode-line-cycle-get-title))
+                   emms-playing-time-string))))
+     emms-player-list '(emms-player-mpv)
+     emms-source-file-default-directory (concat (getenv "HOME") "/music"))))
+
+;; Display the emms mode line as a ticker
+;; https://github.com/momomo5717/emms-mode-line-cycle
+(use-package emms-mode-line-cycle
+  :defer t
+  :ensure t)
+
+;; mpv support for EMMS - https://github.com/dochang/emms-player-mpv/
+(use-package emms-player-mpv
+  :defer t
+  :ensure t)
 
 ;; Emacs Package Library
 ;; https://github.com/cask/epl
@@ -517,8 +589,7 @@
  ;; No default scratch
  initial-scratch-message nil
  ;; Jive with the system clipboard
- x-select-enable-clipboard t
- use-package-verbose t)
+ x-select-enable-clipboard t)
 
 (setq-default
  ;; No tabs
@@ -597,7 +668,7 @@
 ;;; Rebind/Set several useful keybindings - many of which make Emacs behave like
 ;;; other (not vim) editors.
 
-;; UNUSED: <f6> <f7>
+;; UNUSED: None!
 
 ;; Insert a newline, then indent according to major mode
 (global-set-key (kbd "RET") 'newline-and-indent)
