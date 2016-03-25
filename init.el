@@ -167,6 +167,7 @@
 
 ;; elpy: the Emacs Lisp Python Environment
 ;; https://github.com/jorgenschaefer/elpy
+;; Requires: `pip install elpy`
 (use-package elpy
   :ensure t
   :init
@@ -375,6 +376,7 @@
 
 ;; Python auto-completion for Emacs
 ;; http://tkf.github.io/emacs-jedi/latest/
+;; Requires: `pip install jedi`
 (use-package jedi
   :defer t
   :ensure t
@@ -450,12 +452,33 @@
   (add-hook 'html-mode-hook 'rainbow-mode)
   (add-hook 'prog-mode-hook 'rainbow-mode))
 
+;; Robe: Code navigation, documentation lookup and completion for Ruby
+;; https://github.com/dgutov/robe
+;; Requires: `gem install pry` and a Gemfile listing your gems
+(use-package robe
+  :diminish robe-mode
+  :ensure t
+  :init
+  (add-to-list 'exec-path (concat (getenv "HOME") "/.rbenv/shims"))
+  (add-to-list 'exec-path (concat (getenv "HOME") "/.rbenv/bin"))
+  :config
+  (add-hook 'ruby-mode-hook 'robe-mode))
+
 ;; ruby-dev.el - https://github.com/Mon-Ouie/ruby-dev.el
 (use-package ruby-dev
   :ensure t
   :config
   (autoload 'turn-on-ruby-dev "ruby-dev" nil t)
   (add-hook 'ruby-mode-hook 'turn-on-ruby-dev))
+
+;; Activate Robe and company-robe when we start ruby-mode
+(use-package ruby-mode
+  :config
+  (add-hook 'ruby-mode-hook
+            (lambda ()
+              (when (derived-mode-p 'ruby-mode)
+                (add-to-list 'company-backends 'company-robe))))
+  (add-hook 'ruby-mode-hook 'robe-start))
 
 ;; Provides language-aware editing commands based on source code parsers.
 ;; http://www.gnu.org/software/emacs/manual/html_node/emacs/Semantic.html
