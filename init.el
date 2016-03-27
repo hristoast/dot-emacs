@@ -255,8 +255,24 @@
    ("C-c m s" . emms-stop)
    ("C-c m v d" . emms-volume-lower)
    ("C-c m v u" . emms-volume-raise)
+   ("C-c p b" . mpd-rev10)
+   ("C-c p c" . emms-player-mpd-connect)
+   ("C-c p d" . emms-player-mpd-disconnect)
+   ("C-c p f" . mpd-seek10)
+   ("C-c p p" . emms-player-mpd-previous)
+   ("C-c p n" . emms-player-mpd-next)
+   ("C-c p s" . emms-player-mpd-show)
    ("C-x t e" . emms-mode-line-toggle))
   :ensure t
+  :init
+  (defun mpd-rev10 ()
+    "Seek backward ten seconds."
+    (interactive)
+    (emms-player-mpd-seek -10))
+  (defun mpd-seek10 ()
+    "Seek forward ten seconds."
+    (interactive)
+    (emms-player-mpd-seek 10))
   :config
   (progn
     (require 'emms-mode-line-cycle)
@@ -283,7 +299,7 @@
      emms-mode-line-cycle-max-width 25
      emms-mode-line-cycle-use-icon-p t
      emms-mode-line-cycle-velocity 2
-     emms-mode-line-format " [%s]"
+     emms-mode-line-format " ( %s )"
      emms-mode-line-titlebar-function
      (lambda ()
        '(:eval
