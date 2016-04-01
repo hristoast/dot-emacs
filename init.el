@@ -17,9 +17,8 @@
 ;; Some initial package stuff
 (require 'package)
 (setq package-archives
-      '(
-        ;; GNU over SSL
-        ("gnu" . "https://elpa.gnu.org/packages/")
+      ;; GNU over SSL
+      '(("gnu" . "https://elpa.gnu.org/packages/")
         ;; MELPA (Milkypostman’s Emacs Lisp Package Archive)
         ("melpa" . "https://melpa.org/packages/")
         ;; MELPA Stable
@@ -42,6 +41,15 @@
 (use-package apache-mode :defer t :ensure t)
 
 (use-package auto-complete :ensure t)
+
+;; TODO: This does not work
+(use-package ac-slime
+  :ensure t
+  :config
+  (add-hook 'slime-mode-hook 'set-up-slime-ac)
+  (add-hook 'slime-repl-mode-hook 'set-up-slime-ac)
+  (eval-after-load "auto-complete"
+    '(add-to-list 'ac-modes 'slime-repl-mode)))
 
 (use-package auto-complete-clang-async :ensure t)
 
@@ -411,11 +419,13 @@
 
 ;; https://github.com/andre-richter/emacs-lush-theme
 ;; Other cool themes: atom-one-dark, abyss, darcula, gotham, obsidian
-(use-package lush-theme :ensure t
+(use-package lush-theme
+  :ensure t
   :config
   (load-theme 'lush t))
 
-(use-package magit :ensure t
+(use-package magit
+  :ensure t
   :bind
   ("C-c g d" . magit-diff)
   ("C-x g" . magit-status))
@@ -518,13 +528,18 @@
   (add-hook 'css-mode-hook 'skewer-css-mode)
   (add-hook 'html-mode-hook 'skewer-html-mode))
 
-;; TODO
 ;; SLIME: The Superior Lisp Interaction Mode for Emacs
 ;; https://common-lisp.net/project/slime/
-;; (require 'slime)
-;; (setq
-;;  inferior-lisp-program "/usr/bin/sbcl"
-;;  slime-contribs '(slime-fancy))
+(use-package slime
+  :ensure t
+  :bind
+  ("TAB" . slime-complete-symbol)
+  ("C-c s s" . slime)
+  ("C-c s c" . slime-connect)
+  :config
+  (setq inferior-lisp-program "/usr/bin/sbcl")
+  (require 'slime-autoloads)
+  (slime-setup '(slime-fancy)))
 
 ;; Minor mode for Emacs that deals with parens
 ;; pairs and tries to be smart about it
@@ -728,7 +743,6 @@
 ;; Extra keybindings that make life great
 (global-set-key (kbd "C-c r") 'rgrep)
 (global-set-key (kbd "<f13>") 'rgrep)
-(global-set-key (kbd "C-c s c") 'slime-connect)
 (global-set-key (kbd "C-x r b") 'revert-buffer)
 (global-set-key (kbd "C-c u w") 'upcase-word)
 (global-set-key (kbd "C-x u") 'upcase-region)
