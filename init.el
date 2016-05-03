@@ -118,7 +118,7 @@
   (set-face-attribute
    'company-tooltip-common-selection nil :foreground "black" :weight 'bold))
 
-;; company-mode backend for emoji
+;; company-mode backend for emoji - does not work when Emacs is a daemon :-(
 ;; https://github.com/dunn/company-emoji
 (use-package company-emoji
   :defer t
@@ -398,6 +398,15 @@
   :config
   (ido-mode t))
 
+;; Auto Java Complete - https://www.emacswiki.org/emacs/AutoJavaComplete
+(use-package java-mode
+  :defer t
+  :init
+  (load-file (concat (getenv "HOME") "/src/auto-java-complete/ajc-java-complete.el"))
+  (load-file (concat (getenv "HOME") "/src/auto-java-complete/ajc-java-complete-config.el"))
+  :config
+  (add-hook 'java-mode-hook 'ajc-java-complete-mode))
+
 ;; Python auto-completion for Emacs
 ;; http://tkf.github.io/emacs-jedi/latest/
 ;; Requires: `pip install jedi`
@@ -418,11 +427,27 @@
 (use-package lua-mode :defer t :ensure t)
 
 ;; https://github.com/andre-richter/emacs-lush-theme
-;; Other cool themes: atom-one-dark, abyss, darcula, gotham, obsidian
+;; Other cool themes: atom-one-dark, abyss, darcula, obsidian
+;; (use-package abyss-theme
+;;   :ensure t
+;;   :config
+;;   (load-theme 'abyss t))
+;; (use-package atom-one-dark-theme
+;;   :ensure t
+;;   :config
+;;   (load-theme 'atom-one-dark t))
+;; (use-package darcula-theme
+;;   :ensure t
+;;   :config
+;;   (load-theme 'darcula t))
 (use-package lush-theme
   :ensure t
   :config
   (load-theme 'lush t))
+;; (use-package obsidian-theme
+;;   :ensure t
+;;   :config
+;;   (load-theme 'obsidian t))
 
 (use-package magit
   :ensure t
@@ -537,7 +562,9 @@
   ("C-c s s" . slime)
   ("C-c s c" . slime-connect)
   :config
-  (setq inferior-lisp-program "/usr/bin/sbcl")
+  (setq
+   inferior-lisp-program "/usr/bin/sbcl"
+   slime-complete-symbol-function 'slime-fuzzy-complete-symbol)
   (require 'slime-autoloads)
   (slime-setup '(slime-fancy)))
 
@@ -658,14 +685,12 @@
 (put 'upcase-region 'disabled nil)
 (put 'upcase-word 'disabled nil)
 
-;; Use hl-line-mode and linum-mode only if we
-;; are not using a character-based terminal
-(if (display-graphic-p)
-    (progn
-      ;; http://is.gd/Mw5KiS
-      (global-linum-mode t)
-      ;; http://is.gd/4jOQ8Y
-      (global-hl-line-mode 1)))
+;; Always use global-linum-mode and global-hl-line-mode
+;; so we can use them when Emacs is running as a daemon
+;; http://is.gd/Mw5KiS
+(global-linum-mode t)
+;; http://is.gd/4jOQ8Y
+(global-hl-line-mode 1)
 
 ;; Hack - http://sourcefoundry.org/hack/
 (if (or (file-exists-p (concat (getenv "HOME") "/.fonts/Hack-Regular.ttf"))
@@ -744,6 +769,7 @@
 (global-set-key (kbd "C-c r") 'rgrep)
 (global-set-key (kbd "<f13>") 'rgrep)
 (global-set-key (kbd "C-x r b") 'revert-buffer)
+(global-set-key (kbd "C-c q q q") 'save-buffers-kill-emacs)
 (global-set-key (kbd "C-c u w") 'upcase-word)
 (global-set-key (kbd "C-x u") 'upcase-region)
 (global-set-key (kbd "C-x t m") 'menu-bar-mode)
