@@ -16,6 +16,7 @@
 (defconst my-home (getenv "HOME"))
 (defconst my-bin (concat my-home "/bin"))
 (defconst my-src (concat my-home "/src"))
+(defconst default-eclipse-workspace (concat my-src "/eclipse"))
 
 ;; Some initial package stuff
 (require 'package)
@@ -255,6 +256,88 @@
               (when (derived-mode-p 'python-mode)
                 (add-to-list 'company-backends 'company-jedi)))))
 
+;; The Frankenstein required for productive Java programming in Emacs...
+;; 1) https://github.com/senny/emacs-eclim
+;; 2) http://eclim.org/
+;; 3) https://eclipse.org/
+;;
+;; Steps to make this work:
+;; 1) Start eclimd
+;; 2) Start Emacs
+;; 3) Create the eclim project (eclim-project-create, only if need be)
+;; 4) Open your java files
+;; 5) ????
+;; 6) PROFIT
+;;
+;; If you open a .java file before starting eclimd, kill
+;; the buffer, start eclimd, and then re-opem the file.
+;;
+;; TODO: add call to eclim-java-import in tab complete,
+;; so that imports are added when we tab-complete
+(use-package emacs-eclim
+  :ensure t
+  :bind
+  ("C-c s e" . start-eclimd)
+  ("C-c j b" . gradle-build)
+  ("C-c j c" . eclim-problems-correct)
+  ("C-c j d" . gradle-dev-setup)
+  ("C-c j f" . eclim-java-format)
+  ("C-c j g" . eclim-java-find-references)
+  ("C-c j h" . eclim-java-show-documentation-for-current-element)
+  ("C-c j i" . eclim-java-import-organize)
+  ("C-c TAB" . eclim-java-import-organize)
+  ("C-c j j" . eclim-java-implement)
+  ("C-c j l" . eclim-java-hierarchy)
+  ("C-c j n" . eclim-problems-next-same-file)
+  ("C-c j m" . eclim-problems-next)
+  ("C-c j p" . eclim-problems-previous-same-window)
+  ("C-c j o" . eclim-problems-previous)
+  ("C-c j r" . eclim-java-refactor-rename-symbol-at-point)
+  ("C-c j s" . gradle-decomp-workspace)
+  ("C-c j w" . gradle-clean)
+  ("C-c j z" . gradle-build-release)
+  :diminish flycheck-mode flycheck-status-emoji-mode
+  :init
+  (require 'eclimd)
+  (setq
+   eclim-eclipse-dirs '((concat my-bin "/eclipse"))
+   eclim-executable (concat my-bin "/eclipse/eclim")
+   eclimd-default-workspace default-eclipse-workspace
+   eclimd-executable (concat my-bin "/eclipse/eclimd")
+   help-at-pt-display-when-idle t
+   help-at-pt-timer-delay 0.1)
+  (global-eclim-mode)
+  (help-at-pt-set-timer)
+
+  ;; Helpful build functions
+  (defun gradle-build ()
+    (interactive)
+    (compile "make"))
+
+  (defun gradle-build-release ()
+    (interactive)
+    (compile "make release"))
+
+  (defun gradle-clean ()
+    (interactive)
+    (compile "make clean"))
+
+  (defun gradle-decomp-workspace ()
+    (interactive)
+    (compile "make decomp-workspace"))
+
+  (defun gradle-dev-setup ()
+    (interactive)
+    (compile "make dev-setup"))
+
+  (defun gradle-run-client ()
+    (interactive)
+    (compile "make client"))
+
+  (defun gradle-run-server ()
+    (interactive)
+    (compile "make server")))
+
 ;; EMMS - https://www.gnu.org/software/emms/
 ;; TODO: https://www.gnu.org/software/emms/manual/#Track-Information
 (use-package emms
@@ -410,6 +493,11 @@
   :ensure t
   :config
   (ido-mode t))
+
+(use-package java-mode
+  :init
+  (add-hook 'java-mode-hook 'run-eclimd)
+  (add-hook 'java-mode-hook 'eclim-mode))
 
 ;; Python auto-completion for Emacs
 ;; http://tkf.github.io/emacs-jedi/latest/
@@ -739,6 +827,11 @@
   (if mark-active
       (do-func-to-marked-region 'indent-region)
     (indent-according-to-mode)))
+
+(defun run-eclimd ()
+  "Run eclimd for Java editing."
+  (interactive)
+  (start-eclimd default-eclipse-workspace))
 
 (defun toggle-comment ()
   "Toggle comments on the current line or highlighted region."
