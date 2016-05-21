@@ -13,6 +13,9 @@
 
 ;; Start a timer
 (defconst emacs-start-time (current-time))
+(defconst my-home (getenv "HOME"))
+(defconst my-bin (concat my-home "/bin"))
+(defconst my-src (concat my-home "/src"))
 
 ;; Some initial package stuff
 (require 'package)
@@ -40,25 +43,28 @@
 
 (use-package apache-mode :defer t :ensure t)
 
-(use-package auto-complete :ensure t)
-
 ;; TODO: This does not work
-(use-package ac-slime
-  :ensure t
-  :config
-  (add-hook 'slime-mode-hook 'set-up-slime-ac)
-  (add-hook 'slime-repl-mode-hook 'set-up-slime-ac)
-  (eval-after-load "auto-complete"
-    '(add-to-list 'ac-modes 'slime-repl-mode)))
+;; (use-package ac-slime
+;;   :ensure t
+;;   :config
+;;   (add-hook 'slime-mode-hook 'set-up-slime-ac)
+;;   (add-hook 'slime-repl-mode-hook 'set-up-slime-ac)
+;;   (eval-after-load "auto-complete"
+;;     '(add-to-list 'ac-modes 'slime-repl-mode)))
 
-(use-package auto-complete-clang-async :ensure t)
+;; (use-package auto-complete-clang-async :ensure t)
 
 (use-package autorevert :diminish auto-revert-mode)
 
 ;; CC Mode is a GNU Emacs mode for editing files containing C, C++, Objective-C,
 ;; Java, CORBA IDL (and the variants PSDL and CIDL), Pike and AWK code
 ;; https://www.gnu.org/software/emacs/manual/html_mono/ccmode.html
-(use-package cc-mode :defer t)
+(use-package cc-mode
+  :defer t
+  :config
+  (defvar company-backends (delete 'company-semantic company-backends))
+  (define-key c-mode-map [(tab)] 'company-complete)
+  (define-key c++-mode-map [(tab)] 'company-complete))
 
 ;; CIDER is a Clojure Interactive Development Environment that Rocks for Emacs
 ;; https://github.com/clojure-emacs/cider
@@ -124,6 +130,13 @@
   :defer t
   :ensure t)
 
+;; https://github.com/Sarcasm/company-irony
+(use-package company-irony
+  :defer t
+  :ensure t
+  :config
+  (add-to-list 'company-backends 'company-irony))
+
  ;; Company backend for Python jedi - https://github.com/syohex/emacs-company-jedi
 (use-package company-jedi
   :defer t
@@ -139,8 +152,8 @@
               (set (make-local-variable 'company-backends) '(company-go))
               (company-mode)))
   ;; Set up environment variables so Flycheck can find gocode.
-  (setenv "GOPATH" (concat (getenv "HOME") "/src/golibs"))
-  (add-to-list 'exec-path (concat (getenv "GOPATH") "/bin")))
+  (setenv "GOPATH" (concat my-src "/golibs"))
+  (add-to-list 'exec-path my-bin))
 
 ;;  Company integration for racer
 ;; https://github.com/emacs-pe/company-racer
@@ -184,7 +197,7 @@
   (defun use-pyenv-python351 ()
     "Point to Python 3.5.1 for `elpy-mode', `flycheck-mode', and `python-mode'."
     (interactive)
-    (let ((pyenv-351 (concat (getenv "HOME") "/.pyenv/versions/3.5.1")))
+    (let ((pyenv-351 (concat my-home "/.pyenv/versions/3.5.1")))
       (setq
        elpy-rpc-python-command (concat pyenv-351 "/bin/python3.5m")
        elpy-rpc-pythonpath (concat pyenv-351 "/lib/python3.5/site-packages")
@@ -195,7 +208,7 @@
   (defun use-pyenv-python344 ()
     "Point to Python 3.4.4 for `elpy-mode', `flycheck-mode', and `python-mode'."
     (interactive)
-    (let ((pyenv-344 (concat (getenv "HOME") "/.pyenv/versions/3.4.4")))
+    (let ((pyenv-344 (concat my-home "/.pyenv/versions/3.4.4")))
       (setq
        elpy-rpc-python-command (concat pyenv-344 "/bin/python3.4m")
        elpy-rpc-pythonpath (concat pyenv-344 "/lib/python3.4/site-packages")
@@ -206,7 +219,7 @@
   (defun use-pyenv-python2 ()
     "Point to Python 2 for `elpy-mode', `flycheck-mode', and `python-mode'."
     (interactive)
-      (let ((pyenv-2711 (concat (getenv "HOME") "/.pyenv/versions/2.7.11")))
+      (let ((pyenv-2711 (concat my-home "/.pyenv/versions/2.7.11")))
         (setq
          elpy-rpc-python-command (concat pyenv-2711 "/bin/python2.7")
          elpy-rpc-pythonpath (concat pyenv-2711 "/lib/python2.7/site-packages")
@@ -286,7 +299,7 @@
     (require 'emms-mode-line-cycle)
     (require 'emms-mode-line-icon)
     (require 'emms-player-mpv)
-    (emms-add-directory-tree (concat (getenv "HOME") "/music"))
+    (emms-add-directory-tree (concat my-home "/music"))
     (emms-mode-line 1)
     (emms-mode-line-cycle 1)
     (emms-playing-time 1)
@@ -316,7 +329,7 @@
                    (format emms-mode-line-format (emms-mode-line-cycle-get-title))
                    emms-playing-time-string))))
      emms-player-list '(emms-player-mpv)
-     emms-source-file-default-directory (concat (getenv "HOME") "/music"))))
+     emms-source-file-default-directory (concat my-home "/music"))))
 
 ;; Display the emms mode line as a ticker
 ;; https://github.com/momomo5717/emms-mode-line-cycle
@@ -369,7 +382,7 @@
 ;; https://github.com/leoliu/ggtags
 (use-package ggtags
   :ensure t
-  :config
+  :init
   (add-hook 'c-mode-common-hook
             (lambda ()
               (when (derived-mode-p 'c-mode 'c++-mode 'java-mode 'asm-mode)
@@ -397,15 +410,6 @@
   :ensure t
   :config
   (ido-mode t))
-
-;; Auto Java Complete - https://www.emacswiki.org/emacs/AutoJavaComplete
-(use-package java-mode
-  :defer t
-  :init
-  (load-file (concat (getenv "HOME") "/src/auto-java-complete/ajc-java-complete.el"))
-  (load-file (concat (getenv "HOME") "/src/auto-java-complete/ajc-java-complete-config.el"))
-  :config
-  (add-hook 'java-mode-hook 'ajc-java-complete-mode))
 
 ;; Python auto-completion for Emacs
 ;; http://tkf.github.io/emacs-jedi/latest/
@@ -486,8 +490,8 @@
 (use-package racer
   :ensure t
   :init
-  (defvar racer-cmd (concat (getenv "HOME") "/src/racer/target/release/racer"))
-  (defvar racer-rust-src-path (concat (getenv "HOME") "/src/rust/src"))
+  (defvar racer-cmd (concat my-src "/racer/target/release/racer"))
+  (defvar racer-rust-src-path (concat my-src "/rust/src"))
   :config
   (add-hook 'rust-mode-hook #'racer-mode)
   (add-hook 'racer-mode-hook #'eldoc-mode)
@@ -510,8 +514,8 @@
   :diminish robe-mode
   :ensure t
   :init
-  (add-to-list 'exec-path (concat (getenv "HOME") "/.rbenv/shims"))
-  (add-to-list 'exec-path (concat (getenv "HOME") "/.rbenv/bin"))
+  (add-to-list 'exec-path (concat my-home "/.rbenv/shims"))
+  (add-to-list 'exec-path (concat my-home "/.rbenv/bin"))
   :config
   (add-hook 'ruby-mode-hook 'robe-mode))
 
@@ -540,8 +544,8 @@
   (semantic-mode 1)
   ;; add moar include paths like this ...
   ;; (semantic-add-system-include "/usr/include/boost" 'c++-mode)
-  ;; (semantic-add-system-include (concat (getenv "HOME") "/linux/kernel"))
-  ;; (semantic-add-system-include (concat (getenv "HOME") "/linux/include"))
+  ;; (semantic-add-system-include (concat my-home "/linux/kernel"))
+  ;; (semantic-add-system-include (concat my-home "/linux/include"))
   )
 
 ;; skewer-mode: https://github.com/skeeto/skewer-mode
@@ -571,6 +575,7 @@
 ;; Minor mode for Emacs that deals with parens
 ;; pairs and tries to be smart about it
 ;; https://github.com/Fuco1/smartparens
+;; TODO: use paredit?
 (use-package smartparens
   :diminish smartparens-mode
   :ensure t
@@ -693,7 +698,7 @@
 (global-hl-line-mode 1)
 
 ;; Hack - http://sourcefoundry.org/hack/
-(if (or (file-exists-p (concat (getenv "HOME") "/.fonts/Hack-Regular.ttf"))
+(if (or (file-exists-p (concat my-home "/.fonts/Hack-Regular.ttf"))
         (file-exists-p "/usr/share/fonts/TTF/Hack-Regular.ttf"))
     (set-face-attribute 'default nil
                         :family "Hack"
@@ -706,7 +711,7 @@
                       :weight 'normal))
 
 ;; Symbola - http://zhm.github.io/symbola/
-(if (or (file-exists-p (concat (getenv "HOME") "/.fonts/Symbola.ttf"))
+(if (or (file-exists-p (concat my-home "/.fonts/Symbola.ttf"))
         (file-exists-p "/usr/share/fonts/TTF/Symbola.ttf"))
     (set-fontset-font t 'symbol (font-spec :family "Symbola") (selected-frame) 'prepend)
   ;; Again -- proably working on a Mac right now ...
@@ -718,7 +723,7 @@
   "Compile the current project."
   (interactive)
   (setq-local compilation-read-command nil)
-  (call-interactively 'compile))
+    (call-interactively 'compile))
 
 (defun do-func-to-marked-region (func)
   "Do (FUNC) on a region forward and in reverse."
@@ -780,7 +785,7 @@
 (substitute-key-definition 'kill-buffer 'kill-buffer-and-window global-map)
 
 ;;; Warm cozy fireplace -- https://github.com/johanvts/emacs-fireplace
-(let ((fireplace-el (concat (getenv "HOME") "/src/emacs-fireplace/fireplace.el")))
+(let ((fireplace-el (concat my-src "/emacs-fireplace/fireplace.el")))
   (let ((fireplace-elc (concat fireplace-el "c")))
     (if (file-exists-p fireplace-elc)
         (load fireplace-elc)
