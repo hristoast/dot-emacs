@@ -16,7 +16,7 @@
 (defconst my-home (getenv "HOME"))
 (defconst my-bin (concat my-home "/bin"))
 (defconst my-src (concat my-home "/src"))
-(defconst default-eclipse-workspace (concat my-src "/eclipse"))
+;; (defconst default-eclipse-workspace (concat my-src "/eclipse"))
 
 ;; Some initial package stuff
 (require 'package)
@@ -42,7 +42,7 @@
 
 (require 'bind-key)
 
-(use-package apache-mode :defer t :ensure t)
+;; (use-package apache-mode :defer t :ensure t)
 
 ;; TODO: This does not work
 ;; (use-package ac-slime
@@ -135,10 +135,15 @@
 (use-package company-irony
   :defer t
   :ensure t
-  :config
-  (add-to-list 'company-backends 'company-irony))
+  :init
+  (add-hook 'c-mode-common-hook
+            (lambda ()
+              (when (derived-mode-p 'c-mode 'c++-mode)
+                (progn
+                  (add-to-list 'company-backends 'company-irony)
+                  (irony-mode))))))
 
- ;; Company backend for Python jedi - https://github.com/syohex/emacs-company-jedi
+;; Company backend for Python jedi - https://github.com/syohex/emacs-company-jedi
 (use-package company-jedi
   :defer t
   :ensure t)
@@ -155,6 +160,8 @@
   ;; Set up environment variables so Flycheck can find gocode.
   (setenv "GOPATH" (concat my-src "/golibs"))
   (add-to-list 'exec-path my-bin))
+
+(use-package company-lua :defer t :ensure t)
 
 ;;  Company integration for racer
 ;; https://github.com/emacs-pe/company-racer
@@ -195,6 +202,17 @@
   :init
   (with-eval-after-load 'python (elpy-enable))
   ;; Change Python versions, on the fly
+  (defun use-pyenv-python352 ()
+    "Point to Python 3.5.2 for `elpy-mode', `flycheck-mode', and `python-mode'."
+    (interactive)
+    (let ((pyenv-352 (concat my-home "/.pyenv/versions/3.5.2")))
+      (setq
+       elpy-rpc-python-command (concat pyenv-352 "/bin/python3.5m")
+       elpy-rpc-pythonpath (concat pyenv-352 "/lib/python3.5/site-packages")
+       flycheck-python-flake8-executable (concat pyenv-352 "/bin/flake8")
+       python-check-command (concat pyenv-352 "/bin/pyflakes")
+       python-shell-interpreter (concat pyenv-352 "/bin/ipython3"))))
+
   (defun use-pyenv-python351 ()
     "Point to Python 3.5.1 for `elpy-mode', `flycheck-mode', and `python-mode'."
     (interactive)
@@ -274,69 +292,69 @@
 ;;
 ;; TODO: add call to eclim-java-import in tab complete,
 ;; so that imports are added when we tab-complete
-(use-package emacs-eclim
-  :ensure t
-  :bind
-  ("C-c s e" . start-eclimd)
-  ("C-c j b" . gradle-build)
-  ("C-c j c" . eclim-problems-correct)
-  ("C-c j d" . gradle-dev-setup)
-  ("C-c j f" . eclim-java-format)
-  ("C-c j g" . eclim-java-find-references)
-  ("C-c j h" . eclim-java-show-documentation-for-current-element)
-  ("C-c j i" . eclim-java-import-organize)
-  ("C-c TAB" . eclim-java-import-organize)
-  ("C-c j j" . eclim-java-implement)
-  ("C-c j l" . eclim-java-hierarchy)
-  ("C-c j n" . eclim-problems-next-same-file)
-  ("C-c j m" . eclim-problems-next)
-  ("C-c j p" . eclim-problems-previous-same-window)
-  ("C-c j o" . eclim-problems-previous)
-  ("C-c j r" . eclim-java-refactor-rename-symbol-at-point)
-  ("C-c j s" . gradle-decomp-workspace)
-  ("C-c j w" . gradle-clean)
-  ("C-c j z" . gradle-build-release)
-  :diminish flycheck-mode flycheck-status-emoji-mode
-  :init
-  (require 'eclimd)
-  (setq
-   eclim-eclipse-dirs '((concat my-bin "/eclipse"))
-   eclim-executable (concat my-bin "/eclipse/eclim")
-   eclimd-default-workspace default-eclipse-workspace
-   eclimd-executable (concat my-bin "/eclipse/eclimd")
-   help-at-pt-display-when-idle t
-   help-at-pt-timer-delay 0.1)
-  (global-eclim-mode)
-  (help-at-pt-set-timer)
+;; (use-package emacs-eclim
+;;   :diminish abbrev-mode flycheck-mode ggtags-mode
+;;   :ensure t
+;;   :bind
+;;   ("C-c s e" . start-eclimd)
+;;   ("C-c j b" . gradle-build)
+;;   ("C-c j c" . eclim-problems-correct)
+;;   ("C-c j d" . gradle-dev-setup)
+;;   ("C-c j f" . eclim-java-format)
+;;   ("C-c j g" . eclim-java-find-references)
+;;   ("C-c j h" . eclim-java-show-documentation-for-current-element)
+;;   ("C-c j i" . eclim-java-import-organize)
+;;   ("C-c TAB" . eclim-java-import-organize)
+;;   ("C-c j j" . eclim-java-implement)
+;;   ("C-c j l" . eclim-java-hierarchy)
+;;   ("C-c j n" . eclim-problems-next-same-file)
+;;   ("C-c j m" . eclim-problems-next)
+;;   ("C-c j p" . eclim-problems-previous-same-window)
+;;   ("C-c j o" . eclim-problems-previous)
+;;   ("C-c j r" . eclim-java-refactor-rename-symbol-at-point)
+;;   ("C-c j s" . gradle-decomp-workspace)
+;;   ("C-c j w" . gradle-clean)
+;;   ("C-c j z" . gradle-build-release)
+;;   :init
+;;   (require 'eclimd)
+;;   (setq
+;;    eclim-eclipse-dirs '((concat my-bin "/eclipse"))
+;;    eclim-executable (concat my-bin "/eclipse/eclim")
+;;    eclimd-default-workspace default-eclipse-workspace
+;;    eclimd-executable (concat my-bin "/eclipse/eclimd")
+;;    help-at-pt-display-when-idle t
+;;    help-at-pt-timer-delay 0.1)
+;;   (global-eclim-mode)
+;;   (help-at-pt-set-timer)
 
-  ;; Helpful build functions
-  (defun gradle-build ()
-    (interactive)
-    (compile "make"))
+;;   ;; Helpful build functions
+;;   (defun gradle-build ()
+;;     (interactive)
+;;     (compile "make"))
 
-  (defun gradle-build-release ()
-    (interactive)
-    (compile "make release"))
+;;   (defun gradle-build-release ()
+;;     (interactive)
+;;     (compile "make release"))
 
-  (defun gradle-clean ()
-    (interactive)
-    (compile "make clean"))
+;;   (defun gradle-clean ()
+;;     (interactive)
+;;     (compile "make clean"))
 
-  (defun gradle-decomp-workspace ()
-    (interactive)
-    (compile "make decomp-workspace"))
+;;   (defun gradle-decomp-workspace ()
+;;     (interactive)
+;;     (compile "make decomp-workspace"))
 
-  (defun gradle-dev-setup ()
-    (interactive)
-    (compile "make dev-setup"))
+;;   (defun gradle-dev-setup ()
+;;     (interactive)
+;;     (compile "make dev-setup"))
 
-  (defun gradle-run-client ()
-    (interactive)
-    (compile "make client"))
+;;   (defun gradle-run-client ()
+;;     (interactive)
+;;     (compile "make client"))
 
-  (defun gradle-run-server ()
-    (interactive)
-    (compile "make server")))
+;;   (defun gradle-run-server ()
+;;     (interactive)
+;;     (compile "make server")))
 
 ;; EMMS - https://www.gnu.org/software/emms/
 ;; TODO: https://www.gnu.org/software/emms/manual/#Track-Information
@@ -416,14 +434,10 @@
 
 ;; Display the emms mode line as a ticker
 ;; https://github.com/momomo5717/emms-mode-line-cycle
-(use-package emms-mode-line-cycle
-  :defer t
-  :ensure t)
+(use-package emms-mode-line-cycle :defer t :ensure t)
 
 ;; mpv support for EMMS - https://github.com/dochang/emms-player-mpv/
-(use-package emms-player-mpv
-  :defer t
-  :ensure t)
+(use-package emms-player-mpv :defer t :ensure t)
 
 ;; Emacs Package Library
 ;; https://github.com/cask/epl
@@ -494,10 +508,12 @@
   :config
   (ido-mode t))
 
-(use-package java-mode
-  :init
-  (add-hook 'java-mode-hook 'run-eclimd)
-  (add-hook 'java-mode-hook 'eclim-mode))
+(use-package irony :ensure t :defer t)
+
+;; (use-package java-mode
+;;   :init
+;;   (add-hook 'java-mode-hook 'run-eclimd)
+;;   (add-hook 'java-mode-hook 'eclim-mode))
 
 ;; Python auto-completion for Emacs
 ;; http://tkf.github.io/emacs-jedi/latest/
@@ -647,18 +663,18 @@
 
 ;; SLIME: The Superior Lisp Interaction Mode for Emacs
 ;; https://common-lisp.net/project/slime/
-(use-package slime
-  :ensure t
-  :bind
-  ("TAB" . slime-complete-symbol)
-  ("C-c s s" . slime)
-  ("C-c s c" . slime-connect)
-  :config
-  (setq
-   inferior-lisp-program "/usr/bin/sbcl"
-   slime-complete-symbol-function 'slime-fuzzy-complete-symbol)
-  (require 'slime-autoloads)
-  (slime-setup '(slime-fancy)))
+;; (use-package slime
+;;   :ensure t
+;;   :bind
+;;   ("TAB" . slime-complete-symbol)
+;;   ("C-c s s" . slime)
+;;   ("C-c s c" . slime-connect)
+;;   :config
+;;   (setq
+;;    inferior-lisp-program "/usr/bin/sbcl"
+;;    slime-complete-symbol-function 'slime-fuzzy-complete-symbol)
+;;   (require 'slime-autoloads)
+;;   (slime-setup '(slime-fancy)))
 
 ;; Minor mode for Emacs that deals with parens
 ;; pairs and tries to be smart about it
@@ -821,6 +837,7 @@
         (funcall func point mark)
       (funcall func mark point))))
 
+;; TODO: this seems to be broken when writing C++
 (defun indent-appropriately ()
   "Appropriately indent the current line or region."
   (interactive)
@@ -828,10 +845,10 @@
       (do-func-to-marked-region 'indent-region)
     (indent-according-to-mode)))
 
-(defun run-eclimd ()
-  "Run eclimd for Java editing."
-  (interactive)
-  (start-eclimd default-eclipse-workspace))
+;; (defun run-eclimd ()
+;;   "Run eclimd for Java editing."
+;;   (interactive)
+;;   (start-eclimd default-eclipse-workspace))
 
 (defun toggle-comment ()
   "Toggle comments on the current line or highlighted region."
