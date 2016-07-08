@@ -267,7 +267,7 @@
      python-shell-interpreter "/usr/bin/ipython"))
 
   ;; Default
-  (use-pyenv-python351)
+  (use-pyenv-python352)
   :config
   (add-hook 'python-mode-hook
             (lambda ()
