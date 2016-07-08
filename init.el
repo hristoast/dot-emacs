@@ -213,41 +213,29 @@
        python-check-command (concat pyenv-352 "/bin/pyflakes")
        python-shell-interpreter (concat pyenv-352 "/bin/ipython3"))))
 
-  (defun use-pyenv-python351 ()
-    "Point to Python 3.5.1 for `elpy-mode', `flycheck-mode', and `python-mode'."
-    (interactive)
-    (let ((pyenv-351 (concat my-home "/.pyenv/versions/3.5.1")))
-      (setq
-       elpy-rpc-python-command (concat pyenv-351 "/bin/python3.5m")
-       elpy-rpc-pythonpath (concat pyenv-351 "/lib/python3.5/site-packages")
-       flycheck-python-flake8-executable (concat pyenv-351 "/bin/flake8")
-       python-check-command (concat pyenv-351 "/bin/pyflakes")
-       python-shell-interpreter (concat pyenv-351 "/bin/ipython3"))))
-
-  (defun use-pyenv-python344 ()
-    "Point to Python 3.4.4 for `elpy-mode', `flycheck-mode', and `python-mode'."
-    (interactive)
-    (let ((pyenv-344 (concat my-home "/.pyenv/versions/3.4.4")))
-      (setq
-       elpy-rpc-python-command (concat pyenv-344 "/bin/python3.4m")
-       elpy-rpc-pythonpath (concat pyenv-344 "/lib/python3.4/site-packages")
-       flycheck-python-flake8-executable (concat pyenv-344 "/bin/flake8")
-       python-check-command (concat pyenv-344 "/bin/pyflakes")
-       python-shell-interpreter (concat pyenv-344 "/bin/ipython3"))))
-
   (defun use-pyenv-python2 ()
     "Point to Python 2 for `elpy-mode', `flycheck-mode', and `python-mode'."
     (interactive)
-      (let ((pyenv-2711 (concat my-home "/.pyenv/versions/2.7.11")))
+      (let ((pyenv-2712 (concat my-home "/.pyenv/versions/2.7.12")))
         (setq
-         elpy-rpc-python-command (concat pyenv-2711 "/bin/python2.7")
-         elpy-rpc-pythonpath (concat pyenv-2711 "/lib/python2.7/site-packages")
-         flycheck-python-flake8-executable (concat pyenv-2711 "/bin/flake8")
-         python-check-command (concat pyenv-2711 "/bin/pyflakes")
-         python-shell-interpreter (concat pyenv-2711 "/bin/ipython"))))
+         elpy-rpc-python-command (concat pyenv-2712 "/bin/python2.7")
+         elpy-rpc-pythonpath (concat pyenv-2712 "/lib/python2.7/site-packages")
+         flycheck-python-flake8-executable (concat pyenv-2712 "/bin/flake8")
+         python-check-command (concat pyenv-2712 "/bin/pyflakes")
+         python-shell-interpreter (concat pyenv-2712 "/bin/ipython"))))
+
+  (defun use-system-python35 ()
+    "Use the system python3.5 for `elpy-mode', `flycheck-mode', and `python-mode'."
+    (interactive)
+    (setq
+     elpy-rpc-python-command "/usr/bin/python3.5m"
+     elpy-rpc-pythonpath "/usr/lib/python3.5/site-packages"
+     flycheck-python-flake8-executable "/usr/bin/flake8"
+     python-check-command "/usr/bin/pyflakes"
+     python-shell-interpreter "/usr/bin/python3.5m"))  ;; TODO: pip-provided ipython
 
   (defun use-system-python34 ()
-    "Use the system python3 for `elpy-mode', `flycheck-mode', and `python-mode'."
+    "Use the system python3.4 for `elpy-mode', `flycheck-mode', and `python-mode'."
     (interactive)
     (setq
      elpy-rpc-python-command "/usr/bin/python3.4m"
