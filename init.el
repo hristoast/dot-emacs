@@ -42,8 +42,6 @@
 
 (require 'bind-key)
 
-;; (use-package apache-mode :defer t :ensure t)
-
 ;; TODO: This does not work
 ;; (use-package ac-slime
 ;;   :ensure t
@@ -53,8 +51,6 @@
 ;;   (eval-after-load "auto-complete"
 ;;     '(add-to-list 'ac-modes 'slime-repl-mode)))
 
-;; (use-package auto-complete-clang-async :ensure t)
-
 (use-package autorevert :diminish auto-revert-mode)
 
 ;; CC Mode is a GNU Emacs mode for editing files containing C, C++, Objective-C,
@@ -62,6 +58,13 @@
 ;; https://www.gnu.org/software/emacs/manual/html_mono/ccmode.html
 (use-package cc-mode
   :defer t
+  :init
+  (defun clang-format-save-hook ()
+    "Run clang-format on save when in c or c++ mode."
+    (interactive)
+    (when (or (eq major-mode 'c-mode) (eq major-mode 'c++-mode))
+      (clang-format-buffer)))
+  (add-hook 'before-save-hook 'clang-format-save-hook)
   :config
   (defvar company-backends (delete 'company-semantic company-backends))
   (define-key c-mode-map [(tab)] 'company-complete)
@@ -82,6 +85,11 @@
     (cider--close-connection-buffer (current-buffer))
     (delete-window))
   :pin melpa-stable)
+
+;; Clang format
+;; http://clang.llvm.org/docs/ClangFormat.html
+;; http://clang.llvm.org/docs/ClangFormatStyleOptions.html
+(use-package clang-format :ensure t :defer t)
 
 ;; Clean auto-indent and backspace unindent
 ;; https://github.com/pmarinov/clean-aindent-mode
