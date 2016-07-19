@@ -10,13 +10,22 @@
 ;; you other Emacs users out there!
 
 ;;; Code:
-
-;; Start a timer
 (defconst emacs-start-time (current-time))
 (defconst my-home (getenv "HOME"))
 (defconst my-bin (concat my-home "/bin"))
 (defconst my-src (concat my-home "/src"))
 ;; (defconst default-eclipse-workspace (concat my-src "/eclipse"))
+(defvar emms-mode-line-cycle-additional-space-num)
+(defvar emms-mode-line-cycle-any-width-p)
+(defvar emms-mode-line-cycle-current-title-function)
+(defvar emms-mode-line-cycle-max-width)
+(defvar emms-mode-line-cycle-use-icon-p)
+(defvar emms-mode-line-cycle-velocity)
+(defvar emms-mode-line-format)
+(defvar emms-mode-line-titlebar-function)
+(defvar emms-source-file-default-directory)
+(defvar flycheck-python-flake8-executable)
+(defvar pyenv-2712)
 
 ;; Some initial package stuff
 (require 'package)
@@ -27,6 +36,10 @@
         ("melpa" . "https://melpa.org/packages/")
         ;; MELPA Stable
         ("melpa-stable" . "https://stable.melpa.org/packages/")))
+
+;; Pin here because use-package doesn't sseem to be able to...
+;; https://github.com/jwiegley/use-package/issues/343
+(add-to-list 'package-pinned-packages '(cider . "melpa-stable") t)
 
 (package-initialize)
 
@@ -76,6 +89,7 @@
 ;; https://github.com/clojure-emacs/clojure-mode
 (use-package cider
   :ensure t
+  :functions cider--close-connection-buffer
   :bind
   ("C-c n c" . delete-nrepl)
   :config
@@ -83,8 +97,7 @@
     "Close nREPL connection and delete the window."
     (interactive)
     (cider--close-connection-buffer (current-buffer))
-    (delete-window))
-  :pin melpa-stable)
+    (delete-window)))
 
 ;; Clang format
 ;; http://clang.llvm.org/docs/ClangFormat.html
@@ -143,6 +156,10 @@
 (use-package company-irony
   :defer t
   :ensure t
+  :functions c-backward-sws c-beginning-of-decl-1 c-determine-limit
+  c-end-of-macro c-font-lock-declarators c-font-lock-invalid-string
+  c-fontify-recorded-types-and-refs c-forward-keyword-clause c-forward-sws
+  c-forward-type c-get-lang-constant c-skip-comments-and-strings
   :init
   (add-hook 'c-mode-common-hook
             (lambda ()
@@ -177,7 +194,10 @@
 
 ;; A major-mode for editing C# in emacs
 ;; https://github.com/josteink/csharp-mode
-(use-package csharp-mode :defer t :ensure t)
+(use-package csharp-mode
+  :defer t
+  :ensure t
+  :functions imenu--split)
 
 ;; diff-hl - highlight changes/diffs
 ;; https://github.com/dgutov/diff-hl
@@ -207,6 +227,7 @@
 ;; Requires: `pip install elpy`
 (use-package elpy
   :ensure t
+  :functions use-pyenv-python352
   :init
   (with-eval-after-load 'python (elpy-enable))
   ;; Change Python versions, on the fly
@@ -219,18 +240,19 @@
        elpy-rpc-pythonpath (concat pyenv-352 "/lib/python3.5/site-packages")
        flycheck-python-flake8-executable (concat pyenv-352 "/bin/flake8")
        python-check-command (concat pyenv-352 "/bin/pyflakes")
-       python-shell-interpreter (concat pyenv-352 "/bin/ipython3"))))
+       ;; IPython 5+ requires special sauce to servce as the below variable ...
+       python-shell-interpreter (concat pyenv-352 "/bin/python3.5m"))))
 
   (defun use-pyenv-python2 ()
     "Point to Python 2 for `elpy-mode', `flycheck-mode', and `python-mode'."
     (interactive)
-      (let ((pyenv-2712 (concat my-home "/.pyenv/versions/2.7.12")))
-        (setq
-         elpy-rpc-python-command (concat pyenv-2712 "/bin/python2.7")
-         elpy-rpc-pythonpath (concat pyenv-2712 "/lib/python2.7/site-packages")
-         flycheck-python-flake8-executable (concat pyenv-2712 "/bin/flake8")
-         python-check-command (concat pyenv-2712 "/bin/pyflakes")
-         python-shell-interpreter (concat pyenv-2712 "/bin/ipython"))))
+    (let ((pyenv-2712 (concat my-home "/.pyenv/versions/2.7.12")))
+      (setq
+       elpy-rpc-python-command (concat pyenv-2712 "/bin/python2.7")
+       elpy-rpc-pythonpath (concat pyenv-2712 "/lib/python2.7/site-packages")
+       flycheck-python-flake8-executable (concat pyenv-2712 "/bin/flake8")
+       python-check-command (concat pyenv-2712 "/bin/pyflakes")
+       python-shell-interpreter (concat pyenv-2712 "/bin/ipython"))))
 
   (defun use-system-python35 ()
     "Use the system python3.5 for `elpy-mode', `flycheck-mode', and `python-mode'."
@@ -355,6 +377,10 @@
 ;; EMMS - https://www.gnu.org/software/emms/
 ;; TODO: https://www.gnu.org/software/emms/manual/#Track-Information
 (use-package emms
+  :ensure t
+  :functions emms-mode-line emms-player-mpd-seek emms-player-started
+  emms-playing-time emms-playlist-current-selected-track emms-stream-name
+  emms-track-description emms-track-get emms-track-name emms-track-type
   :bind
   (("<f1>" . emms-volume-lower)
    ("<f2>" . emms-volume-raise)
@@ -381,7 +407,6 @@
    ("C-c p n" . emms-player-mpd-next)
    ("C-c p s" . emms-player-mpd-show)
    ("C-x t e" . emms-mode-line-toggle))
-  :ensure t
   :init
   (defun mpd-rev10 ()
     "Seek backward ten seconds."
@@ -517,8 +542,9 @@
 (use-package jedi
   :defer t
   :ensure t
-  :init
-  (setq jedi:setup-keys 1))
+  ;; :init
+  :config
+  (setq jedi:complete-on-dot t))
 
 (use-package jinja2-mode :defer t :ensure t)
 
@@ -532,26 +558,10 @@
 
 ;; https://github.com/andre-richter/emacs-lush-theme
 ;; Other cool themes: atom-one-dark, abyss, darcula, obsidian
-;; (use-package abyss-theme
-;;   :ensure t
-;;   :config
-;;   (load-theme 'abyss t))
-;; (use-package atom-one-dark-theme
-;;   :ensure t
-;;   :config
-;;   (load-theme 'atom-one-dark t))
-;; (use-package darcula-theme
-;;   :ensure t
-;;   :config
-;;   (load-theme 'darcula t))
 (use-package lush-theme
   :ensure t
   :config
   (load-theme 'lush t))
-;; (use-package obsidian-theme
-;;   :ensure t
-;;   :config
-;;   (load-theme 'obsidian t))
 
 (use-package magit
   :ensure t
@@ -638,15 +648,11 @@
 ;; Provides language-aware editing commands based on source code parsers.
 ;; http://www.gnu.org/software/emacs/manual/html_node/emacs/Semantic.html
 (use-package semantic
+  :functions global-semanticdb-minor-mode global-semantic-idle-scheduler-mode
   :config
   (global-semanticdb-minor-mode 1)
   (global-semantic-idle-scheduler-mode 1)
-  (semantic-mode 1)
-  ;; add moar include paths like this ...
-  ;; (semantic-add-system-include "/usr/include/boost" 'c++-mode)
-  ;; (semantic-add-system-include (concat my-home "/linux/kernel"))
-  ;; (semantic-add-system-include (concat my-home "/linux/include"))
-  )
+  (semantic-mode 1))
 
 ;; skewer-mode: https://github.com/skeeto/skewer-mode
 (use-package skewer-mode
@@ -694,7 +700,10 @@
 ;;                       'ruby 'nxml)
 
 ;; https://www.emacswiki.org/emacs/SrSpeedbar
-(use-package sr-speedbar :ensure t)
+(use-package sr-speedbar
+  :ensure t
+  :bind
+  ("C-c b" . sr-speedbar-toggle))
 
 ;;  Emacs isearch with an overview. Oh, man!
 ;; https://github.com/abo-abo/swiper
@@ -833,7 +842,6 @@
         (funcall func point mark)
       (funcall func mark point))))
 
-;; TODO: this seems to be broken when writing C++
 (defun indent-appropriately ()
   "Appropriately indent the current line or region."
   (interactive)
