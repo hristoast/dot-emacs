@@ -240,7 +240,7 @@
        elpy-rpc-pythonpath (concat pyenv-352 "/lib/python3.5/site-packages")
        flycheck-python-flake8-executable (concat pyenv-352 "/bin/flake8")
        python-check-command (concat pyenv-352 "/bin/pyflakes")
-       ;; IPython 5+ requires special sauce to servce as the below variable ...
+       ;; IPython 5+ requires special sauce to serve as the below variable ...
        python-shell-interpreter (concat pyenv-352 "/bin/python3.5m"))))
 
   (defun use-pyenv-python2 ()
@@ -499,6 +499,7 @@
 ;; Emacs frontend to GNU Global source code tagging system.
 ;; https://github.com/leoliu/ggtags
 (use-package ggtags
+  :diminish ggtags-mode
   :ensure t
   :init
   (add-hook 'c-mode-common-hook
@@ -529,7 +530,9 @@
   :config
   (ido-mode t))
 
-(use-package irony :ensure t :defer t)
+;; A C/C++ minor mode for Emacs powered by libclang
+;; https://github.com/Sarcasm/irony-mode
+(use-package irony :ensure t :defer t :diminish abbrev-mode irony-mode)
 
 ;; (use-package java-mode
 ;;   :init
@@ -563,6 +566,8 @@
   :config
   (load-theme 'lush t))
 
+;; A Git Porcelain inside Emacs
+;; https://magit.vc/
 (use-package magit
   :ensure t
   :bind
@@ -700,6 +705,8 @@
 ;;                       'ruby 'nxml)
 
 ;; https://www.emacswiki.org/emacs/SrSpeedbar
+;; TODO: This warning seems to come from sr-speedbar itself...
+;; TODO: reference to free variable `helm-alive-p'
 (use-package sr-speedbar
   :ensure t
   :bind
@@ -804,7 +811,7 @@
 ;; http://is.gd/Mw5KiS
 (global-linum-mode t)
 ;; http://is.gd/4jOQ8Y
-(global-hl-line-mode 1)
+(global-hl-line-mode t)
 
 ;; Hack - http://sourcefoundry.org/hack/
 (if (or (file-exists-p (concat my-home "/.fonts/Hack-Regular.ttf"))
@@ -886,14 +893,14 @@
 (global-set-key (kbd "C-c w") 'whitespace-mode)
 ;; Extra keybindings that make life great
 (global-set-key (kbd "C-c r") 'rgrep)
-(global-set-key (kbd "<f13>") 'rgrep)
+(global-set-key (kbd "<f13>") 'rgrep) ;; Nice for macs
 (global-set-key (kbd "C-x r b") 'revert-buffer)
 (global-set-key (kbd "C-c q q q") 'save-buffers-kill-emacs)
 (global-set-key (kbd "C-c u w") 'upcase-word)
 (global-set-key (kbd "C-x u") 'upcase-region)
 (global-set-key (kbd "C-x t m") 'menu-bar-mode)
 (global-set-key (kbd "TAB") 'indent-appropriately)
-(global-set-key (kbd "<f12>") 'fireplace)
+;; (global-set-key (kbd "<f12>") 'fireplace)
 
 ;; Kill this buffer!
 (substitute-key-definition 'kill-buffer 'kill-buffer-and-window global-map)
@@ -915,5 +922,8 @@
                                             emacs-start-time))))
     (message "[STARTUP] Loading %s ... done (%.3fs)" load-file-name elapsed)))
 
+;; TODO: WTF these warnings... adding them as :functions does not fix...
+;; TODO: the following functions might not be defined at runtime:
+;; TODO: csharp-log, markdown-indent-line, sp-wrap--can-wrap-p
 (provide 'init)
 ;;; init.el ends here
