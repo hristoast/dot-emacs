@@ -473,7 +473,11 @@
   :config
   (add-hook 'after-init-hook #'global-flycheck-mode))
 
-(use-package flycheck-irony :ensure t)
+(use-package flycheck-irony
+  :ensure t
+  :config
+  (eval-after-load 'flycheck
+    '(add-hook 'flycheck-mode-hook #'flycheck-irony-setup)))
 
 (use-package flycheck-rust :ensure t)
 
@@ -532,7 +536,18 @@
 
 ;; A C/C++ minor mode for Emacs powered by libclang
 ;; https://github.com/Sarcasm/irony-mode
-(use-package irony :ensure t :defer t :diminish abbrev-mode irony-mode)
+(use-package irony
+  :defer t
+  :diminish abbrev-mode irony-mode
+  :ensure t
+  :config
+  (defun my-irony-mode-hook ()
+    (define-key irony-mode-map [remap completion-at-point]
+      'irony-completion-at-point-async)
+    (define-key irony-mode-map [remap complete-symbol]
+      'irony-completion-at-point-async))
+  (add-hook 'irony-mode-hook 'my-irony-mode-hook)
+  (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options))
 
 ;; (use-package java-mode
 ;;   :init
