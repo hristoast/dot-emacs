@@ -192,6 +192,10 @@
 ;; https://github.com/emacs-pe/company-racer
 (use-package company-racer :ensure t)
 
+;; Company integration for tern (js)
+;; https://github.com/proofit404/company-tern
+;; (use-package company-tern :ensure t :defer t)
+
 ;; A major-mode for editing C# in emacs
 ;; https://github.com/josteink/csharp-mode
 (use-package csharp-mode
@@ -241,6 +245,9 @@
        flycheck-python-flake8-executable (concat pyenv-352 "/bin/flake8")
        python-check-command (concat pyenv-352 "/bin/pyflakes")
        ;; IPython 5+ requires special sauce to serve as the below variable ...
+       ;; https://www.reddit.com/r/Python/comments/4w5d4e/psa_ipython_5_will_break_emacs_heres_how_to_fix_it/
+       ;; (setq python-shell-interpreter "ipython"
+       ;;       python-shell-interpreter-args "--simple-prompt")
        python-shell-interpreter (concat pyenv-352 "/bin/python3.5m"))))
 
   (defun use-pyenv-python2 ()
@@ -285,12 +292,7 @@
      python-shell-interpreter "/usr/bin/ipython"))
 
   ;; Default
-  (use-pyenv-python352)
-  :config
-  (add-hook 'python-mode-hook
-            (lambda ()
-              (when (derived-mode-p 'python-mode)
-                (add-to-list 'company-backends 'company-jedi)))))
+  (use-pyenv-python352))
 
 ;; The Frankenstein required for productive Java programming in Emacs...
 ;; 1) https://github.com/senny/emacs-eclim
@@ -612,8 +614,13 @@
 
 ;; Run jedi when we use python-mode
 (use-package python-mode
-  :config
-  (add-hook 'python-mode-hook 'jedi:setup))
+  :init
+  (jedi:install-server)
+  (add-hook 'python-mode-hook 'jedi:setup)
+  (add-hook 'python-mode-hook
+            (lambda ()
+              (when (derived-mode-p 'python-mode)
+                (add-to-list 'company-backends 'company-jedi)))))
 
 ;; rust-mode: https://github.com/rust-lang/rust-mode
 ;; and emacs-racer: https://github.com/racer-rust/emacs-racer
@@ -730,6 +737,9 @@
 ;;  Emacs isearch with an overview. Oh, man!
 ;; https://github.com/abo-abo/swiper
 (use-package swiper :ensure t)
+
+;; http://ternjs.net/doc/manual.html#emacs
+;; (use-package tern :ensure t :defer t)
 
 ;; web-mode: An autonomous emacs major-mode for editing web templates.
 ;; http://web-mode.org/
