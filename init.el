@@ -147,7 +147,7 @@
   (set-face-attribute
    'company-tooltip-common-selection nil :foreground "black" :weight 'bold))
 
-;; company-mode backend for emoji - does not work when Emacs is a daemon :-(
+;; company-mode backend for emoji
 ;; https://github.com/dunn/company-emoji
 (use-package company-emoji
   :defer t
@@ -169,10 +169,18 @@
                   (add-to-list 'company-backends 'company-irony)
                   (irony-mode))))))
 
-;; Company backend for Python jedi - https://github.com/syohex/emacs-company-jedi
+;; Python auto-completion for Emacs
+;; http://tkf.github.io/emacs-jedi/latest/
+;; Requires: `pip install jedi`
+;; Company backend for Python jedi
+;; https://github.com/syohex/emacs-company-jedi
+;; TODO: Why is the auto-complete tooltip so wide?
 (use-package company-jedi
   :defer t
-  :ensure t)
+  :ensure t
+  :init
+  (setq jedi:complete-on-dot t)
+  (setq jedi:get-in-function-call-delay 0.2))
 
 ;; company-mode autocompletion for golang
 ;; https://github.com/nsf/gocode/tree/master/emacs-company
@@ -230,6 +238,7 @@
 ;; elpy: the Emacs Lisp Python Environment
 ;; https://github.com/jorgenschaefer/elpy
 ;; Requires: `pip install elpy`
+;; TODO: http://tkf.github.io/emacs-jedi/latest/#automatically-use-appropriate-python-version
 (use-package elpy
   :ensure t
   :functions use-pyenv-python352
@@ -556,16 +565,6 @@
 ;;   :init
 ;;   (add-hook 'java-mode-hook 'run-eclimd)
 ;;   (add-hook 'java-mode-hook 'eclim-mode))
-
-;; Python auto-completion for Emacs
-;; http://tkf.github.io/emacs-jedi/latest/
-;; Requires: `pip install jedi`
-(use-package jedi
-  :defer t
-  :ensure t
-  ;; :init
-  :config
-  (setq jedi:complete-on-dot t))
 
 (use-package jinja2-mode :defer t :ensure t)
 
