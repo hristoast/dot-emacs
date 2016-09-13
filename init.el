@@ -254,11 +254,8 @@
        elpy-rpc-pythonpath (concat pyenv-352 "/lib/python3.5/site-packages")
        flycheck-python-flake8-executable (concat pyenv-352 "/bin/flake8")
        python-check-command (concat pyenv-352 "/bin/pyflakes")
-       ;; IPython 5+ requires special sauce to serve as the below variable ...
-       ;; https://www.reddit.com/r/Python/comments/4w5d4e/psa_ipython_5_will_break_emacs_heres_how_to_fix_it/
-       ;; (setq python-shell-interpreter "ipython"
-       ;;       python-shell-interpreter-args "--simple-prompt")
-       python-shell-interpreter (concat pyenv-352 "/bin/python3.5m"))))
+       python-shell-interpreter (concat pyenv-352 "/bin/ipython3")
+       python-shell-interpreter-args "--simple-prompt")))
 
   (defun use-pyenv-python2 ()
     "Point to Python 2 for `elpy-mode', `flycheck-mode', and `python-mode'."
