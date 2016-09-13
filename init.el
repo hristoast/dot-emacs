@@ -25,6 +25,7 @@
 (defvar emms-mode-line-titlebar-function)
 (defvar emms-source-file-default-directory)
 (defvar flycheck-python-flake8-executable)
+(defvar linum-format)
 (defvar pyenv-2712)
 
 ;; Some initial package stuff
@@ -773,6 +774,9 @@
 ;; http://capitaomorte.github.io/yasnippet/
 (use-package yasnippet
   :ensure t
+  :init
+  ;; Shut yas up! Disables startup noise
+  (setq yas-verbosity 0)
   :config
   (yas-global-mode 1))
 
@@ -835,6 +839,11 @@
 ;; so we can use them when Emacs is running as a daemon
 ;; http://is.gd/Mw5KiS
 (global-linum-mode t)
+
+;; If we're using a terminal, add a margin
+(unless (display-graphic-p)
+  (setq linum-format "%d "))
+
 ;; http://is.gd/4jOQ8Y
 (global-hl-line-mode t)
 
@@ -905,14 +914,15 @@
 ;; Build, compile, that stuff
 (global-set-key (kbd "<f5>") 'build-project)
 ;; Make undo work like other editors
-(global-set-key (kbd "C-z") 'undo)
+(global-unset-key (kbd "C-/"))
+(global-set-key (kbd "M-z") 'undo)
 ;; Better comment-toggling
-(global-set-key (kbd "C-/") 'toggle-comment)
+(global-set-key (kbd "M-/") 'toggle-comment)
 ;; Make text bigger
-(global-set-key (kbd "C-+") 'text-scale-increase)
+(global-set-key (kbd "M-+") 'text-scale-increase)
 (global-set-key (kbd "<f9>") 'text-scale-increase)
 ;; Or make it smaller
-(global-set-key (kbd "C--") 'text-scale-decrease)
+(global-set-key (kbd "M--") 'text-scale-decrease)
 (global-set-key (kbd "<f8>") 'text-scale-decrease)
 ;; Toggle whitespace-mode
 (global-set-key (kbd "C-c w") 'whitespace-mode)
