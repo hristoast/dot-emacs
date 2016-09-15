@@ -805,6 +805,8 @@
 (delete-selection-mode t)
 
 (setq
+ ;; Backup files ...
+ backup-directory-alist `(("." . "~/.emacs.d/backups"))
  ;; Show column numbers
  column-number-mode t
  ;; gdb-many-windows t
@@ -816,7 +818,9 @@
  ;; No default scratch
  initial-scratch-message nil
  ;; Jive with the system clipboard
- x-select-enable-clipboard t)
+ x-select-enable-clipboard t
+ coding-system-for-read 'utf-8
+ coding-system-for-write 'utf-8)
 
 (setq-default
  ;; No tabs
