@@ -2,12 +2,7 @@
 
 ;;; Commentary:
 
-;; I've tweaked Emacs to behave like "regular" editors in many ways; Ctrl-z
-;; for undo, Ctrl-/ to toggle comments on either a line or in a region.
-;; It's a nice blend of familiar keybindings on top of Emacs.  This file
-;; should work on modern Linux and Mac OSX systems.  I've cultivated this
-;; file based on cool things I've seen others do -- huge thanks to all
-;; you other Emacs users out there!
+;; TL;DR my Emacs configuration for writing code and things.
 
 ;;; Code:
 (defconst emacs-start-time (current-time))
@@ -15,18 +10,6 @@
 (defconst my-bin (concat my-home "/bin"))
 (defconst my-src (concat my-home "/src"))
 ;; (defconst default-eclipse-workspace (concat my-src "/eclipse"))
-(defvar emms-mode-line-cycle-additional-space-num)
-(defvar emms-mode-line-cycle-any-width-p)
-(defvar emms-mode-line-cycle-current-title-function)
-(defvar emms-mode-line-cycle-max-width)
-(defvar emms-mode-line-cycle-use-icon-p)
-(defvar emms-mode-line-cycle-velocity)
-(defvar emms-mode-line-format)
-(defvar emms-mode-line-titlebar-function)
-(defvar emms-source-file-default-directory)
-(defvar flycheck-python-flake8-executable)
-(defvar linum-format)
-(defvar pyenv-2712)
 
 ;; Some initial package stuff
 (require 'package)
@@ -241,65 +224,8 @@
 ;; TODO: http://tkf.github.io/emacs-jedi/latest/#automatically-use-appropriate-python-version
 (use-package elpy
   :ensure t
-  :functions use-pyenv-python352
   :init
-  (with-eval-after-load 'python (elpy-enable))
-  ;; Change Python versions, on the fly
-  (defun use-pyenv-python352 ()
-    "Point to Python 3.5.2 for `elpy-mode', `flycheck-mode', and `python-mode'."
-    (interactive)
-    (let ((pyenv-352 (concat my-home "/.pyenv/versions/3.5.2")))
-      (setq
-       elpy-rpc-python-command (concat pyenv-352 "/bin/python3.5m")
-       elpy-rpc-pythonpath (concat pyenv-352 "/lib/python3.5/site-packages")
-       flycheck-python-flake8-executable (concat pyenv-352 "/bin/flake8")
-       python-check-command (concat pyenv-352 "/bin/pyflakes")
-       python-shell-interpreter (concat pyenv-352 "/bin/ipython3")
-       python-shell-interpreter-args "--simple-prompt")))
-
-  (defun use-pyenv-python2 ()
-    "Point to Python 2 for `elpy-mode', `flycheck-mode', and `python-mode'."
-    (interactive)
-    (let ((pyenv-2712 (concat my-home "/.pyenv/versions/2.7.12")))
-      (setq
-       elpy-rpc-python-command (concat pyenv-2712 "/bin/python2.7")
-       elpy-rpc-pythonpath (concat pyenv-2712 "/lib/python2.7/site-packages")
-       flycheck-python-flake8-executable (concat pyenv-2712 "/bin/flake8")
-       python-check-command (concat pyenv-2712 "/bin/pyflakes")
-       python-shell-interpreter (concat pyenv-2712 "/bin/ipython"))))
-
-  (defun use-system-python35 ()
-    "Use the system python3.5 for `elpy-mode', `flycheck-mode', and `python-mode'."
-    (interactive)
-    (setq
-     elpy-rpc-python-command "/usr/bin/python3.5m"
-     elpy-rpc-pythonpath "/usr/lib/python3.5/site-packages"
-     flycheck-python-flake8-executable "/usr/bin/flake8"
-     python-check-command "/usr/bin/pyflakes"
-     python-shell-interpreter "/usr/bin/python3.5m"))  ;; TODO: pip-provided ipython
-
-  (defun use-system-python34 ()
-    "Use the system python3.4 for `elpy-mode', `flycheck-mode', and `python-mode'."
-    (interactive)
-    (setq
-     elpy-rpc-python-command "/usr/bin/python3.4m"
-     elpy-rpc-pythonpath "/usr/lib/python3.4/site-packages"
-     flycheck-python-flake8-executable "/usr/bin/flake8"
-     python-check-command "/usr/bin/pyflakes"
-     python-shell-interpreter "/usr/bin/ipython3.4"))
-
-  (defun use-system-python2 ()
-    "Use the system python2 for `elpy-mode', `flycheck-mode', and `python-mode'."
-    (interactive)
-    (setq
-     elpy-rpc-python-command "/usr/bin/python2.7"
-     elpy-rpc-pythonpath "/usr/local/lib/python2.7/dist-packages"
-     flycheck-python-flake8-executable "/usr/bin/flake8"
-     python-check-command "/usr/bin/pyflakes"
-     python-shell-interpreter "/usr/bin/ipython"))
-
-  ;; Default
-  (use-pyenv-python352))
+  (with-eval-after-load 'python (elpy-enable)))
 
 ;; The Frankenstein required for productive Java programming in Emacs...
 ;; 1) https://github.com/senny/emacs-eclim
@@ -434,7 +360,7 @@
     (emms-mode-line 1)
     (emms-mode-line-cycle 1)
     (emms-playing-time 1)
-    (setq
+    (setq-default
      emms-mode-line-cycle-additional-space-num 4
      emms-mode-line-cycle-any-width-p t
      emms-mode-line-cycle-current-title-function
@@ -609,15 +535,37 @@
 
 (use-package nginx-mode :defer t :ensure t)
 
-;; Run jedi when we use python-mode
 (use-package python-mode
   :init
-  (jedi:install-server)
-  (add-hook 'python-mode-hook 'jedi:setup)
-  (add-hook 'python-mode-hook
-            (lambda ()
-              (when (derived-mode-p 'python-mode)
-                (add-to-list 'company-backends 'company-jedi)))))
+  (defun use-pyenv-python352 ()
+    "Point to Python 3.5.2 in `python-mode' and others."
+    (interactive)
+    (setq-default python-shell-completion-native nil)
+    (let ((pyenv-352 (concat my-home "/.pyenv/versions/3.5.2")))
+      (setq
+       elpy-rpc-python-command (concat pyenv-352 "/bin/python3.5m")
+       elpy-rpc-pythonpath (concat pyenv-352 "/lib/python3.5/site-packages")
+       flycheck-python-flake8-executable (concat pyenv-352 "/bin/flake8")
+       jedi:environment-root (concat my-home "/.emacs.d/.py/352")
+       jedi:environment-virtualenv (concat pyenv-352 "/bin/pyvenv-3.5")
+       jedi:server-command (concat my-home "/.emacs.d/elpa/jedi-core-20151214.705/jediepcserver.py")
+       ;; TODO: ipython's simple prompt doesn't support readline
+       ;; python-shell-interpreter (concat pyenv-352 "/bin/ipython3")
+       ;; python-shell-interpreter-args "--simple-prompt"
+       python-shell-interpreter elpy-rpc-python-command))
+
+    ;; Set up python(3 via pyenv) environment
+    ;; (add-hook 'python-mode-hook 'use-pyenv-python352)
+    (use-pyenv-python352)
+
+    ;; Set up jedi
+    (add-hook 'python-mode-hook 'jedi:setup)
+
+    ;; Hook into company
+    (add-hook 'python-mode-hook
+              (lambda ()
+                (when (derived-mode-p 'python-mode)
+                  (add-to-list 'company-backends 'company-jedi))))))
 
 ;; rust-mode: https://github.com/rust-lang/rust-mode
 ;; and emacs-racer: https://github.com/racer-rust/emacs-racer
@@ -818,9 +766,10 @@
  ;; No default scratch
  initial-scratch-message nil
  ;; Jive with the system clipboard
- x-select-enable-clipboard t
+ select-enable-clipboard t
  coding-system-for-read 'utf-8
- coding-system-for-write 'utf-8)
+ coding-system-for-write 'utf-8
+ xterm-mouse-mode t)
 
 (setq-default
  ;; No tabs
@@ -842,7 +791,7 @@
 
 ;; If we're using a terminal, add a margin
 (unless (display-graphic-p)
-  (setq linum-format "%d "))
+  (setq-default linum-format "%d "))
 
 ;; http://is.gd/4jOQ8Y
 (global-hl-line-mode t)
