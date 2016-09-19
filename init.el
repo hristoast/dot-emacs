@@ -545,7 +545,6 @@
        elpy-rpc-python-command (concat pyenv-352 "/bin/python3.5m")
        elpy-rpc-pythonpath (concat pyenv-352 "/lib/python3.5/site-packages")
        flycheck-python-flake8-executable (concat pyenv-352 "/bin/flake8")
-       jedi:environment-root (concat my-home "/.emacs.d/.py/352")
        jedi:environment-virtualenv (concat pyenv-352 "/bin/pyvenv-3.5")
        jedi:server-command
        (car (file-expand-wildcards (concat my-home "/.emacs.d/elpa/jedi-core-*/jediepcserver.py")))
