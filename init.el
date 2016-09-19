@@ -157,13 +157,13 @@
 ;; Requires: `pip install jedi`
 ;; Company backend for Python jedi
 ;; https://github.com/syohex/emacs-company-jedi
-;; TODO: Why is the auto-complete tooltip so wide?
 (use-package company-jedi
   :defer t
   :ensure t
   :init
-  (setq jedi:complete-on-dot t)
-  (setq jedi:get-in-function-call-delay 0.2))
+  (setq-default
+   jedi:complete-on-dot t
+   jedi:get-in-function-call-delay 0.2))
 
 ;; company-mode autocompletion for golang
 ;; https://github.com/nsf/gocode/tree/master/emacs-company
