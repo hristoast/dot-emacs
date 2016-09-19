@@ -548,14 +548,14 @@
        flycheck-python-flake8-executable (concat pyenv-352 "/bin/flake8")
        jedi:environment-root (concat my-home "/.emacs.d/.py/352")
        jedi:environment-virtualenv (concat pyenv-352 "/bin/pyvenv-3.5")
-       jedi:server-command (concat my-home "/.emacs.d/elpa/jedi-core-20151214.705/jediepcserver.py")
+       jedi:server-command
+       (car (file-expand-wildcards (concat my-home "/.emacs.d/elpa/jedi-core-*/jediepcserver.py")))
        ;; TODO: ipython's simple prompt doesn't support readline
        ;; python-shell-interpreter (concat pyenv-352 "/bin/ipython3")
        ;; python-shell-interpreter-args "--simple-prompt"
        python-shell-interpreter elpy-rpc-python-command))
 
     ;; Set up python(3 via pyenv) environment
-    ;; (add-hook 'python-mode-hook 'use-pyenv-python352)
     (use-pyenv-python352)
 
     ;; Set up jedi
