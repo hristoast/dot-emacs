@@ -540,7 +540,6 @@
   (defun use-pyenv-python352 ()
     "Point to Python 3.5.2 in `python-mode' and others."
     (interactive)
-    (setq-default python-shell-completion-native nil)
     (let ((pyenv-352 (concat my-home "/.pyenv/versions/3.5.2")))
       (setq
        elpy-rpc-python-command (concat pyenv-352 "/bin/python3.5m")
@@ -553,6 +552,7 @@
        ;; TODO: ipython's simple prompt doesn't support readline
        ;; python-shell-interpreter (concat pyenv-352 "/bin/ipython3")
        ;; python-shell-interpreter-args "--simple-prompt"
+       python-shell-completion-native-enable nil
        python-shell-interpreter elpy-rpc-python-command))
 
     ;; Set up python(3 via pyenv) environment
