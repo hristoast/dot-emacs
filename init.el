@@ -218,14 +218,6 @@
 
 (use-package dockerfile-mode :defer t :ensure t)
 
-;; elpy: the Emacs Lisp Python Environment
-;; https://github.com/jorgenschaefer/elpy
-;; Requires: `pip install elpy`
-(use-package elpy
-  :ensure t
-  :init
-  (with-eval-after-load 'python (elpy-enable)))
-
 ;; The Frankenstein required for productive Java programming in Emacs...
 ;; 1) https://github.com/senny/emacs-eclim
 ;; 2) http://eclim.org/
@@ -537,22 +529,21 @@
 (use-package python-mode
   ;; TODO: helper functions that install pip packages
   :init
-  (defun use-pyenv-python352 ()
-    "Point to Python 3.5.2 in `elpy' and others."
+  (setq-default python-shell-completion-native-enable nil)
+  (defun use-pyenv352 ()
+    "Configure Jedi to use a pyenv-provided Python 3.5.2."
     (interactive)
-    (let ((pyenv-352 (concat my-home "/.pyenv/versions/3.5.2")))
+    (let ((pyenv352 (concat my-home "/.pyenv/versions/3.5.2")))
       (setq
-       elpy-rpc-python-command (concat pyenv-352 "/bin/python3.5m")
-       elpy-rpc-pythonpath (concat pyenv-352 "/lib/python3.5/site-packages")
-       flycheck-python-flake8-executable (concat pyenv-352 "/bin/flake8")
-       ;; TODO: ipython's simple prompt doesn't support readline
-       ;; python-shell-interpreter (concat pyenv-352 "/bin/ipython3")
-       ;; python-shell-interpreter-args "--simple-prompt"
-       python-shell-completion-native-enable nil
-       python-shell-interpreter elpy-rpc-python-command)))
-
-  (use-pyenv-python352)
-  (setq python-shell-completion-native-enable nil)
+       jedi:environment-virtualenv (list (concat pyenv352 "/bin/pyvenv-3.5"))
+       jedi:environment-root (concat my-home "/.emacs.d/.py/352")
+       jedi:server-args
+       '("--sys-path" "~/.pyenv/versions/3.5.2/lib/python3.5"))
+      (if (not (file-exists-p
+                (concat jedi:environment-root
+                        "/lib/python3.5/site-packages/jediepcserver.py")))
+          (jedi:install-server))))
+  (use-pyenv352)
   (add-hook 'python-mode-hook 'jedi:setup)
   (add-hook 'python-mode-hook
             (lambda ()
