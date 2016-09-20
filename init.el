@@ -9,7 +9,6 @@
 (defconst my-home (getenv "HOME"))
 (defconst my-bin (concat my-home "/bin"))
 (defconst my-src (concat my-home "/src"))
-;; (defconst default-eclipse-workspace (concat my-src "/eclipse"))
 
 ;; Some initial package stuff
 (require 'package)
@@ -38,15 +37,6 @@
 (eval-when-compile (require 'use-package))
 
 (require 'bind-key)
-
-;; TODO: This does not work
-;; (use-package ac-slime
-;;   :ensure t
-;;   :config
-;;   (add-hook 'slime-mode-hook 'set-up-slime-ac)
-;;   (add-hook 'slime-repl-mode-hook 'set-up-slime-ac)
-;;   (eval-after-load "auto-complete"
-;;     '(add-to-list 'ac-modes 'slime-repl-mode)))
 
 (use-package autorevert :diminish auto-revert-mode)
 
@@ -218,173 +208,91 @@
 
 (use-package dockerfile-mode :defer t :ensure t)
 
-;; The Frankenstein required for productive Java programming in Emacs...
-;; 1) https://github.com/senny/emacs-eclim
-;; 2) http://eclim.org/
-;; 3) https://eclipse.org/
-;;
-;; Steps to make this work:
-;; 1) Start eclimd
-;; 2) Start Emacs
-;; 3) Create the eclim project (eclim-project-create, only if need be)
-;; 4) Open your java files
-;; 5) ????
-;; 6) PROFIT
-;;
-;; If you open a .java file before starting eclimd, kill
-;; the buffer, start eclimd, and then re-opem the file.
-;;
-;; TODO: add call to eclim-java-import in tab complete,
-;; so that imports are added when we tab-complete
-;; (use-package emacs-eclim
-;;   :diminish abbrev-mode flycheck-mode ggtags-mode
-;;   :ensure t
-;;   :bind
-;;   ("C-c s e" . start-eclimd)
-;;   ("C-c j b" . gradle-build)
-;;   ("C-c j c" . eclim-problems-correct)
-;;   ("C-c j d" . gradle-dev-setup)
-;;   ("C-c j f" . eclim-java-format)
-;;   ("C-c j g" . eclim-java-find-references)
-;;   ("C-c j h" . eclim-java-show-documentation-for-current-element)
-;;   ("C-c j i" . eclim-java-import-organize)
-;;   ("C-c TAB" . eclim-java-import-organize)
-;;   ("C-c j j" . eclim-java-implement)
-;;   ("C-c j l" . eclim-java-hierarchy)
-;;   ("C-c j n" . eclim-problems-next-same-file)
-;;   ("C-c j m" . eclim-problems-next)
-;;   ("C-c j p" . eclim-problems-previous-same-window)
-;;   ("C-c j o" . eclim-problems-previous)
-;;   ("C-c j r" . eclim-java-refactor-rename-symbol-at-point)
-;;   ("C-c j s" . gradle-decomp-workspace)
-;;   ("C-c j w" . gradle-clean)
-;;   ("C-c j z" . gradle-build-release)
-;;   :init
-;;   (require 'eclimd)
-;;   (setq
-;;    eclim-eclipse-dirs '((concat my-bin "/eclipse"))
-;;    eclim-executable (concat my-bin "/eclipse/eclim")
-;;    eclimd-default-workspace default-eclipse-workspace
-;;    eclimd-executable (concat my-bin "/eclipse/eclimd")
-;;    help-at-pt-display-when-idle t
-;;    help-at-pt-timer-delay 0.1)
-;;   (global-eclim-mode)
-;;   (help-at-pt-set-timer)
-
-;;   ;; Helpful build functions
-;;   (defun gradle-build ()
-;;     (interactive)
-;;     (compile "make"))
-
-;;   (defun gradle-build-release ()
-;;     (interactive)
-;;     (compile "make release"))
-
-;;   (defun gradle-clean ()
-;;     (interactive)
-;;     (compile "make clean"))
-
-;;   (defun gradle-decomp-workspace ()
-;;     (interactive)
-;;     (compile "make decomp-workspace"))
-
-;;   (defun gradle-dev-setup ()
-;;     (interactive)
-;;     (compile "make dev-setup"))
-
-;;   (defun gradle-run-client ()
-;;     (interactive)
-;;     (compile "make client"))
-
-;;   (defun gradle-run-server ()
-;;     (interactive)
-;;     (compile "make server")))
-
 ;; EMMS - https://www.gnu.org/software/emms/
 ;; TODO: https://www.gnu.org/software/emms/manual/#Track-Information
-(use-package emms
-  :ensure t
-  :functions emms-mode-line emms-player-mpd-seek emms-player-started
-  emms-playing-time emms-playlist-current-selected-track emms-stream-name
-  emms-track-description emms-track-get emms-track-name emms-track-type
-  :bind
-  (("<f1>" . emms-volume-lower)
-   ("<f2>" . emms-volume-raise)
-   ("<f3>" . emms-previous)
-   ("<f4>" . emms-next)
-   ("<f6>" . emms-play-directory)
-   ("<f7>" . emms-pause)
-   ("C-c m SPC" . emms-pause)
-   ("C-c m a" . emms-add-directory)
-   ("C-c m b" . emms-previous)
-   ("C-c m f" . emms-next)
-   ("C-c m l" . emms-lyrics-toggle)
-   ("C-c m n" . emms-playlist-mode-go)
-   ("C-c m p" . emms-start)
-   ("C-c m q" . emms-shuffle)
-   ("C-c m s" . emms-stop)
-   ("C-c m v d" . emms-volume-lower)
-   ("C-c m v u" . emms-volume-raise)
-   ("C-c p b" . mpd-rev10)
-   ("C-c p c" . emms-player-mpd-connect)
-   ("C-c p d" . emms-player-mpd-disconnect)
-   ("C-c p f" . mpd-seek10)
-   ("C-c p p" . emms-player-mpd-previous)
-   ("C-c p n" . emms-player-mpd-next)
-   ("C-c p s" . emms-player-mpd-show)
-   ("C-x t e" . emms-mode-line-toggle))
-  :init
-  (defun mpd-rev10 ()
-    "Seek backward ten seconds."
-    (interactive)
-    (emms-player-mpd-seek -10))
-  (defun mpd-seek10 ()
-    "Seek forward ten seconds."
-    (interactive)
-    (emms-player-mpd-seek 10))
-  :config
-  (progn
-    (require 'emms-mode-line-cycle)
-    (require 'emms-mode-line-icon)
-    (require 'emms-player-mpv)
-    (emms-add-directory-tree (concat my-home "/music"))
-    (emms-mode-line 1)
-    (emms-mode-line-cycle 1)
-    (emms-playing-time 1)
-    (setq-default
-     emms-mode-line-cycle-additional-space-num 4
-     emms-mode-line-cycle-any-width-p t
-     emms-mode-line-cycle-current-title-function
-     (lambda ()
-       (let ((track (emms-playlist-current-selected-track)))
-         (cl-case (emms-track-type track)
-           ((streamlist)
-            (let ((stream-name (emms-stream-name
-                                (emms-track-get track 'metadata))))
-              (if stream-name stream-name (emms-track-description track))))
-           ((url) (emms-track-description track))
-           (t (file-name-nondirectory
-               (emms-track-description track))))))
-     emms-mode-line-cycle-max-width 25
-     emms-mode-line-cycle-use-icon-p t
-     emms-mode-line-cycle-velocity 2
-     emms-mode-line-format " ( %s )"
-     emms-mode-line-titlebar-function
-     (lambda ()
-       '(:eval
-         (when emms-player-playing-p
-           (format " %s %s"
-                   (format emms-mode-line-format (emms-mode-line-cycle-get-title))
-                   emms-playing-time-string))))
-     emms-player-list '(emms-player-mpv)
-     emms-source-file-default-directory (concat my-home "/music"))))
+;; (use-package emms
+;;   :ensure t
+;;   :functions emms-mode-line emms-player-mpd-seek emms-player-started
+;;   emms-playing-time emms-playlist-current-selected-track emms-stream-name
+;;   emms-track-description emms-track-get emms-track-name emms-track-type
+;;   :bind
+;;   (("<f1>" . emms-volume-lower)
+;;    ("<f2>" . emms-volume-raise)
+;;    ("<f3>" . emms-previous)
+;;    ("<f4>" . emms-next)
+;;    ("<f6>" . emms-play-directory)
+;;    ("<f7>" . emms-pause)
+;;    ("C-c m SPC" . emms-pause)
+;;    ("C-c m a" . emms-add-directory)
+;;    ("C-c m b" . emms-previous)
+;;    ("C-c m f" . emms-next)
+;;    ("C-c m l" . emms-lyrics-toggle)
+;;    ("C-c m n" . emms-playlist-mode-go)
+;;    ("C-c m p" . emms-start)
+;;    ("C-c m q" . emms-shuffle)
+;;    ("C-c m s" . emms-stop)
+;;    ("C-c m v d" . emms-volume-lower)
+;;    ("C-c m v u" . emms-volume-raise)
+;;    ("C-c p b" . mpd-rev10)
+;;    ("C-c p c" . emms-player-mpd-connect)
+;;    ("C-c p d" . emms-player-mpd-disconnect)
+;;    ("C-c p f" . mpd-seek10)
+;;    ("C-c p p" . emms-player-mpd-previous)
+;;    ("C-c p n" . emms-player-mpd-next)
+;;    ("C-c p s" . emms-player-mpd-show)
+;;    ("C-x t e" . emms-mode-line-toggle))
+;;   :init
+;;   (defun mpd-rev10 ()
+;;     "Seek backward ten seconds."
+;;     (interactive)
+;;     (emms-player-mpd-seek -10))
+;;   (defun mpd-seek10 ()
+;;     "Seek forward ten seconds."
+;;     (interactive)
+;;     (emms-player-mpd-seek 10))
+;;   :config
+;;   (progn
+;;     (require 'emms-mode-line-cycle)
+;;     (require 'emms-mode-line-icon)
+;;     (require 'emms-player-mpv)
+;;     (emms-add-directory-tree (concat my-home "/music"))
+;;     (emms-mode-line 1)
+;;     (emms-mode-line-cycle 1)
+;;     (emms-playing-time 1)
+;;     (setq-default
+;;      emms-mode-line-cycle-additional-space-num 4
+;;      emms-mode-line-cycle-any-width-p t
+;;      emms-mode-line-cycle-current-title-function
+;;      (lambda ()
+;;        (let ((track (emms-playlist-current-selected-track)))
+;;          (cl-case (emms-track-type track)
+;;            ((streamlist)
+;;             (let ((stream-name (emms-stream-name
+;;                                 (emms-track-get track 'metadata))))
+;;               (if stream-name stream-name (emms-track-description track))))
+;;            ((url) (emms-track-description track))
+;;            (t (file-name-nondirectory
+;;                (emms-track-description track))))))
+;;      emms-mode-line-cycle-max-width 25
+;;      emms-mode-line-cycle-use-icon-p t
+;;      emms-mode-line-cycle-velocity 2
+;;      emms-mode-line-format " ( %s )"
+;;      emms-mode-line-titlebar-function
+;;      (lambda ()
+;;        '(:eval
+;;          (when emms-player-playing-p
+;;            (format " %s %s"
+;;                    (format emms-mode-line-format (emms-mode-line-cycle-get-title))
+;;                    emms-playing-time-string))))
+;;      emms-player-list '(emms-player-mpv)
+;;      emms-source-file-default-directory (concat my-home "/music"))))
 
 ;; Display the emms mode line as a ticker
 ;; https://github.com/momomo5717/emms-mode-line-cycle
-(use-package emms-mode-line-cycle :defer t :ensure t)
+;; (use-package emms-mode-line-cycle :defer t :ensure t)
 
 ;; mpv support for EMMS - https://github.com/dochang/emms-player-mpv/
-(use-package emms-player-mpv :defer t :ensure t)
+;; (use-package emms-player-mpv :defer t :ensure t)
 
 ;; Emacs Package Library
 ;; https://github.com/cask/epl
@@ -475,11 +383,6 @@
   (add-hook 'irony-mode-hook 'my-irony-mode-hook)
   (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options))
 
-;; (use-package java-mode
-;;   :init
-;;   (add-hook 'java-mode-hook 'run-eclimd)
-;;   (add-hook 'java-mode-hook 'eclim-mode))
-
 (use-package jinja2-mode :defer t :ensure t)
 
 (use-package js2-highlight-vars :ensure t)
@@ -533,6 +436,7 @@
   (defun use-pyenv352 ()
     "Configure Jedi to use a pyenv-provided Python 3.5.2."
     (interactive)
+    (jedi:stop-server)
     (let ((pyenv352 (concat my-home "/.pyenv/versions/3.5.2")))
       (setq
        jedi:environment-virtualenv (list (concat pyenv352 "/bin/pyvenv-3.5"))
@@ -543,8 +447,23 @@
       (if (not (file-exists-p
                 (concat jedi:environment-root
                         "/lib/python3.5/site-packages/jediepcserver.py")))
-          (jedi:install-server)))
-    (jedi:setup))
+          (jedi:install-server))))
+  (defun use-pyenv2712 ()
+    "Configure Jedi to use a pyenv-provided Python 2.7.12."
+    (interactive)
+    ;; TODO: pip install virtualenv if not already there
+    (jedi:stop-server)
+    (let ((pyenv2712 (concat my-home "/.pyenv/versions/2.7.12")))
+      (setq
+       jedi:environment-virtualenv (list (concat pyenv2712 "/bin/virtualenv"))
+       jedi:environment-root (concat my-home "/.emacs.d/.py/2712")
+       jedi:server-args
+       ;; TODO: de-hardcode this
+       '("--sys-path" "~/.pyenv/versions/2.7.12/lib/python2.7/site-packages"))
+      (if (not (file-exists-p
+                (concat jedi:environment-root
+                        "/lib/python2.7/site-packages/jediepcserver.py")))
+          (jedi:install-server))))
   (add-hook 'python-mode-hook 'use-pyenv352)
   (add-hook 'python-mode-hook
             (lambda ()
@@ -619,21 +538,6 @@
   (add-hook 'css-mode-hook 'skewer-css-mode)
   (add-hook 'html-mode-hook 'skewer-html-mode))
 
-;; SLIME: The Superior Lisp Interaction Mode for Emacs
-;; https://common-lisp.net/project/slime/
-;; (use-package slime
-;;   :ensure t
-;;   :bind
-;;   ("TAB" . slime-complete-symbol)
-;;   ("C-c s s" . slime)
-;;   ("C-c s c" . slime-connect)
-;;   :config
-;;   (setq
-;;    inferior-lisp-program "/usr/bin/sbcl"
-;;    slime-complete-symbol-function 'slime-fuzzy-complete-symbol)
-;;   (require 'slime-autoloads)
-;;   (slime-setup '(slime-fancy)))
-
 ;; Minor mode for Emacs that deals with parens
 ;; pairs and tries to be smart about it
 ;; https://github.com/Fuco1/smartparens
@@ -649,11 +553,6 @@
   (sp-use-paredit-bindings)
   (show-smartparens-global-mode +1)
   (smartparens-global-mode 1))
-
-;; Smart Tabs (indenting with tabs and aligning with spaces)
-;; http://www.emacswiki.org/emacs/SmartTabs
-;; (smart-tabs-insinuate 'c 'c++ 'java 'javascript 'cperl 'python
-;;                       'ruby 'nxml)
 
 ;; https://www.emacswiki.org/emacs/SrSpeedbar
 ;; TODO: This warning seems to come from sr-speedbar itself...
@@ -822,11 +721,6 @@
   (if mark-active
       (do-func-to-marked-region 'indent-region)
     (indent-according-to-mode)))
-
-;; (defun run-eclimd ()
-;;   "Run eclimd for Java editing."
-;;   (interactive)
-;;   (start-eclimd default-eclipse-workspace))
 
 (defun toggle-comment ()
   "Toggle comments on the current line or highlighted region."
