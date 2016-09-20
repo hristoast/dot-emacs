@@ -221,7 +221,6 @@
 ;; elpy: the Emacs Lisp Python Environment
 ;; https://github.com/jorgenschaefer/elpy
 ;; Requires: `pip install elpy`
-;; TODO: http://tkf.github.io/emacs-jedi/latest/#automatically-use-appropriate-python-version
 (use-package elpy
   :ensure t
   :init
@@ -536,35 +535,29 @@
 (use-package nginx-mode :defer t :ensure t)
 
 (use-package python-mode
+  ;; TODO: helper functions that install pip packages
   :init
   (defun use-pyenv-python352 ()
-    "Point to Python 3.5.2 in `python-mode' and others."
+    "Point to Python 3.5.2 in `elpy' and others."
     (interactive)
     (let ((pyenv-352 (concat my-home "/.pyenv/versions/3.5.2")))
       (setq
        elpy-rpc-python-command (concat pyenv-352 "/bin/python3.5m")
        elpy-rpc-pythonpath (concat pyenv-352 "/lib/python3.5/site-packages")
        flycheck-python-flake8-executable (concat pyenv-352 "/bin/flake8")
-       jedi:environment-virtualenv (concat pyenv-352 "/bin/pyvenv-3.5")
-       jedi:server-command
-       (car (file-expand-wildcards (concat my-home "/.emacs.d/elpa/jedi-core-*/jediepcserver.py")))
        ;; TODO: ipython's simple prompt doesn't support readline
        ;; python-shell-interpreter (concat pyenv-352 "/bin/ipython3")
        ;; python-shell-interpreter-args "--simple-prompt"
        python-shell-completion-native-enable nil
-       python-shell-interpreter elpy-rpc-python-command))
+       python-shell-interpreter elpy-rpc-python-command)))
 
-    ;; Set up python(3 via pyenv) environment
-    (use-pyenv-python352)
-
-    ;; Set up jedi
-    (add-hook 'python-mode-hook 'jedi:setup)
-
-    ;; Hook into company
-    (add-hook 'python-mode-hook
-              (lambda ()
-                (when (derived-mode-p 'python-mode)
-                  (add-to-list 'company-backends 'company-jedi))))))
+  (use-pyenv-python352)
+  (setq python-shell-completion-native-enable nil)
+  (add-hook 'python-mode-hook 'jedi:setup)
+  (add-hook 'python-mode-hook
+            (lambda ()
+              (when (derived-mode-p 'python-mode)
+                (add-to-list 'company-backends 'company-jedi)))))
 
 ;; rust-mode: https://github.com/rust-lang/rust-mode
 ;; and emacs-racer: https://github.com/racer-rust/emacs-racer
