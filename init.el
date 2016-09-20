@@ -538,13 +538,14 @@
        jedi:environment-virtualenv (list (concat pyenv352 "/bin/pyvenv-3.5"))
        jedi:environment-root (concat my-home "/.emacs.d/.py/352")
        jedi:server-args
-       '("--sys-path" "~/.pyenv/versions/3.5.2/lib/python3.5"))
+       ;; TODO: de-hardcode this
+       '("--sys-path" "~/.pyenv/versions/3.5.2/lib/python3.5/site-packages"))
       (if (not (file-exists-p
                 (concat jedi:environment-root
                         "/lib/python3.5/site-packages/jediepcserver.py")))
-          (jedi:install-server))))
-  (use-pyenv352)
-  (add-hook 'python-mode-hook 'jedi:setup)
+          (jedi:install-server)))
+    (jedi:setup))
+  (add-hook 'python-mode-hook 'use-pyenv352)
   (add-hook 'python-mode-hook
             (lambda ()
               (when (derived-mode-p 'python-mode)
