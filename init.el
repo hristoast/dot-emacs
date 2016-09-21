@@ -433,10 +433,16 @@
   ;; TODO: helper functions that install pip packages
   :init
   (setq-default python-shell-completion-native-enable nil)
+
+  (defun maybe-stop-jedi-server ()
+    "Stop the Jedi server, if need me."
+    (if (boundp 'jedi:stop-server)
+        (jedi:stop-server)))
+
   (defun use-pyenv352 ()
     "Configure Jedi to use a pyenv-provided Python 3.5.2."
     (interactive)
-    (jedi:stop-server)
+    (maybe-stop-jedi-server)
     (let ((pyenv352 (concat my-home "/.pyenv/versions/3.5.2")))
       (setq
        jedi:environment-virtualenv (list (concat pyenv352 "/bin/pyvenv-3.5"))
@@ -448,11 +454,12 @@
                 (concat jedi:environment-root
                         "/lib/python3.5/site-packages/jediepcserver.py")))
           (jedi:install-server))))
+
   (defun use-pyenv2712 ()
     "Configure Jedi to use a pyenv-provided Python 2.7.12."
     (interactive)
     ;; TODO: pip install virtualenv if not already there
-    (jedi:stop-server)
+    (maybe-stop-jedi-server)
     (let ((pyenv2712 (concat my-home "/.pyenv/versions/2.7.12")))
       (setq
        jedi:environment-virtualenv (list (concat pyenv2712 "/bin/virtualenv"))
@@ -464,6 +471,7 @@
                 (concat jedi:environment-root
                         "/lib/python2.7/site-packages/jediepcserver.py")))
           (jedi:install-server))))
+
   (add-hook 'python-mode-hook 'use-pyenv352)
   (add-hook 'python-mode-hook
             (lambda ()
