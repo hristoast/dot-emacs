@@ -651,6 +651,8 @@
  backup-directory-alist `(("." . "~/.emacs.d/backups"))
  ;; Show column numbers
  column-number-mode t
+ ;; Keep custom stuff out of here!
+ custom-file "~/emacs.d/custom.el"
  ;; gdb-many-windows t
  ;; gdb-show-main t
  ;; Auto-open symlinks that point to vcs-controlled files
@@ -664,6 +666,10 @@
  coding-system-for-read 'utf-8
  coding-system-for-write 'utf-8
  xterm-mouse-mode t)
+
+;; Load any cutsom stuff
+(if (file-exists-p custom-file)
+    (load-file custom-file))
 
 (setq-default
  ;; No tabs
@@ -800,17 +806,3 @@
 ;; TODO: csharp-log, markdown-indent-line, sp-wrap--can-wrap-p
 (provide 'init)
 ;;; init.el ends here
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   (quote
-    (zenburn-theme solarized-theme zygospore yaml-mode ws-butler web-mode use-package sr-speedbar smartparens skewer-mode ruby-dev robe rainbow-mode racer obsidian-theme nginx-mode markdown-mode+ magit lush-theme json-mode js2-highlight-vars jinja2-mode jedi groovy-mode gotham-theme glsl-mode gitignore-mode ggtags function-args flycheck-status-emoji flycheck-rust flycheck-irony emms-player-mpv emms-mode-line-cycle emacs-eclim elpy dtrt-indent dockerfile-mode diff-hl darcula-theme csharp-mode company-racer company-lua company-jedi company-irony company-go company-emoji cmake-mode clojure-snippets clean-aindent-mode clang-format cider auto-complete-clang-async atom-one-dark-theme apache-mode ac-slime abyss-theme))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
