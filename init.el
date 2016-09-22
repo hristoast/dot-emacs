@@ -395,10 +395,13 @@
 
 ;; https://github.com/andre-richter/emacs-lush-theme
 ;; Other cool themes: atom-one-dark, abyss, darcula, obsidian
-(use-package lush-theme
-  :ensure t
-  :config
-  (load-theme 'lush t))
+;; No theme if in a terminal;
+;; I've yet to find a decent theme for terminals..
+(if (display-graphic-p)
+    (use-package lush-theme
+      :ensure t
+      :config
+      (load-theme 'lush t)))
 
 ;; A Git Porcelain inside Emacs
 ;; https://magit.vc/
@@ -797,3 +800,17 @@
 ;; TODO: csharp-log, markdown-indent-line, sp-wrap--can-wrap-p
 (provide 'init)
 ;;; init.el ends here
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (zenburn-theme solarized-theme zygospore yaml-mode ws-butler web-mode use-package sr-speedbar smartparens skewer-mode ruby-dev robe rainbow-mode racer obsidian-theme nginx-mode markdown-mode+ magit lush-theme json-mode js2-highlight-vars jinja2-mode jedi groovy-mode gotham-theme glsl-mode gitignore-mode ggtags function-args flycheck-status-emoji flycheck-rust flycheck-irony emms-player-mpv emms-mode-line-cycle emacs-eclim elpy dtrt-indent dockerfile-mode diff-hl darcula-theme csharp-mode company-racer company-lua company-jedi company-irony company-go company-emoji cmake-mode clojure-snippets clean-aindent-mode clang-format cider auto-complete-clang-async atom-one-dark-theme apache-mode ac-slime abyss-theme))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
