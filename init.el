@@ -103,6 +103,7 @@
 ;; Modular in-buffer completion framework for Emacs
 ;; http://company-mode.github.io/
 (use-package company
+  :diminish company-mode
   :ensure t
   :config
   (add-hook 'after-init-hook 'global-company-mode)
@@ -634,6 +635,7 @@
 ;; Yet another snippet extension
 ;; http://capitaomorte.github.io/yasnippet/
 (use-package yasnippet
+  :diminish yas-minor-mode
   :ensure t
   :init
   ;; Shut yas up! Disables startup noise
