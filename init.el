@@ -5,10 +5,17 @@
 ;; TL;DR my Emacs configuration for writing code and things.
 
 ;;; Code:
+(defconst dot-emacs "~/.emacs.d")
 (defconst emacs-start-time (current-time))
 (defconst my-home (getenv "HOME"))
 (defconst my-bin (concat my-home "/bin"))
 (defconst my-src (concat my-home "/src"))
+
+;; For the package-selected-packages var ...
+;; Not sure if I really care about this but here it is.
+(let ((selected-packages.el (concat dot-emacs "/selected-packages.el")))
+  (if (file-exists-p selected-packages.el)
+      (load-file selected-packages.el)))
 
 ;; Some initial package stuff
 (require 'package)
@@ -376,6 +383,22 @@
   :ensure t
   :config
   (defun my-irony-mode-hook ()
+    (let ((cmd
+           ;; Build command stolen from irony.el:
+           (format
+            (concat "%s %s %s && %s --build . "
+                    "--use-stderr --config Release --target install")
+            (shell-quote-argument irony-cmake-executable)
+            (shell-quote-argument (concat "-DCMAKE_INSTALL_PREFIX="
+                                          (expand-file-name
+                                           irony-server-install-prefix)))
+            (shell-quote-argument irony-server-source-dir)
+            (shell-quote-argument irony-cmake-executable))))
+
+      ;; Install irony-server if need be
+      (if (not (file-exists-p (concat dot-emacs "/irony/bin/irony-server")))
+          (irony-install-server cmd)))
+
     (define-key irony-mode-map [remap completion-at-point]
       'irony-completion-at-point-async)
     (define-key irony-mode-map [remap complete-symbol]
@@ -449,7 +472,7 @@
     (let ((pyenv352 (concat my-home "/.pyenv/versions/3.5.2")))
       (setq
        jedi:environment-virtualenv (list (concat pyenv352 "/bin/pyvenv-3.5"))
-       jedi:environment-root (concat my-home "/.emacs.d/.py/352")
+       jedi:environment-root (concat dot-emacs "/.py/352")
        jedi:server-args
        ;; TODO: de-hardcode this
        '("--sys-path" "~/.pyenv/versions/3.5.2/lib/python3.5/site-packages"))
@@ -466,7 +489,7 @@
     (let ((pyenv2712 (concat my-home "/.pyenv/versions/2.7.12")))
       (setq
        jedi:environment-virtualenv (list (concat pyenv2712 "/bin/virtualenv"))
-       jedi:environment-root (concat my-home "/.emacs.d/.py/2712")
+       jedi:environment-root (concat dot-emacs "/.py/2712")
        jedi:server-args
        ;; TODO: de-hardcode this
        '("--sys-path" "~/.pyenv/versions/2.7.12/lib/python2.7/site-packages"))
@@ -652,9 +675,7 @@
  ;; Show column numbers
  column-number-mode t
  ;; Keep custom stuff out of here!
- custom-file "~/emacs.d/custom.el"
- ;; gdb-many-windows t
- ;; gdb-show-main t
+ custom-file (concat dot-emacs "/custom.el")
  ;; Auto-open symlinks that point to vcs-controlled files
  vc-follow-symlinks t
  ;; No splash screen.
@@ -748,10 +769,7 @@
      (line-beginning-position)
      (line-end-position))))
 
-;;; Rebind/Set several useful keybindings - many of which make Emacs behave like
-;;; other (not vim) editors.
-
-;; UNUSED: None!
+;;; Rebind/Set several useful keybindings
 
 ;; Insert a newline, then indent according to major mode
 (global-set-key (kbd "RET") 'newline-and-indent)
