@@ -450,6 +450,9 @@
 
 (use-package nginx-mode :defer t :ensure t)
 
+;; pony-mode:  Django mode for emacs
+(use-package pony-mode :defer t :diminish pony-minor-mode pony-tpl-minor-mode :ensure t)
+
 (use-package python-mode
   ;; TODO: helper functions that install pip packages
   :bind
