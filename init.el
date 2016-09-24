@@ -452,8 +452,19 @@
 
 (use-package python-mode
   ;; TODO: helper functions that install pip packages
+  :bind
+  ("<S-down-mouse-1>" . goto-definition-at-point)
   :init
   (setq-default python-shell-completion-native-enable nil)
+
+  (defun goto-definition-at-point (event)
+    "Move the point to the clicked position
+     and jedi:goto-definition the thing at point."
+    (interactive "e")
+    (let ((es (event-start event)))
+      (select-window (posn-window es))
+      (goto-char (posn-point es))
+      (jedi:goto-definition)))
 
   (defun maybe-stop-jedi-server ()
     "Stop the Jedi server, if need me."
