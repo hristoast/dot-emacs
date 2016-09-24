@@ -11,12 +11,6 @@
 (defconst my-bin (concat my-home "/bin"))
 (defconst my-src (concat my-home "/src"))
 
-;; For the package-selected-packages var ...
-;; Not sure if I really care about this but here it is.
-(let ((selected-packages.el (concat dot-emacs "/selected-packages.el")))
-  (if (file-exists-p selected-packages.el)
-      (load-file selected-packages.el)))
-
 ;; Some initial package stuff
 (require 'package)
 (setq package-archives
