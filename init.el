@@ -132,10 +132,6 @@
 (use-package company-irony
   :defer t
   :ensure t
-  :functions c-backward-sws c-beginning-of-decl-1 c-determine-limit
-  c-end-of-macro c-font-lock-declarators c-font-lock-invalid-string
-  c-fontify-recorded-types-and-refs c-forward-keyword-clause c-forward-sws
-  c-forward-type c-get-lang-constant c-skip-comments-and-strings
   :init
   (add-hook 'c-mode-common-hook
             (lambda ()
@@ -182,10 +178,7 @@
 
 ;; A major-mode for editing C# in emacs
 ;; https://github.com/josteink/csharp-mode
-(use-package csharp-mode
-  :defer t
-  :ensure t
-  :functions imenu--split)
+(use-package csharp-mode :defer t :ensure t)
 
 ;; diff-hl - highlight changes/diffs
 ;; https://github.com/dgutov/diff-hl
@@ -378,21 +371,21 @@
   :ensure t
   :config
   (defun my-irony-mode-hook ()
-    (let ((cmd
-           ;; Build command stolen from irony.el:
-           (format
-            (concat "%s %s %s && %s --build . "
-                    "--use-stderr --config Release --target install")
-            (shell-quote-argument irony-cmake-executable)
-            (shell-quote-argument (concat "-DCMAKE_INSTALL_PREFIX="
-                                          (expand-file-name
-                                           irony-server-install-prefix)))
-            (shell-quote-argument irony-server-source-dir)
-            (shell-quote-argument irony-cmake-executable))))
+    ;; (let ((cmd
+    ;;        ;; Build command stolen from irony.el:
+    ;;        (format
+    ;;         (concat "%s %s %s && %s --build . "
+    ;;                 "--use-stderr --config Release --target install")
+    ;;         (shell-quote-argument irony-cmake-executable)
+    ;;         (shell-quote-argument (concat "-DCMAKE_INSTALL_PREFIX="
+    ;;                                       (expand-file-name
+    ;;                                        irony-server-install-prefix)))
+    ;;         (shell-quote-argument irony-server-source-dir)
+    ;;         (shell-quote-argument irony-cmake-executable))))
 
-      ;; Install irony-server if need be
-      (if (not (file-exists-p (concat dot-emacs "/irony/bin/irony-server")))
-          (irony-install-server cmd)))
+    ;;   ;; Install irony-server if need be
+    ;;   (if (not (file-exists-p (concat dot-emacs "/irony/bin/irony-server")))
+    ;;       (irony-install-server cmd)))
 
     (define-key irony-mode-map [remap completion-at-point]
       'irony-completion-at-point-async)
@@ -446,18 +439,29 @@
         (do-func-to-marked-region 'markdown-indent-region)
       (markdown-indent-line))))
 
-(use-package markdown-mode+ :defer t :ensure t)
+(use-package markdown-mode+ :defer t :ensure t :functions markdown-indent-line)
 
 (use-package nginx-mode :defer t :ensure t)
 
-;; pony-mode:  Django mode for emacs
+;; pony-mode: Django mode for emacs
 (use-package pony-mode :defer t :diminish pony-minor-mode pony-tpl-minor-mode :ensure t)
+
+;; (use-package pydoc-info :defer t :ensure t)
 
 (use-package python-mode
   ;; TODO: helper functions that install pip packages
   :bind
   ("<S-down-mouse-1>" . goto-definition-at-point)
+  :functions jedi:goto-definition jedi:stop-server maybe-stop-jedi-server
   :init
+  ;; TODO: http://www.draketo.de/light/english/free-software/read-your-python-module-documentation-emacs
+  ;; (info-lookup-add-help
+  ;;  :mode 'python-mode
+  ;;  :parse-rule 'pydoc-info-python-symbol-at-point
+  ;;  :doc-spec
+  ;;  '(("(python)Index" pydoc-info-lookup-transform-entry)
+  ;;    ("(TARGETNAME)Index" pydoc-info-lookup-transform-entry)))
+
   (setq-default python-shell-completion-native-enable nil)
 
   (defun goto-definition-at-point (event)
@@ -600,15 +604,18 @@
 ;; https://www.emacswiki.org/emacs/SrSpeedbar
 ;; TODO: This warning seems to come from sr-speedbar itself...
 ;; TODO: reference to free variable `helm-alive-p'
-(use-package sr-speedbar
-  :ensure t
-  :bind
-  ("C-c b" . sr-speedbar-toggle))
+;; TODO: http://emacs.stackexchange.com/q/23786
+;; TODO: maybe remove this.
+;; (use-package sr-speedbar
+;;   :bind
+;;   ("C-c b" . sr-speedbar-toggle)
+;;   :ensure t)
 
 ;;  Emacs isearch with an overview. Oh, man!
 ;; https://github.com/abo-abo/swiper
 (use-package swiper :ensure t)
 
+;; TODO: maybe check this
 ;; http://ternjs.net/doc/manual.html#emacs
 ;; (use-package tern :ensure t :defer t)
 
@@ -619,7 +626,6 @@
   :ensure t
   :mode
   ("\\.erb\\'" . web-mode)
-  ("\\.html\\'" . web-mode)
   ("\\.tpl\\'" . web-mode))
 
 ;; windmove: http://is.gd/63r6U0
@@ -659,9 +665,6 @@
   ("C-x 1" . zygospore-toggle-delete-other-windows))
 
 ;; Tweaks to Emacs internals
-
-;; Always show whitespace characters
-;; (global-whitespace-mode)
 
 ;; ...But with regular coloring; no highlighting
 (defvar whitespace-style
@@ -824,13 +827,9 @@
         (message (concat "Could not find " fireplace-el " or " fireplace-elc "!!!!"))))))
 
 ;; How long did we take to load?
-(when window-system
-  (let ((elapsed (float-time (time-subtract (current-time)
-                                            emacs-start-time))))
-    (message "[STARTUP] Loading %s ... done (%.3fs)" load-file-name elapsed)))
+(let ((elapsed (float-time (time-subtract (current-time)
+                                          emacs-start-time))))
+  (message "[STARTUP] Loading %s ... done (%.3fs)" load-file-name elapsed))
 
-;; TODO: WTF these warnings... adding them as :functions does not fix...
-;; TODO: the following functions might not be defined at runtime:
-;; TODO: csharp-log, markdown-indent-line, sp-wrap--can-wrap-p
 (provide 'init)
 ;;; init.el ends here
