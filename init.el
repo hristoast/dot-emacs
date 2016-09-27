@@ -619,7 +619,10 @@
 (if (file-exists-p custom-file)
     (load-file custom-file))
 
+;; Which browser to open links in
 (setq-default
+ browse-url-browser-function 'browse-url-generic
+ browse-url-generic-program "firefox"
  ;; No tabs
  indent-tabs-mode nil
  ;; "Tabs" are 4 spaces
