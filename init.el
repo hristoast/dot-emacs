@@ -124,9 +124,7 @@
 
 ;; company-mode backend for emoji
 ;; https://github.com/dunn/company-emoji
-(use-package company-emoji
-  :defer t
-  :ensure t)
+(use-package company-emoji :defer t :ensure t)
 
 ;; https://github.com/Sarcasm/company-irony
 (use-package company-irony
@@ -203,92 +201,6 @@
 
 (use-package dockerfile-mode :defer t :ensure t)
 
-;; EMMS - https://www.gnu.org/software/emms/
-;; TODO: https://www.gnu.org/software/emms/manual/#Track-Information
-;; (use-package emms
-;;   :ensure t
-;;   :functions emms-mode-line emms-player-mpd-seek emms-player-started
-;;   emms-playing-time emms-playlist-current-selected-track emms-stream-name
-;;   emms-track-description emms-track-get emms-track-name emms-track-type
-;;   :bind
-;;   (("<f1>" . emms-volume-lower)
-;;    ("<f2>" . emms-volume-raise)
-;;    ("<f3>" . emms-previous)
-;;    ("<f4>" . emms-next)
-;;    ("<f6>" . emms-play-directory)
-;;    ("<f7>" . emms-pause)
-;;    ("C-c m SPC" . emms-pause)
-;;    ("C-c m a" . emms-add-directory)
-;;    ("C-c m b" . emms-previous)
-;;    ("C-c m f" . emms-next)
-;;    ("C-c m l" . emms-lyrics-toggle)
-;;    ("C-c m n" . emms-playlist-mode-go)
-;;    ("C-c m p" . emms-start)
-;;    ("C-c m q" . emms-shuffle)
-;;    ("C-c m s" . emms-stop)
-;;    ("C-c m v d" . emms-volume-lower)
-;;    ("C-c m v u" . emms-volume-raise)
-;;    ("C-c p b" . mpd-rev10)
-;;    ("C-c p c" . emms-player-mpd-connect)
-;;    ("C-c p d" . emms-player-mpd-disconnect)
-;;    ("C-c p f" . mpd-seek10)
-;;    ("C-c p p" . emms-player-mpd-previous)
-;;    ("C-c p n" . emms-player-mpd-next)
-;;    ("C-c p s" . emms-player-mpd-show)
-;;    ("C-x t e" . emms-mode-line-toggle))
-;;   :init
-;;   (defun mpd-rev10 ()
-;;     "Seek backward ten seconds."
-;;     (interactive)
-;;     (emms-player-mpd-seek -10))
-;;   (defun mpd-seek10 ()
-;;     "Seek forward ten seconds."
-;;     (interactive)
-;;     (emms-player-mpd-seek 10))
-;;   :config
-;;   (progn
-;;     (require 'emms-mode-line-cycle)
-;;     (require 'emms-mode-line-icon)
-;;     (require 'emms-player-mpv)
-;;     (emms-add-directory-tree (concat my-home "/music"))
-;;     (emms-mode-line 1)
-;;     (emms-mode-line-cycle 1)
-;;     (emms-playing-time 1)
-;;     (setq-default
-;;      emms-mode-line-cycle-additional-space-num 4
-;;      emms-mode-line-cycle-any-width-p t
-;;      emms-mode-line-cycle-current-title-function
-;;      (lambda ()
-;;        (let ((track (emms-playlist-current-selected-track)))
-;;          (cl-case (emms-track-type track)
-;;            ((streamlist)
-;;             (let ((stream-name (emms-stream-name
-;;                                 (emms-track-get track 'metadata))))
-;;               (if stream-name stream-name (emms-track-description track))))
-;;            ((url) (emms-track-description track))
-;;            (t (file-name-nondirectory
-;;                (emms-track-description track))))))
-;;      emms-mode-line-cycle-max-width 25
-;;      emms-mode-line-cycle-use-icon-p t
-;;      emms-mode-line-cycle-velocity 2
-;;      emms-mode-line-format " ( %s )"
-;;      emms-mode-line-titlebar-function
-;;      (lambda ()
-;;        '(:eval
-;;          (when emms-player-playing-p
-;;            (format " %s %s"
-;;                    (format emms-mode-line-format (emms-mode-line-cycle-get-title))
-;;                    emms-playing-time-string))))
-;;      emms-player-list '(emms-player-mpv)
-;;      emms-source-file-default-directory (concat my-home "/music"))))
-
-;; Display the emms mode line as a ticker
-;; https://github.com/momomo5717/emms-mode-line-cycle
-;; (use-package emms-mode-line-cycle :defer t :ensure t)
-
-;; mpv support for EMMS - https://github.com/dochang/emms-player-mpv/
-;; (use-package emms-player-mpv :defer t :ensure t)
-
 ;; Emacs Package Library
 ;; https://github.com/cask/epl
 (use-package epl :ensure t)
@@ -358,10 +270,7 @@
 
 ;; Interactively Do Things
 ;; http://emacswiki.org/emacs/InteractivelyDoThings
-(use-package ido
-  :ensure t
-  :config
-  (ido-mode t))
+(use-package ido :ensure t :config (ido-mode t))
 
 ;; A C/C++ minor mode for Emacs powered by libclang
 ;; https://github.com/Sarcasm/irony-mode
