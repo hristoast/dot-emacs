@@ -355,22 +355,18 @@
 ;; pony-mode: Django mode for emacs
 (use-package pony-mode :defer t :diminish pony-minor-mode pony-tpl-minor-mode :ensure t)
 
-;; (use-package pydoc-info :defer t :ensure t)
+;; Navigate Python documentation
+;; https://github.com/statmobile/pydoc
+(use-package pydoc :defer t :ensure t)
 
 (use-package python-mode
   ;; TODO: helper functions that install pip packages
+  ;; pip install flake8 jedi
   :bind
   ("<S-down-mouse-1>" . goto-definition-at-point)
+  ("<S-down-mouse-3>" . quick-pydoc)
   :functions jedi:goto-definition jedi:stop-server maybe-stop-jedi-server
   :init
-  ;; TODO: http://www.draketo.de/light/english/free-software/read-your-python-module-documentation-emacs
-  ;; (info-lookup-add-help
-  ;;  :mode 'python-mode
-  ;;  :parse-rule 'pydoc-info-python-symbol-at-point
-  ;;  :doc-spec
-  ;;  '(("(python)Index" pydoc-info-lookup-transform-entry)
-  ;;    ("(TARGETNAME)Index" pydoc-info-lookup-transform-entry)))
-
   (setq-default python-shell-completion-native-enable nil)
 
   (defun goto-definition-at-point (event)
@@ -386,6 +382,15 @@
     "Stop the Jedi server, if need me."
     (if (boundp 'jedi:stop-server)
         (jedi:stop-server)))
+
+  (defun quick-pydoc (event)
+    "Move the point to the clicked position
+     and pydoc the thing at point."
+    (interactive "e")
+    (let ((es (event-start event)))
+      (select-window (posn-window es))
+      (goto-char (posn-point es))
+      (pydoc-at-point)))
 
   (defun use-pyenv352 ()
     "Configure Jedi to use a pyenv-provided Python 3.5.2."
@@ -719,7 +724,10 @@
 (global-set-key (kbd "C-x u") 'upcase-region)
 (global-set-key (kbd "C-x t m") 'menu-bar-mode)
 (global-set-key (kbd "TAB") 'indent-appropriately)
-;; (global-set-key (kbd "<f12>") 'fireplace)
+
+;; Handy default bindings that are kept:
+;; M-< Start of file
+;; M-> End of file
 
 ;; Kill this buffer!
 (substitute-key-definition 'kill-buffer 'kill-buffer-and-window global-map)
