@@ -178,6 +178,8 @@
 ;; https://github.com/josteink/csharp-mode
 (use-package csharp-mode :defer t :ensure t)
 
+(use-package css-mode :init (add-hook 'css-mode-hook 'skewer-css-mode))
+
 ;; diff-hl - highlight changes/diffs
 ;; https://github.com/dgutov/diff-hl
 (use-package diff-hl
@@ -268,6 +270,8 @@
 
 (use-package groovy-mode :defer t :ensure t)
 
+(use-package html-mode :init (add-hook 'html-mode-hook 'skewer-html-mode))
+
 ;; Interactively Do Things
 ;; http://emacswiki.org/emacs/InteractivelyDoThings
 (use-package ido :ensure t :config (ido-mode t))
@@ -307,7 +311,11 @@
 
 (use-package js2-highlight-vars :ensure t)
 
-(use-package js2-mode :defer t :ensure t)
+(use-package js2-mode
+  :defer t
+  :ensure t
+  :init
+  (add-hook 'js2-mode-hook 'skewer-mode))
 
 (use-package json-mode :defer t :ensure t)
 
@@ -494,10 +502,11 @@
 (use-package skewer-mode
   :defer t
   :ensure t
-  :config
-  (add-hook 'js2-mode-hook 'skewer-mode)
-  (add-hook 'css-mode-hook 'skewer-css-mode)
-  (add-hook 'html-mode-hook 'skewer-html-mode))
+  :init
+  (setq-default httpd-root (concat dot-emacs "/httpd"))
+  :bind
+  ("C-c h p" . httpd-start)
+  ("C-c h s" . httpd-stop))
 
 ;; Minor mode for Emacs that deals with parens
 ;; pairs and tries to be smart about it
@@ -673,7 +682,7 @@
   "Compile the current project."
   (interactive)
   (setq-local compilation-read-command nil)
-    (call-interactively 'compile))
+  (call-interactively 'compile))
 
 (defun do-func-to-marked-region (func)
   "Do (FUNC) on a region forward and in reverse."
