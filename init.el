@@ -178,7 +178,10 @@
 ;; https://github.com/josteink/csharp-mode
 (use-package csharp-mode :defer t :ensure t)
 
-(use-package css-mode :init (add-hook 'css-mode-hook 'skewer-css-mode))
+(use-package css-mode
+  :defer t
+  :init
+  (add-hook 'css-mode-hook 'skewer-css-mode))
 
 ;; diff-hl - highlight changes/diffs
 ;; https://github.com/dgutov/diff-hl
@@ -270,7 +273,10 @@
 
 (use-package groovy-mode :defer t :ensure t)
 
-(use-package html-mode :init (add-hook 'html-mode-hook 'skewer-html-mode))
+(use-package html-mode
+  :defer t
+  :init
+  (add-hook 'html-mode-hook 'skewer-html-mode))
 
 ;; Interactively Do Things
 ;; http://emacswiki.org/emacs/InteractivelyDoThings
