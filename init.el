@@ -5,21 +5,30 @@
 ;; TL;DR my Emacs configuration for writing code and things.
 
 ;;; Code:
-(defconst dot-emacs "~/.emacs.d")
 (defconst emacs-start-time (current-time))
 (defconst my-home (getenv "HOME"))
 (defconst my-bin (concat my-home "/bin"))
 (defconst my-src (concat my-home "/src"))
+;; user-emacs-directory is provided too
+;; late for my purposes so I set this now.
+(defconst dot-emacs (concat my-home "/.emacs.d"))
 
 ;; Some initial package stuff
 (require 'package)
-(setq package-archives
-      ;; GNU over SSL
-      '(("gnu" . "https://elpa.gnu.org/packages/")
-        ;; MELPA (Milkypostman’s Emacs Lisp Package Archive)
-        ("melpa" . "https://melpa.org/packages/")
-        ;; MELPA Stable
-        ("melpa-stable" . "https://stable.melpa.org/packages/")))
+(setq
+ ;; Keep custom stuff out of here!
+ custom-file (concat dot-emacs "/my-custom.el")
+ package-archives
+ ;; GNU over SSL
+ '(("gnu" . "https://elpa.gnu.org/packages/")
+   ;; MELPA (Milkypostman’s Emacs Lisp Package Archive)
+   ("melpa" . "https://melpa.org/packages/")
+   ;; MELPA Stable
+   ("melpa-stable" . "https://stable.melpa.org/packages/")))
+
+;; TODO: This is necessary to trust sml themes, but can
+;; the later, redundant loading of custom-file be stopped?
+(load custom-file :noerror :nomessage)
 
 ;; Pin here because use-package doesn't sseem to be able to...
 ;; https://github.com/jwiegley/use-package/issues/343
@@ -332,10 +341,19 @@
 ;; No theme if in a terminal;
 ;; I've yet to find a decent theme for terminals..
 (if (display-graphic-p)
-    (use-package lush-theme
-      :ensure t
-      :config
-      (load-theme 'lush t)))
+    ;; Tomorrow Theme is also pretty awesome:
+    ;; https://github.com/chriskempson/tomorrow-theme
+    ;; No package as of 2016-09-29, so test for and load local files.
+    ;; (let ((tomorrow-theme (concat my-src "/tomorrow-theme/GNU Emacs")))
+    ;;   (if (file-exists-p tomorrow-theme)
+    ;;       (progn
+    ;;         (add-to-list 'load-path tomorrow-theme)
+    ;;         (add-to-list 'custom-theme-load-path tomorrow-theme)
+    ;;         (load-theme 'tomorrow-night-bright))))
+  (use-package lush-theme
+    :ensure t
+    :config
+    (load-theme 'lush)))
 
 ;; A Git Porcelain inside Emacs
 ;; https://magit.vc/
@@ -514,6 +532,18 @@
   ("C-c h p" . httpd-start)
   ("C-c h s" . httpd-stop))
 
+;; A powerful and beautiful mode-line for Emacs.
+;; https://github.com/Malabarba/smart-mode-line
+;; This looks terrible in terminal Emacs, only use with GUI
+(if (display-graphic-p)
+    (use-package smart-mode-line
+      :ensure t
+      :config
+      (setq
+       sml/shorten-directory t
+       sml/theme 'powerline)
+      (sml/setup)))
+
 ;; Minor mode for Emacs that deals with parens
 ;; pairs and tries to be smart about it
 ;; https://github.com/Fuco1/smartparens
@@ -616,8 +646,6 @@
  backup-directory-alist `(("." . "~/.emacs.d/backups"))
  ;; Show column numbers
  column-number-mode t
- ;; Keep custom stuff out of here!
- custom-file (concat dot-emacs "/custom.el")
  ;; Default startup frame dimensions
  default-frame-alist (add-to-list 'default-frame-alist '(width . 110))
  default-frame-alist (add-to-list 'default-frame-alist '(height . 45))
@@ -641,10 +669,16 @@
 (setq-default
  browse-url-browser-function 'browse-url-generic
  browse-url-generic-program "firefox"
+ ;; display-time-mode options
+ display-time-24hr-format t
+ display-time-format "%T"
+ display-time-interval 1
  ;; No tabs
  indent-tabs-mode nil
  ;; "Tabs" are 4 spaces
  tab-width 4)
+
+(display-time-mode)
 
 ;; Enable the disabled things
 (put 'downcase-region 'disabled nil)
