@@ -612,6 +612,9 @@
  column-number-mode t
  ;; Keep custom stuff out of here!
  custom-file (concat dot-emacs "/custom.el")
+ ;; Default startup frame dimensions
+ default-frame-alist (add-to-list 'default-frame-alist '(width . 110))
+ default-frame-alist (add-to-list 'default-frame-alist '(height . 45))
  ;; Auto-open symlinks that point to vcs-controlled files
  vc-follow-symlinks t
  ;; No splash screen.
