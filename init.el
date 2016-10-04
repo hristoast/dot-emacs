@@ -536,13 +536,17 @@
 ;; https://github.com/Malabarba/smart-mode-line
 ;; This looks terrible in terminal Emacs, only use with GUI
 (if (display-graphic-p)
-    (use-package smart-mode-line
-      :ensure t
-      :config
-      (setq
-       sml/shorten-directory t
-       sml/theme 'powerline)
-      (sml/setup)))
+    (progn
+      ;; Package that provides access to sml's powerline theme
+      (use-package smart-mode-line-powerline-theme :ensure t)
+
+      (use-package smart-mode-line
+        :ensure t
+        :config
+        (setq
+         sml/shorten-directory t
+         sml/theme 'powerline)
+        (sml/setup))))
 
 ;; Minor mode for Emacs that deals with parens
 ;; pairs and tries to be smart about it
