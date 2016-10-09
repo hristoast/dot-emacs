@@ -341,19 +341,22 @@
 ;; No theme if in a terminal;
 ;; I've yet to find a decent theme for terminals..
 (if (display-graphic-p)
-    ;; Tomorrow Theme is also pretty awesome:
-    ;; https://github.com/chriskempson/tomorrow-theme
-    ;; No package as of 2016-09-29, so test for and load local files.
-    ;; (let ((tomorrow-theme (concat my-src "/tomorrow-theme/GNU Emacs")))
-    ;;   (if (file-exists-p tomorrow-theme)
-    ;;       (progn
-    ;;         (add-to-list 'load-path tomorrow-theme)
-    ;;         (add-to-list 'custom-theme-load-path tomorrow-theme)
-    ;;         (load-theme 'tomorrow-night-bright))))
-  (use-package lush-theme
-    :ensure t
-    :config
-    (load-theme 'lush)))
+    (progn
+      ;; http://is.gd/4jOQ8Y
+      (global-hl-line-mode t)
+      ;; Tomorrow Theme is also pretty awesome:
+      ;; https://github.com/chriskempson/tomorrow-theme
+      ;; No package as of 2016-09-29, so test for and load local files.
+      ;; (let ((tomorrow-theme (concat my-src "/tomorrow-theme/GNU Emacs")))
+      ;;   (if (file-exists-p tomorrow-theme)
+      ;;       (progn
+      ;;         (add-to-list 'load-path tomorrow-theme)
+      ;;         (add-to-list 'custom-theme-load-path tomorrow-theme)
+      ;;         (load-theme 'tomorrow-night))))
+      (use-package lush-theme
+        :ensure t
+        :config
+        (load-theme 'lush))))
 
 ;; A Git Porcelain inside Emacs
 ;; https://magit.vc/
@@ -699,9 +702,6 @@
 ;; If we're using a terminal, add a margin
 (unless (display-graphic-p)
   (setq-default linum-format "%d "))
-
-;; http://is.gd/4jOQ8Y
-(global-hl-line-mode t)
 
 ;; Hack - http://sourcefoundry.org/hack/
 (if (or (file-exists-p (concat my-home "/.fonts/Hack-Regular.ttf"))
