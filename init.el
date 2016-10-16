@@ -132,6 +132,10 @@
   (set-face-attribute
    'company-tooltip-common-selection nil :foreground "black" :weight 'bold))
 
+;; Ansible keywords completion for Emacs
+;; https://github.com/krzysztof-magosa/company-ansible
+(use-package company-ansible :defer t :ensure t)
+
 ;; company-mode backend for emoji
 ;; https://github.com/dunn/company-emoji
 (use-package company-emoji :defer t :ensure t)
@@ -622,7 +626,12 @@
   :config
   (add-hook 'prog-mode-hook 'ws-butler-mode))
 
-(use-package yaml-mode :defer t :ensure t)
+(use-package yaml-mode :defer t :ensure t
+  :config
+  (add-hook 'yaml-mode-hook
+            (lambda ()
+              (when (derived-mode-p 'yaml-mode)
+                (add-to-list 'company-backends 'company-ansible)))))
 
 ;; Yet another snippet extension
 ;; http://capitaomorte.github.io/yasnippet/
