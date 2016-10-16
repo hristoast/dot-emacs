@@ -33,6 +33,7 @@
 ;; Pin here because use-package doesn't sseem to be able to...
 ;; https://github.com/jwiegley/use-package/issues/343
 (add-to-list 'package-pinned-packages '(cider . "melpa-stable") t)
+(add-to-list 'package-pinned-packages '(ensime . "melpa-stable") t)
 
 (package-initialize)
 
@@ -215,6 +216,11 @@
 
 (use-package dockerfile-mode :defer t :ensure t)
 
+;; ENSIME brings Scala and Java IDE-like features to your favourite text editor
+;; http://ensime.github.io/
+;; Java compatibility is still being worked on but is now quite good!
+(use-package ensime :defer t :ensure t)
+
 ;; Emacs Package Library
 ;; https://github.com/cask/epl
 (use-package epl :ensure t)
@@ -228,12 +234,14 @@
   :config
   (add-hook 'after-init-hook #'global-flycheck-mode))
 
+;; https://github.com/Sarcasm/flycheck-irony
 (use-package flycheck-irony
   :ensure t
   :config
   (eval-after-load 'flycheck
     '(add-hook 'flycheck-mode-hook #'flycheck-irony-setup)))
 
+;; https://github.com/flycheck/flycheck-rust
 (use-package flycheck-rust :ensure t)
 
 ;; Flycheck Status Emoji
@@ -580,6 +588,10 @@
 ;;  Emacs isearch with an overview. Oh, man!
 ;; https://github.com/abo-abo/swiper
 (use-package swiper :ensure t)
+
+;; I strongly dislike systemd...
+;; but this mode is pretty handy when you need it.
+(use-package systemd :defer t :ensure t)
 
 ;; TODO: maybe check this
 ;; http://ternjs.net/doc/manual.html#emacs
