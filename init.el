@@ -190,8 +190,6 @@
 
 ;; A major-mode for editing C# in emacs
 ;; https://github.com/josteink/csharp-mode
-(use-package csharp-mode :defer t :ensure t)
-
 (use-package css-mode
   :defer t
   :init
@@ -291,8 +289,6 @@
 (use-package glsl-mode :defer t :ensure t)
 
 (use-package go-mode :defer t :ensure t)
-
-(use-package groovy-mode :defer t :ensure t)
 
 (use-package html-mode
   :defer t
