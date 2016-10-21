@@ -441,6 +441,7 @@
     (maybe-stop-jedi-server)
     (let ((pyenv352 (concat my-home "/.pyenv/versions/3.5.2")))
       (setq
+       flycheck-python-flake8-executable "~/.pyenv/versions/3.5.2/bin/flake8"
        jedi:environment-virtualenv (list (concat pyenv352 "/bin/pyvenv-3.5"))
        jedi:environment-root (concat dot-emacs "/.py/352")
        jedi:server-args
@@ -458,6 +459,7 @@
     (maybe-stop-jedi-server)
     (let ((pyenv2712 (concat my-home "/.pyenv/versions/2.7.12")))
       (setq
+       flycheck-python-flake8-executable "~/.pyenv/versions/2.7.12/bin/flake8"
        jedi:environment-virtualenv (list (concat pyenv2712 "/bin/virtualenv"))
        jedi:environment-root (concat dot-emacs "/.py/2712")
        jedi:server-args
