@@ -69,6 +69,8 @@
 ;; Java, CORBA IDL (and the variants PSDL and CIDL), Pike and AWK code
 ;; https://www.gnu.org/software/emacs/manual/html_mono/ccmode.html
 (use-package cc-mode
+  :bind
+  ("M-j" . nil)
   :defer t
   :init
   (defun clang-format-save-hook ()
@@ -150,10 +152,22 @@
 ;; https://github.com/krzysztof-magosa/company-ansible
 (use-package company-ansible :defer t :ensure t)
 
+;; Auto-completion for C/C++ headers using Company
+;; https://github.com/randomphrase/company-c-headers
+(use-package company-c-headers
+  :defer t
+  :ensure t
+  :init
+  (add-hook 'c-mode-common-hook
+            (lambda ()
+              (when (derived-mode-p 'c-mode 'c++-mode)
+                  (add-to-list 'company-backends 'company-c-headers)))))
+
 ;; company-mode backend for emoji
 ;; https://github.com/dunn/company-emoji
 (use-package company-emoji :defer t :ensure t)
 
+;; company-mode completion back-end for irony-mode
 ;; https://github.com/Sarcasm/company-irony
 (use-package company-irony
   :defer t
