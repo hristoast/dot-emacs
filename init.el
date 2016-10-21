@@ -51,6 +51,20 @@
 
 (use-package autorevert :diminish auto-revert-mode)
 
+;; Tool for capturing screencasts directly from Emacs.
+;; https://github.com/Malabarba/camcorder.el
+(use-package camcorder
+  :defer t
+  :ensure t
+  :config
+  (custom-set-variables
+   '(camcorder-frame-parameters
+     (quote
+      ((height . 45)
+       (width . 110))))
+   '(camcorder-gif-output-directory "~/videos/emacs/gifs")
+   '(camcorder-output-directory "~/videos/emacs")))
+
 ;; CC Mode is a GNU Emacs mode for editing files containing C, C++, Objective-C,
 ;; Java, CORBA IDL (and the variants PSDL and CIDL), Pike and AWK code
 ;; https://www.gnu.org/software/emacs/manual/html_mono/ccmode.html
