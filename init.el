@@ -366,7 +366,12 @@
   :defer t
   :ensure t
   :init
-  (add-hook 'js2-mode-hook 'skewer-mode))
+  (add-hook 'js2-mode-hook 'skewer-mode)
+  (add-hook 'js2-mode-hook
+            (lambda ()
+              (progn
+                (tern-mode t)
+                (add-to-list 'company-backends 'company-tern)))))
 
 (use-package json-mode :defer t :ensure t)
 
@@ -623,9 +628,12 @@
 ;; but this mode is pretty handy when you need it.
 (use-package systemd :defer t :ensure t)
 
-;; TODO: maybe check this
 ;; http://ternjs.net/doc/manual.html#emacs
-;; (use-package tern :ensure t :defer t)
+(use-package tern
+  :ensure t
+  :init
+  (add-to-list 'exec-path
+               (concat my-home "/.nvm/versions/node/v6.9.1/bin")))
 
 ;; web-mode: An autonomous emacs major-mode for editing web templates.
 ;; http://web-mode.org/
