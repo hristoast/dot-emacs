@@ -70,6 +70,7 @@
 ;; https://www.gnu.org/software/emacs/manual/html_mono/ccmode.html
 (use-package cc-mode
   :bind
+  ("M-e" . nil)
   ("M-j" . nil)
   :defer t
   :init
@@ -318,6 +319,8 @@
 
 (use-package go-mode :defer t :ensure t)
 
+(use-package groovy-mode :defer t :ensure t)
+
 (use-package html-mode
   :defer t
   :init
@@ -357,6 +360,10 @@
       'irony-completion-at-point-async))
   (add-hook 'irony-mode-hook 'my-irony-mode-hook)
   (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options))
+
+(use-package java-mode
+  :init
+  (add-hook 'java-mode-hook 'ensime))
 
 (use-package jinja2-mode :defer t :ensure t)
 
