@@ -647,8 +647,17 @@
 (use-package web-mode
   :defer t
   :ensure t
+  :init
+  (setq
+   web-mode-code-indent-offset 2
+   web-mode-comment-style 2
+   web-mode-css-indent-offset 2
+   web-mode-enable-current-element-highlight t
+   web-mode-enable-current-column-highlight t
+   web-mode-markup-indent-offset 2)
   :mode
   ("\\.erb\\'" . web-mode)
+  ("\\.html?\\'" . web-mode)
   ("\\.tpl\\'" . web-mode))
 
 ;; windmove: http://is.gd/63r6U0
