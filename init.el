@@ -435,9 +435,6 @@
 
 (use-package nginx-mode :defer t :ensure t)
 
-;; pony-mode: Django mode for emacs
-(use-package pony-mode :defer t :diminish pony-minor-mode pony-tpl-minor-mode :ensure t)
-
 ;; Navigate Python documentation
 ;; https://github.com/statmobile/pydoc
 (use-package pydoc :defer t :ensure t)
@@ -604,7 +601,6 @@
 ;; Minor mode for Emacs that deals with parens
 ;; pairs and tries to be smart about it
 ;; https://github.com/Fuco1/smartparens
-;; TODO: use paredit?
 (use-package smartparens
   :diminish smartparens-mode
   :ensure t
@@ -615,17 +611,28 @@
    sp-hybrid-kill-entire-symbol nil)
   (sp-use-paredit-bindings)
   (show-smartparens-global-mode +1)
-  (smartparens-global-mode 1))
-
-;; https://www.emacswiki.org/emacs/SrSpeedbar
-;; TODO: This warning seems to come from sr-speedbar itself...
-;; TODO: reference to free variable `helm-alive-p'
-;; TODO: http://emacs.stackexchange.com/q/23786
-;; TODO: maybe remove this.
-;; (use-package sr-speedbar
-;;   :bind
-;;   ("C-c b" . sr-speedbar-toggle)
-;;   :ensure t)
+  (smartparens-global-mode 1)
+  ;; Fix usage of ' in Lisp modes
+  ;; THANKS: https://github.com/Fuco1/smartparens/issues/286#issuecomment-32324743
+  ;; (eval) is used as a hack to quiet Flycheck errors about (sp-with-modes)
+  (eval
+   '(sp-with-modes sp-lisp-modes
+      ;; disable ', it's the quote character!
+      (sp-local-pair "'" nil :actions nil)
+      ;; also only use the pseudo-quote inside strings where it serve as
+      ;; hyperlink.
+      (sp-local-pair "`" "'" :when '(sp-in-string-p sp-in-comment-p))
+      (sp-local-pair "`" nil
+                     :skip-match (lambda (ms mb me)
+                                   (cond
+                                    ((equal ms "'")
+                                     (or (sp--org-skip-markup ms mb me)
+                                         (not (sp-point-in-string-or-comment))))
+                                    (t (not (sp-point-in-string-or-comment))))))))
+  ;; Don't pair { in web-mode
+  (eval
+   '(sp-with-modes 'web-mode
+      (sp-local-pair "\{" nil :actions nil))))
 
 ;;  Emacs isearch with an overview. Oh, man!
 ;; https://github.com/abo-abo/swiper
@@ -780,12 +787,12 @@
     (set-face-attribute 'default nil
                         :family "Hack"
                         :height 100
-                        :weight 'normal)
-  ;; Probably on a Mac ...
-  (set-face-attribute 'default nil
-                      :family "Hack"
-                      :height 120
-                      :weight 'normal))
+                        :weight 'normal))
+(if (string-equal system-type "darwin")
+    (set-face-attribute 'default nil
+                        :family "Hack"
+                        :height 120
+                        :weight 'normal))
 
 ;; Symbola - http://zhm.github.io/symbola/
 (if (or (file-exists-p (concat my-home "/.fonts/Symbola.ttf"))
