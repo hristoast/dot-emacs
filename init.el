@@ -73,14 +73,19 @@
   ("M-e" . nil)
   ("M-j" . nil)
   :defer t
-  :init
+  :config
   (defun clang-format-save-hook ()
-    "Run clang-format on save when in c or c++ mode."
+    "Run clang-format on save when in c or c++ mode when the variable
+     'clang-forma-on-save' is set. Put the following into a .dir-locals.el file
+     in your project to use this:
+
+     ((nil . ((eval . (setq clang-format-on-save t)))))"
     (interactive)
-    (when (or (eq major-mode 'c-mode) (eq major-mode 'c++-mode))
+    (defvar clang-format-on-save)
+    (when (and clang-format-on-save
+               (or (eq major-mode 'c-mode) (eq major-mode 'c++-mode)))
       (clang-format-buffer)))
   (add-hook 'before-save-hook 'clang-format-save-hook)
-  :config
   (defvar company-backends (delete 'company-semantic company-backends))
   (define-key c-mode-map [(tab)] 'company-complete)
   (define-key c++-mode-map [(tab)] 'company-complete))
