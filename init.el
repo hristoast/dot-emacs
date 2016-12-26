@@ -419,6 +419,11 @@
   ("C-c g d" . magit-diff)
   ("C-x g" . magit-status))
 
+(use-package makefile-mode
+  :init
+  (add-hook 'makefile-gmake-mode-hook
+            (lambda () (setq indent-tabs-mode nil))))
+
 (use-package markdown-mode
   :ensure t
   :config
