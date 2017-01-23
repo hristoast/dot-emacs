@@ -261,6 +261,8 @@
 ;; https://github.com/cask/epl
 (use-package epl :ensure t)
 
+(use-package fish-mode :ensure t)
+
 ;; Syntax checking for GNU Emacs - http://www.flycheck.org/
 (use-package flycheck
   :ensure t
