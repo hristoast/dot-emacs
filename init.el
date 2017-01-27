@@ -482,15 +482,15 @@
       (goto-char (posn-point es))
       (pydoc-at-point)))
 
-  (defun use-pyenv353 ()
+  (defun use-pyenv3.5.3 ()
     "Configure Jedi to use a pyenv-provided Python 3.5.3."
     (interactive)
     (maybe-stop-jedi-server)
-    (let ((pyenv353 (concat my-home "/.pyenv/versions/3.5.3")))
+    (let ((pyenv3.5.3 (concat my-home "/.pyenv/versions/3.5.3")))
       (setq
        flycheck-python-flake8-executable "~/.pyenv/versions/3.5.3/bin/flake8"
-       jedi:environment-virtualenv (list (concat pyenv353 "/bin/pyvenv-3.5"))
-       jedi:environment-root (concat dot-emacs "/.py/353")
+       jedi:environment-virtualenv (list (concat pyenv3.5.3 "/bin/pyvenv-3.5"))
+       jedi:environment-root (concat dot-emacs "/.py/3.5.3")
        jedi:server-args
        ;; TODO: de-hardcode this
        '("--sys-path" "~/.pyenv/versions/3.5.3/lib/python3.5/site-packages"))
@@ -499,16 +499,16 @@
                         "/lib/python3.5/site-packages/jediepcserver.py")))
           (jedi:install-server))))
 
-  (defun use-pyenv2713 ()
+  (defun use-pyenv2.7.13 ()
     "Configure Jedi to use a pyenv-provided Python 2.7.13."
     (interactive)
     ;; TODO: pip install virtualenv if not already there
     (maybe-stop-jedi-server)
-    (let ((pyenv2713 (concat my-home "/.pyenv/versions/2.7.13")))
+    (let ((pyenv2.7.13 (concat my-home "/.pyenv/versions/2.7.13")))
       (setq
        flycheck-python-flake8-executable "~/.pyenv/versions/2.7.13/bin/flake8"
-       jedi:environment-virtualenv (list (concat pyenv2713 "/bin/virtualenv"))
-       jedi:environment-root (concat dot-emacs "/.py/2713")
+       jedi:environment-virtualenv (list (concat pyenv2.7.13 "/bin/virtualenv"))
+       jedi:environment-root (concat dot-emacs "/.py/2.7.13")
        jedi:server-args
        ;; TODO: de-hardcode this
        '("--sys-path" "~/.pyenv/versions/2.7.13/lib/python2.7/site-packages"))
@@ -517,7 +517,7 @@
                         "/lib/python2.7/site-packages/jediepcserver.py")))
           (jedi:install-server))))
 
-  (add-hook 'python-mode-hook 'use-pyenv353)
+  (add-hook 'python-mode-hook 'use-pyenv3.5.3)
   (add-hook 'python-mode-hook
             (lambda ()
               (when (derived-mode-p 'python-mode)
