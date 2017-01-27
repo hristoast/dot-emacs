@@ -491,7 +491,7 @@
     (let ((pyenv353 (concat my-home "/.pyenv/versions/3.5.3")))
       (setq
        flycheck-python-flake8-executable "~/.pyenv/versions/3.5.3/bin/flake8"
-       jedi:environment-virtualenv (list (concat pyenv352 "/bin/pyvenv-3.5"))
+       jedi:environment-virtualenv (list (concat pyenv353 "/bin/pyvenv-3.5"))
        jedi:environment-root (concat dot-emacs "/.py/353")
        jedi:server-args
        ;; TODO: de-hardcode this
