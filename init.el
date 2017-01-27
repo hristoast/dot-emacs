@@ -222,8 +222,6 @@
 ;; https://github.com/proofit404/company-tern
 ;; (use-package company-tern :ensure t :defer t)
 
-;; A major-mode for editing C# in emacs
-;; https://github.com/josteink/csharp-mode
 (use-package css-mode
   :defer t
   :init
