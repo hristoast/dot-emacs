@@ -535,6 +535,18 @@
   (add-hook 'racer-mode-hook #'eldoc-mode)
   (add-hook 'racer-mode-hook #'company-mode))
 
+;; GNU Emacs major modes for Racket: Edit and REPL.
+;; https://github.com/greghendershott/racket-mode
+;; See the below link for why the REPL doesn't load some functions.
+;; http://stackoverflow.com/a/31523545
+(use-package racket-mode :defer t :ensure t)
+
+;; Start racket-mode via a hook so we get completions when we just open a REPL
+(use-package racket-repl-mode
+  :defer t
+  :init
+  (add-hook 'racket-rep-mode-hook (racket-mode)))
+
 ;; Rainbow mode - #000 #fff #f00 #ff0 #00f #0f0 #800080 #00ffff #ff00ff
 ;; https://julien.danjou.info/projects/emacs-packages
 (use-package rainbow-mode
