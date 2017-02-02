@@ -1,0 +1,27 @@
+;;; rust.el -- for rust functionality
+
+;;; Commentary:
+;; Require this from init.el to enable Rust functionality.
+
+;;; Code:
+;;  Company integration for racer
+;; https://github.com/emacs-pe/company-racer
+(use-package company-racer :ensure t)
+
+;; https://github.com/flycheck/flycheck-rust
+(use-package flycheck-rust :ensure t)
+
+;; rust-mode: https://github.com/rust-lang/rust-mode
+;; and emacs-racer: https://github.com/racer-rust/emacs-racer
+(use-package racer
+  :ensure t
+  :init
+  (defvar racer-cmd (concat my-src "/racer/target/release/racer"))
+  (defvar racer-rust-src-path (concat my-src "/rust/src"))
+  :config
+  (add-hook 'rust-mode-hook #'racer-mode)
+  (add-hook 'racer-mode-hook #'eldoc-mode)
+  (add-hook 'racer-mode-hook #'company-mode))
+
+(provide 'rust)
+;;; rust.el ends here

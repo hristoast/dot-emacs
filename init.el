@@ -90,21 +90,10 @@
   (define-key c-mode-map [(tab)] 'company-complete)
   (define-key c++-mode-map [(tab)] 'company-complete))
 
-;; CIDER is a Clojure Interactive Development Environment that Rocks for Emacs
-;; https://github.com/clojure-emacs/cider
-;; Depends on clojure-mode:
-;; https://github.com/clojure-emacs/clojure-mode
-(use-package cider
-  :ensure t
-  :functions cider--close-connection-buffer
-  :bind
-  ("C-c n c" . delete-nrepl)
-  :config
-  (defun delete-nrepl ()
-    "Close nREPL connection and delete the window."
-    (interactive)
-    (cider--close-connection-buffer (current-buffer))
-    (delete-window)))
+;; Clojure -- to use or not to use?
+(let ((use-clojure (getenv "EMACS_CLOJURE")))
+  (if (not (equal use-clojure nil))
+      (load "~/.emacs.d/extra/clojure")))
 
 ;; Clang format
 ;; http://clang.llvm.org/docs/ClangFormat.html
@@ -117,10 +106,6 @@
   :ensure t
   :config
   (add-hook 'prog-mode-hook 'clean-aindent-mode))
-
-;; yasnippet 0.7.0+ snippets for clojure
-;; https://github.com/mpenet/clojure-snippets
-(use-package clojure-snippets :defer t :ensure t)
 
 ;; major-mode for editing CMake sources
 ;; https://github.com/Kitware/CMake/blob/master/Auxiliary/cmake-mode.el
@@ -199,28 +184,7 @@
    jedi:complete-on-dot t
    jedi:get-in-function-call-delay 0.2))
 
-;; company-mode autocompletion for golang
-;; https://github.com/nsf/gocode/tree/master/emacs-company
-(use-package company-go
-  :ensure t
-  :config
-  (add-hook 'go-mode-hook
-            (lambda ()
-              (set (make-local-variable 'company-backends) '(company-go))
-              (company-mode)))
-  ;; Set up environment variables so Flycheck can find gocode.
-  (setenv "GOPATH" (concat my-src "/golibs"))
-  (add-to-list 'exec-path my-bin))
-
 (use-package company-lua :defer t :ensure t)
-
-;;  Company integration for racer
-;; https://github.com/emacs-pe/company-racer
-(use-package company-racer :ensure t)
-
-;; Company integration for tern (js)
-;; https://github.com/proofit404/company-tern
-;; (use-package company-tern :ensure t :defer t)
 
 (use-package css-mode
   :defer t
@@ -277,9 +241,6 @@
   (eval-after-load 'flycheck
     '(add-hook 'flycheck-mode-hook #'flycheck-irony-setup)))
 
-;; https://github.com/flycheck/flycheck-rust
-(use-package flycheck-rust :ensure t)
-
 ;; Flycheck Status Emoji
 ;; https://github.com/liblit/flycheck-status-emoji
 (use-package flycheck-status-emoji
@@ -322,7 +283,10 @@
 
 (use-package glsl-mode :defer t :ensure t)
 
-(use-package go-mode :defer t :ensure t)
+;; Golang -- to use or not to use?
+(let ((use-go (getenv "EMACS_GO")))
+  (if (not (equal use-go nil))
+      (load "~/.emacs.d/extra/go")))
 
 (use-package groovy-mode :defer t :ensure t)
 
@@ -370,20 +334,12 @@
   :init
   (add-hook 'java-mode-hook 'ensime))
 
+;; Javascript -- to use or not to use?
+(let ((use-javascript (getenv "EMACS_JAVASCRIPT")))
+  (if (not (equal use-javascript nil))
+      (load "~/.emacs.d/extra/javascript")))
+
 (use-package jinja2-mode :defer t :ensure t)
-
-(use-package js2-highlight-vars :ensure t)
-
-(use-package js2-mode
-  :defer t
-  :ensure t
-  :init
-  (add-hook 'js2-mode-hook 'skewer-mode)
-  (add-hook 'js2-mode-hook
-            (lambda ()
-              (progn
-                (tern-mode t)
-                (add-to-list 'company-backends 'company-tern)))))
 
 (use-package json-mode :defer t :ensure t)
 
@@ -523,18 +479,6 @@
               (when (derived-mode-p 'python-mode)
                 (add-to-list 'company-backends 'company-jedi)))))
 
-;; rust-mode: https://github.com/rust-lang/rust-mode
-;; and emacs-racer: https://github.com/racer-rust/emacs-racer
-(use-package racer
-  :ensure t
-  :init
-  (defvar racer-cmd (concat my-src "/racer/target/release/racer"))
-  (defvar racer-rust-src-path (concat my-src "/rust/src"))
-  :config
-  (add-hook 'rust-mode-hook #'racer-mode)
-  (add-hook 'racer-mode-hook #'eldoc-mode)
-  (add-hook 'racer-mode-hook #'company-mode))
-
 ;; GNU Emacs major modes for Racket: Edit and REPL.
 ;; https://github.com/greghendershott/racket-mode
 ;; See the below link for why the REPL doesn't load some functions.
@@ -584,6 +528,11 @@
               (when (derived-mode-p 'ruby-mode)
                 (add-to-list 'company-backends 'company-robe))))
   (add-hook 'ruby-mode-hook 'robe-start))
+
+;; Rust -- to use or not to use?
+(let ((use-rust (getenv "EMACS_RUST")))
+  (if (not (equal use-rust nil))
+      (load "~/.emacs.d/extra/rust")))
 
 ;; Provides language-aware editing commands based on source code parsers.
 ;; http://www.gnu.org/software/emacs/manual/html_node/emacs/Semantic.html
@@ -663,13 +612,6 @@
 ;; I strongly dislike systemd...
 ;; but this mode is pretty handy when you need it.
 (use-package systemd :defer t :ensure t)
-
-;; http://ternjs.net/doc/manual.html#emacs
-(use-package tern
-  :ensure t
-  :init
-  (add-to-list 'exec-path
-               (concat my-home "/.nvm/versions/node/v6.9.1/bin")))
 
 ;; web-mode: An autonomous emacs major-mode for editing web templates.
 ;; http://web-mode.org/
