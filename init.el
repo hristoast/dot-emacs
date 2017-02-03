@@ -2,7 +2,7 @@
 
 ;;; Commentary:
 
-;; TL;DR my Emacs configuration for writing code and things.
+;; My Emacs configuration for writing code and things.
 
 ;;; Code:
 (defconst emacs-start-time (current-time))
