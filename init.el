@@ -345,27 +345,18 @@
 
 (use-package lua-mode :defer t :ensure t)
 
-;; https://github.com/andre-richter/emacs-lush-theme
-;; Other cool themes: atom-one-dark, abyss, darcula, obsidian
 ;; No theme if in a terminal;
 ;; I've yet to find a decent theme for terminals..
 (if (display-graphic-p)
     (progn
       ;; http://is.gd/4jOQ8Y
       (global-hl-line-mode t)
-      ;; Tomorrow Theme is also pretty awesome:
-      ;; https://github.com/chriskempson/tomorrow-theme
-      ;; No package as of 2016-09-29, so test for and load local files.
-      ;; (let ((tomorrow-theme (concat my-src "/tomorrow-theme/GNU Emacs")))
-      ;;   (if (file-exists-p tomorrow-theme)
-      ;;       (progn
-      ;;         (add-to-list 'load-path tomorrow-theme)
-      ;;         (add-to-list 'custom-theme-load-path tomorrow-theme)
-      ;;         (load-theme 'tomorrow-night))))
-      (use-package lush-theme
+      ;; Color Theme for emacs based on material design colors
+      ;; https://github.com/cpaulik/emacs-material-theme
+      (use-package material-theme
         :ensure t
         :config
-        (load-theme 'lush))))
+        (load-theme 'material t))))
 
 ;; A Git Porcelain inside Emacs
 ;; https://magit.vc/
@@ -485,11 +476,21 @@
 ;; http://stackoverflow.com/a/31523545
 (use-package racket-mode :defer t :ensure t)
 
-;; Start racket-mode via a hook so we get completions when we just open a REPL
+;; Start racket-mode via a hook so we get rainbow delimiters
 (use-package racket-repl-mode
   :defer t
   :init
-  (add-hook 'racket-rep-mode-hook (racket-mode)))
+  ;; TODO: Currently lacking a good way to start racket-mode when we launch
+  ;; TODO: racket-repl on its own, not from a file with C-c C-c.
+  ;; (add-hook 'racket-repl-mode-hook (racket-mode))
+  (add-hook 'racket-repl-mode-hook #'rainbow-delimiters-mode))
+
+;; Emacs rainbow delimiters mode
+;; https://github.com/Fanael/rainbow-delimiters
+(use-package rainbow-delimiters
+  :ensure t
+  :init
+  (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 
 ;; Rainbow mode - #000 #fff #f00 #ff0 #00f #0f0 #800080 #00ffff #ff00ff
 ;; https://julien.danjou.info/projects/emacs-packages
@@ -661,7 +662,7 @@
   :ensure t
   :init
   ;; Shut yas up! Disables startup noise
-  (setq yas-verbosity 0)
+  (setq-default yas-verbosity 0)
   :config
   (yas-global-mode 1))
 
