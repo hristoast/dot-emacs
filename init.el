@@ -345,19 +345,6 @@
 
 (use-package lua-mode :defer t :ensure t)
 
-;; No theme if in a terminal;
-;; I've yet to find a decent theme for terminals..
-(if (display-graphic-p)
-    (progn
-      ;; http://is.gd/4jOQ8Y
-      (global-hl-line-mode t)
-      ;; Color Theme for emacs based on material design colors
-      ;; https://github.com/cpaulik/emacs-material-theme
-      (use-package material-theme
-        :ensure t
-        :config
-        (load-theme 'material t))))
-
 ;; A Git Porcelain inside Emacs
 ;; https://magit.vc/
 (use-package magit
@@ -672,6 +659,19 @@
   :ensure t
   :bind
   ("C-x 1" . zygospore-toggle-delete-other-windows))
+
+;; No theme if in a terminal;
+;; I've yet to find a decent theme for terminals..
+(if (display-graphic-p)
+    (progn
+      ;; http://is.gd/4jOQ8Y
+      (global-hl-line-mode t)
+      ;; Color Theme for emacs based on material design colors
+      ;; https://github.com/cpaulik/emacs-material-theme
+      (use-package material-theme
+        :ensure t
+        :config
+        (load-theme 'material t))))
 
 ;; Tweaks to Emacs internals
 
