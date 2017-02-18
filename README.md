@@ -1,11 +1,16 @@
 # /home/hristos/.emacs.d/
+
+![This configuration in action](screenshot.png)
+
 ## About
 
-My Emacs configuration.  I use it on Emacs 25.1+, but it should run fine on Emacs 24 (with some warnings.)
+My Emacs configuration.  I use it on Emacs 25.1+, but it should run fine on Emacs 24 (with some warnings.)  It sports the [Material Theme for Emacs](https://github.com/cpaulik/emacs-material-theme) and [Smart Mode Line](https://github.com/Malabarba/smart-mode-line) with the [Powerline theme](https://github.com/Malabarba/smart-mode-line/blob/master/themes/smart-mode-line-powerline-theme.el).
+
+The main file will set you up with a pretty solid editor for several languages (C/C++, Common Lisp, Lua, Python, Racket, Ruby, YAML, and more) and even some frameworks and other things (Magit, Ansible, Django (via `web-mode`), Nginx, `skewer-mode`,  and others).
 
 ## Usage
 
-Clone this repo to `~/.emacs.d/` and fire up Emacs, it should work fine on modern Linux and Mac OSX setups.  The main file will set you up with a pretty solid editor for several languages (C/C++, Lua, Python, Racket, Ruby, YAML, and more) and even some frameworks and other things (Magit, Ansible, Django (via `web-mode`), Nginx, `skewer-mode`,  and others).
+Clone this repo to `~/.emacs.d/` and fire up Emacs, it should work fine on modern Linux and Mac OSX setups.
 
 ## Extra
 
