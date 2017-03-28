@@ -621,6 +621,19 @@
 ;; but this mode is pretty handy when you need it.
 (use-package systemd :defer t :ensure t)
 
+;; undo-tree.el --- Treat undo history as a tree
+;; http://www.dr-qubit.org/undo-tree/undo-tree.el
+;; https://www.emacswiki.org/emacs/UndoTree
+(use-package undo-tree
+  :ensure t
+  :config
+  (setq
+   ;; TODO: make a special dir for these.
+   ;; undo-tree-auto-save-history t
+   undo-tree-visualizer-diff t
+   undo-tree-visualizer-timestamps t)
+  (global-undo-tree-mode))
+
 ;; web-mode: An autonomous emacs major-mode for editing web templates.
 ;; http://web-mode.org/
 (use-package web-mode
