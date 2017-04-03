@@ -154,10 +154,6 @@
               (when (derived-mode-p 'c-mode 'c++-mode)
                   (add-to-list 'company-backends 'company-c-headers)))))
 
-;; company-mode backend for emoji
-;; https://github.com/dunn/company-emoji
-(use-package company-emoji :defer t :ensure t)
-
 ;; company-mode completion back-end for irony-mode
 ;; https://github.com/Sarcasm/company-irony
 (use-package company-irony
@@ -364,10 +360,6 @@
   ;; Special indent for markdown-mode
   (add-hook 'markdown-mode-hook
             (global-set-key (kbd "TAB") 'md-indent))
-  (add-hook 'markdown-mode-hook
-            (lambda ()
-              (when (derived-mode-p 'markdown-mode)
-                (add-to-list 'company-backends 'company-emoji))))
   (defun md-indent ()
     "Indent for `markdown-mode', to be used to rebind TAB - WIP."
     (interactive)
@@ -626,6 +618,7 @@
 ;; https://www.emacswiki.org/emacs/UndoTree
 (use-package undo-tree
   :ensure t
+  :diminish undo-tree-mode
   :config
   (setq
    ;; TODO: make a special dir for these.
