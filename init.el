@@ -555,16 +555,12 @@
 
 ;; A powerful and beautiful mode-line for Emacs.
 ;; https://github.com/Malabarba/smart-mode-line
-;; Package that provides access to sml's powerline theme
-;; Looks like crap in terminal mode but oh well.
-(use-package smart-mode-line-powerline-theme :ensure t)
-
 (use-package smart-mode-line
   :ensure t
   :config
   (setq
    sml/shorten-directory t
-   sml/theme 'powerline)
+   sml/theme 'respectful)
   (sml/setup))
 
 ;; Minor mode for Emacs that deals with parens
