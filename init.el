@@ -555,19 +555,17 @@
 
 ;; A powerful and beautiful mode-line for Emacs.
 ;; https://github.com/Malabarba/smart-mode-line
-;; This looks terrible in terminal Emacs, only use with GUI
-(if (display-graphic-p)
-    (progn
-      ;; Package that provides access to sml's powerline theme
-      (use-package smart-mode-line-powerline-theme :ensure t)
+;; Package that provides access to sml's powerline theme
+;; Looks like crap in terminal mode but oh well.
+(use-package smart-mode-line-powerline-theme :ensure t)
 
-      (use-package smart-mode-line
-        :ensure t
-        :config
-        (setq
-         sml/shorten-directory t
-         sml/theme 'powerline)
-        (sml/setup))))
+(use-package smart-mode-line
+  :ensure t
+  :config
+  (setq
+   sml/shorten-directory t
+   sml/theme 'powerline)
+  (sml/setup))
 
 ;; Minor mode for Emacs that deals with parens
 ;; pairs and tries to be smart about it
@@ -686,18 +684,12 @@
   :bind
   ("C-x 1" . zygospore-toggle-delete-other-windows))
 
-;; No theme if in a terminal;
-;; I've yet to find a decent theme for terminals..
-(if (display-graphic-p)
-    (progn
-      ;; http://is.gd/4jOQ8Y
-      (global-hl-line-mode t)
-      ;; Color Theme for emacs based on material design colors
-      ;; https://github.com/cpaulik/emacs-material-theme
-      (use-package material-theme
-        :ensure t
-        :config
-        (load-theme 'material t))))
+;; Color Theme for emacs based on material design colors
+;; https://github.com/cpaulik/emacs-material-theme
+(use-package material-theme
+  :ensure t
+  :config
+  (load-theme 'material t))
 
 ;; Tweaks to Emacs internals
 
@@ -707,7 +699,8 @@
 
 ;; http://www.gnu.org/software/emacs/manual/html_node/emacs/Autorevert.html
 (global-auto-revert-mode t)
-
+;; https://www.emacswiki.org/emacs/HighlightCurrentLine
+(global-hl-line-mode t)
 ;; No toolbar, please.
 (tool-bar-mode -1)
 ;; Or menu bar...
@@ -767,10 +760,6 @@
 ;; so we can use them when Emacs is running as a daemon
 ;; http://is.gd/Mw5KiS
 (global-linum-mode t)
-
-;; If we're using a terminal, add a margin
-(unless (display-graphic-p)
-  (setq-default linum-format "%d "))
 
 ;; Hack - http://sourcefoundry.org/hack/
 (if (or (file-exists-p (concat my-home "/.fonts/Hack-Regular.ttf"))
