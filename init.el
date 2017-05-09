@@ -724,6 +724,7 @@
  select-enable-clipboard t
  coding-system-for-read 'utf-8
  coding-system-for-write 'utf-8
+ shell-file-name "/bin/bash"
  xterm-mouse-mode t)
 
 ;; Load any cutsom stuff
