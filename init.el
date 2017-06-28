@@ -215,6 +215,15 @@
 ;; https://github.com/cask/epl
 (use-package epl :ensure t)
 
+;;; Warm cozy fireplace -- https://github.com/johanvts/emacs-fireplace
+(use-package fireplace
+  ;; https://github.com/jwiegley/use-package/issues/294#issuecomment-189054409
+  :bind (:map fireplace-mode-map
+              ("d" . fireplace-down)
+              ("s" . fireplace-toggle-smoke)
+              ("u" . fireplace-up))
+  :ensure t)
+
 (use-package fish-mode :ensure t)
 
 ;; Syntax checking for GNU Emacs - http://www.flycheck.org/
@@ -864,17 +873,6 @@
 
 ;; Kill this buffer!
 (substitute-key-definition 'kill-buffer 'kill-buffer-and-window global-map)
-
-;;; Warm cozy fireplace -- https://github.com/johanvts/emacs-fireplace
-(let ((fireplace-el (concat my-src "/emacs-fireplace/fireplace.el")))
-  (let ((fireplace-elc (concat fireplace-el "c")))
-    (if (file-exists-p fireplace-elc)
-        (load fireplace-elc)
-      (if (file-exists-p fireplace-el)
-          (progn
-            (byte-compile-file fireplace-el)
-            (load fireplace-elc))
-        (message (concat "Could not find " fireplace-el " or " fireplace-elc "!!!!"))))))
 
 ;; How long did we take to load?
 (let ((elapsed (float-time (time-subtract (current-time)
