@@ -33,7 +33,6 @@
 ;; Pin here because use-package doesn't sseem to be able to...
 ;; https://github.com/jwiegley/use-package/issues/343
 (add-to-list 'package-pinned-packages '(cider . "melpa-stable") t)
-(add-to-list 'package-pinned-packages '(ensime . "melpa-stable") t)
 
 (package-initialize)
 
@@ -212,11 +211,6 @@
 
 (use-package dockerfile-mode :defer t :ensure t)
 
-;; ENSIME brings Scala and Java IDE-like features to your favourite text editor
-;; http://ensime.github.io/
-;; Java compatibility is still being worked on but is now quite good!
-(use-package ensime :defer t :ensure t)
-
 ;; Emacs Package Library
 ;; https://github.com/cask/epl
 (use-package epl :ensure t)
@@ -330,8 +324,18 @@
 
 (use-package java-mode
   :init
-  (add-hook 'java-mode-hook 'ensime))
-
+  (add-hook 'java-mode-hook
+            (lambda ()
+              (meghanada-mode t)
+              (rainbow-delimiters-mode t)
+              (setq-default highlight-symbol-mode t)
+              (add-hook 'before-save-hook 'meghanada-code-beautify-before-save)))
+  :config
+  (setq
+   c-basic-offset 2)
+  (setq-default
+   meghanada-server-remote-debug t
+   meghanada-javac-xlint "-Xlint:all,-processing"))
 
 (use-package jinja2-mode :defer t :ensure t)
 
@@ -366,6 +370,10 @@
       (markdown-indent-line))))
 
 (use-package markdown-mode+ :defer t :ensure t :functions markdown-indent-line)
+
+;; A Better Java Development Environment for Emacs
+;; https://github.com/mopemope/meghanada-emacs
+(use-package meghanada :ensure t :defer t)
 
 (use-package nginx-mode :defer t :ensure t)
 
