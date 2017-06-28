@@ -724,10 +724,10 @@
  select-enable-clipboard t
  coding-system-for-read 'utf-8
  coding-system-for-write 'utf-8
- shell-file-name "/bin/bash"
+ shell-file-name (executable-find "bash")
  xterm-mouse-mode t)
 
-;; Load any cutsom stuff
+;; Load any custom stuff
 (if (file-exists-p custom-file)
     (load-file custom-file))
 
