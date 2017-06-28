@@ -710,6 +710,8 @@
 (defvar whitespace-style
   '(spaces tabs newline space-mark tab-mark newline-mark face))
 
+;; Emacs highlights misspellings only in comments or strings
+(flyspell-prog-mode)
 ;; http://www.gnu.org/software/emacs/manual/html_node/emacs/Autorevert.html
 (global-auto-revert-mode t)
 ;; https://www.emacswiki.org/emacs/HighlightCurrentLine
