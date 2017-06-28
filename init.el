@@ -182,6 +182,8 @@
 
 (use-package company-lua :defer t :ensure t)
 
+(use-package company-tern :defer t :ensure t)
+
 (use-package css-mode
   :defer t
   :init
@@ -330,10 +332,6 @@
   :init
   (add-hook 'java-mode-hook 'ensime))
 
-;; Javascript -- to use or not to use?
-(let ((use-javascript (getenv "EMACS_JAVASCRIPT")))
-  (if (not (equal use-javascript nil))
-      (load "~/.emacs.d/extra/javascript")))
 
 (use-package jinja2-mode :defer t :ensure t)
 
@@ -606,6 +604,17 @@
 ;; I strongly dislike systemd...
 ;; but this mode is pretty handy when you need it.
 (use-package systemd :defer t :ensure t)
+
+;; Tern: Intelligent JavaScript tooling http://ternjs.net/doc/manual.html#emacs
+(use-package tern
+  :ensure t
+  :init
+  (add-hook 'js-mode-hook
+            (lambda ()
+              (progn
+                (add-to-list 'exec-path (concat my-home "/.node_modules/tern/bin"))
+                (add-to-list 'company-backends 'company-tern)
+                (tern-mode t)))))
 
 ;; undo-tree.el --- Treat undo history as a tree
 ;; http://www.dr-qubit.org/undo-tree/undo-tree.el
