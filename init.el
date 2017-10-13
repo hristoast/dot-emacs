@@ -509,42 +509,23 @@
       (goto-char (posn-point es))
       (pydoc-at-point)))
 
-  (defun use-pyenv3.5.3 ()
-    "Configure Jedi to use a pyenv-provided Python 3.5.3."
+  (defun use-system-python3 ()
+    "Use the system python3."
     (interactive)
     (maybe-stop-jedi-server)
-    (let ((pyenv3.5.3 (concat my-home "/.pyenv/versions/3.5.3")))
-      (setq
-       flycheck-python-flake8-executable "~/.pyenv/versions/3.5.3/bin/flake8"
-       jedi:environment-virtualenv (list (concat pyenv3.5.3 "/bin/pyvenv-3.5"))
-       jedi:environment-root (concat dot-emacs "/.py/3.5.3")
+    (setq
+       flycheck-python-flake8-executable "/usr/bin/python3-flake8"
+       jedi:environment-virtualenv (list "/usr/bin/pyvenv-3.6")
+       jedi:environment-root (concat dot-emacs "/.py/system3")
        jedi:server-args
-       ;; TODO: de-hardcode this
-       '("--sys-path" "~/.pyenv/versions/3.5.3/lib/python3.5/site-packages"))
+       '("--sys-path" "/usr/lib/python3.6/site-packages"
+         "--sys-path" "~/.local/lib/python3.6/site-packages"))
       (if (not (file-exists-p
                 (concat jedi:environment-root
-                        "/lib/python3.5/site-packages/jediepcserver.py")))
-          (jedi:install-server))))
+                        "/lib/python3.6/site-packages/jediepcserver.py")))
+          (jedi:install-server)))
 
-  (defun use-pyenv2.7.13 ()
-    "Configure Jedi to use a pyenv-provided Python 2.7.13."
-    (interactive)
-    ;; TODO: pip install virtualenv if not already there
-    (maybe-stop-jedi-server)
-    (let ((pyenv2.7.13 (concat my-home "/.pyenv/versions/2.7.13")))
-      (setq
-       flycheck-python-flake8-executable "~/.pyenv/versions/2.7.13/bin/flake8"
-       jedi:environment-virtualenv (list (concat pyenv2.7.13 "/bin/virtualenv"))
-       jedi:environment-root (concat dot-emacs "/.py/2.7.13")
-       jedi:server-args
-       ;; TODO: de-hardcode this
-       '("--sys-path" "~/.pyenv/versions/2.7.13/lib/python2.7/site-packages"))
-      (if (not (file-exists-p
-                (concat jedi:environment-root
-                        "/lib/python2.7/site-packages/jediepcserver.py")))
-          (jedi:install-server))))
-
-  (add-hook 'python-mode-hook 'use-pyenv3.5.3)
+  (add-hook 'python-mode-hook 'use-system-python3)
   (add-hook 'python-mode-hook
             (lambda ()
               (when (derived-mode-p 'python-mode)
