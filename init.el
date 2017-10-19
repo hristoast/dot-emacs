@@ -62,6 +62,36 @@
 ;; M-$n		Repeat the next command $n times
 ;; C-u $n	Repeat the next command $n times (or four times if $n is omitted)
 ;;
+;; Org mode bindings:
+;;
+;; C-c C-o				org-open-at-point
+;; C-c C-s				org-schedule
+;; C-c C-t				org-todo
+;; C-c a a				org-agenda
+;; C-c a t				Enter global TODO list (requires org-agenda-files be set)
+;; C-c l				org-store-link
+;; M-Shift-RET			org-insert-todo-heading
+;; Shift-TAB			Toggle overview/folding
+;;
+;; Org mode agenda bindings (http://orgmode.org/manual/Agenda-commands.html):
+;;
+;; A					Interactively select another agenda view and append it to the current view.
+;; v d || d				org-agenda-day-view
+;; v w || w				org-agenda-week-view
+;; v t					org-agenda-fortnight-view
+;; v m					org-agenda-month-view
+;; v y					org-agenda-year-view
+;; v SPC				org-agenda-reset-view
+;; f					Go forward in time to display the following org-agenda-current-span days.
+;;                      For example, if the display covers a week, switch to the following week.
+;;                      With prefix arg, go forward that many times org-agenda-current-span days.
+;; b					Go backward in time to display earlier dates.
+;; .					Go to today.
+;; j					Prompt for a date and go there.
+;; J					Go to the currently clocked-in task in the agenda buffer.
+;; D					Toggle the inclusion of diary entries.  See http://orgmode.org/manual/Weekly_002fdaily-agenda.html#Weekly_002fdaily-agenda
+;; v l || l				Toggle logbook mode.
+;;
 ;; Rectangle bindings:
 ;; C-x r k				Delete a rectangle and store it
 ;; C-x r d				Delete a rectangle and do not store it
@@ -127,7 +157,9 @@
    ;; MELPA (Milkypostman’s Emacs Lisp Package Archive)
    ("melpa" . "https://melpa.org/packages/")
    ;; MELPA Stable
-   ("melpa-stable" . "https://stable.melpa.org/packages/")))
+   ("melpa-stable" . "https://stable.melpa.org/packages/")
+   ;; Org mode ELPA archive
+   ("org" . "http://orgmode.org/elpa/")))
 
 ;; TODO: This is necessary to trust sml themes, but can
 ;; the later, redundant loading of custom-file be stopped?
@@ -471,6 +503,13 @@
 (use-package meghanada :ensure t :defer t)
 
 (use-package nginx-mode :defer t :ensure t)
+
+(use-package org-plus-contrib
+  :bind
+  ("C-c l" . org-store-link)
+  ("C-c a" . org-agenda)
+  :defer t
+  :ensure t)
 
 ;; Navigate Python documentation
 ;; https://github.com/statmobile/pydoc
@@ -834,6 +873,9 @@
  display-time-24hr-format t
  display-time-format "%T"
  display-time-interval 1
+ ;; Org mode stuff
+ org-log-done t
+ org-agenda-files (list "~/src/org/home.org")
  ;; No tabs
  indent-tabs-mode nil
  ;; "Tabs" are 4 spaces
