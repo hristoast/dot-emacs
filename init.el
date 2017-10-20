@@ -70,8 +70,8 @@
 ;; C-c a a				org-agenda
 ;; C-c a t				Enter global TODO list (requires org-agenda-files be set)
 ;; C-c l				org-store-link
-;; M-Shift-RET			org-insert-todo-heading
-;; Shift-TAB			Toggle overview/folding
+;; M-S-RET				org-insert-todo-heading
+;; S-TAB				Toggle overview/folding
 ;;
 ;; Org mode agenda bindings (http://orgmode.org/manual/Agenda-commands.html):
 ;;
@@ -136,6 +136,9 @@
 ;; shrink-window				Make the current window taller
 ;; string-insert-rectangle		Prompts for string and inserts rectangle
 ;;
+;;; Recommended reading:
+;;; http://www.gnu.org/software/emacs/manual/html_node/elisp/Startup-Summary.html
+;;;
 ;;; Code:
 
 (defconst emacs-start-time (current-time))
@@ -821,7 +824,8 @@
 
 ;; Tweaks to Emacs internals
 
-;; ...But with regular coloring; no highlighting
+(defconst default-org-file "~/src/org/home.org")
+
 (defvar whitespace-style
   '(spaces tabs newline space-mark tab-mark newline-mark face))
 
@@ -848,6 +852,10 @@
  ;; Default startup frame dimensions
  default-frame-alist (add-to-list 'default-frame-alist '(width . 110))
  default-frame-alist (add-to-list 'default-frame-alist '(height . 45))
+ ;; Make org-agenda-list open when Emacs launches. This does not
+ ;; work with daemon mode, instead use this arg with emacsclient:
+ ;; --eval '(org-agenda-list)'
+ ;; initial-buffer-choice 'org-agenda-list
  ;; Auto-open symlinks that point to vcs-controlled files
  vc-follow-symlinks t
  ;; No splash screen.
@@ -865,8 +873,8 @@
 (if (file-exists-p custom-file)
     (load-file custom-file))
 
-;; Which browser to open links in
 (setq-default
+;; Which browser to open links in
  browse-url-browser-function 'browse-url-generic
  browse-url-generic-program "firefox"
  ;; display-time-mode options
@@ -875,7 +883,7 @@
  display-time-interval 1
  ;; Org mode stuff
  org-log-done t
- org-agenda-files (list "~/src/org/home.org")
+ org-agenda-files (list default-org-file)
  ;; No tabs
  indent-tabs-mode nil
  ;; "Tabs" are 4 spaces
