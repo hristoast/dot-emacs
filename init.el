@@ -844,14 +844,14 @@
 ;; Delete highlighted text when you type
 (delete-selection-mode t)
 
+;; Maximize Emacs when it's opened
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
+
 (setq
  ;; Backup files ...
  backup-directory-alist `(("." . "~/.emacs.d/backups"))
  ;; Show column numbers
  column-number-mode t
- ;; Default startup frame dimensions
- default-frame-alist (add-to-list 'default-frame-alist '(width . 110))
- default-frame-alist (add-to-list 'default-frame-alist '(height . 45))
  ;; Make org-agenda-list open when Emacs launches. This does not
  ;; work with daemon mode, instead use this arg with emacsclient:
  ;; --eval '(org-agenda-list)'
