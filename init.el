@@ -817,6 +817,7 @@
 
 ;; Color Theme for emacs based on material design colors
 ;; https://github.com/cpaulik/emacs-material-theme
+;; TODO: How to use darker grey vs blue colors?
 (use-package material-theme
   :ensure t
   :config
@@ -843,9 +844,6 @@
 (scroll-bar-mode -1)
 ;; Delete highlighted text when you type
 (delete-selection-mode t)
-
-;; Maximize Emacs when it's opened
-(add-to-list 'default-frame-alist '(fullscreen . maximized))
 
 (setq
  ;; Backup files ...
@@ -985,6 +983,32 @@
 
 ;; Kill this buffer!
 (substitute-key-definition 'kill-buffer 'kill-buffer-and-window global-map)
+
+;;; Using Emacs as a window manager with this configuration
+;; Inspired by this:
+;; http://www.howardism.org/Technical/Emacs/new-window-manager.html
+;; If you want to use Emacs as a window manager, all that's
+;; needed is an ~/.xinitrc file with the following contents:
+;;
+;; exec /usr/bin/emacs
+;;
+;; The below functions are convenience wrappers for launching other GUI
+;; programs while working in this environment, and the frame is set to
+;; maximize to make this work (plus, I just prefer it that way.)
+
+(defun launch-thing (thing)
+  "Open 'THING', which should be some sort of X program."
+  (start-process "" nil thing))
+
+(defun launch-chromium () "Launch Chromium." (launch-thing "chromium"))
+(defun launch-chromium-incognito ()
+  "Launch Chromium in incognito mode."
+  (launch-thing "chromium --incognito"))
+(defun launch-firefox () "Launch Firefox." (launch-thing "firefox"))
+(defun launch-terminal () "Launch terminator." (launch-thing "terminator"))
+
+;; Maximize Emacs when it's opened
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
 
 ;; How long did we take to load?
 (let ((elapsed (float-time (time-subtract (current-time)
