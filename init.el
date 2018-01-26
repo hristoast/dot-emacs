@@ -406,7 +406,7 @@
   :init
   (add-hook 'c-mode-common-hook
             (lambda ()
-              (when (derived-mode-p 'c-mode 'c++-mode 'java-mode 'asm-mode)
+              (when (derived-mode-p 'c-mode 'c++-mode 'asm-mode)
                 (ggtags-mode 1))))
   :bind
   (:map ggtags-mode-map
@@ -452,21 +452,6 @@
   (add-hook 'irony-mode-hook 'my-irony-mode-hook)
   (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options))
 
-(use-package java-mode
-  :init
-  (add-hook 'java-mode-hook
-            (lambda ()
-              (meghanada-mode t)
-              (rainbow-delimiters-mode t)
-              (setq-default highlight-symbol-mode t)
-              (add-hook 'before-save-hook 'meghanada-code-beautify-before-save)))
-  :config
-  (setq
-   c-basic-offset 2)
-  (setq-default
-   meghanada-server-remote-debug t
-   meghanada-javac-xlint "-Xlint:all,-processing"))
-
 (use-package jinja2-mode :defer t :ensure t)
 
 (use-package json-mode :defer t :ensure t)
@@ -480,11 +465,6 @@
   :bind
   ("C-c g d" . magit-diff)
   ("C-x g" . magit-status))
-
-(use-package makefile-mode
-  :init
-  (add-hook 'makefile-gmake-mode-hook
-            (lambda () (setq indent-tabs-mode nil))))
 
 (use-package markdown-mode
   :ensure t
@@ -616,13 +596,6 @@
   (add-to-list 'exec-path (concat my-home "/.rbenv/bin"))
   :config
   (add-hook 'ruby-mode-hook 'robe-mode))
-
-;; ruby-dev.el - https://github.com/Mon-Ouie/ruby-dev.el
-(use-package ruby-dev
-  :ensure t
-  :config
-  (autoload 'turn-on-ruby-dev "ruby-dev" nil t)
-  (add-hook 'ruby-mode-hook 'turn-on-ruby-dev))
 
 ;; Activate Robe and company-robe when we start ruby-mode
 (use-package ruby-mode
@@ -860,6 +833,8 @@
  inhibit-splash-screen t
  ;; No default scratch
  initial-scratch-message nil
+ ;; Show five lines from the previous page when paging up or down
+ next-screen-context-lines 5
  ;; Jive with the system clipboard
  select-enable-clipboard t
  coding-system-for-read 'utf-8
@@ -999,13 +974,6 @@
 (defun launch-thing (thing)
   "Open 'THING', which should be some sort of X program."
   (start-process "" nil thing))
-
-(defun launch-chromium () "Launch Chromium." (launch-thing "chromium"))
-(defun launch-chromium-incognito ()
-  "Launch Chromium in incognito mode."
-  (launch-thing "chromium --incognito"))
-(defun launch-firefox () "Launch Firefox." (launch-thing "firefox"))
-(defun launch-terminal () "Launch terminator." (launch-thing "terminator"))
 
 ;; Maximize Emacs when it's opened
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
