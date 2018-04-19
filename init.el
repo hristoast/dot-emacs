@@ -591,9 +591,6 @@
 (use-package robe
   :diminish robe-mode
   :ensure t
-  :init
-  (add-to-list 'exec-path (concat my-home "/.rbenv/shims"))
-  (add-to-list 'exec-path (concat my-home "/.rbenv/bin"))
   :config
   (add-hook 'ruby-mode-hook 'robe-mode))
 
@@ -614,6 +611,7 @@
 ;; Provides language-aware editing commands based on source code parsers.
 ;; http://www.gnu.org/software/emacs/manual/html_node/emacs/Semantic.html
 (use-package semantic
+  :commands semantic-mode
   :functions global-semanticdb-minor-mode global-semantic-idle-scheduler-mode
   :config
   (global-semanticdb-minor-mode 1)
@@ -706,6 +704,7 @@
 
 ;; Tern: Intelligent JavaScript tooling http://ternjs.net/doc/manual.html#emacs
 (use-package tern
+  :commands tern-mode
   :ensure t
   :init
   (add-hook 'js-mode-hook
