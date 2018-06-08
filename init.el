@@ -873,17 +873,17 @@
 ;; http://is.gd/Mw5KiS
 (global-linum-mode t)
 
+(defvar h-font-height)
+(if (getenv "RETINA_DISPLAY")
+    (setq h-font-height 140)
+  (setq h-font-height 100))
+
 ;; Hack - http://sourcefoundry.org/hack/
 (if (or (file-exists-p (concat my-home "/.fonts/Hack-Regular.ttf"))
         (file-exists-p "/usr/share/fonts/TTF/Hack-Regular.ttf"))
     (set-face-attribute 'default nil
                         :family "Hack"
-                        :height 100
-                        :weight 'normal))
-(if (string-equal system-type "darwin")
-    (set-face-attribute 'default nil
-                        :family "Hack"
-                        :height 120
+                        :height h-font-height
                         :weight 'normal))
 
 ;; Symbola - http://zhm.github.io/symbola/
