@@ -424,7 +424,7 @@
 ;; Golang -- to use or not to use?
 (let ((use-go (getenv "EMACS_GO")))
   (if (not (equal use-go nil))
-      (load "~/.emacs.d/extra/go")))
+      (load "~/.emacs.d/extra/go.el")))
 
 (use-package groovy-mode :defer t :ensure t)
 
