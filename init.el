@@ -535,7 +535,9 @@
     "Use the system python3."
     (interactive)
     (maybe-stop-jedi-server)
+    (defvar python-shell-interpreter)
     (setq
+       python-shell-interpreter "/usr/bin/python3.6m"
        flycheck-python-flake8-executable "/usr/bin/python3-flake8"
        jedi:environment-virtualenv (list "/usr/bin/pyvenv-3.6")
        jedi:environment-root (concat dot-emacs "/.py/system3")
