@@ -162,7 +162,7 @@
    ;; MELPA Stable
    ("melpa-stable" . "https://stable.melpa.org/packages/")
    ;; Org mode ELPA archive
-   ("org" . "http://orgmode.org/elpa/")))
+   ("org" . "https://orgmode.org/elpa/")))
 
 ;; TODO: This is necessary to trust sml themes, but can
 ;; the later, redundant loading of custom-file be stopped?
