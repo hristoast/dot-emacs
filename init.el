@@ -1,4 +1,4 @@
-;;; init.el --- Self-installing, for Emacs 25
+;;; init.el --- Self-installing, for Emacs 25 and up.
 ;;; Commentary:
 ;; My Emacs configuration for writing code and things.  Might work on Emacs 24.
 ;; Below is a keybindings cheat-sheet, many of these are defaults.
