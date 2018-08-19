@@ -551,6 +551,26 @@
                         "/lib/python3.6/site-packages/jediepcserver.py")))
           (jedi:install-server)))
 
+  (defun use-system-python2 ()
+    "Use the system python2."
+    (interactive)
+    (maybe-stop-jedi-server)
+    (defvar python-check-command)
+    (defvar python-shell-interpreter)
+    (setq
+       python-check-command "/usr/bin/pyflakes2"
+       python-shell-interpreter "/usr/bin/python2.7"
+       flycheck-python-flake8-executable "/usr/bin/python2-flake8"
+       jedi:environment-virtualenv (list "/usr/bin/virtualenv2")
+       jedi:environment-root (concat dot-emacs "/.py/system2")
+       jedi:server-args
+       '("--sys-path" "/usr/lib/python2.7/site-packages"
+         "--sys-path" "~/.local/lib/python2.7/site-packages"))
+      (if (not (file-exists-p
+                (concat jedi:environment-root
+                        "/lib/python2.7/site-packages/jediepcserver.py")))
+          (jedi:install-server)))
+
   (add-hook 'python-mode-hook 'use-system-python3)
   (add-hook 'python-mode-hook
             (lambda ()
@@ -929,6 +949,10 @@
      (line-beginning-position)
      (line-end-position))))
 
+;; Use lua-mode for PICO-8 source files
+(setq auto-mode-alist (append '(("\\.p8$" . lua-mode))
+                              auto-mode-alist))
+
 ;;; Rebind/Set several useful keybindings
 
 ;; Insert a newline, then indent according to major mode
@@ -958,6 +982,7 @@
 (global-set-key (kbd "C-x u") 'upcase-region)
 (global-set-key (kbd "C-x t m") 'menu-bar-mode)
 (global-set-key (kbd "TAB") 'indent-appropriately)
+(global-set-key (kbd "C-x C-v") 'clipboard-yank)
 
 ;; Kill this buffer!
 (substitute-key-definition 'kill-buffer 'kill-buffer-and-window global-map)
