@@ -734,7 +734,7 @@
   (add-hook 'js-mode-hook
             (lambda ()
               (progn
-                (add-to-list 'exec-path (concat my-home "/.node_modules/tern/bin"))
+                (add-to-list 'exec-path (concat my-home "/.local/bin"))
                 (add-to-list 'company-backends 'company-tern)
                 (tern-mode t)))))
 
