@@ -182,6 +182,7 @@
 ;; Use some packages (configure them too!)
 ;; https://github.com/jwiegley/use-package/
 (defvar use-package-verbose t)
+(defvar use-package-always-ensure t)
 (eval-when-compile (require 'use-package))
 
 (require 'bind-key)
@@ -192,7 +193,6 @@
 ;; https://github.com/Malabarba/camcorder.el
 (use-package camcorder
   :defer t
-  :ensure t
   :config
   (custom-set-variables
    '(camcorder-frame-parameters
@@ -232,24 +232,22 @@
 ;; Clang format
 ;; http://clang.llvm.org/docs/ClangFormat.html
 ;; http://clang.llvm.org/docs/ClangFormatStyleOptions.html
-(use-package clang-format :ensure t :defer t)
+(use-package clang-format :defer t)
 
 ;; Clean auto-indent and backspace unindent
 ;; https://github.com/pmarinov/clean-aindent-mode
 (use-package clean-aindent-mode
-  :ensure t
   :config
   (add-hook 'prog-mode-hook 'clean-aindent-mode))
 
 ;; major-mode for editing CMake sources
 ;; https://github.com/Kitware/CMake/blob/master/Auxiliary/cmake-mode.el
-(use-package cmake-mode :defer t :ensure t)
+(use-package cmake-mode :defer t)
 
 ;; Modular in-buffer completion framework for Emacs
 ;; http://company-mode.github.io/
 (use-package company
   :diminish company-mode
-  :ensure t
   :config
   (add-hook 'after-init-hook 'global-company-mode)
   (setq
@@ -275,13 +273,12 @@
 
 ;; Ansible keywords completion for Emacs
 ;; https://github.com/krzysztof-magosa/company-ansible
-(use-package company-ansible :defer t :ensure t)
+(use-package company-ansible :defer t)
 
 ;; Auto-completion for C/C++ headers using Company
 ;; https://github.com/randomphrase/company-c-headers
 (use-package company-c-headers
   :defer t
-  :ensure t
   :init
   (add-hook 'c-mode-common-hook
             (lambda ()
@@ -292,7 +289,6 @@
 ;; https://github.com/Sarcasm/company-irony
 (use-package company-irony
   :defer t
-  :ensure t
   :init
   (add-hook 'c-mode-common-hook
             (lambda ()
@@ -308,15 +304,14 @@
 ;; https://github.com/syohex/emacs-company-jedi
 (use-package company-jedi
   :defer t
-  :ensure t
   :init
   (setq-default
    jedi:complete-on-dot t
    jedi:get-in-function-call-delay 0.2))
 
-(use-package company-lua :defer t :ensure t)
+(use-package company-lua :defer t)
 
-(use-package company-tern :defer t :ensure t)
+(use-package company-tern :defer t)
 
 (use-package css-mode
   :defer t
@@ -326,43 +321,39 @@
 ;; diff-hl - highlight changes/diffs
 ;; https://github.com/dgutov/diff-hl
 (use-package diff-hl
-  :ensure t
   :config
   (global-diff-hl-mode))
 
 ;; Diminished modes are minor modes with no modeline display
 ;; http://www.eskimo.com/~seldon/diminish.el
-(use-package diminish :ensure t)
+(use-package diminish)
 
 ;; A minor mode that guesses the indentation offset originally used for
 ;; creating source code files and transparently adjusts the corresponding
 ;; settings in Emacs, making it more convenient to edit foreign files
 ;; https://github.com/jscheid/dtrt-indent
 (use-package dtrt-indent
-  :ensure t
   :config
   (setq global-mode-string (remove 'dtrt-indent-mode-line-info global-mode-string))
   (dtrt-indent-mode 1))
 
-(use-package dockerfile-mode :defer t :ensure t)
+(use-package dockerfile-mode :defer t)
 
 ;; Emacs Package Library
 ;; https://github.com/cask/epl
-(use-package epl :ensure t)
+(use-package epl)
 
 ;;; Warm cozy fireplace -- https://github.com/johanvts/emacs-fireplace
 (use-package fireplace
   :bind (:map fireplace-mode-map
               ("d" . fireplace-down)
               ("s" . fireplace-toggle-smoke)
-              ("u" . fireplace-up))
-  :ensure t)
+              ("u" . fireplace-up)))
 
-(use-package fish-mode :ensure t)
+(use-package fish-mode)
 
 ;; Syntax checking for GNU Emacs - http://www.flycheck.org/
 (use-package flycheck
-  :ensure t
   :bind
   (("C-c e n" . flycheck-next-error)
    ("C-c e p" . flycheck-previous-error))
@@ -371,7 +362,6 @@
 
 ;; https://github.com/Sarcasm/flycheck-irony
 (use-package flycheck-irony
-  :ensure t
   :config
   (eval-after-load 'flycheck
     '(add-hook 'flycheck-mode-hook #'flycheck-irony-setup)))
@@ -379,14 +369,12 @@
 ;; Flycheck Status Emoji
 ;; https://github.com/liblit/flycheck-status-emoji
 (use-package flycheck-status-emoji
-  :ensure t
   :config
   (flycheck-status-emoji-mode))
 
 ;; Shows an inline arguments hint for the C/C++ function at point
 ;; https://github.com/abo-abo/function-args
 (use-package function-args
-  :ensure t
   :config
   (fa-config-default)
   :bind
@@ -399,7 +387,6 @@
 ;; https://github.com/leoliu/ggtags
 (use-package ggtags
   :diminish ggtags-mode
-  :ensure t
   :init
   (add-hook 'c-mode-common-hook
             (lambda ()
@@ -414,32 +401,32 @@
         ("C-c g c" . ggtags-create-tags)
         ("M-," . pop-tag-mark)))
 
-(use-package gitignore-mode :defer t :ensure t)
+(use-package gitignore-mode :defer t)
 
-(use-package glsl-mode :defer t :ensure t)
+(use-package glsl-mode :defer t)
 
 ;; Golang -- to use or not to use?
 (let ((use-go (getenv "EMACS_GO")))
   (if (not (equal use-go nil))
       (load "~/.emacs.d/extra/go.el")))
 
-(use-package groovy-mode :defer t :ensure t)
+(use-package groovy-mode :defer t)
 
 (use-package html-mode
   :defer t
+  :ensure nil
   :init
   (add-hook 'html-mode-hook 'skewer-html-mode))
 
 ;; Interactively Do Things
 ;; http://emacswiki.org/emacs/InteractivelyDoThings
-(use-package ido :ensure t :config (ido-mode t))
+(use-package ido :config (ido-mode t))
 
 ;; A C/C++ minor mode for Emacs powered by libclang
 ;; https://github.com/Sarcasm/irony-mode
 (use-package irony
   :defer t
   :diminish abbrev-mode irony-mode
-  :ensure t
   :config
   (defun my-irony-mode-hook ()
     (define-key irony-mode-map [remap completion-at-point]
@@ -449,22 +436,20 @@
   (add-hook 'irony-mode-hook 'my-irony-mode-hook)
   (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options))
 
-(use-package jinja2-mode :defer t :ensure t)
+(use-package jinja2-mode :defer t)
 
-(use-package json-mode :defer t :ensure t)
+(use-package json-mode :defer t)
 
-(use-package lua-mode :defer t :ensure t)
+(use-package lua-mode :defer t)
 
 ;; A Git Porcelain inside Emacs
 ;; https://magit.vc/
 (use-package magit
-  :ensure t
   :bind
   ("C-c g d" . magit-diff)
   ("C-x g" . magit-status))
 
 (use-package markdown-mode
-  :ensure t
   :config
   ;; Special indent for markdown-mode
   (add-hook 'markdown-mode-hook
@@ -476,24 +461,23 @@
         (do-func-to-marked-region 'markdown-indent-region)
       (markdown-indent-line))))
 
-(use-package markdown-mode+ :defer t :ensure t :functions markdown-indent-line)
+(use-package markdown-mode+ :defer t :functions markdown-indent-line)
 
 ;; A Better Java Development Environment for Emacs
 ;; https://github.com/mopemope/meghanada-emacs
-(use-package meghanada :ensure t :defer t)
+(use-package meghanada :defer t)
 
-(use-package nginx-mode :defer t :ensure t)
+(use-package nginx-mode :defer t)
 
 (use-package org-plus-contrib
   :bind
   ("C-c l" . org-store-link)
   ("C-c a" . org-agenda)
-  :defer t
-  :ensure t)
+  :defer t)
 
 ;; Navigate Python documentation
 ;; https://github.com/statmobile/pydoc
-(use-package pydoc :defer t :ensure t)
+(use-package pydoc :defer t)
 
 (use-package python-mode
   ;; TODO: helper functions that install pip packages
@@ -578,11 +562,12 @@
 ;; https://github.com/greghendershott/racket-mode
 ;; See the below link for why the REPL doesn't load some functions.
 ;; http://stackoverflow.com/a/31523545
-(use-package racket-mode :defer t :ensure t)
+(use-package racket-mode :defer t)
 
 ;; Start racket-mode via a hook so we get rainbow delimiters
 (use-package racket-repl-mode
   :defer t
+  :ensure nil
   :init
   ;; TODO: Currently lacking a good way to start racket-mode when we launch
   ;; TODO: racket-repl on its own, not from a file with C-c C-c.
@@ -592,15 +577,12 @@
 ;; Emacs rainbow delimiters mode
 ;; https://github.com/Fanael/rainbow-delimiters
 (use-package rainbow-delimiters
-  :ensure t
-  :init
-  (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
+  :init (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 
 ;; Rainbow mode - #000 #fff #f00 #ff0 #00f #0f0 #800080 #00ffff #ff00ff
 ;; https://julien.danjou.info/projects/emacs-packages
 (use-package rainbow-mode
   :diminish rainbow-mode
-  :ensure t
   :config
   (add-hook 'css-mode-hook 'rainbow-mode)
   (add-hook 'html-mode-hook 'rainbow-mode)
@@ -611,7 +593,6 @@
 ;; Requires: `gem install pry` and a Gemfile listing your gems
 (use-package robe
   :diminish robe-mode
-  :ensure t
   :config
   (add-hook 'ruby-mode-hook 'robe-mode))
 
@@ -642,7 +623,6 @@
 ;; skewer-mode: https://github.com/skeeto/skewer-mode
 (use-package skewer-mode
   :defer t
-  :ensure t
   :init
   (setq-default httpd-root (concat dot-emacs "/httpd"))
   :bind
@@ -651,7 +631,7 @@
 
 ;; SLIME company goodness
 ;; https://github.com/anwyn/slime-company
-(use-package slime-company :defer t :ensure t)
+(use-package slime-company :defer t)
 
 ;; Superior LISP Interaction Mode for Emacs
 ;; https://common-lisp.net/project/slime/
@@ -661,7 +641,6 @@
 ;; C-c C-k Compile and load current buffer
 ;; C-c C-q Invoke slime-close-parens-at-point
 (use-package slime
-  :ensure t
   :config
   ;; This breaks the default coloring of SLIME.  Net gain in my opinion.
   (add-hook 'slime-repl-mode-hook #'rainbow-delimiters-mode)
@@ -672,7 +651,6 @@
 ;; A powerful and beautiful mode-line for Emacs.
 ;; https://github.com/Malabarba/smart-mode-line
 (use-package smart-mode-line
-  :ensure t
   :config
   (setq
    sml/shorten-directory t
@@ -684,16 +662,15 @@
 
 ;;  Emacs isearch with an overview. Oh, man!
 ;; https://github.com/abo-abo/swiper
-(use-package swiper :ensure t)
+(use-package swiper)
 
 ;; I strongly dislike systemd...
 ;; but this mode is pretty handy when you need it.
-(use-package systemd :defer t :ensure t)
+(use-package systemd :defer t)
 
 ;; Tern: Intelligent JavaScript tooling http://ternjs.net/doc/manual.html#emacs
 (use-package tern
   :commands tern-mode
-  :ensure t
   :init
   (add-hook 'js-mode-hook
             (lambda ()
@@ -706,7 +683,6 @@
 ;; http://www.dr-qubit.org/undo-tree/undo-tree.el
 ;; https://www.emacswiki.org/emacs/UndoTree
 (use-package undo-tree
-  :ensure t
   :diminish undo-tree-mode
   :config
   (setq
@@ -720,7 +696,6 @@
 ;; http://web-mode.org/
 (use-package web-mode
   :defer t
-  :ensure t
   :init
   (setq
    web-mode-code-indent-offset 2
@@ -736,7 +711,6 @@
 
 ;; windmove: http://is.gd/63r6U0
 (use-package windmove
-  :ensure t
   :bind
   ("M-e" . windmove-left)
   ("M-u" . windmove-right)
@@ -747,11 +721,10 @@
 ;; https://github.com/lewang/ws-butler
 (use-package ws-butler
   :diminish ws-butler-mode
-  :ensure t
   :config
   (add-hook 'prog-mode-hook 'ws-butler-mode))
 
-(use-package yaml-mode :defer t :ensure t
+(use-package yaml-mode :defer t
   :config
   (add-hook 'yaml-mode-hook
             (lambda ()
@@ -762,7 +735,6 @@
 ;; http://capitaomorte.github.io/yasnippet/
 (use-package yasnippet
   :diminish yas-minor-mode
-  :ensure t
   :init
   ;; Shut yas up! Disables startup noise
   (setq-default yas-verbosity 0)
@@ -772,17 +744,13 @@
 ;; zygospore: Reversible C-x 1
 ;; https://github.com/LouisKottmann/zygospore.el
 (use-package zygospore
-  :ensure t
-  :bind
-  ("C-x 1" . zygospore-toggle-delete-other-windows))
+  :bind ("C-x 1" . zygospore-toggle-delete-other-windows))
 
 ;; Color Theme for emacs based on material design colors
 ;; https://github.com/cpaulik/emacs-material-theme
 ;; TODO: How to use darker grey vs blue colors?
 (use-package material-theme
-  :ensure t
-  :config
-  (load-theme 'material t))
+  :config (load-theme 'material t))
 
 ;; Tweaks to Emacs internals
 
