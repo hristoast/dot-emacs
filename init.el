@@ -206,9 +206,6 @@
 ;; Java, CORBA IDL (and the variants PSDL and CIDL), Pike and AWK code
 ;; https://www.gnu.org/software/emacs/manual/html_mono/ccmode.html
 (use-package cc-mode
-  :bind
-  ("M-e" . nil)
-  ("M-j" . nil)
   :defer t
   :config
   (defun clang-format-save-hook ()
@@ -682,47 +679,8 @@
    sml/theme 'respectful)
   (sml/setup))
 
-;; Minor mode for Emacs that deals with parens
-;; pairs and tries to be smart about it
-;; https://github.com/Fuco1/smartparens
-(use-package smartparens
-  ;; Prevent smartparens from hijacking my windmove bindings..
-  :bind
-  ("M-e" . windmove-left)
-  ("M-u" . windmove-right)
-  ("M-k" . windmove-up)
-  ("M-j" . windmove-down)
-  :diminish smartparens-mode
-  :ensure t
-  :config
-  (setq
-   sp-base-key-bindings 'paredit
-   sp-autoskip-closing-pair 'always
-   sp-hybrid-kill-entire-symbol nil)
-  (sp-use-paredit-bindings)
-  (show-smartparens-global-mode +1)
-  (smartparens-global-mode 1)
-  ;; Fix usage of ' in Lisp modes
-  ;; THANKS: https://github.com/Fuco1/smartparens/issues/286#issuecomment-32324743
-  ;; (eval) is used as a hack to quiet Flycheck errors about (sp-with-modes)
-  (eval
-   '(sp-with-modes sp-lisp-modes
-      ;; disable ', it's the quote character!
-      (sp-local-pair "'" nil :actions nil)
-      ;; also only use the pseudo-quote inside strings where it serve as
-      ;; hyperlink.
-      (sp-local-pair "`" "'" :when '(sp-in-string-p sp-in-comment-p))
-      (sp-local-pair "`" nil
-                     :skip-match (lambda (ms mb me)
-                                   (cond
-                                    ((equal ms "'")
-                                     (or (sp--org-skip-markup ms mb me)
-                                         (not (sp-point-in-string-or-comment))))
-                                    (t (not (sp-point-in-string-or-comment))))))))
-  ;; Don't pair { in web-mode
-  (eval
-   '(sp-with-modes 'web-mode
-      (sp-local-pair "\{" nil :actions nil))))
+;; TODO: use paredit
+(electric-pair-mode t)
 
 ;;  Emacs isearch with an overview. Oh, man!
 ;; https://github.com/abo-abo/swiper
@@ -778,6 +736,7 @@
 
 ;; windmove: http://is.gd/63r6U0
 (use-package windmove
+  :ensure t
   :bind
   ("M-e" . windmove-left)
   ("M-u" . windmove-right)
