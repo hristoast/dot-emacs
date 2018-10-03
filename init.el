@@ -499,7 +499,7 @@
       (jedi:goto-definition)))
 
   (defun maybe-stop-jedi-server ()
-    "Stop the Jedi server, if need me."
+    "Stop the Jedi server, if need be."
     (if (boundp 'jedi:stop-server)
         (jedi:stop-server)))
 
