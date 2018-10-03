@@ -774,6 +774,9 @@
 ;; Delete highlighted text when you type
 (delete-selection-mode t)
 
+;; As advised by https://www.emacswiki.org/emacs/TrampMode
+(setq-default tramp-default-method "ssh")
+
 (setq
  ;; Backup files ...
  backup-directory-alist `(("." . "~/.emacs.d/backups"))
