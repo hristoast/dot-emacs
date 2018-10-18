@@ -850,7 +850,7 @@
 
 (defvar h-font-height)
 (if (getenv "RETINA_DISPLAY")
-    (setq h-font-height 140)
+    (setq h-font-height 170)
   (setq h-font-height 100))
 
 ;; Hack - http://sourcefoundry.org/hack/
