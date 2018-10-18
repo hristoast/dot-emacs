@@ -672,20 +672,12 @@
 ;; pairs and tries to be smart about it
 ;; https://github.com/Fuco1/smartparens
 (use-package smartparens
-  ;; Prevent smartparens from hijacking my windmove bindings..
-  :bind
-  ("M-e" . windmove-left)
-  ("M-u" . windmove-right)
-  ("M-k" . windmove-up)
-  ("M-j" . windmove-down)
   :diminish smartparens-mode
   :ensure t
   :config
   (setq
-   sp-base-key-bindings 'paredit
    sp-autoskip-closing-pair 'always
    sp-hybrid-kill-entire-symbol nil)
-  (sp-use-paredit-bindings)
   (show-smartparens-global-mode +1)
   (smartparens-global-mode 1)
   ;; Fix usage of ' in Lisp modes
