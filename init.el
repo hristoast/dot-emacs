@@ -828,6 +828,11 @@
  display-time-24hr-format t
  display-time-format "%T"
  display-time-interval 1
+ ;; https://emacs.stackexchange.com/a/16836
+ ;; TODO: When Emacs is iconified/minimized the title reverts to the default.
+ ;; When Emacs is iconified/minimized and another Emacs frame is in focus, the
+ ;; title becomes just the file name (not the full path.)
+ frame-title-format '("%f [%m]")
  ;; Org mode stuff
  org-log-done t
  org-agenda-files (list default-org-file)
