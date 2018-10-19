@@ -525,9 +525,11 @@
     (maybe-stop-jedi-server)
     (defvar python-check-command)
     (defvar python-shell-interpreter)
+    (defvar python-shell-interpreter-args)
     (setq
        python-check-command "/usr/bin/pyflakes3"
-       python-shell-interpreter "/usr/bin/python3.6m"
+       python-shell-interpreter (concat dot-emacs "/.py/system3/bin/ipython")
+       python-shell-interpreter-args "--simple-prompt -i"
        flycheck-python-flake8-executable "/usr/bin/python3-flake8"
        jedi:environment-virtualenv (list "/usr/bin/pyvenv-3.6")
        jedi:environment-root (concat dot-emacs "/.py/system3")
