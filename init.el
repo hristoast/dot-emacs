@@ -455,7 +455,7 @@
 ;; https://magit.vc/
 (use-package magit
   :bind
-  ("C-c g d" . magit-diff)
+  ("C-c g d" . magit-diff-range)
   ("C-x g" . magit-status))
 
 (use-package markdown-mode
