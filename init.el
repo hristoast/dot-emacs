@@ -487,14 +487,12 @@
 (use-package pydoc :defer t)
 
 (use-package python-mode
-  ;; TODO: helper functions that install pip packages
-  ;; pip install flake8 jedi
   :bind
   ("<S-down-mouse-1>" . goto-definition-at-point)
   ("<S-down-mouse-3>" . quick-pydoc)
+  :ensure nil
   :functions jedi:goto-definition jedi:stop-server maybe-stop-jedi-server
   :init
-  (setq-default python-shell-completion-native-enable nil)
 
   (defun goto-definition-at-point (event)
     "Move the point to the clicked position
@@ -525,13 +523,11 @@
     (maybe-stop-jedi-server)
     (defvar python-check-command)
     (defvar python-shell-interpreter)
-    (defvar python-shell-interpreter-args)
     (setq
-       python-check-command "/usr/bin/pyflakes3"
-       python-shell-interpreter (concat dot-emacs "/.py/system3/bin/ipython")
-       python-shell-interpreter-args "--simple-prompt -i"
-       flycheck-python-flake8-executable "/usr/bin/python3-flake8"
-       jedi:environment-virtualenv (list "/usr/bin/pyvenv-3.6")
+       python-check-command "pyflakes"
+       python-shell-interpreter "python3"
+       flycheck-python-flake8-executable "flake8"
+       jedi:environment-virtualenv (list "python -m venv")
        jedi:environment-root (concat dot-emacs "/.py/system3")
        jedi:server-args
        '("--sys-path" "/usr/lib/python3.6/site-packages"
@@ -539,26 +535,6 @@
       (if (not (file-exists-p
                 (concat jedi:environment-root
                         "/lib/python3.6/site-packages/jediepcserver.py")))
-          (jedi:install-server)))
-
-  (defun use-system-python2 ()
-    "Use the system python2."
-    (interactive)
-    (maybe-stop-jedi-server)
-    (defvar python-check-command)
-    (defvar python-shell-interpreter)
-    (setq
-       python-check-command "/usr/bin/pyflakes2"
-       python-shell-interpreter "/usr/bin/python2.7"
-       flycheck-python-flake8-executable "/usr/bin/python2-flake8"
-       jedi:environment-virtualenv (list "/usr/bin/virtualenv2")
-       jedi:environment-root (concat dot-emacs "/.py/system2")
-       jedi:server-args
-       '("--sys-path" "/usr/lib/python2.7/site-packages"
-         "--sys-path" "~/.local/lib/python2.7/site-packages"))
-      (if (not (file-exists-p
-                (concat jedi:environment-root
-                        "/lib/python2.7/site-packages/jediepcserver.py")))
           (jedi:install-server)))
 
   (add-hook 'python-mode-hook 'use-system-python3)
