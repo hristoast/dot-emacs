@@ -562,6 +562,7 @@
 ;; Emacs rainbow delimiters mode
 ;; https://github.com/Fanael/rainbow-delimiters
 (use-package rainbow-delimiters
+  :ensure t
   :init (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 
 ;; Rainbow mode - #000 #fff #f00 #ff0 #00f #0f0 #800080 #00ffff #ff00ff
