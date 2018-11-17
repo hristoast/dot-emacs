@@ -73,7 +73,7 @@ Clone this repo to `~/.emacs.d/` and fire up Emacs, it should work fine on moder
 
 ## Extra
 
-To use the Clojure, Golang, Javascript, or Rust bits, export an environment variable like `EMACS_RUST=true` (with any value, it just needs to be set) and that file will get loaded.  I don't use these too often so they may or may not be as up to date as they ought to be.
+To use the Clojure, Golang, or Rust bits, one of the following environment variables are required to be defined (the value can be anything): `EMACS_CLOJURE`, `EMACS_GO`, or `EMACS_RUST` (with any value, it just needs to be set) and that file will get loaded.
 
 ## Issues
 
