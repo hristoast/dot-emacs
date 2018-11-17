@@ -313,6 +313,9 @@
 
 (use-package company-lua :defer t)
 
+;; https://github.com/rafalcieslak/emacs-company-terraform
+(use-package company-terraform :defer t)
+
 (use-package company-tern :defer t)
 
 (use-package css-mode
@@ -688,6 +691,9 @@
 ;; I strongly dislike systemd...
 ;; but this mode is pretty handy when you need it.
 (use-package systemd :defer t)
+
+;; https://github.com/syohex/emacs-terraform-mode
+(use-package terraform-mode :init (company-terraform-init))
 
 ;; Tern: Intelligent JavaScript tooling http://ternjs.net/doc/manual.html#emacs
 (use-package tern
