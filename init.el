@@ -306,6 +306,7 @@
 ;; https://github.com/syohex/emacs-company-jedi
 (use-package company-jedi
   :defer t
+  :ensure t
   :init
   (setq-default
    jedi:complete-on-dot t
