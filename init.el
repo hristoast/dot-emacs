@@ -531,7 +531,7 @@
        python-check-command "pyflakes"
        python-shell-interpreter "python3"
        flycheck-python-flake8-executable "flake8"
-       jedi:environment-virtualenv (list "python -m venv")
+       jedi:environment-virtualenv (list "python3" "-m" "venv")
        jedi:environment-root (concat dot-emacs "/.py/system3")
        jedi:server-args
        '("--sys-path" "/usr/lib/python3.6/site-packages"
