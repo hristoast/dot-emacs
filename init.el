@@ -393,6 +393,9 @@
   (:map c++-mode-map
         ("M-o" . fa-show)))
 
+;; Major mode for editing Godot GDScript files
+(use-package gdscript-mode :defer t :ensure t)
+
 ;; Emacs frontend to GNU Global source code tagging system.
 ;; https://github.com/leoliu/ggtags
 (use-package ggtags
