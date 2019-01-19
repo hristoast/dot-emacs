@@ -943,9 +943,11 @@
 ;; Make text bigger
 (global-set-key (kbd "M-+") 'text-scale-increase)
 (global-set-key (kbd "<f9>") 'text-scale-increase)
+(global-set-key (kbd "<C-mouse-4>") 'text-scale-increase)
 ;; Or make it smaller
 (global-set-key (kbd "M--") 'text-scale-decrease)
 (global-set-key (kbd "<f8>") 'text-scale-decrease)
+(global-set-key (kbd "<C-mouse-5>") 'text-scale-decrease)
 ;; Toggle whitespace-mode
 (global-set-key (kbd "C-c w") 'whitespace-mode)
 ;; Extra keybindings that make life great
