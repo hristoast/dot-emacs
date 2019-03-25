@@ -787,6 +787,11 @@
   :ensure t
   :config (load-theme 'material t))
 
+;; Use conf-mode for .godot and .tscn source files
+(setq auto-mode-alist (append '(("\\.godot$" . conf-mode))
+                              '(("\\.tscn$" . conf-mode))
+                              auto-mode-alist))
+
 ;; Tweaks to Emacs internals
 
 (defconst default-org-file "~/src/org/home.org")
@@ -886,12 +891,10 @@
                         :height h-font-height
                         :weight 'normal))
 
-;; Symbola - http://zhm.github.io/symbola/
-(if (or (file-exists-p (concat my-home "/.fonts/Symbola.ttf"))
-        (file-exists-p "/usr/share/fonts/TTF/Symbola.ttf"))
-    (set-fontset-font t 'symbol (font-spec :family "Symbola") (selected-frame) 'prepend)
-  ;; Again -- proably working on a Mac right now ...
-  (set-fontset-font t 'symbol (font-spec :family "Apple Color Emoji") (selected-frame) 'prepend))
+;; Emoji font
+(set-fontset-font t 'symbol (font-spec :family "Noto Emoji") (selected-frame) 'prepend)
+;; I don't work on macOS much anymore.. but if i do:
+;; (set-fontset-font t 'symbol (font-spec :family "Apple Color Emoji") (selected-frame) 'prepend))
 
 ;;; Define some handy functions
 
@@ -961,9 +964,12 @@
 (global-set-key (kbd "C-x t m") 'menu-bar-mode)
 (global-set-key (kbd "TAB") 'indent-appropriately)
 (global-set-key (kbd "C-x C-v") 'clipboard-yank)
+(global-set-key (kbd "C-^") 'enlarge-window)
 
 ;; Kill this buffer!
 (substitute-key-definition 'kill-buffer 'kill-buffer-and-window global-map)
+
+(setq org-support-shift-select t)
 
 ;;; Using Emacs as a window manager with this configuration
 ;; Inspired by this:
