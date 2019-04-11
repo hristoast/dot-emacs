@@ -191,16 +191,16 @@
 
 ;; Tool for capturing screencasts directly from Emacs.
 ;; https://github.com/Malabarba/camcorder.el
-(use-package camcorder
-  :defer t
-  :config
-  (custom-set-variables
-   '(camcorder-frame-parameters
-     (quote
-      ((height . 45)
-       (width . 110))))
-   '(camcorder-gif-output-directory "~/videos/emacs/gifs")
-   '(camcorder-output-directory "~/videos/emacs")))
+;; (use-package camcorder
+;;   :defer t
+;;   :config
+;;   (custom-set-variables
+;;    '(camcorder-frame-parameters
+;;      (quote
+;;       ((height . 45)
+;;        (width . 110))))
+;;    '(camcorder-gif-output-directory "~/videos/emacs/gifs")
+;;    '(camcorder-output-directory "~/videos/emacs")))
 
 ;; CC Mode is a GNU Emacs mode for editing files containing C, C++, Objective-C,
 ;; Java, CORBA IDL (and the variants PSDL and CIDL), Pike and AWK code
@@ -220,6 +220,13 @@
                (or (eq major-mode 'c-mode) (eq major-mode 'c++-mode)))
       (clang-format-buffer)))
   (add-hook 'before-save-hook 'clang-format-save-hook)
+  ;;
+  ;; Add the following to a .dir-locals.el file in your C/C++ project:
+  ;;
+  ;; ((nil . ((eval . (add-hook 'after-save-hook 'export-compile-commands-foo)))))
+  ;;
+  ;; This will regenerate the `compile_commands.json' file after each save.
+  ;;
   (defvar company-backends (delete 'company-semantic company-backends))
   (define-key c-mode-map [(tab)] 'company-complete)
   (define-key c++-mode-map [(tab)] 'company-complete))
@@ -291,6 +298,10 @@
 ;; https://github.com/Sarcasm/company-irony
 (use-package company-irony
   :defer t
+  ;; :ensure-system-package
+  ;; ((rc . "fish -c 'xi rtags'")
+  ;;  (rdm . "fish -c 'xi rtags'")
+  ;;  (bear . "fish -c 'xi Bear'"))
   :init
   (add-hook 'c-mode-common-hook
             (lambda ()
@@ -314,10 +325,25 @@
 
 (use-package company-lua :defer t)
 
+;; A c/c++ client/server indexer for c/c++/objc[++] with integration for Emacs based on clang.
+;; http://www.rtags.net / https://github.com/Andersbakken/rtags
+(use-package company-rtags
+  :defer t
+  :config
+  (progn
+    (setq rtags-autostart-diagnostics t)
+    (rtags-diagnostics)
+    (setq rtags-completions-enabled t)
+    (push 'company-rtags company-backends)))
+
 ;; https://github.com/rafalcieslak/emacs-company-terraform
 (use-package company-terraform :defer t)
 
 (use-package company-tern :defer t)
+
+;; Various completion functions using Ivy
+;; https://github.com/abo-abo/swiper / https://melpa.org/#/counsel
+(use-package counsel :defer t)
 
 (use-package css-mode
   :defer t
@@ -375,6 +401,23 @@
   (eval-after-load 'flycheck
     '(add-hook 'flycheck-mode-hook #'flycheck-irony-setup)))
 
+;; A c/c++ client/server indexer for c/c++/objc[++] with integration for Emacs based on clang.
+;; http://www.rtags.net / https://github.com/Andersbakken/rtags
+(use-package flycheck-rtags
+  :defer t
+  :functions flycheck-select-checker setup-flycheck-rtags
+  :config
+  (progn
+    ;; ensure that we use only rtags checking
+    ;; https://github.com/Andersbakken/rtags#optional-1
+    (defun setup-flycheck-rtags ()
+      (flycheck-select-checker 'rtags)
+      (setq-local flycheck-highlighting-mode nil) ;; RTags creates more accurate overlays.
+      (setq-local flycheck-check-syntax-automatically nil)
+      (rtags-set-periodic-reparse-timeout 2.0))  ;; Run flycheck 2 seconds after being idle.
+    (add-hook 'c-mode-hook #'setup-flycheck-rtags)
+    (add-hook 'c++-mode-hook #'setup-flycheck-rtags)))
+
 ;; Flycheck Status Emoji
 ;; https://github.com/liblit/flycheck-status-emoji
 (use-package flycheck-status-emoji
@@ -398,21 +441,22 @@
 
 ;; Emacs frontend to GNU Global source code tagging system.
 ;; https://github.com/leoliu/ggtags
-(use-package ggtags
-  :diminish ggtags-mode
-  :init
-  (add-hook 'c-mode-common-hook
-            (lambda ()
-              (when (derived-mode-p 'c-mode 'c++-mode 'asm-mode)
-                (ggtags-mode 1))))
-  :bind
-  (:map ggtags-mode-map
-        ("C-c g s" . ggtags-find-other-symbol)
-        ("C-c g h" . ggtags-view-tag-history)
-        ("C-c g r" . ggtags-find-reference)
-        ("C-c g f" . ggtags-find-rule)
-        ("C-c g c" . ggtags-create-tags)
-        ("M-," . pop-tag-mark)))
+;; (use-package ggtags
+;;   :defer t
+;;   :diminish ggtags-mode
+;;   :init
+;;   (add-hook 'c-mode-common-hook
+;;             (lambda ()
+;;               (when (derived-mode-p 'c-mode 'c++-mode 'asm-mode)
+;;                 (ggtags-mode 1))))
+;;   :bind
+;;   (:map ggtags-mode-map
+;;         ("C-c g s" . ggtags-find-other-symbol)
+;;         ("C-c g h" . ggtags-view-tag-history)
+;;         ("C-c g r" . ggtags-find-reference)
+;;         ("C-c g f" . ggtags-find-rule)
+;;         ("C-c g c" . ggtags-create-tags)
+;;         ("M-," . pop-tag-mark)))
 
 (use-package gitignore-mode :defer t)
 
@@ -442,12 +486,14 @@
   :diminish abbrev-mode irony-mode
   :config
   (defun my-irony-mode-hook ()
-    (define-key irony-mode-map [remap completion-at-point]
-      'irony-completion-at-point-async)
-    (define-key irony-mode-map [remap complete-symbol]
-      'irony-completion-at-point-async))
+    (define-key irony-mode-map [remap completion-at-point] 'counsel-irony)
+    (define-key irony-mode-map [remap complete-symbol] 'counsel-irony))
   (add-hook 'irony-mode-hook 'my-irony-mode-hook)
   (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options))
+
+;; irony-mode support for eldoc-mode
+;; https://github.com/ikirill/irony-eldoc
+(use-package irony-eldoc :defer t)
 
 (use-package jinja2-mode :defer t)
 
@@ -927,6 +973,31 @@
     (comment-or-uncomment-region
      (line-beginning-position)
      (line-end-position))))
+
+(defun export-compile-commands (project)
+  "Generate a `compile_commands.json' file for a give project.
+Select the appropriate cmake invocation via the `PROJECT' arg."
+  ;; TODO: define project commands in a .dir-locals.el file.
+  (interactive (list (read-from-minibuffer "project name: " nil nil nil nil)))
+  (cond ((string= project "tes3mp")
+         (let ((default-directory "~/src/openmw-tes3mp"))
+           (shell-command
+            "cmake -DDESIRED_QT_VERSION=5 -DCMAKE_PREFIX_PATH=~/src/CrabNet/build/include -DLIBUNSHIELD_INCLUDE_DIR=/opt/morrowind/unshield/include -DBullet_BulletCollision_LIBRARY=/opt/morrowind/bullet/lib/libBulletCollision.so -DBullet_INCLUDE_DIR=/opt/morrowind/bullet/include/bullet -DBullet_LinearMath_LIBRARY=/opt/morrowind/bullet/lib/libLinearMath.so -DCMAKE_EXPORT_COMPILE_COMMANDS=1 .")))
+        ((string= project "openmw")
+         (let ((default-directory "~/src/openmw"))
+           (shell-command
+            "cmake -DDESIRED_QT_VERSION=5 -DLIBUNSHIELD_INCLUDE_DIR=/opt/morrowind/unshield/include -DBullet_BulletCollision_LIBRARY=/opt/morrowind/bullet/lib/libBulletCollision.so -DBullet_INCLUDE_DIR=/opt/morrowind/bullet/include/bullet -DLIBUNSHIELD_LIBRARY=/opt/morrowind/unshield/lib64 -DBullet_LinearMath_LIBRARY=/opt/morrowind/bullet/lib/libLinearMath.so -DCMAKE_EXPORT_COMPILE_COMMANDS=1 .")))
+        (t (shell-command "echo The given project name was not recognized."))))
+
+(defun export-compile-commands-openmw ()
+  "Shortcut for calling export-compile-commands for OpenMW."
+  (interactive)
+  (export-compile-commands "openmw"))
+
+(defun export-compile-commands-tes3mp ()
+  "Shortcut for calling export-compile-commands for TES3MP."
+  (interactive)
+  (export-compile-commands "tes3mp"))
 
 ;; Use lua-mode for PICO-8 source files
 (setq auto-mode-alist (append '(("\\.p8$" . lua-mode))
