@@ -202,6 +202,10 @@
 ;;    '(camcorder-gif-output-directory "~/videos/emacs/gifs")
 ;;    '(camcorder-output-directory "~/videos/emacs")))
 
+;; Python Black for Emacs
+;; https://github.com/proofit404/blacken
+(use-package blacken :defer t)
+
 ;; CC Mode is a GNU Emacs mode for editing files containing C, C++, Objective-C,
 ;; Java, CORBA IDL (and the variants PSDL and CIDL), Pike and AWK code
 ;; https://www.gnu.org/software/emacs/manual/html_mono/ccmode.html
@@ -239,7 +243,9 @@
 ;; Clang format
 ;; http://clang.llvm.org/docs/ClangFormat.html
 ;; http://clang.llvm.org/docs/ClangFormatStyleOptions.html
-(use-package clang-format :defer t)
+(use-package clang-format
+  :defer t
+  :functions clang-format-buffer)
 
 ;; Clean auto-indent and backspace unindent
 ;; https://github.com/pmarinov/clean-aindent-mode
@@ -329,15 +335,16 @@
 ;; http://www.rtags.net / https://github.com/Andersbakken/rtags
 (use-package company-rtags
   :defer t
+  :functions rtags-diagnostics rtags-set-periodic-reparse-timeout
   :config
   (progn
-    (setq rtags-autostart-diagnostics t)
+    (setq-default rtags-autostart-diagnostics t)
     (rtags-diagnostics)
-    (setq rtags-completions-enabled t)
+    (setq-default rtags-completions-enabled t)
     (push 'company-rtags company-backends)))
 
 ;; https://github.com/rafalcieslak/emacs-company-terraform
-(use-package company-terraform :defer t)
+;; (use-package company-terraform :defer t)
 
 (use-package company-tern :defer t)
 
@@ -379,6 +386,7 @@
 
 ;;; Warm cozy fireplace -- https://github.com/johanvts/emacs-fireplace
 (use-package fireplace
+  :init (defvar fireplace-mode-map)
   :bind (:map fireplace-mode-map
               ("d" . fireplace-down)
               ("s" . fireplace-toggle-smoke)
@@ -428,6 +436,7 @@
 ;; Shows an inline arguments hint for the C/C++ function at point
 ;; https://github.com/abo-abo/function-args
 (use-package function-args
+  :functions fa-config-default
   :config
   (fa-config-default)
   :bind
@@ -504,6 +513,7 @@
 ;; A Git Porcelain inside Emacs
 ;; https://magit.vc/
 (use-package magit
+  :ensure t
   :bind
   ("C-c g d" . magit-diff-range)
   ("C-x g" . magit-status))
@@ -544,7 +554,7 @@
   ("<S-down-mouse-1>" . goto-definition-at-point)
   ("<S-down-mouse-3>" . quick-pydoc)
   :ensure nil
-  :functions jedi:goto-definition jedi:stop-server maybe-stop-jedi-server
+  :functions jedi:goto-definition jedi:stop-server maybe-stop-jedi-server pydoc-at-point
   :init
 
   (defun goto-definition-at-point (event)
@@ -653,9 +663,10 @@
 
 ;; Provides language-aware editing commands based on source code parsers.
 ;; http://www.gnu.org/software/emacs/manual/html_node/emacs/Semantic.html
+(require 'semantic)
 (use-package semantic
   :commands semantic-mode
-  :functions global-semanticdb-minor-mode global-semantic-idle-scheduler-mode
+  :functions (global-semanticdb-minor-mode global-semantic-idle-scheduler-mode)
   :config
   (global-semanticdb-minor-mode 1)
   (global-semantic-idle-scheduler-mode 1)
@@ -743,7 +754,7 @@
 (use-package systemd :defer t)
 
 ;; https://github.com/syohex/emacs-terraform-mode
-(use-package terraform-mode :init (company-terraform-init))
+;; (use-package terraform-mode :config (company-terraform-init))
 
 ;; Tern: Intelligent JavaScript tooling http://ternjs.net/doc/manual.html#emacs
 (use-package tern
@@ -775,7 +786,7 @@
 (use-package web-mode
   :defer t
   :init
-  (setq
+  (setq-default
    web-mode-code-indent-offset 2
    web-mode-comment-style 2
    web-mode-css-indent-offset 2
@@ -1040,7 +1051,7 @@ Select the appropriate cmake invocation via the `PROJECT' arg."
 ;; Kill this buffer!
 (substitute-key-definition 'kill-buffer 'kill-buffer-and-window global-map)
 
-(setq org-support-shift-select t)
+(setq-default org-support-shift-select t)
 
 ;;; Using Emacs as a window manager with this configuration
 ;; Inspired by this:
