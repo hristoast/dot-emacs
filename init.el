@@ -304,10 +304,6 @@
 ;; https://github.com/Sarcasm/company-irony
 (use-package company-irony
   :defer t
-  ;; :ensure-system-package
-  ;; ((rc . "fish -c 'xi rtags'")
-  ;;  (rdm . "fish -c 'xi rtags'")
-  ;;  (bear . "fish -c 'xi Bear'"))
   :init
   (add-hook 'c-mode-common-hook
             (lambda ()
@@ -344,7 +340,8 @@
     (push 'company-rtags company-backends)))
 
 ;; https://github.com/rafalcieslak/emacs-company-terraform
-;; (use-package company-terraform :defer t)
+;; Company backend for terraform files
+(use-package company-terraform :defer t)
 
 (use-package company-tern :defer t)
 
@@ -601,6 +598,7 @@
           (jedi:install-server)))
 
   (add-hook 'python-mode-hook 'use-system-python3)
+  (add-hook 'python-mode-hook 'blacken-mode)
   (add-hook 'python-mode-hook
             (lambda ()
               (when (derived-mode-p 'python-mode)
@@ -766,6 +764,8 @@
                 (add-to-list 'exec-path (concat my-home "/.local/bin"))
                 (add-to-list 'company-backends 'company-tern)
                 (tern-mode t)))))
+
+(use-package terraform-mode :init (company-terraform-init))
 
 ;; undo-tree.el --- Treat undo history as a tree
 ;; http://www.dr-qubit.org/undo-tree/undo-tree.el
