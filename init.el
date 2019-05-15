@@ -187,6 +187,7 @@
 
 (require 'bind-key)
 
+;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Autorevert.html
 (use-package autorevert :diminish auto-revert-mode)
 
 ;; Tool for capturing screencasts directly from Emacs.
@@ -325,6 +326,8 @@
    jedi:complete-on-dot t
    jedi:get-in-function-call-delay 0.2))
 
+;; company-mode completion backend for Lua
+;; https://github.com/ptrv/company-lua
 (use-package company-lua :defer t)
 
 ;; A c/c++ client/server indexer for c/c++/objc[++] with integration for Emacs based on clang.
@@ -343,16 +346,16 @@
 ;; Company backend for terraform files
 (use-package company-terraform :defer t)
 
+;; Tern backend for company-mode.
+;; https://github.com/proofit404/company-tern
 (use-package company-tern :defer t)
 
 ;; Various completion functions using Ivy
 ;; https://github.com/abo-abo/swiper / https://melpa.org/#/counsel
 (use-package counsel :defer t)
 
-(use-package css-mode
-  :defer t
-  :init
-  (add-hook 'css-mode-hook 'skewer-css-mode))
+;; Built into Emacs
+(use-package css-mode :init (add-hook 'css-mode-hook 'skewer-css-mode))
 
 ;; diff-hl - highlight changes/diffs
 ;; https://github.com/dgutov/diff-hl
@@ -375,6 +378,8 @@
   (setq global-mode-string (remove 'dtrt-indent-mode-line-info global-mode-string))
   (dtrt-indent-mode 1))
 
+;; An emacs mode for handling Dockerfiles
+;; https://github.com/spotify/dockerfile-mode
 (use-package dockerfile-mode :defer t)
 
 ;; Emacs Package Library
@@ -389,6 +394,8 @@
               ("s" . fireplace-toggle-smoke)
               ("u" . fireplace-up)))
 
+;; fish-mode for emacs
+;; https://github.com/wwwjfy/emacs-fish
 (use-package fish-mode :ensure t)
 
 ;; Syntax checking for GNU Emacs - http://www.flycheck.org/
@@ -399,6 +406,7 @@
   :config
   (add-hook 'after-init-hook #'global-flycheck-mode))
 
+;; C, C++ and Objective-C support for Flycheck, using Irony Mode
 ;; https://github.com/Sarcasm/flycheck-irony
 (use-package flycheck-irony
   :ensure t
@@ -445,6 +453,7 @@
 ;; Major mode for editing Godot GDScript files
 (use-package gdscript-mode :defer t :ensure t)
 
+;; TODO: Make this optional.
 ;; Emacs frontend to GNU Global source code tagging system.
 ;; https://github.com/leoliu/ggtags
 ;; (use-package ggtags
@@ -464,8 +473,13 @@
 ;;         ("C-c g c" . ggtags-create-tags)
 ;;         ("M-," . pop-tag-mark)))
 
+
+;; Emacs mode for .gitignore files
+;; https://github.com/magit/git-modes/blob/master/gitignore-mode.el
 (use-package gitignore-mode :defer t)
 
+;; GLSL emacs mode
+;; https://github.com/jimhourihan/glsl-mode
 (use-package glsl-mode :defer t)
 
 ;; Golang -- to use or not to use?
@@ -473,13 +487,13 @@
   (if (not (equal use-go nil))
       (load "~/.emacs.d/extra/go.el")))
 
+;; A groovy major mode, grails minor mode, and a groovy inferior mode.
+;; https://github.com/Groovy-Emacs-Modes/groovy-emacs-modes
 (use-package groovy-mode :defer t)
 
-(use-package html-mode
-  :defer t
-  :ensure nil
-  :init
-  (add-hook 'html-mode-hook 'skewer-html-mode))
+;; Built into Emacs
+;; https://www.gnu.org/software/emacs/manual/html_node/emacs/HTML-Mode.html
+(use-package html-mode :init (add-hook 'html-mode-hook 'skewer-html-mode))
 
 ;; Interactively Do Things
 ;; http://emacswiki.org/emacs/InteractivelyDoThings
@@ -501,10 +515,16 @@
 ;; https://github.com/ikirill/irony-eldoc
 (use-package irony-eldoc :defer t)
 
+;; Jinja2 mode for emacs
+;; https://github.com/paradoxxxzero/jinja2-mode
 (use-package jinja2-mode :defer t)
 
+;; Major mode for editing JSON files with emacs
+;; https://github.com/joshwnj/json-mode
 (use-package json-mode :defer t)
 
+;; Emacs major mode for editing Lua
+;; http://immerrr.github.io/lua-mode/
 (use-package lua-mode :defer t)
 
 ;; A Git Porcelain inside Emacs
@@ -515,6 +535,8 @@
   ("C-c g d" . magit-diff-range)
   ("C-x g" . magit-status))
 
+;; Emacs Markdown Mode
+;; https://github.com/jrblevin/markdown-mode
 (use-package markdown-mode
   :ensure t
   :config
@@ -528,24 +550,32 @@
         (do-func-to-marked-region 'markdown-indent-region)
       (markdown-indent-line))))
 
+;; Additional functions for Emacs [markdown-mode].
+;; https://github.com/milkypostman/markdown-mode-plus
 (use-package markdown-mode+ :defer t :functions markdown-indent-line)
 
 ;; A Better Java Development Environment for Emacs
 ;; https://github.com/mopemope/meghanada-emacs
 (use-package meghanada :defer t)
 
+;; Emacs editing mode for Nginx config files
+;; https://github.com/ajc/nginx-mode
 (use-package nginx-mode :defer t)
 
+;; https://orgmode.org/elpa.html
 (use-package org-plus-contrib
   :bind
   ("C-c l" . org-store-link)
   ("C-c a" . org-agenda)
-  :defer t)
+  :defer t
+  :init (setq-default org-startup-truncated nil))
 
 ;; Navigate Python documentation
 ;; https://github.com/statmobile/pydoc
 (use-package pydoc :defer t)
 
+;; Built into Emacs
+;; https://www.emacswiki.org/emacs/PythonProgrammingInEmacs
 (use-package python-mode
   :bind
   ("<S-down-mouse-1>" . goto-definition-at-point)
@@ -670,7 +700,8 @@
   (global-semantic-idle-scheduler-mode 1)
   (semantic-mode 1))
 
-;; skewer-mode: https://github.com/skeeto/skewer-mode
+;; Live web development in Emacs
+;; https://github.com/skeeto/skewer-mode
 (use-package skewer-mode
   :defer t
   :init
@@ -747,14 +778,12 @@
 ;; https://github.com/abo-abo/swiper
 (use-package swiper :ensure t)
 
-;; I strongly dislike systemd...
-;; but this mode is pretty handy when you need it.
+;; I strongly dislike systemd... but this mode is pretty handy when you need it.
+;; https://github.com/holomorph/systemd-mode
 (use-package systemd :defer t)
 
-;; https://github.com/syohex/emacs-terraform-mode
-;; (use-package terraform-mode :config (company-terraform-init))
-
-;; Tern: Intelligent JavaScript tooling http://ternjs.net/doc/manual.html#emacs
+;; Tern: Intelligent JavaScript tooling
+;; http://ternjs.net/doc/manual.html#emacs
 (use-package tern
   :commands tern-mode
   :init
@@ -765,6 +794,8 @@
                 (add-to-list 'company-backends 'company-tern)
                 (tern-mode t)))))
 
+;; Major mode of Terraform configuration file
+;; https://github.com/syohex/emacs-terraform-mode
 (use-package terraform-mode :init (company-terraform-init))
 
 ;; undo-tree.el --- Treat undo history as a tree
@@ -798,7 +829,7 @@
   ("\\.html?\\'" . web-mode)
   ("\\.tpl\\'" . web-mode))
 
-;; windmove: http://is.gd/63r6U0
+;; windmove, built into Emacs: http://is.gd/63r6U0
 (use-package windmove
   :bind
   ("M-e" . windmove-left)
@@ -814,6 +845,8 @@
   :config
   (add-hook 'prog-mode-hook 'ws-butler-mode))
 
+;; The emacs major mode for editing files in the YAML data serialization format.
+;; https://github.com/yoshiki/yaml-mode
 (use-package yaml-mode :defer t
   :config
   (add-hook 'yaml-mode-hook
