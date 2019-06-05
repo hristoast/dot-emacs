@@ -493,7 +493,7 @@
 
 ;; Built into Emacs
 ;; https://www.gnu.org/software/emacs/manual/html_node/emacs/HTML-Mode.html
-(use-package html-mode :init (add-hook 'html-mode-hook 'skewer-html-mode))
+(use-package html-mode :no-require t :ensure nil  :init (add-hook 'html-mode-hook 'skewer-html-mode))
 
 ;; Interactively Do Things
 ;; http://emacswiki.org/emacs/InteractivelyDoThings
