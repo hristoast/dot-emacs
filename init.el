@@ -948,6 +948,8 @@
  ;; When Emacs is iconified/minimized and another Emacs frame is in focus, the
  ;; title becomes just the file name (not the full path.)
  frame-title-format '("%f [%m]")
+ ;; Don't automatically 'fix' files with DOS line endings
+ inhibit-eol-conversion t
  ;; Org mode stuff
  org-log-done t
  org-agenda-files (list default-org-file)
