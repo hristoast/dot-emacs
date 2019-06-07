@@ -1028,11 +1028,11 @@ Select the appropriate cmake invocation via the `PROJECT' arg."
   (cond ((string= project "tes3mp")
          (let ((default-directory "~/src/openmw-tes3mp"))
            (shell-command
-            "cmake -DDESIRED_QT_VERSION=5 -DCMAKE_PREFIX_PATH=~/src/CrabNet/build/include -DLIBUNSHIELD_INCLUDE_DIR=/opt/morrowind/unshield/include -DBullet_BulletCollision_LIBRARY=/opt/morrowind/bullet/lib/libBulletCollision.so -DBullet_INCLUDE_DIR=/opt/morrowind/bullet/include/bullet -DBullet_LinearMath_LIBRARY=/opt/morrowind/bullet/lib/libLinearMath.so -DCMAKE_EXPORT_COMPILE_COMMANDS=1 .")))
+            "cmake -DDESIRED_QT_VERSION=5 -DRakNet_INCLUDES=/opt/morrowind/src/raknet/include -DLIBUNSHIELD_INCLUDE_DIR=/usr/include -DBullet_BulletCollision_LIBRARY=/usr/lib/libBulletCollision.so -DBullet_INCLUDE_DIR=/usr/include/bullet -DBullet_LinearMath_LIBRARY=/usr/lib/libLinearMath.so -DCMAKE_EXPORT_COMPILE_COMMANDS=1 .")))
         ((string= project "openmw")
          (let ((default-directory "~/src/openmw"))
            (shell-command
-            "cmake -DDESIRED_QT_VERSION=5 -DLIBUNSHIELD_INCLUDE_DIR=/opt/morrowind/unshield/include -DBullet_BulletCollision_LIBRARY=/opt/morrowind/bullet/lib/libBulletCollision.so -DBullet_INCLUDE_DIR=/opt/morrowind/bullet/include/bullet -DLIBUNSHIELD_LIBRARY=/opt/morrowind/unshield/lib64 -DBullet_LinearMath_LIBRARY=/opt/morrowind/bullet/lib/libLinearMath.so -DCMAKE_EXPORT_COMPILE_COMMANDS=1 .")))
+            "cmake -DDESIRED_QT_VERSION=5 -DLIBUNSHIELD_INCLUDE_DIR=/usr/include -DBullet_BulletCollision_LIBRARY=/usr/lib/libBulletCollision.so -DBullet_INCLUDE_DIR=/usr/include/bullet -DBullet_LinearMath_LIBRARY=/usr/lib/libLinearMath.so -DCMAKE_EXPORT_COMPILE_COMMANDS=1 .")))
         (t (shell-command "echo The given project name was not recognized."))))
 
 (defun export-compile-commands-openmw ()
