@@ -533,7 +533,10 @@
   :ensure t
   :bind
   ("C-c g d" . magit-diff-range)
-  ("C-x g" . magit-status))
+  ("C-x g" . magit-status)
+  :config
+  (setf (alist-get 'unpushed magit-section-initial-visibility-alist) 'show)
+  (setf (alist-get 'stashes magit-section-initial-visibility-alist) 'show))
 
 ;; Emacs Markdown Mode
 ;; https://github.com/jrblevin/markdown-mode
