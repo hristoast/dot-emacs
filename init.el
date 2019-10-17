@@ -801,6 +801,11 @@
 ;; https://github.com/syohex/emacs-terraform-mode
 (use-package terraform-mode :init (company-terraform-init))
 
+
+;; Emacs Mojor mode for editing TOML files
+;; https://github.com/dryman/toml-mode.el
+(use-package toml-mode :defer t)
+
 ;; undo-tree.el --- Treat undo history as a tree
 ;; http://www.dr-qubit.org/undo-tree/undo-tree.el
 ;; https://www.emacswiki.org/emacs/UndoTree
