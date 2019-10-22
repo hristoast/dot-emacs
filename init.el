@@ -220,8 +220,7 @@
 
      ((nil . ((eval . (setq clang-format-on-save t)))))"
     (interactive)
-    (defvar clang-format-on-save)
-    (when (and clang-format-on-save
+    (when (and (boundp 'clang-format-on-save)
                (or (eq major-mode 'c-mode) (eq major-mode 'c++-mode)))
       (clang-format-buffer)))
   (add-hook 'before-save-hook 'clang-format-save-hook)
