@@ -187,6 +187,9 @@
 
 (require 'bind-key)
 
+;; https://github.com/jwiegley/use-package#use-package-ensure-system-package
+(use-package use-package-ensure-system-package)
+
 ;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Autorevert.html
 (use-package autorevert :diminish auto-revert-mode)
 
@@ -474,10 +477,19 @@
 ;; https://github.com/jimhourihan/glsl-mode
 (use-package glsl-mode :defer t)
 
-;; Golang -- to use or not to use?
-(let ((use-go (getenv "EMACS_GO")))
-  (if (not (equal use-go nil))
-      (load "~/.emacs.d/extra/go.el")))
+(use-package go-mode
+  :ensure-system-package ((go)
+                          (goimports . "go get golang.org/x/tools/cmd/goimports"))
+  :init
+  ;; Set up so that go get doesn't spam $HOME
+  (setenv "GOPATH" (concat my-home "/.local/go"))
+  ;; Add the resulting bindir to the exec-path
+  (add-to-list 'exec-path (concat (getenv "GOPATH") "/bin"))
+  (setq gofmt-command "goimports")
+  (add-hook 'before-save-hook #'gofmt-before-save)
+  (add-hook 'go-mode-hook 'go-eldoc-setup))
+
+(use-package go-eldoc :defer t)
 
 ;; A groovy major mode, grails minor mode, and a groovy inferior mode.
 ;; https://github.com/Groovy-Emacs-Modes/groovy-emacs-modes
