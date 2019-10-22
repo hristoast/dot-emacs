@@ -250,7 +250,6 @@
 ;; Clean auto-indent and backspace unindent
 ;; https://github.com/pmarinov/clean-aindent-mode
 (use-package clean-aindent-mode
-  :ensure t
   :config
   (add-hook 'prog-mode-hook 'clean-aindent-mode))
 
@@ -262,7 +261,6 @@
 ;; http://company-mode.github.io/
 (use-package company
   :diminish company-mode
-  :ensure t
   :config
   (add-hook 'after-init-hook 'global-company-mode)
   (setq
@@ -319,7 +317,6 @@
 ;; https://github.com/syohex/emacs-company-jedi
 (use-package company-jedi
   :defer t
-  :ensure t
   :init
   (setq-default
    jedi:complete-on-dot t
@@ -359,20 +356,18 @@
 ;; diff-hl - highlight changes/diffs
 ;; https://github.com/dgutov/diff-hl
 (use-package diff-hl
-  :ensure t
   :config
   (global-diff-hl-mode))
 
 ;; Diminished modes are minor modes with no modeline display
 ;; http://www.eskimo.com/~seldon/diminish.el
-(use-package diminish :ensure t)
+(use-package diminish)
 
 ;; A minor mode that guesses the indentation offset originally used for
 ;; creating source code files and transparently adjusts the corresponding
 ;; settings in Emacs, making it more convenient to edit foreign files
 ;; https://github.com/jscheid/dtrt-indent
 (use-package dtrt-indent
-  :ensure t
   :config
   (setq global-mode-string (remove 'dtrt-indent-mode-line-info global-mode-string))
   (dtrt-indent-mode 1))
@@ -383,7 +378,7 @@
 
 ;; Emacs Package Library
 ;; https://github.com/cask/epl
-(use-package epl :ensure t)
+(use-package epl)
 
 ;;; Warm cozy fireplace -- https://github.com/johanvts/emacs-fireplace
 (use-package fireplace
@@ -395,7 +390,7 @@
 
 ;; fish-mode for emacs
 ;; https://github.com/wwwjfy/emacs-fish
-(use-package fish-mode :ensure t)
+(use-package fish-mode)
 
 ;; Syntax checking for GNU Emacs - http://www.flycheck.org/
 (use-package flycheck
@@ -408,7 +403,6 @@
 ;; C, C++ and Objective-C support for Flycheck, using Irony Mode
 ;; https://github.com/Sarcasm/flycheck-irony
 (use-package flycheck-irony
-  :ensure t
   :config
   (eval-after-load 'flycheck
     '(add-hook 'flycheck-mode-hook #'flycheck-irony-setup)))
@@ -433,7 +427,6 @@
 ;; Flycheck Status Emoji
 ;; https://github.com/liblit/flycheck-status-emoji
 (use-package flycheck-status-emoji
-  :ensure t
   :config
   (flycheck-status-emoji-mode))
 
@@ -450,7 +443,7 @@
         ("M-o" . fa-show)))
 
 ;; Major mode for editing Godot GDScript files
-(use-package gdscript-mode :defer t :ensure t)
+(use-package gdscript-mode :defer t)
 
 ;; TODO: Make this optional.
 ;; Emacs frontend to GNU Global source code tagging system.
@@ -529,7 +522,6 @@
 ;; A Git Porcelain inside Emacs
 ;; https://magit.vc/
 (use-package magit
-  :ensure t
   :bind
   ("C-c g d" . magit-diff-range)
   ("C-x g" . magit-status)
@@ -540,7 +532,6 @@
 ;; Emacs Markdown Mode
 ;; https://github.com/jrblevin/markdown-mode
 (use-package markdown-mode
-  :ensure t
   :config
   ;; Special indent for markdown-mode
   (add-hook 'markdown-mode-hook
@@ -655,13 +646,11 @@
 ;; Emacs rainbow delimiters mode
 ;; https://github.com/Fanael/rainbow-delimiters
 (use-package rainbow-delimiters
-  :ensure t
   :init (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 
 ;; Rainbow mode - #000 #fff #f00 #ff0 #00f #0f0 #800080 #00ffff #ff00ff
 ;; https://julien.danjou.info/projects/emacs-packages
 (use-package rainbow-mode
-  :ensure t
   :diminish rainbow-mode
   :config
   (add-hook 'css-mode-hook 'rainbow-mode)
@@ -672,7 +661,6 @@
 ;; https://github.com/dgutov/robe
 ;; Requires: `gem install pry` and a Gemfile listing your gems
 (use-package robe
-  :ensure t
   :diminish robe-mode
   :config
   (add-hook 'ruby-mode-hook 'robe-mode))
@@ -724,7 +712,6 @@
 ;; C-c C-k Compile and load current buffer
 ;; C-c C-q Invoke slime-close-parens-at-point
 (use-package slime
-  :ensure t
   :config
   ;; This breaks the default coloring of SLIME.  Net gain in my opinion.
   (add-hook 'slime-repl-mode-hook #'rainbow-delimiters-mode)
@@ -735,7 +722,6 @@
 ;; A powerful and beautiful mode-line for Emacs.
 ;; https://github.com/Malabarba/smart-mode-line
 (use-package smart-mode-line
-  :ensure t
   :config
   (setq
    sml/shorten-directory t
@@ -747,7 +733,6 @@
 ;; https://github.com/Fuco1/smartparens
 (use-package smartparens
   :diminish smartparens-mode
-  :ensure t
   :config
   (setq
    sp-autoskip-closing-pair 'always
@@ -778,7 +763,7 @@
 
 ;;  Emacs isearch with an overview. Oh, man!
 ;; https://github.com/abo-abo/swiper
-(use-package swiper :ensure t)
+(use-package swiper)
 
 ;; I strongly dislike systemd... but this mode is pretty handy when you need it.
 ;; https://github.com/holomorph/systemd-mode
@@ -809,7 +794,6 @@
 ;; http://www.dr-qubit.org/undo-tree/undo-tree.el
 ;; https://www.emacswiki.org/emacs/UndoTree
 (use-package undo-tree
-  :ensure t
   :diminish undo-tree-mode
   :config
   (setq
@@ -847,7 +831,6 @@
 ;; Unobtrusively trim extraneous whitespace *ONLY* in lines edited
 ;; https://github.com/lewang/ws-butler
 (use-package ws-butler
-  :ensure t
   :diminish ws-butler-mode
   :config
   (add-hook 'prog-mode-hook 'ws-butler-mode))
@@ -864,7 +847,6 @@
 ;; Yet another snippet extension
 ;; http://capitaomorte.github.io/yasnippet/
 (use-package yasnippet
-  :ensure t
   :diminish yas-minor-mode
   :init
   ;; Shut yas up! Disables startup noise
@@ -881,7 +863,6 @@
 ;; https://github.com/cpaulik/emacs-material-theme
 ;; TODO: How to use darker grey vs blue colors?
 (use-package material-theme
-  :ensure t
   :config (load-theme 'material t))
 
 ;; Use conf-mode for .godot and .tscn source files
