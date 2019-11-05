@@ -99,12 +99,12 @@
           "EMACS_NO_TOML" "toml"
           "EMACS_NO_YAML" "yaml")))
 
-;; Load and optionally byte-compile everything
+;; Load everything
 (maphash
  (lambda (env-var filename)
    (unless (getenv env-var)
      ;; TODO: dry up the emacs.d dir location
-     (let ((el-file (concat user-emacs-directory (concat filename ".el"))))
+     (let ((el-file (concat user-emacs-directory "lib/" filename ".el")))
        (if (file-exists-p el-file)
            (load el-file)
          (message (concat "Could not load the file: " el-file))))))
