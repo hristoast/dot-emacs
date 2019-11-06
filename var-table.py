@@ -18,7 +18,7 @@ def main():
             var_list.append({"var": varname, "file": filename})
 
     for var_dict in var_list:
-        el_file = os.path.join(this_dir, var_dict["file"] + ".el")
+        el_file = os.path.join(this_dir, "lib", var_dict["file"] + ".el")
         pkg_list = []
         with open(el_file, "r") as f:
             lines = f.readlines()
