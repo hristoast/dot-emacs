@@ -79,7 +79,7 @@ Set any of the below environment variables to disable the corresponding extra tw
 
 Env Var | Description
 ------- |------------
-`EMACS_NO_EDITING_TWEAKS` | Packages: autorevert, clean-aindent-mode, company, counsel, dtrt-indent, flycheck, ido, rainbow-delimiters, rainbow-mode, semantic, smartparens, swiper), undo-tree, windmove, ws-butler, yasnippet, zygospore
+`EMACS_NO_EDITING_TWEAKS` | Packages: autorevert, clean-aindent-mode, company, counsel, dtrt-indent, flycheck, ido, rainbow-delimiters, rainbow-mode, semantic, smartparens, swiper, undo-tree, windmove, ws-butler, yasnippet, zygospore
 `EMACS_NO_EXTRA_FUNCTIONS` | Extra convenience functions.
 `EMACS_NO_INTERNALS_TWEAKS` | Tweaks to various Emacs internals.
 `EMACS_NO_KEYBINDINGS_TWEAKS` | Custom keybindings that are not necessarily mode-specific.
