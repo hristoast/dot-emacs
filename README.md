@@ -1,6 +1,6 @@
 # /home/hristos/.emacs.d/
 
-![This configuration in action](screenshot.png)
+![This configuration in action](https://hristos.co/i/hristos-emacs.png)
 
 ## About
 
