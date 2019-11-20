@@ -86,8 +86,9 @@
 (put 'upcase-region 'disabled nil)
 (put 'upcase-word 'disabled nil)
 
-;; http://is.gd/Mw5KiS
-(global-linum-mode t)
+(if (getenv "EMACS_LINUM")
+    ;; http://is.gd/Mw5KiS
+    (global-linum-mode t))
 
 (defvar h-font-height)
 (if (getenv "RETINA_DISPLAY")
