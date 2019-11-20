@@ -59,7 +59,7 @@
 
 ;; https://github.com/jwiegley/use-package#use-package-ensure-system-package
 ;; TODO: This fails on a first run.  Specifically when it si being used in the golang module.
-(use-package use-package-ensure-system-package :demand)
+;; (use-package use-package-ensure-system-package :demand)
 
 ;; Module definitions
 (defvar modules-to-load)

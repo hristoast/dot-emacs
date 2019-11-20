@@ -18,9 +18,9 @@
 
 (use-package go-mode
   ;; TODO: using `:ensure-system-package' fails on a first run
-  :ensure-system-package ((go)
-                          (gocode . "go get github.com/stamblerre/gocode")
-                          (goimports . "go get golang.org/x/tools/cmd/goimports"))
+  ;; :ensure-system-package ((go)
+  ;;                         (gocode . "go get github.com/stamblerre/gocode")
+  ;;                         (goimports . "go get golang.org/x/tools/cmd/goimports"))
   :init
   (unless (getenv "EMACS_NO_GOCODE") ;; Don't try to set up `gocode'
     (add-hook 'go-mode-hook (lambda () (add-to-list 'company-backends 'company-go))))
