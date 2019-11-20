@@ -1,6 +1,11 @@
 ;;; init.el --- Self-installing, for Emacs 25 and up.
 ;;; Commentary:
+;;
 ;; My Emacs configuration for writing code and things.  Might work on Emacs 24.
+;;
+;; A breakdown of keybindings can be found in this repository at lib/bindings.el, or at:
+;; https://git.sr.ht/~hristoast/dot-emacs/tree/master/lib/bindings.el
+;;
 ;;; Code:
 
 ;; Convenience variables
