@@ -26,6 +26,7 @@
     :config
     (flycheck-status-emoji-mode)))
 
+;; TODO: customizable sml theme
 (unless (getenv "EMACS_NO_SMART_MODE_LINE") ;; Don't use smart-mode-line.
   ;; A powerful and beautiful mode-line for Emacs.
   ;; https://github.com/Malabarba/smart-mode-line
@@ -33,7 +34,7 @@
     :config
     (setq
      sml/shorten-directory t
-     sml/theme 'respectful)
+     sml/theme 'dark)
     (sml/setup)))
 
 (unless (getenv "EMACS_NO_THEME") ;; Don't load a theme.
