@@ -7,12 +7,12 @@
 ;; https://github.com/greghendershott/racket-mode
 ;; See the below link for why the REPL doesn't load some functions.
 ;; http://stackoverflow.com/a/31523545
-(use-package racket-mode :defer t)
+(use-package racket-mode :defer t :ensure t)
 
 ;; Start racket-mode via a hook so we get rainbow delimiters
 (use-package racket-repl-mode
-  :defer t
   :ensure nil
+  :defer t
   :init
   ;; TODO: Currently lacking a good way to start racket-mode when we launch
   ;; TODO: racket-repl on its own, not from a file with C-c C-c.

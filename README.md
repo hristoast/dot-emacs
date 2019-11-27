@@ -6,7 +6,7 @@ Check out [the screenshots page](https://man.sr.ht/%7Ehristoast/dot-emacs/screen
 
 ## About
 
-My Emacs configuration.  I use it on Emacs 25.1+, but it should run fine on Emacs 24 (with some warnings.)  It sports the [Material Theme for Emacs](https://github.com/cpaulik/emacs-material-theme) and [Smart Mode Line](https://github.com/Malabarba/smart-mode-line) with the Respectful theme.  I recommend running this configuration in daemon mode - it's great for GUI Emacs or terminal Emacs.
+My Emacs configuration.  I use it on Emacs 26.3, but it should run fine on Emacs 24 or higher (with some warnings.)  It sports the [Material Theme for Emacs](https://github.com/cpaulik/emacs-material-theme) and [Smart Mode Line](https://github.com/Malabarba/smart-mode-line) with the Dark theme.  I recommend running this configuration in daemon mode - it's great for GUI Emacs or terminal Emacs.
 
 The main file will set you up with a pretty solid editor for several languages (C/C++, Common Lisp, Lua, Python, Racket, Ruby, YAML, and more) and even some frameworks and other things (Magit, Ansible, Django (via `web-mode`), Nginx, `skewer-mode`,  and others).
 
@@ -34,8 +34,8 @@ If you're an Emacs daemon user, your first run should not be in daemon mode so t
 
 See [the config page](https://man.sr.ht/%7Ehristoast/dot-emacs/config.md) on the wiki.
 
-## Issues
+## Issues/Notes
 
-* As noted above, this configuration needs to be ran with non-daemon Emacs first.
-* Additionally, the very first run will fail with an error regarding `ensure-system-package`.  Re-running Emacs will continue the setup as intended.
-* This configuration works best with GUI Emacs.  It tries to behave well when used in terminal Emacs (and should be fine on a GNU/Linux system), but there may be issues with some keybindings on macOS.
+* When installing, this configuration should not be ran in daemon mode for the first run.
+* Some keybindings might not work well with terminal Emacs.
+* You can view the startup time in the `*Messages*` buffer, look for a line starting with `[STARTUP] Loading ...`.

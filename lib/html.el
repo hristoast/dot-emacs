@@ -5,14 +5,17 @@
 
 ;; Built into Emacs
 ;; https://www.gnu.org/software/emacs/manual/html_node/emacs/HTML-Mode.html
-(use-package html-mode :no-require t :ensure nil  :init (add-hook 'html-mode-hook 'skewer-html-mode))
+(use-package html-mode
+  :no-require t
+  :init (add-hook 'html-mode-hook 'skewer-html-mode))
 
 ;; Live web development in Emacs
 ;; https://github.com/skeeto/skewer-mode
 (use-package skewer-mode
+  :ensure t
   :defer t
   :init
-  (setq-default httpd-root (concat dot-emacs "/httpd"))
+  (setq-default httpd-root (concat user-emacs-directory "/httpd"))
   :bind
   ("C-c h p" . httpd-start)
   ("C-c h s" . httpd-stop))
@@ -20,6 +23,7 @@
 ;; web-mode: An autonomous emacs major-mode for editing web templates.
 ;; http://web-mode.org/
 (use-package web-mode
+  :ensure t
   :defer t
   :init
   (setq-default

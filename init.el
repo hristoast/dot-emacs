@@ -46,8 +46,7 @@
   (package-install 'use-package))
 
 ;; Configure use-package
-(defvar use-package-verbose t)
-(defvar use-package-always-ensure t)
+(setq-default use-package-verbose t)
 (eval-when-compile (require 'use-package))
 
 ;; https://github.com/jwiegley/use-package#key-binding
@@ -55,54 +54,50 @@
 
 ;; Diminished modes are minor modes with no modeline display
 ;; http://www.eskimo.com/~seldon/diminish.el
-(use-package diminish)
-
-;; https://github.com/jwiegley/use-package#use-package-ensure-system-package
-;; TODO: This fails on a first run.  Specifically when it si being used in the golang module.
-;; (use-package use-package-ensure-system-package :demand)
+(use-package diminish :ensure t)
 
 ;; Module definitions
-(defvar modules-to-load)
-(setq modules-to-load
-      #s(hash-table
-         size 4
-         data
-         ("EMACS_NO_EDITING_TWEAKS" "editing"
-          "EMACS_NO_EXTRA_FUNCTIONS" "functions"
-          "EMACS_NO_INTERNALS_TWEAKS" "internals"
-          "EMACS_NO_KEYBINDINGS_TWEAKS" "keybindings"
-          "EMACS_NO_UI_TWEAKS" "ui"
+(defvar modules-to-load
+  #s(hash-table
+     size 35
+     data
+     ;; "Env var that disables loadingif present" "file name in lib/ minus the extension"
+     ("EMACS_NO_EDITING_TWEAKS" "editing"
+      "EMACS_NO_EXTRA_FUNCTIONS" "functions"
+      "EMACS_NO_INTERNALS_TWEAKS" "internals"
+      "EMACS_NO_KEYBINDINGS_TWEAKS" "keybindings"
+      "EMACS_NO_UI_TWEAKS" "ui"
 
-          "EMACS_NO_ANSIBLE" "ansible"
-          "EMACS_NO_C_CPP" "c-cpp"
-          "EMACS_NO_CLOJURE" "clojure"
-          "EMACS_NO_CSS" "css"
-          "EMACS_NO_DOCKER" "docker"
-          "EMACS_NO_EPL" "emacs-package-library"
-          "EMACS_NO_FISH" "fish"
-          "EMACS_NO_GIT" "git"
-          "EMACS_NO_GODOT" "godot"
-          "EMACS_NO_GOLANG" "golang"
-          "EMACS_NO_GROOVY" "groovy"
-          "EMACS_NO_HTML" "html"
-          "EMACS_NO_JAVA" "java"
-          "EMACS_NO_JAVASCRIPT" "javascript"
-          "EMACS_NO_JINJA2" "jinja2"
-          "EMACS_NO_JSON" "json"
-          "EMACS_NO_LUA" "lua"
-          "EMACS_NO_MARKDOWN" "markdown"
-          "EMACS_NO_NGINX" "nginx"
-          "EMACS_NO_ORGMODE" "orgmode"
-          "EMACS_NO_PYTHON" "python"
-          "EMACS_NO_RACKET" "racket"
-          "EMACS_NO_RUBY" "ruby"
-          "EMACS_NO_RUST" "rust"
-          "EMACS_NO_SHADERS" "shaders"
-          "EMACS_NO_SLIME" "slime"
-          "EMACS_NO_SYSTEMD" "systemd"
-          "EMACS_NO_TERRAFORM" "terraform"
-          "EMACS_NO_TOML" "toml"
-          "EMACS_NO_YAML" "yaml")))
+      "EMACS_NO_ANSIBLE" "ansible"
+      "EMACS_NO_C_CPP" "c-cpp"
+      "EMACS_NO_CLOJURE" "clojure"
+      "EMACS_NO_CSS" "css"
+      "EMACS_NO_DOCKER" "docker"
+      "EMACS_NO_EPL" "emacs-package-library"
+      "EMACS_NO_FISH" "fish"
+      "EMACS_NO_GIT" "git"
+      "EMACS_NO_GODOT" "godot"
+      "EMACS_NO_GOLANG" "golang"
+      "EMACS_NO_GROOVY" "groovy"
+      "EMACS_NO_HTML" "html"
+      "EMACS_NO_JAVA" "java"
+      "EMACS_NO_JAVASCRIPT" "javascript"
+      "EMACS_NO_JINJA2" "jinja2"
+      "EMACS_NO_JSON" "json"
+      "EMACS_NO_LUA" "lua"
+      "EMACS_NO_MARKDOWN" "markdown"
+      "EMACS_NO_NGINX" "nginx"
+      "EMACS_NO_ORGMODE" "orgmode"
+      "EMACS_NO_PYTHON" "python"
+      "EMACS_NO_RACKET" "racket"
+      "EMACS_NO_RUBY" "ruby"
+      "EMACS_NO_RUST" "rust"
+      "EMACS_NO_SHADERS" "shaders"
+      "EMACS_NO_SLIME" "slime"
+      "EMACS_NO_SYSTEMD" "systemd"
+      "EMACS_NO_TERRAFORM" "terraform"
+      "EMACS_NO_TOML" "toml"
+      "EMACS_NO_YAML" "yaml")))
 
 ;; Load everything
 (maphash

@@ -6,10 +6,10 @@
 ;;; Code:
 ;;  Company integration for racer
 ;; https://github.com/emacs-pe/company-racer
-(use-package company-racer :ensure t)
+(use-package company-racer :ensure t :ensure t)
 
 ;; https://github.com/flycheck/flycheck-rust
-(use-package flycheck-rust :ensure t)
+(use-package flycheck-rust :ensure t :ensure t)
 
 ;; rust-mode: https://github.com/rust-lang/rust-mode
 ;; and emacs-racer: https://github.com/racer-rust/emacs-racer

@@ -7,6 +7,7 @@
 ;; Java, CORBA IDL (and the variants PSDL and CIDL), Pike and AWK code
 ;; https://www.gnu.org/software/emacs/manual/html_mono/ccmode.html
 (use-package cc-mode
+  :ensure t
   :defer t
   :config
   (defun clang-format-save-hook ()
@@ -34,18 +35,17 @@
 ;; Clang format
 ;; http://clang.llvm.org/docs/ClangFormat.html
 ;; http://clang.llvm.org/docs/ClangFormatStyleOptions.html
-(use-package clang-format
-  :defer t
-  :functions clang-format-buffer)
+(use-package clang-format :ensure t :defer t)
 
 ;; major-mode for editing CMake sources
 ;; https://github.com/Kitware/CMake/blob/master/Auxiliary/cmake-mode.el
-(use-package cmake-mode :defer t)
+(use-package cmake-mode :defer t :ensure t)
 
 
 ;; Auto-completion for C/C++ headers using Company
 ;; https://github.com/randomphrase/company-c-headers
 (use-package company-c-headers
+  :ensure t
   :defer t
   :init
   (add-hook 'c-mode-common-hook
@@ -56,6 +56,7 @@
 ;; company-mode completion back-end for irony-mode
 ;; https://github.com/Sarcasm/company-irony
 (use-package company-irony
+  :ensure t
   :defer t
   :init
   (add-hook 'c-mode-common-hook
@@ -69,8 +70,8 @@
 ;; A c/c++ client/server indexer for c/c++/objc[++] with integration for Emacs based on clang.
 ;; http://www.rtags.net / https://github.com/Andersbakken/rtags
 (use-package company-rtags
+  :ensure t
   :defer t
-  :functions rtags-diagnostics rtags-set-periodic-reparse-timeout
   :config
   (progn
     (setq-default rtags-autostart-diagnostics t)
@@ -82,6 +83,7 @@
 ;; C, C++ and Objective-C support for Flycheck, using Irony Mode
 ;; https://github.com/Sarcasm/flycheck-irony
 (use-package flycheck-irony
+  :ensure t
   :config
   (eval-after-load 'flycheck
     '(add-hook 'flycheck-mode-hook #'flycheck-irony-setup)))
@@ -89,8 +91,8 @@
 ;; A c/c++ client/server indexer for c/c++/objc[++] with integration for Emacs based on clang.
 ;; http://www.rtags.net / https://github.com/Andersbakken/rtags
 (use-package flycheck-rtags
+  :ensure t
   :defer t
-  :functions flycheck-select-checker setup-flycheck-rtags
   :config
   (progn
     ;; ensure that we use only rtags checking
@@ -106,7 +108,7 @@
 ;; Shows an inline arguments hint for the C/C++ function at point
 ;; https://github.com/abo-abo/function-args
 (use-package function-args
-  :functions fa-config-default
+  :ensure t
   :config
   (fa-config-default)
   :bind
@@ -118,6 +120,7 @@
 ;; A C/C++ minor mode for Emacs powered by libclang
 ;; https://github.com/Sarcasm/irony-mode
 (use-package irony
+  :ensure t
   :defer t
   :diminish abbrev-mode irony-mode
   :config
@@ -129,6 +132,6 @@
 
 ;; irony-mode support for eldoc-mode
 ;; https://github.com/ikirill/irony-eldoc
-(use-package irony-eldoc :defer t)
+(use-package irony-eldoc :defer t :ensure t)
 
 ;;; c-cpp.el ends here

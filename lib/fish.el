@@ -5,6 +5,6 @@
 
 ;; fish-mode for emacs
 ;; https://github.com/wwwjfy/emacs-fish
-(use-package fish-mode)
+(use-package fish-mode :ensure t)
 
 ;;; fish.el ends here

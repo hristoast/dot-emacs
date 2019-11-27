@@ -6,7 +6,9 @@
 ;; The emacs major mode for editing files in the YAML data serialization format.
 ;; https://github.com/yoshiki/yaml-mode
 ;; TODO: don't always load company-ansible
-(use-package yaml-mode :defer t
+(use-package yaml-mode
+  :ensure t
+  :defer t
   :config
   (add-hook 'yaml-mode-hook
             (lambda ()

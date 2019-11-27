@@ -7,12 +7,14 @@
   ;; diff-hl - highlight changes/diffs
   ;; https://github.com/dgutov/diff-hl
   (use-package diff-hl
+    :ensure t
     :config
     (global-diff-hl-mode)))
 
 (unless (getenv "EMACS_NO_FIREPLACE") ;; Don't allow Emacs to be a warm cozy fireplace.
 ;;; Warm cozy fireplace -- https://github.com/johanvts/emacs-fireplace
   (use-package fireplace
+    :ensure t
     :init (defvar fireplace-mode-map)
     :bind (:map fireplace-mode-map
                 ("d" . fireplace-down)
@@ -23,6 +25,7 @@
   ;; Flycheck Status Emoji
   ;; https://github.com/liblit/flycheck-status-emoji
   (use-package flycheck-status-emoji
+    :ensure t
     :config
     (flycheck-status-emoji-mode)))
 
@@ -31,6 +34,7 @@
   ;; A powerful and beautiful mode-line for Emacs.
   ;; https://github.com/Malabarba/smart-mode-line
   (use-package smart-mode-line
+    :ensure t
     :config
     (setq
      sml/shorten-directory t
@@ -42,6 +46,7 @@
   ;; https://github.com/cpaulik/emacs-material-theme
   ;; TODO: How to use darker grey vs blue colors?
   (use-package material-theme
+    :ensure t
     :config (load-theme 'material t)))
 
 ;;; ui.el ends here

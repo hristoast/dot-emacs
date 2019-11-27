@@ -5,6 +5,6 @@
 
 ;; Jinja2 mode for emacs
 ;; https://github.com/paradoxxxzero/jinja2-mode
-(use-package jinja2-mode :defer t)
+(use-package jinja2-mode :defer t :ensure t)
 
 ;;; jinja2.el ends here

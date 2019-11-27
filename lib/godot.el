@@ -4,11 +4,15 @@
 ;;; Code:
 
 ;; Major mode for editing Godot GDScript files
-(use-package gdscript-mode :defer t)
+(use-package gdscript-mode
+  :defer t
+  :ensure t
+  ;; Use toml-mode for .godot and .tscn source files
+  :init (setq auto-mode-alist (append '(("\\.godot$" . toml-mode))
+                                      '(("\\.tscn$" . toml-mode))
+                                      auto-mode-alist)))
 
-;; Use conf-mode for .godot and .tscn source files
-(setq auto-mode-alist (append '(("\\.godot$" . conf-mode))
-                              '(("\\.tscn$" . conf-mode))
-                              auto-mode-alist))
+
+
 
 ;;; godot.el ends here

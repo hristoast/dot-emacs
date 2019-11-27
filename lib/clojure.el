@@ -10,7 +10,6 @@
 ;; https://github.com/clojure-emacs/clojure-mode
 (use-package cider
   :ensure t
-  :functions cider--close-connection-buffer
   :bind
   ("C-c n c" . delete-nrepl)
   :config

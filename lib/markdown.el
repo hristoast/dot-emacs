@@ -6,6 +6,7 @@
 ;; Emacs Markdown Mode
 ;; https://github.com/jrblevin/markdown-mode
 (use-package markdown-mode
+  :ensure t
   :config
   ;; Special indent for markdown-mode
   ;; TODO: set this the right way
@@ -20,6 +21,6 @@
 
 ;; Additional functions for Emacs [markdown-mode].
 ;; https://github.com/milkypostman/markdown-mode-plus
-(use-package markdown-mode+ :defer t :functions markdown-indent-line)
+(use-package markdown-mode+ :ensure t :defer t)
 
 ;;; markdown.el ends here
