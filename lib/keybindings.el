@@ -15,10 +15,12 @@
 ;; Make text bigger
 (global-set-key (kbd "M-+") 'text-scale-increase)
 (global-set-key (kbd "<f9>") 'text-scale-increase)
+;; Ctrl-mouse scroll up to make text bigger
 (global-set-key (kbd "<C-mouse-4>") 'text-scale-increase)
 ;; Or make it smaller
 (global-set-key (kbd "M--") 'text-scale-decrease)
 (global-set-key (kbd "<f8>") 'text-scale-decrease)
+;; Ctrl-mouse scroll down to make text smaller
 (global-set-key (kbd "<C-mouse-5>") 'text-scale-decrease)
 ;; Toggle whitespace-mode
 (global-set-key (kbd "C-c w") 'whitespace-mode)
@@ -37,8 +39,5 @@
 
 ;; Kill this buffer!
 (substitute-key-definition 'kill-buffer 'kill-buffer-and-window global-map)
-
-;; TODO: put this in with the orgmode stuff
-(setq-default org-support-shift-select t)
 
 ;;; keybindings.el ends here

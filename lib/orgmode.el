@@ -10,6 +10,8 @@
   ("C-c l" . org-store-link)
   ("C-c a" . org-agenda)
   :defer t
-  :init (setq-default org-startup-truncated nil))
+  :init (setq-default
+         org-startup-truncated nil
+         org-support-shift-select t))
 
 ;;; orgmode.el ends here

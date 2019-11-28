@@ -12,19 +12,8 @@
 (flyspell-prog-mode)
 ;; http://www.gnu.org/software/emacs/manual/html_node/emacs/Autorevert.html
 (global-auto-revert-mode t)
-;; https://www.emacswiki.org/emacs/HighlightCurrentLine
-(global-hl-line-mode t)
-;; No toolbar, please.
-(tool-bar-mode -1)
-;; Or menu bar...
-(menu-bar-mode -1)
-;; Or scroll bar.
-(scroll-bar-mode -1)
 ;; Delete highlighted text when you type
 (delete-selection-mode t)
-
-;; As advised by https://www.emacswiki.org/emacs/TrampMode
-(setq-default tramp-default-method "ssh")
 
 (setq
  ;; Backup files ...
@@ -37,7 +26,7 @@
  ;; initial-buffer-choice 'org-agenda-list
  ;; Auto-open symlinks that point to vcs-controlled files
  vc-follow-symlinks t
- ;; No splash screen.
+ ;; No splash screen.  TODO: Is this better suited for ui.el?
  inhibit-splash-screen t
  ;; No default scratch
  initial-scratch-message nil
@@ -75,9 +64,9 @@
  ;; No tabs
  indent-tabs-mode nil
  ;; "Tabs" are 4 spaces
- tab-width 4)
-
-(display-time-mode)
+ tab-width 4
+ ;; As advised by https://www.emacswiki.org/emacs/TrampMode
+ tramp-default-method "ssh")
 
 ;; Enable the disabled things
 (put 'downcase-region 'disabled nil)
@@ -85,30 +74,5 @@
 (put 'eval-expression 'disabled nil)
 (put 'upcase-region 'disabled nil)
 (put 'upcase-word 'disabled nil)
-
-(if (getenv "EMACS_LINUM")
-    ;; http://is.gd/Mw5KiS
-    (global-linum-mode t))
-
-(defvar h-font-height)
-(if (getenv "RETINA_DISPLAY")
-    (setq h-font-height 170)
-  (setq h-font-height 100))
-
-;; Hack - http://sourcefoundry.org/hack/
-(if (or (file-exists-p (concat (getenv "HOME") "/.fonts/Hack-Regular.ttf"))
-        (file-exists-p "/usr/share/fonts/TTF/Hack-Regular.ttf"))
-    (set-face-attribute 'default nil
-                        :family "Hack"
-                        :height h-font-height
-                        :weight 'normal))
-
-;; Emoji font
-(set-fontset-font t 'symbol (font-spec :family "Noto Emoji") (selected-frame) 'prepend)
-;; I don't work on macOS much anymore.. but if i do:
-;; (set-fontset-font t 'symbol (font-spec :family "Apple Color Emoji") (selected-frame) 'prepend))
-
-;; Maximize Emacs when it's opened
-(add-to-list 'default-frame-alist '(fullscreen . maximized))
 
 ;;; internals.el ends here
