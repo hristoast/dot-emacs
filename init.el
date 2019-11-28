@@ -8,19 +8,15 @@
 ;;
 ;;; Code:
 
-;; Convenience variables
+;; Start a timer.
 (defconst emacs-start-time (current-time))
-(defconst env-home (getenv "HOME"))
-;; user-emacs-directory is provided too
-;; late for my purposes so I set this now.
-(defconst dot-emacs (concat env-home "/.emacs.d"))
 
-;; Some initial package stuff
-(require 'package)
-(setq package-enable-at-startup nil)
 (setq
+ ;; use-package handles enabling things.
+ package-enable-at-startup nil
  ;; Keep custom stuff out of here!
- custom-file (concat dot-emacs "/my-custom.el")
+ custom-file (or (getenv "EMACS_CUSTOM_FILE")
+                 (concat user-emacs-directory "/my-custom.el"))
  package-archives
  ;; GNU over SSL
  '(("gnu" . "https://elpa.gnu.org/packages/")
@@ -31,25 +27,17 @@
    ;; Org mode ELPA archive
    ("org" . "https://orgmode.org/elpa/")))
 
-;; TODO: This is necessary to trust sml themes, but can
-;; the later, redundant loading of custom-file be stopped?
-(load custom-file :noerror :nomessage)
-
-;; Refresh
+;; Init package.el
+(require 'package)
 (package-initialize)
 
 ;; Ensure that use-package is installed
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
-  ;; Install use-package
-  ;; https://github.com/jwiegley/use-package/
   (package-install 'use-package))
 
-;; Configure use-package
-(setq-default use-package-verbose t)
+;; https://github.com/jwiegley/use-package/blob/4b58ab78177f636f862a66c7a8fdcf9b070e0925/README.md#use-packageel-is-no-longer-needed-at-runtime
 (eval-when-compile (require 'use-package))
-
-;; https://github.com/jwiegley/use-package#key-binding
 (require 'bind-key)
 
 ;; Diminished modes are minor modes with no modeline display
@@ -57,11 +45,11 @@
 (use-package diminish :ensure t)
 
 ;; Module definitions
-(defvar modules-to-load
+(defvar h/modules
   #s(hash-table
      size 35
      data
-     ;; "Env var that disables loadingif present" "file name in lib/ minus the extension"
+     ;; "Env var that disables loading if present" "file name in lib/ minus the extension"
      ("EMACS_NO_EDITING_TWEAKS" "editing"
       "EMACS_NO_EXTRA_FUNCTIONS" "functions"
       "EMACS_NO_INTERNALS_TWEAKS" "internals"
@@ -103,12 +91,11 @@
 (maphash
  (lambda (env-var filename)
    (unless (getenv env-var)
-     ;; TODO: dry up the emacs.d dir location
      (let ((el-file (concat user-emacs-directory "lib/" filename ".el")))
        (if (file-exists-p el-file)
            (load el-file)
          (message (concat "Could not load the file: " el-file))))))
- modules-to-load)
+ h/modules)
 
 ;; How long did we take to load?
 (let ((elapsed
