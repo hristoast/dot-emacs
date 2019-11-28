@@ -1,14 +1,14 @@
 # /home/hristos/.emacs.d/
 
-## Screenshots
-
-Check out [the screenshots page](https://man.sr.ht/%7Ehristoast/dot-emacs/screenshots.md) on the wiki.
-
 ## About
 
 My Emacs configuration.  I use it on Emacs 26.3, but it should run fine on Emacs 24 or higher (with some warnings.)  It sports the [Material Theme for Emacs](https://github.com/cpaulik/emacs-material-theme) and [Smart Mode Line](https://github.com/Malabarba/smart-mode-line) with the Dark theme.  I recommend running this configuration in daemon mode - it's great for GUI Emacs or terminal Emacs.
 
-The main file will set you up with a pretty solid editor for several languages (C/C++, Common Lisp, Lua, Python, Racket, Ruby, YAML, and more) and even some frameworks and other things (Magit, Ansible, Django (via `web-mode`), Nginx, `skewer-mode`,  and others).
+It sets up Emacs with support for a wide variety of languages, as well as other more opinionated things like: color themes, many aspects of Emacs internals, code completion, and much much more.
+
+## Screenshots
+
+Check out [the screenshots page](https://man.sr.ht/%7Ehristoast/dot-emacs/screenshots.md) on the wiki.
 
 ## Installation
 
@@ -32,10 +32,10 @@ If you're an Emacs daemon user, your first run should not be in daemon mode so t
 
 ## Configuring
 
-See [the config page](https://man.sr.ht/%7Ehristoast/dot-emacs/config.md) on the wiki.
+Large portions of the overall configuration are toggle-able.  See [the config page](https://man.sr.ht/%7Ehristoast/dot-emacs/config.md) on the wiki for more information.
 
 ## Issues/Notes
 
 * When installing, this configuration should not be ran in daemon mode for the first run.
-* Some keybindings might not work well with terminal Emacs.
+* Some of my keybindings might not work well with terminal Emacs.  If that's an issue, don't load them (see [the config wiki page](https://man.sr.ht/%7Ehristoast/dot-emacs/config.md)).
 * You can view the startup time in the `*Messages*` buffer, look for a line starting with `[STARTUP] Loading ...`.
