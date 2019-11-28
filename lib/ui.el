@@ -21,7 +21,7 @@
                 ("s" . fireplace-toggle-smoke)
                 ("u" . fireplace-up))))
 
-(unless (getenv "EMACS_NO_STATUS_EMOJII") ;; Don't use emojii for Flycheck's status.
+(unless (getenv "EMACS_NO_STATUS_EMOJI") ;; Don't use emoji for Flycheck's status.
   ;; Flycheck Status Emoji
   ;; https://github.com/liblit/flycheck-status-emoji
   (use-package flycheck-status-emoji
