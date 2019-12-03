@@ -75,4 +75,11 @@
 (put 'upcase-region 'disabled nil)
 (put 'upcase-word 'disabled nil)
 
+(if (string-equal (getenv "EMACS_AUDIO_BEEP") "audio")
+    (setq ring-bell-function nil)
+  (if (string-equal (getenv "EMACS_AUDIO_BEEP") "visual")
+      (setq ring-bell-function t)
+    ;; No bell/beeping by default.
+    (setq ring-bell-function 'ignore)))
+
 ;;; internals.el ends here
