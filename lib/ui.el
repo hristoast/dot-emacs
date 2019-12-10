@@ -29,29 +29,36 @@
     :config
     (flycheck-status-emoji-mode)))
 
-(unless (getenv "EMACS_NO_SMART_MODE_LINE") ;; Don't use smart-mode-line.
-  ;; A powerful and beautiful mode-line for Emacs.
-  ;; https://github.com/Malabarba/smart-mode-line
-  ;; TODO: Possibly add support for extra themes (e.g. powerline and solarized)
-  (let ((h/sml/themes
-         #s(hash-table
-            size 3
-            test equal
-            data
-            ("dark" dark
-             "light" light
-             "respectful" respectful)))
-        (h/sml/default-theme "dark"))
+(or (getenv "EMACS_NO_SMART_MODE_LINE")
+    (getenv "EMACS_NO_THEME")
+    ;; A powerful and beautiful mode-line for Emacs.
+    ;; https://github.com/Malabarba/smart-mode-line
+    ;; TODO: Possibly add support for extra themes (e.g. powerline and solarized)
+    (let ((h/sml/themes
+           #s(hash-table
+              size 3
+              test equal
+              data
+              ("dark" dark
+               "light" light
+               "respectful" respectful)))
+          (h/sml/default-theme "dark"))
 
-    (use-package smart-mode-line
-      :ensure t
-      :config
-      (setq
-       sml/shorten-directory t
-       sml/theme
-       (gethash (or (getenv "EMACS_USE_SML_THEME") h/sml/default-theme)
-                          h/sml/themes nil))
-      (sml/setup))))
+      (use-package smart-mode-line
+        :ensure t
+        :config
+        (setq
+         sml/shorten-directory t
+         sml/theme
+         (gethash (or (getenv "EMACS_USE_SML_THEME") h/sml/default-theme)
+                  h/sml/themes nil))
+
+        (if (getenv "EMACS_TRUST_SML_THEMES")
+            ;; This isn't totally cool but here's an option for it anyways:
+            ;; https://github.com/Malabarba/smart-mode-line/blob/f53e380c9aadcba42ed2d4ed6ebc508b5e006519/README.org#installation-issues-faq
+            (setq sml/no-confirm-load-theme t))
+
+        (sml/setup))))
 
 (unless (getenv "EMACS_NO_THEME") ;; Don't load a theme.
   ;; Color Theme for emacs based on material design colors
@@ -61,7 +68,12 @@
   ;; from a list or perhaps an arbitrary one.
   (use-package material-theme
     :ensure t
-    :config (load-theme 'material t)))
+    :config
+    (if (getenv "EMACS_TRUST_THEMES")
+        (setq h/trust-themes t)
+      (setq h/trust-themes nil))
+
+    (load-theme 'material h/trust-themes)))
 
 (if (getenv "EMACS_LINUM")
     ;; http://is.gd/Mw5KiS
