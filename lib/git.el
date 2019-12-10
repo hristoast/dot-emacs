@@ -15,7 +15,11 @@
   ("C-c g d" . magit-diff-range)
   ("C-x g" . magit-status)
   :config
-  (setf (alist-get 'unpushed magit-section-initial-visibility-alist) 'show)
-  (setf (alist-get 'stashes magit-section-initial-visibility-alist) 'show))
+  (unless (getenv "EMACS_MAGIT_HIDE_UNPUSHED")
+    (setf (alist-get 'unpushed magit-section-initial-visibility-alist) 'show))
+
+  (unless (getenv "EMACS_MAGIT_HIDE_STASHES")
+    (setf (alist-get 'stashes magit-section-initial-visibility-alist) 'show)))
+
 
 ;;; git.el ends here
