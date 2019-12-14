@@ -1,5 +1,7 @@
 # /home/hristos/.emacs.d/
 
+[![builds.sr.ht status](https://builds.sr.ht/~hristoast/dot-emacs/.build.yml.svg)](https://builds.sr.ht/~hristoast/dot-emacs/.build.yml?)
+
 ## About
 
 My Emacs configuration.  I use it on Emacs 26.3, but it should run fine on Emacs 24 or higher (with some warnings.)  It sports the [Material Theme for Emacs](https://github.com/cpaulik/emacs-material-theme) and [Smart Mode Line](https://github.com/Malabarba/smart-mode-line) with the Dark theme.  I recommend running this configuration in daemon mode - it's great for GUI Emacs or terminal Emacs.
