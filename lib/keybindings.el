@@ -36,6 +36,7 @@
 (global-set-key (kbd "TAB") 'indent-appropriately)
 (global-set-key (kbd "C-x C-v") 'clipboard-yank)
 (global-set-key (kbd "C-^") 'enlarge-window)
+(global-set-key (kbd "C-c g l") 'goto-line)
 
 ;; Kill this buffer!
 (substitute-key-definition 'kill-buffer 'kill-buffer-and-window global-map)
