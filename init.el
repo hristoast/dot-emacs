@@ -47,7 +47,7 @@
 ;; Module definitions
 (defvar h/modules
   #s(hash-table
-     size 35
+     size 36
      data
      ;; "Env var that disables loading if present" "file name in lib/ minus the extension"
      ("EMACS_NO_EDITING_TWEAKS" "editing"
@@ -85,6 +85,7 @@
       "EMACS_NO_SYSTEMD" "systemd"
       "EMACS_NO_TERRAFORM" "terraform"
       "EMACS_NO_TOML" "toml"
+      "EMACS_NO_VISUAL_BASIC" "visual-basic-mode"
       "EMACS_NO_YAML" "yaml")))
 
 ;; Load everything
