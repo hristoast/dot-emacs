@@ -5,12 +5,12 @@
 
 ;; https://github.com/rafalcieslak/emacs-company-terraform
 ;; Company backend for terraform files
-(use-package company-terraform :defer t :ensure t)
+(use-package company-terraform :defer t :straight t)
 
 ;; Major mode of Terraform configuration file
 ;; https://github.com/syohex/emacs-terraform-mode
 (use-package terraform-mode
-  :ensure t
+  :straight t
   :init (company-terraform-init))
 
 ;;; terraform.el ends here

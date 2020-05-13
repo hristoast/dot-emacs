@@ -5,7 +5,7 @@
 
 ;; Python Black for Emacs
 ;; https://github.com/proofit404/blacken
-(use-package blacken :defer t :ensure t)
+(use-package blacken :defer t :straight t)
 
 ;; Python auto-completion for Emacs
 ;; http://tkf.github.io/emacs-jedi/latest/
@@ -13,7 +13,7 @@
 ;; Company backend for Python jedi
 ;; https://github.com/syohex/emacs-company-jedi
 (use-package company-jedi
-  :ensure t
+  :straight t
   :defer t
   :init
   (setq-default
@@ -22,7 +22,7 @@
 
 ;; Navigate Python documentation
 ;; https://github.com/statmobile/pydoc
-(use-package pydoc :defer t :ensure t)
+(use-package pydoc :defer t :straight t)
 
 ;; Built into Emacs
 ;; https://www.emacswiki.org/emacs/PythonProgrammingInEmacs

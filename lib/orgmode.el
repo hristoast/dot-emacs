@@ -5,7 +5,7 @@
 
 ;; https://orgmode.org/elpa.html
 (use-package org-plus-contrib
-  :ensure t
+  :straight t
   :bind
   ("C-c l" . org-store-link)
   ("C-c a" . org-agenda)

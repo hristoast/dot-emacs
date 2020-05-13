@@ -4,12 +4,12 @@
 ;;; Code:
 
 ;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Autorevert.html
-(use-package autorevert :diminish auto-revert-mode :ensure t)
+(use-package autorevert :diminish auto-revert-mode :straight t)
 
 ;; Clean auto-indent and backspace unindent
 ;; https://github.com/pmarinov/clean-aindent-mode
 (use-package clean-aindent-mode
-  :ensure t
+  :straight t
   :config
   (electric-indent-mode -1)
   (setq clean-aindent-is-simple-indent t))
@@ -17,7 +17,7 @@
 ;; Modular in-buffer completion framework for Emacs
 ;; http://company-mode.github.io/
 (use-package company
-  :ensure t
+  :straight t
   :diminish company-mode
   :config
   (add-hook 'after-init-hook 'global-company-mode)
@@ -44,7 +44,7 @@
 
 ;; Various completion functions using Ivy
 ;; https://github.com/abo-abo/swiper / https://melpa.org/#/counsel
-(use-package counsel :defer t :ensure t)
+(use-package counsel :defer t :straight t)
 
 ;; A minor mode that guesses the indentation offset originally used for
 ;; creating source code files and transparently adjusts the corresponding
@@ -52,14 +52,14 @@
 ;; https://github.com/jscheid/dtrt-indent
 ;; TODO: remove this, perhaps?
 (use-package dtrt-indent
-  :ensure t
+  :straight t
   :config
   (setq global-mode-string (remove 'dtrt-indent-mode-line-info global-mode-string))
   (dtrt-indent-mode 1))
 
 ;; Syntax checking for GNU Emacs - http://www.flycheck.org/
 (use-package flycheck
-  :ensure t
+  :straight t
   :bind
   (("C-c e n" . flycheck-next-error)
    ("C-c e p" . flycheck-previous-error))
@@ -68,18 +68,18 @@
 
 ;; Interactively Do Things
 ;; http://emacswiki.org/emacs/InteractivelyDoThings
-(use-package ido :config (ido-mode t) :ensure t)
+(use-package ido :config (ido-mode t) :straight t)
 
 ;; Emacs rainbow delimiters mode
 ;; https://github.com/Fanael/rainbow-delimiters
 (use-package rainbow-delimiters
-  :ensure t
+  :straight t
   :init (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 
 ;; Rainbow mode - #000 #fff #f00 #ff0 #00f #0f0 #800080 #00ffff #ff00ff
 ;; https://julien.danjou.info/projects/emacs-packages
 (use-package rainbow-mode
-  :ensure t
+  :straight t
   :diminish rainbow-mode
   :config
   (add-hook 'css-mode-hook 'rainbow-mode)
@@ -90,7 +90,7 @@
 ;; http://www.gnu.org/software/emacs/manual/html_node/emacs/Semantic.html
 ;; (require 'semantic)
 (use-package semantic
-  :ensure t
+  :straight t
   :commands semantic-mode
   :config
   (global-semanticdb-minor-mode 1)
@@ -101,7 +101,7 @@
 ;; pairs and tries to be smart about it
 ;; https://github.com/Fuco1/smartparens
 (use-package smartparens
-  :ensure t
+  :straight t
   :diminish smartparens-mode
   :config
   (setq
@@ -133,13 +133,13 @@
 
 ;;  Emacs isearch with an overview. Oh, man!
 ;; https://github.com/abo-abo/swiper
-(use-package swiper :ensure t)
+(use-package swiper :straight t)
 
 ;; undo-tree.el --- Treat undo history as a tree
 ;; http://www.dr-qubit.org/undo-tree/undo-tree.el
 ;; https://www.emacswiki.org/emacs/UndoTree
 (use-package undo-tree
-  :ensure t
+  :straight t
   :diminish undo-tree-mode
   :config
   (setq
@@ -151,7 +151,7 @@
 
 ;; windmove, built into Emacs: http://is.gd/63r6U0
 (use-package windmove
-  :ensure t
+  :straight t
   :bind
   ("M-e" . windmove-left)
   ("M-u" . windmove-right)
@@ -161,7 +161,7 @@
 ;; Unobtrusively trim extraneous whitespace *ONLY* in lines edited
 ;; https://github.com/lewang/ws-butler
 (use-package ws-butler
-  :ensure t
+  :straight t
   :diminish ws-butler-mode
   :config
   (add-hook 'prog-mode-hook 'ws-butler-mode))
@@ -169,7 +169,7 @@
 ;; Yet another snippet extension
 ;; http://capitaomorte.github.io/yasnippet/
 (use-package yasnippet
-  :ensure t
+  :straight t
   :diminish yas-minor-mode
   :init
   ;; Shut yas up! Disables startup noise
@@ -180,7 +180,7 @@
 ;; zygospore: Reversible C-x 1
 ;; https://github.com/LouisKottmann/zygospore.el
 (use-package zygospore
-  :ensure t
+  :straight t
   :bind ("C-x 1" . zygospore-toggle-delete-other-windows))
 
 ;;; editing.el ends here

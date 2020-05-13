@@ -1,7 +1,7 @@
-;;; init.el --- Self-installing, for Emacs 25 and up.
+;;; init.el --- Self-installing.
 ;;; Commentary:
 ;;
-;; My Emacs configuration for writing code and things.  Might work on Emacs 24.
+;; My Emacs configuration for writing code and things.
 ;;
 ;; A breakdown of keybindings can be found in this repository at lib/bindings.el, or at:
 ;; https://git.sr.ht/~hristoast/dot-emacs/tree/master/lib/bindings.el
@@ -12,42 +12,35 @@
 (defconst emacs-start-time (current-time))
 
 (setq
- ;; use-package handles enabling things.
- package-enable-at-startup nil
  ;; Keep custom stuff out of here!
  custom-file (or (getenv "EMACS_CUSTOM_FILE")
-                 (concat user-emacs-directory "/my-custom.el"))
- package-archives
- ;; GNU over SSL
- '(("gnu" . "https://elpa.gnu.org/packages/")
-   ;; MELPA (Milkypostman’s Emacs Lisp Package Archive)
-   ("melpa" . "https://melpa.org/packages/")
-   ;; MELPA Stable
-   ("melpa-stable" . "https://stable.melpa.org/packages/")
-   ;; Org mode ELPA archive
-   ("org" . "https://orgmode.org/elpa/")))
+                 (concat user-emacs-directory "/my-custom.el")))
 
-;; Init package.el
-(require 'package)
-(package-initialize)
+;; https://github.com/raxod502/straight.el/blob/a7f94876b2bf96d2595706270be6630ecc94f0d3/README.md#getting-started
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 5))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
 
-;; Ensure that use-package is installed
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
-
-;; https://github.com/jwiegley/use-package/blob/4b58ab78177f636f862a66c7a8fdcf9b070e0925/README.md#use-packageel-is-no-longer-needed-at-runtime
-(eval-when-compile (require 'use-package))
-(require 'bind-key)
+;; https://github.com/raxod502/straight.el/blob/a7f94876b2bf96d2595706270be6630ecc94f0d3/README.md#integration-with-use-package
+(straight-use-package 'use-package)
 
 ;; Diminished modes are minor modes with no modeline display
 ;; http://www.eskimo.com/~seldon/diminish.el
-(use-package diminish :ensure t)
+(use-package diminish :straight t)
 
 ;; Module definitions
 (defvar h/modules
   #s(hash-table
-     size 36
+     size 35
      data
      ;; "Env var that disables loading if present" "file name in lib/ minus the extension"
      ("EMACS_NO_EDITING_TWEAKS" "editing"
@@ -61,7 +54,6 @@
       "EMACS_NO_CLOJURE" "clojure"
       "EMACS_NO_CSS" "css"
       "EMACS_NO_DOCKER" "docker"
-      "EMACS_NO_EPL" "emacs-package-library"
       "EMACS_NO_FISH" "fish"
       "EMACS_NO_GIT" "git"
       "EMACS_NO_GODOT" "godot"
@@ -85,7 +77,7 @@
       "EMACS_NO_SYSTEMD" "systemd"
       "EMACS_NO_TERRAFORM" "terraform"
       "EMACS_NO_TOML" "toml"
-      "EMACS_NO_VISUAL_BASIC" "visual-basic-mode"
+      ;; "EMACS_NO_VISUAL_BASIC" "visual-basic-mode"
       "EMACS_NO_YAML" "yaml")))
 
 ;; Load everything

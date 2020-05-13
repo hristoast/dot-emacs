@@ -1,13 +1,13 @@
-image: archlinux
-environment:
-  EMACS_TRUST_SML_THEMES: t
-  EMACS_TRUST_THEMES: t
-packages:
-  - emacs
-  - python3
-sources:
-  - https://git.sr.ht/~hristoast/dot-emacs
-tasks:
-  - test-startup: |
-      cd ./dot-emacs
-      ./test-startup.py || exit 1
+# image: archlinux
+# environment:
+#   EMACS_TRUST_SML_THEMES: t
+#   EMACS_TRUST_THEMES: t
+# packages:
+#   - emacs
+#   - python3
+# sources:
+#   - https://git.sr.ht/~hristoast/dot-emacs
+# tasks:
+#   - test-startup: |
+#       cd ./dot-emacs
+#       ./test-startup.py || exit 1

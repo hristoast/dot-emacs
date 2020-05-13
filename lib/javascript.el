@@ -5,13 +5,13 @@
 
 ;; Tern backend for company-mode.
 ;; https://github.com/proofit404/company-tern
-(use-package company-tern :defer t :ensure t)
+(use-package company-tern :defer t :straight t)
 
 ;; Tern: Intelligent JavaScript tooling
 ;; http://ternjs.net/doc/manual.html#emacs
 ;; TODO: require `tern' installation.
 (use-package tern
-  :ensure t
+  :straight t
   :commands tern-mode
   :init
   (add-hook 'js-mode-hook

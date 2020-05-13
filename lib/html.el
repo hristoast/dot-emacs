@@ -12,7 +12,7 @@
 ;; Live web development in Emacs
 ;; https://github.com/skeeto/skewer-mode
 (use-package skewer-mode
-  :ensure t
+  :straight t
   :defer t
   :init
   (setq-default httpd-root (concat user-emacs-directory "/httpd"))
@@ -23,7 +23,7 @@
 ;; web-mode: An autonomous emacs major-mode for editing web templates.
 ;; http://web-mode.org/
 (use-package web-mode
-  :ensure t
+  :straight t
   :defer t
   :init
   (setq-default

@@ -6,7 +6,7 @@
 ;; Major mode for editing Godot GDScript files
 (use-package gdscript-mode
   :defer t
-  :ensure t
+  :straight t
   ;; Use toml-mode for .godot and .tscn source files
   :init (setq auto-mode-alist (append '(("\\.godot$" . toml-mode))
                                       '(("\\.tscn$" . toml-mode))

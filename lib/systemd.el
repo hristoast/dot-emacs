@@ -5,6 +5,6 @@
 
 ;; I strongly dislike systemd... but this mode is pretty handy when you need it.
 ;; https://github.com/holomorph/systemd-mode
-(use-package systemd :defer t :ensure t)
+(use-package systemd :defer t :straight t)
 
 ;;; systemd.el ends here

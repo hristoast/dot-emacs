@@ -5,6 +5,6 @@
 
 ;; A groovy major mode, grails minor mode, and a groovy inferior mode.
 ;; https://github.com/Groovy-Emacs-Modes/groovy-emacs-modes
-(use-package groovy-mode :defer t :ensure t)
+(use-package groovy-mode :defer t :straight t)
 
 ;;; groovy.el ends here

@@ -5,6 +5,6 @@
 
 ;; Major mode for editing JSON files with emacs
 ;; https://github.com/joshwnj/json-mode
-(use-package json-mode :defer t :ensure t)
+(use-package json-mode :defer t :straight t)
 
 ;;; json.el ends here

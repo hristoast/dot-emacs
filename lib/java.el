@@ -6,7 +6,7 @@
 ;; A Better Java Development Environment for Emacs
 ;; https://github.com/mopemope/meghanada-emacs
 (use-package meghanada
-  :ensure t
+  :straight t
   :init
   (add-hook 'java-mode-hook
             (lambda ()

@@ -5,6 +5,6 @@
 
 ;; Ansible keywords completion for Emacs
 ;; https://github.com/krzysztof-magosa/company-ansible
-(use-package company-ansible :defer t :ensure t)
+(use-package company-ansible :defer t :straight t)
 
 ;;; ansible.el ends here

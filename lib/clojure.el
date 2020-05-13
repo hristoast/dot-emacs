@@ -9,7 +9,7 @@
 ;; Depends on clojure-mode:
 ;; https://github.com/clojure-emacs/clojure-mode
 (use-package cider
-  :ensure t
+  :straight t
   :bind
   ("C-c n c" . delete-nrepl)
   :config
@@ -21,7 +21,7 @@
 
 ;; yasnippet 0.7.0+ snippets for clojure
 ;; https://github.com/mpenet/clojure-snippets
-(use-package clojure-snippets :defer t :ensure t)
+(use-package clojure-snippets :defer t :straight t)
 
 (provide 'clojure)
 ;;; clojure.el ends here

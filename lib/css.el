@@ -5,7 +5,7 @@
 
 ;; Built into Emacs
 (use-package css-mode
-  :ensure t
+  :straight t
   :init (add-hook 'css-mode-hook 'skewer-css-mode))
 
 ;;; css.el ends here

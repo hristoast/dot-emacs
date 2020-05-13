@@ -7,14 +7,14 @@
 ;; https://github.com/dgutov/robe
 ;; Requires: `gem install pry` and a Gemfile listing your gems
 (use-package robe
-  :ensure t
+  :straight t
   :diminish robe-mode
   :config
   (add-hook 'ruby-mode-hook 'robe-mode))
 
 ;; Activate Robe and company-robe when we start ruby-mode
 (use-package ruby-mode
-  :ensure t
+  :straight t
   :config
   (add-hook 'ruby-mode-hook
             (lambda ()

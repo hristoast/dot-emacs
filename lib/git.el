@@ -5,12 +5,12 @@
 
 ;; Emacs mode for .gitignore files
 ;; https://github.com/magit/git-modes/blob/master/gitignore-mode.el
-(use-package gitignore-mode :defer t :ensure t)
+(use-package gitignore-mode :defer t :straight t)
 
 ;; A Git Porcelain inside Emacs
 ;; https://magit.vc/
 (use-package magit
-  :ensure t
+  :straight t
   :bind
   ("C-c g d" . magit-diff-range)
   ("C-x g" . magit-status)

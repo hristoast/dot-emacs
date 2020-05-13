@@ -5,6 +5,6 @@
 
 ;; GLSL emacs mode
 ;; https://github.com/jimhourihan/glsl-mode
-(use-package glsl-mode :defer t :ensure t)
+(use-package glsl-mode :defer t :straight t)
 
 ;;; shaders.el ends here

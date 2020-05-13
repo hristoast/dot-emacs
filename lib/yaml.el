@@ -7,7 +7,7 @@
 ;; https://github.com/yoshiki/yaml-mode
 ;; TODO: don't always load company-ansible
 (use-package yaml-mode
-  :ensure t
+  :straight t
   :defer t
   :config
   (add-hook 'yaml-mode-hook

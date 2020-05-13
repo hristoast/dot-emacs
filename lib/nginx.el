@@ -5,6 +5,6 @@
 
 ;; Emacs editing mode for Nginx config files
 ;; https://github.com/ajc/nginx-mode
-(use-package nginx-mode :defer t :ensure t)
+(use-package nginx-mode :defer t :straight t)
 
 ;;; nginx.el ends here
