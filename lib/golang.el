@@ -11,20 +11,23 @@
   ;; Add the resulting bindir to the exec-path
   (add-to-list 'exec-path (concat (getenv "GOPATH") "/bin")))
 
-(unless (getenv "EMACS_NO_GOCODE") ;; Don't try to set up `gocode'
-  ;; company-mode autocompletion for golang
-  ;; https://github.com/nsf/gocode/tree/master/emacs-company
-  (use-package company-go :defer t :straight t))
+;; https://github.com/golang/tools/blob/9abf76cc034c465c6e45ab8455a465543a8d552e/gopls/doc/emacs.md
+(defun lsp-go-install-save-hooks ()
+  (add-hook 'before-save-hook #'lsp-format-buffer t t)
+  (add-hook 'before-save-hook #'lsp-organize-imports t t))
 
 (use-package go-mode
+  ;; https://github.com/golang/tools/blob/d33eef8e6825f50394356b51ff2bbbe3d30e07e7/gopls/doc/user.md#installation
+  ;; GO111MODULE=on go get golang.org/x/tools/gopls@latest
   :straight t
   :init
-  (unless (getenv "EMACS_NO_GOCODE") ;; Don't try to set up `gocode'
-    (add-hook 'go-mode-hook (lambda () (add-to-list 'company-backends 'company-go))))
-  (setq-default gofmt-command "goimports")
-  (add-hook 'before-save-hook #'gofmt-before-save)
+  (add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
+  (add-hook 'go-mode-hook
+            (lambda ()
+              (lsp-register-custom-settings
+               '(("gopls.completeUnimported" t t)
+                 ("gopls.staticcheck" t t)))))
+  (add-hook 'go-mode-hook 'lsp-deferred)
   (add-hook 'go-mode-hook 'go-eldoc-setup))
-
-(use-package go-eldoc :defer t :straight t)
 
 ;;; golang.el ends here
