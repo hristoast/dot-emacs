@@ -63,8 +63,8 @@
   :bind
   (("C-c e n" . flycheck-next-error)
    ("C-c e p" . flycheck-previous-error))
-  :config
-  (add-hook 'after-init-hook #'global-flycheck-mode))
+  ;; https://www.flycheck.org/en/latest/user/installation.html#use-package
+  :init (global-flycheck-mode))
 
 ;; Interactively Do Things
 ;; http://emacswiki.org/emacs/InteractivelyDoThings
