@@ -10,7 +10,11 @@
 ;; Emacs major mode for editing Lua
 ;; http://immerrr.github.io/lua-mode/
 ;; TODO: require a `luacheck' install
-(use-package lua-mode :defer t :straight t)
+(use-package lua-mode
+  :defer t
+  :straight t
+  :defer
+  (add-hook 'lua-mode-hook 'lsp-deferred))
 
 ;; Use lua-mode for PICO-8 source files
 ;; TODO: document that this is here, or make a separate pico8.el file.

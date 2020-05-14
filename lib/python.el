@@ -27,6 +27,8 @@
 ;; Built into Emacs
 ;; https://www.emacswiki.org/emacs/PythonProgrammingInEmacs
 (use-package python-mode
+  ;; Void packages: python3-language-server autopep8 python3-pycodestyle pylint python3-yapf
+  ;; PyPI packages: pydocstyle==5.0.2 rope==0.17.0
   :bind
   ("<S-down-mouse-1>" . goto-definition-at-point)
   ("<S-down-mouse-3>" . quick-pydoc)
@@ -38,12 +40,7 @@
     (let ((es (event-start event)))
       (select-window (posn-window es))
       (goto-char (posn-point es))
-      (jedi:goto-definition)))
-
-  (defun maybe-stop-jedi-server ()
-    "Stop the Jedi server, if need be."
-    (if (boundp 'jedi:stop-server)
-        (jedi:stop-server)))
+      (lsp-goto-implementation)))
 
   (defun quick-pydoc (event)
     "Move the point to the clicked position
@@ -54,31 +51,8 @@
       (goto-char (posn-point es))
       (pydoc-at-point)))
 
-  (defun use-system-python3 ()
-    "Use the system python3."
-    (interactive)
-    (maybe-stop-jedi-server)
-    (defvar python-check-command)
-    (defvar python-shell-interpreter)
-    (setq
-       python-check-command "pyflakes"
-       python-shell-interpreter "python3"
-       flycheck-python-flake8-executable "flake8"
-       jedi:environment-virtualenv (list "python3" "-m" "venv")
-       jedi:environment-root (concat (getenv "HOME") "/.emacs.d" "/.py/system3")
-       jedi:server-args
-       '("--sys-path" "/usr/lib/python3.6/site-packages"
-         "--sys-path" "~/.local/lib/python3.6/site-packages"))
-      (if (not (file-exists-p
-                (concat jedi:environment-root
-                        "/lib/python3.6/site-packages/jediepcserver.py")))
-          (jedi:install-server)))
-
-  (add-hook 'python-mode-hook 'use-system-python3)
   (add-hook 'python-mode-hook 'blacken-mode)
-  (add-hook 'python-mode-hook
-            (lambda ()
-              (when (derived-mode-p 'python-mode)
-                (add-to-list 'company-backends 'company-jedi)))))
+  ;; Python configuration for lsp-mode done in lsp.el...
+  (add-hook 'python-mode-hook 'lsp-deferred))
 
 ;;; python.el ends here

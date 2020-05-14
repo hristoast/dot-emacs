@@ -40,7 +40,7 @@
 ;; Module definitions
 (defvar h/modules
   #s(hash-table
-     size 35
+     size 36
      data
      ;; "Env var that disables loading if present" "file name in lib/ minus the extension"
      ("EMACS_NO_EDITING_TWEAKS" "editing"
@@ -49,6 +49,7 @@
       "EMACS_NO_KEYBINDINGS_TWEAKS" "keybindings"
       "EMACS_NO_UI_TWEAKS" "ui"
 
+      "EMACS_NO_LSP" "lsp"
       "EMACS_NO_ANSIBLE" "ansible"
       "EMACS_NO_C_CPP" "c-cpp"
       "EMACS_NO_CLOJURE" "clojure"
