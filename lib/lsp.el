@@ -11,4 +11,6 @@
   :init
   (setq lsp-clients-python-library-directories (concat (getenv "HOME") ".local/lib/python3.8/site-packages")))
 
-;;; docker.el ends here
+(use-package lsp-ui :straight t :defer t)
+
+;;; lsp.el ends here
