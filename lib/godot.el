@@ -5,14 +5,15 @@
 
 ;; Major mode for editing Godot GDScript files
 (use-package gdscript-mode
-  :defer t
-  :straight t
+  :straight (gdscript-mode
+             :type git
+             :host github
+             :repo "GDQuest/emacs-gdscript-mode")
   ;; Use toml-mode for .godot and .tscn source files
-  :init (setq auto-mode-alist (append '(("\\.godot$" . toml-mode))
-                                      '(("\\.tscn$" . toml-mode))
-                                      auto-mode-alist)))
-
-
-
-
+  :init
+  (add-hook 'gdscript-mode-hook 'lsp-deferred)
+  (setq auto-mode-alist (append '(("\\.godot$" . toml-mode))
+                                '(("\\.tscn$" . toml-mode))
+                                '(("\\.gd$" . gdscript-mode))
+                                auto-mode-alist)))
 ;;; godot.el ends here
