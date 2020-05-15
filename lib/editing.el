@@ -29,16 +29,18 @@
    company-tooltip-limit 20)
   ;; Default colors are awful - borrowed these from gocode (thanks!):
   ;; https://github.com/nsf/gocode/tree/master/emacs-company#color-customization
+  ;; See: M-x list-colors-display
+  ;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Colors.html
   (set-face-attribute
    'company-preview nil :foreground "black" :underline t)
   (set-face-attribute
    'company-preview-common nil :inherit 'company-preview)
   (set-face-attribute
-   'company-tooltip nil :background "lightgray" :foreground "black")
+   'company-tooltip nil :background "gray44" :foreground "black")
   (set-face-attribute
-   'company-tooltip-selection nil :background "steelblue" :foreground "white")
+   'company-tooltip-selection nil :background "LavenderBlush4" :foreground "DarkOliveGreen2")
   (set-face-attribute
-   'company-tooltip-common nil :foreground "darkgreen" :weight 'bold)
+   'company-tooltip-common nil :foreground "OliveDrab3" :weight 'bold)
   (set-face-attribute
    'company-tooltip-common-selection nil :foreground "black" :weight 'bold))
 
