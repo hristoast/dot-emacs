@@ -16,12 +16,13 @@
   :bind ("C-x r s" . h/godot-run-current-scene-debug)
   ;; Use toml-mode for .godot and .tscn source files
   :init
+
   (defun h/godot-run-current-scene-debug ()
     "Run the current scene in debug mode and switch to the output buffer."
     (interactive)
     (progn
       (gdscript-godot-run-current-scene-debug)
-      (switch-to-buffer "*godot*")))
+      (switch-to-buffer-other-window "*godot*")))
 
   (defun h/gdscript-format-buffer-save-hook ()
     (when (eq major-mode 'gdscript-mode)
