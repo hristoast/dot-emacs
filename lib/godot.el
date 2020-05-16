@@ -15,16 +15,17 @@
              :repo "GDQuest/emacs-gdscript-mode")
   ;; Use toml-mode for .godot and .tscn source files
   :init
-  (defun gdscript-format-buffer-save-hook ()
-    (interactive)
+  (defun h/gdscript-format-buffer-save-hook ()
     (when (eq major-mode 'gdscript-mode)
-      (progn (gdscript-format-buffer)
-             ;; Gotta run this to get things going again...
-             (lsp))))
-  (add-hook 'before-save-hook 'gdscript-format-buffer-save-hook)
+      (progn
+        (gdscript-format-buffer)
+        ;; Gotta run this to get things going again...
+        (lsp))))
+  (add-hook 'before-save-hook 'h/gdscript-format-buffer-save-hook)
   (add-hook 'gdscript-mode-hook 'lsp-deferred)
   (setq auto-mode-alist (append '(("\\.godot$" . toml-mode))
                                 '(("\\.tscn$" . toml-mode))
                                 '(("\\.gd$" . gdscript-mode))
                                 auto-mode-alist)))
+
 ;;; godot.el ends here
