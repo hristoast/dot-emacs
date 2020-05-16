@@ -18,7 +18,9 @@
   (defun gdscript-format-buffer-save-hook ()
     (interactive)
     (when (eq major-mode 'gdscript-mode)
-      (gdscript-format-buffer)))
+      (progn (gdscript-format-buffer)
+             ;; Gotta run this to get things going again...
+             (lsp))))
   (add-hook 'before-save-hook 'gdscript-format-buffer-save-hook)
   (add-hook 'gdscript-mode-hook 'lsp-deferred)
   (setq auto-mode-alist (append '(("\\.godot$" . toml-mode))
