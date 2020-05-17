@@ -14,13 +14,13 @@
              :host github
              :repo "GDQuest/emacs-gdscript-mode")
   :bind ("C-x r s" . h/godot-run-current-scene-debug)
-  ;; Use toml-mode for .godot and .tscn source files
   :init
 
   (defun h/godot-run-current-scene-debug ()
     "Run the current scene in debug mode and switch to the output buffer."
     (interactive)
     (progn
+      ;; TODO: Clear the *godot* or recenter-top on it.
       (gdscript-godot-run-current-scene-debug)
       (switch-to-buffer-other-window "*godot*")))
 
@@ -33,8 +33,9 @@
 
   (add-hook 'before-save-hook 'h/gdscript-format-buffer-save-hook)
   (add-hook 'gdscript-mode-hook 'lsp-deferred)
-  (setq auto-mode-alist (append '(("\\.godot$" . toml-mode))
-                                '(("\\.tscn$" . toml-mode))
+  (setq auto-mode-alist (append '(("\\.godot$" . conf-toml-mode))
+                                '(("\\.tres$" . conf-toml-mode))
+                                '(("\\.tscn$" . conf-toml-mode))
                                 '(("\\.gd$" . gdscript-mode))
                                 auto-mode-alist)))
 
