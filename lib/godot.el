@@ -13,8 +13,8 @@
              :type git
              :host github
              :repo "GDQuest/emacs-gdscript-mode")
-  :bind ("C-x r s" . h/godot-run-current-scene-debug)
   :init
+  (bind-key "C-x r s" 'h/godot-run-current-scene-debug)
 
   (defun h/godot-run-current-scene-debug ()
     "Run the current scene in debug mode and switch to the output buffer."
