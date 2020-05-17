@@ -20,9 +20,10 @@
     "Run the current scene in debug mode and switch to the output buffer."
     (interactive)
     (progn
-      ;; TODO: Clear the *godot* or recenter-top on it.
-      (gdscript-godot-run-current-scene-debug)
-      (switch-to-buffer-other-window "*godot*")))
+      (let ((godot-buffer "*godot*"))
+        (with-current-buffer godot-buffer (erase-buffer))
+        (gdscript-godot-run-current-scene-debug)
+        (switch-to-buffer-other-window godot-buffer))))
 
   (defun h/gdscript-format-buffer-save-hook ()
     (when (eq major-mode 'gdscript-mode)
