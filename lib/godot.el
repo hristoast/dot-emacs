@@ -21,7 +21,8 @@
     (interactive)
     (progn
       (let ((godot-buffer "*godot*"))
-        (with-current-buffer godot-buffer (erase-buffer))
+        (if (get-buffer godot-buffer)
+            (with-current-buffer godot-buffer (erase-buffer)))
         (gdscript-godot-run-current-scene-debug)
         (switch-to-buffer-other-window godot-buffer))))
 
