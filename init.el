@@ -52,6 +52,7 @@
       "EMACS_NO_LSP" "lsp"
       "EMACS_NO_ANSIBLE" "ansible"
       "EMACS_NO_C_CPP" "c-cpp"
+      "EMACS_NO_CALC" "calc"
       "EMACS_NO_CLOJURE" "clojure"
       "EMACS_NO_CSS" "css"
       "EMACS_NO_DOCKER" "docker"
