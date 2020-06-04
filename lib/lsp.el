@@ -13,4 +13,9 @@
 
 (use-package lsp-ui :straight t :defer t)
 
+(use-package company-lsp
+  :straight t
+  :init
+  (push 'company-lsp company-backends))
+
 ;;; lsp.el ends here
