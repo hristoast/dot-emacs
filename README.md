@@ -27,7 +27,7 @@ git clone https://git.sr.ht/~hristoast/dot-emacs ~/.emacs.d
 mv -v ~/.emacs.d ~/$(date +%F)-emacs.d
 mkdir ~/.emacs.d
 git clone https://git.sr.ht/~hristoast/dot-emacs ~/src/hristoast-dot-emacs
-ln -sv ~/src/toasty-dotfiles/soma/.emacs.d/{init.el,lib} ~/.emacs.d/
+ln -sv ~/src/hristoast-dot-emacs/{init.el,lib} ~/.emacs.d/
 ```
 
 If you're an Emacs daemon user, your first run should not be in daemon mode so that you can accept the theme (if you choose to use that).  After completing the first successful startup, where all packages and etc are installed, you may start the daemon.
