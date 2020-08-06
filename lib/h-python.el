@@ -1,4 +1,4 @@
-;;; python.el --- Load python packages
+;;; h-python.el --- Load python packages
 ;;; Commentary:
 ;; Packages related to python.
 ;;; Code:
@@ -14,11 +14,11 @@
 ;; Built into Emacs
 ;; https://www.emacswiki.org/emacs/PythonProgrammingInEmacs
 (use-package python-mode
-  ;; Void packages: python3-language-server python3-pycodestyle pylint
+  ;; Void package: python3-language-server
   ;; PyPI packages: pydocstyle==5.0.2 rope==0.17.0 pyls-black==0.4.4
   :bind
-  ("<S-down-mouse-1>" . goto-definition-at-point)
-  ("<S-down-mouse-3>" . quick-pydoc)
+  ("<S-mouse-1>" . goto-definition-at-point)
+  ("<S-mouse-3>" . quick-pydoc)
   :init
   (defun goto-definition-at-point (event)
     "Move the point to the clicked position

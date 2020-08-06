@@ -1,4 +1,4 @@
-;;; slime.el --- Load slime packages
+;;; h-slime.el --- Load slime packages
 ;;; Commentary:
 ;; Packages related to slime.
 ;;; Code:

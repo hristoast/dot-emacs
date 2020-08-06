@@ -1,4 +1,4 @@
-;;; calc.el --- Calc-mode and related packages.
+;;; h-calc.el --- Calc-mode and related packages.
 ;;; Commentary:
 ;; Packages related to calc and similar functionality.
 ;;; Code:

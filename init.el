@@ -4,7 +4,7 @@
 ;; My Emacs configuration for writing code and things.
 ;;
 ;; A breakdown of keybindings can be found in this repository at lib/bindings.el, or at:
-;; https://git.sr.ht/~hristoast/dot-emacs/tree/master/lib/bindings.el
+;; https://git.sr.ht/~hristoast/dot-emacs/tree/master/lib/h-bindings.el
 ;;
 ;;; Code:
 
@@ -43,16 +43,17 @@
      size 39
      data
      ;; "Env var that disables loading if present" "file name in lib/ minus the extension"
+     ;; Be sure to check `list-load-path-shadows' every so often!
      ("EMACS_NO_EDITING_TWEAKS" "editing"
       "EMACS_NO_EXTRA_FUNCTIONS" "functions"
       "EMACS_NO_INTERNALS_TWEAKS" "internals"
       "EMACS_NO_KEYBINDINGS_TWEAKS" "keybindings"
       "EMACS_NO_UI_TWEAKS" "ui"
 
-      "EMACS_NO_LSP" "lsp"
+      "EMACS_NO_LSP" "h-lsp"
       "EMACS_NO_ANSIBLE" "ansible"
       "EMACS_NO_C_CPP" "c-cpp"
-      "EMACS_NO_CALC" "calc"
+      "EMACS_NO_CALC" "h-calc"
       "EMACS_NO_CLOJURE" "clojure"
       "EMACS_NO_CSS" "css"
       "EMACS_NO_DOCKER" "docker"
@@ -66,18 +67,18 @@
       "EMACS_NO_JAVA" "java"
       "EMACS_NO_JAVASCRIPT" "javascript"
       "EMACS_NO_JINJA2" "jinja2"
-      "EMACS_NO_JSON" "json"
+      "EMACS_NO_JSON" "h-json"
       "EMACS_NO_LUA" "lua"
       "EMACS_NO_MARKDOWN" "markdown"
       "EMACS_NO_NGINX" "nginx"
       "EMACS_NO_ORGMODE" "orgmode"
-      "EMACS_NO_PYTHON" "python"
+      "EMACS_NO_PYTHON" "h-python"
       "EMACS_NO_RACKET" "racket"
       "EMACS_NO_RUBY" "ruby"
       "EMACS_NO_RUST" "rust"
       "EMACS_NO_SHADERS" "shaders"
-      "EMACS_NO_SLIME" "slime"
-      "EMACS_NO_SYSTEMD" "systemd"
+      "EMACS_NO_SLIME" "h-slime"
+      "EMACS_NO_SYSTEMD" "h-systemd"
       "EMACS_NO_TERRAFORM" "terraform"
       "EMACS_NO_TOML" "toml"
       "EMACS_NO_VISUAL_BASIC" "vbscript"

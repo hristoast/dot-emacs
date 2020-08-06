@@ -1,4 +1,4 @@
-;;; json.el --- Load json packages
+;;; h-json.el --- Load json packages
 ;;; Commentary:
 ;; Packages related to json.
 ;;; Code:

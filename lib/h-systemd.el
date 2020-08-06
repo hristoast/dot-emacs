@@ -1,4 +1,4 @@
-;;; systemd.el --- Load systemd packages
+;;; h-systemd.el --- Load systemd packages
 ;;; Commentary:
 ;; Packages related to systemd.
 ;;; Code:
