@@ -6,7 +6,6 @@
 ;; Emacs client/library for the Language Server Protocol
 ;; https://github.com/emacs-lsp/lsp-mode
 (use-package lsp-mode
-  :defer t
   :straight t
   :init
   (setq
@@ -17,12 +16,6 @@
   (setq lsp-pyls-plugins-mccabe-enabled nil
         lsp-pyls-plugins-pycodestyle-enabled nil))
 
-(use-package lsp-ui :straight t :defer t)
-
-(use-package company-lsp
-  :straight t
-  :init
-  (setq company-lsp-enable-recompletion t)
-  (push 'company-lsp company-backends))
+(use-package lsp-ui :straight t)
 
 ;;; lsp.el ends here
