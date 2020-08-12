@@ -12,7 +12,7 @@
  ("emacs-async" . "86aef2c38e7d35e8509b7feeee3e989d825eba91")
  ("emacs-fireplace" . "f6c23e259349922aae25cf2898ba815a7d8f2527")
  ("emacs-fish" . "db257db81058b0b12f788c324c264cc59b9a5bf4")
- ("emacs-gdscript-mode" . "b6e1f9a512c44e965d209e7e66acb98d560197b7")
+ ("emacs-gdscript-mode" . "7aea87bd7b3cd14b1a767e7d835cee896722cd29")
  ("emacs-material-theme" . "b66838d220ad380a16da1d8878936974b26f815d")
  ("emacs-web-server" . "22ce66ea43e0eadb9ec1d691a35d9695fc29cee6")
  ("emacsmirror-mirror" . "59b23cc3b17708e4975bcea451ccb415f8d06040")
