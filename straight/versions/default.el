@@ -33,7 +33,6 @@
  ("json-snatcher" . "c4cecc0a5051bd364373aa499c47a1bb7a5ac51c")
  ("let-alist" . "ef3c02fa292b6e32769945bbbfb7f2e5ac574b64")
  ("literate-calc-mode.el" . "5138ebae637ec7b849a394306e101130c6fdef31")
- ("lsp-lua-emmy" . "ab53fb2a8b8942804eb75bab5624fd19f1d360bf")
  ("lsp-mode" . "720ec4f3334b4fba61db0cdc331fb9630095a66e")
  ("lsp-ui" . "271b47cb33f11915295911f7cf8575f8a82a5e1c")
  ("lua-mode" . "35b6e4c20b8b4eaf783ccc8e613d0dd06dbd165c")
