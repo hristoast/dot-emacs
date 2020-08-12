@@ -2,13 +2,13 @@
 
 ## About
 
-My Emacs configuration.  I use it on Emacs 26.3, but it should run fine on Emacs 24 or higher (with some warnings.)  It sports the [Material Theme for Emacs](https://github.com/cpaulik/emacs-material-theme) and [Smart Mode Line](https://github.com/Malabarba/smart-mode-line) with the Dark theme.  I recommend running this configuration in daemon mode - it's great for GUI Emacs or terminal Emacs.
+My Emacs configuration.  I use it on Emacs 27.1, but it should run fine on Emacs 24 or higher (with some warnings.)  It sports the [Material Theme for Emacs](https://github.com/cpaulik/emacs-material-theme) and [Smart Mode Line](https://github.com/Malabarba/smart-mode-line) with the Dark theme.  I recommend running this configuration in daemon mode - it's great for GUI Emacs or terminal Emacs.
 
 It sets up Emacs with support for a wide variety of languages, as well as other more opinionated things like: color themes, many aspects of Emacs internals, code completion, and much much more.
 
 ## Screenshots
 
-Check out [the screenshots page](https://man.sr.ht/%7Ehristoast/dot-emacs/screenshots.md) on the wiki.
+Check out [the screenshots page](https://man.sr.ht/%7Ehristoast/dot-emacs/screenshots.md) on [the wiki](https://man.sr.ht/~hristoast/dot-emacs/).
 
 ## Installation
 
