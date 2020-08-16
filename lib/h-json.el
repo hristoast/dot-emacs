@@ -7,4 +7,4 @@
 ;; https://github.com/joshwnj/json-mode
 (use-package json-mode :defer t :straight t)
 
-;;; json.el ends here
+;;; h-json.el ends here

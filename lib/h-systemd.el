@@ -7,4 +7,4 @@
 ;; https://github.com/holomorph/systemd-mode
 (use-package systemd :defer t :straight t)
 
-;;; systemd.el ends here
+;;; h-systemd.el ends here

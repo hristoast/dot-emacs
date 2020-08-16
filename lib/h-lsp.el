@@ -18,4 +18,4 @@
 
 (use-package lsp-ui :straight t)
 
-;;; lsp.el ends here
+;;; h-lsp.el ends here

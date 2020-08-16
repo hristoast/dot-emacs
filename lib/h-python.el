@@ -42,4 +42,4 @@
   ;; Python configuration for lsp-mode done in lsp.el...
   (add-hook 'python-mode-hook 'lsp-deferred))
 
-;;; python.el ends here
+;;; h-python.el ends here

@@ -7,4 +7,4 @@
 ;; https://github.com/sulami/literate-calc-mode.el
 (use-package literate-calc-mode :straight t :defer t)
 
-;;; calc.el ends here
+;;; h-calc.el ends here

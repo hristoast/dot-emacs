@@ -23,4 +23,4 @@
         slime-contribs '(slime-company slime-fancy)
         slime-net-coding-system 'utf-8-unix))
 
-;;; slime.el ends here
+;;; h-slime.el ends here
