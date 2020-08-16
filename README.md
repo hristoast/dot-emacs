@@ -12,7 +12,7 @@ Check out [the screenshots page](https://man.sr.ht/%7Ehristoast/dot-emacs/screen
 
 ## Installation
 
-Copy all `.el` files from the root of this repository into your `~/.emacs.d`, start Emacs.  It may be wise to `mv` your current `~/.emacs.d` out of the way and start fresh.
+Copy all `.el` files as well as the `lib` and `straight` directories from the root of this repository into your `~/.emacs.d`, start Emacs.  It may be wise to `mv` your current `~/.emacs.d` out of the way and start fresh.
 
 Two install methods are demonstrated below:
 
@@ -25,7 +25,7 @@ git clone https://git.sr.ht/~hristoast/dot-emacs ~/.emacs.d
 mv -v ~/.emacs.d ~/$(date +%F)-emacs.d
 mkdir ~/.emacs.d
 git clone https://git.sr.ht/~hristoast/dot-emacs ~/src/hristoast-dot-emacs
-ln -sv ~/src/hristoast-dot-emacs/{init.el,lib} ~/.emacs.d/
+ln -sv ~/src/hristoast-dot-emacs/{init.el,lib,straight} ~/.emacs.d/
 ```
 
 If you're an Emacs daemon user, your first run should not be in daemon mode so that you can accept the theme (if you choose to use that).  After completing the first successful startup, where all packages and etc are installed, you may start the daemon.
