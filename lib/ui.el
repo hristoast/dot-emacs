@@ -3,6 +3,29 @@
 ;; User interface changes.
 ;;; Code:
 
+(unless (getenv "EMACS_NO_ALERT")
+  ;; https://github.com/jwiegley/alert
+  ;; A Growl-like alerts notifier for Emacs
+  (use-package alert
+    :straight t
+    :config
+    (let ((h/alert/styles
+           #s(hash-table
+              size 8
+              test equal
+              data
+              ("growl" growl
+               "libnotify" libnotify
+               "log" log
+               "message" message
+               "mode-line" mode-line
+               "notifications" notifications
+               "osx-notifier" osx-notifier
+               "x11" x11)))
+          (h/alert/default-style "libnotify"))
+      (setq-default alert-default-style (gethash (or (getenv "EMACS_ALERT_STYLE") h/alert/default-style)
+                                                 h/alert/styles nil)))))
+
 (unless (getenv "EMACS_NO_DIFF_HL") ;; Don't use diff-hl.
   ;; diff-hl - highlight changes/diffs
   ;; https://github.com/dgutov/diff-hl
