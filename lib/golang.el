@@ -19,6 +19,9 @@
 (use-package go-mode
   ;; https://github.com/golang/tools/blob/d33eef8e6825f50394356b51ff2bbbe3d30e07e7/gopls/doc/user.md#installation
   ;; GO111MODULE=on go get golang.org/x/tools/gopls@latest
+  ;; TODO: when i update use-package, do this:
+  ;; :ensure-system-package
+  ;; ("~/.local/go/bin/gopls" . "GOPATH=$HOME/.local/go go get golang.org/x/tools/gopls@latest")
   :straight t
   :init
   (add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
@@ -27,7 +30,6 @@
               (lsp-register-custom-settings
                '(("gopls.completeUnimported" t t)
                  ("gopls.staticcheck" t t)))))
-  (add-hook 'go-mode-hook 'lsp-deferred)
-  (add-hook 'go-mode-hook 'go-eldoc-setup))
+  (add-hook 'go-mode-hook 'lsp-deferred))
 
 ;;; golang.el ends here
