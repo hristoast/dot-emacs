@@ -68,6 +68,13 @@
   ;; https://www.flycheck.org/en/latest/user/installation.html#use-package
   :init (global-flycheck-mode))
 
+;; Ignore "vendor" directories when rgrepping. Useful for some go projects I've worked on.
+(use-package grep
+  :straight nil
+  :config
+  (add-to-list 'grep-find-ignored-directories ".cache")
+  (add-to-list 'grep-find-ignored-directories "vendor"))
+
 ;; Interactively Do Things
 ;; http://emacswiki.org/emacs/InteractivelyDoThings
 (use-package ido :config (ido-mode t) :straight t)
@@ -90,7 +97,6 @@
 
 ;; Provides language-aware editing commands based on source code parsers.
 ;; http://www.gnu.org/software/emacs/manual/html_node/emacs/Semantic.html
-;; (require 'semantic)
 (use-package semantic
   :straight t
   :commands semantic-mode
