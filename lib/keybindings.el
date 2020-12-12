@@ -38,6 +38,14 @@
 (global-set-key (kbd "C-^") 'enlarge-window)
 (global-set-key (kbd "C-c g l") 'goto-line)
 
+(defun toggle-fc-and-ws ()
+  "Toggle displaying the fill column indicator and `whitespace-mode' in one handy function."
+  (interactive)
+  (display-fill-column-indicator-mode 'toggle)
+  (whitespace-mode 'toggle))
+
+(global-set-key (kbd "<f11>") 'toggle-fc-and-ws)
+
 ;; Kill this buffer!
 (substitute-key-definition 'kill-buffer 'kill-buffer-and-window global-map)
 
