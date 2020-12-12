@@ -34,6 +34,10 @@
     :config
     (global-diff-hl-mode)))
 
+;; https://github.com/akreisher/eshell-syntax-highlighting/
+(unless (getenv "EMACS_NO_ESHELL_SYNTAX")
+  (use-package eshell-syntax-highlighting :straight t :defer t))
+
 (unless (getenv "EMACS_NO_FIREPLACE") ;; Don't allow Emacs to be a warm cozy fireplace.
 ;;; Warm cozy fireplace -- https://github.com/johanvts/emacs-fireplace
   (use-package fireplace
