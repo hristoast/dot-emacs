@@ -95,9 +95,6 @@
 
 ;; Interactively Do Things
 ;; http://emacswiki.org/emacs/InteractivelyDoThings
-;; TODO: https://old.reddit.com/r/emacs/comments/its1jd/ido_mode_autocompletes_and_doesnt_allow_me_to/g5gyofx/
-;; TODO: https://old.reddit.com/r/emacs/comments/its1jd/ido_mode_autocompletes_and_doesnt_allow_me_to/g5gg76k/
-;; TODO: https://old.reddit.com/r/emacs/comments/its1jd/ido_mode_autocompletes_and_doesnt_allow_me_to/g5gefz5/
 (use-package ido :config (ido-mode t) :straight t)
 
 ;; marginalia.el - Marginalia in the minibuffer
