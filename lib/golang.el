@@ -24,11 +24,6 @@
   ;; ("~/.local/go/bin/gopls" . "GOPATH=$HOME/.local/go go get golang.org/x/tools/gopls@latest")
   :straight t
   :init
-  (add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
-  (add-hook 'go-mode-hook
-            (lambda ()
-              (lsp-register-custom-settings
-               '(("gopls.completeUnimported" t t)
-                 ("gopls.staticcheck" t t))))))
+  (add-hook 'go-mode-hook #'lsp-go-install-save-hooks))
 
 ;;; golang.el ends here
