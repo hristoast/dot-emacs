@@ -54,6 +54,9 @@
   (use-package dimmer
     :straight t
     :config
+    (setq
+     dimmer-fraction 0.40
+     dimmer-watch-frame-focus-events nil)
     (dimmer-mode t)))
 
 ;; A minor mode that guesses the indentation offset originally used for
