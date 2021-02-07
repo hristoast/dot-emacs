@@ -35,12 +35,26 @@
   ;; https://github.com/joaotavora/eglot
   (use-package eglot :straight t
     ;; Hook into modes that I always want LSP functionality in.
-    :hook ((gdscript-mode . eglot-ensure)
-           (go-mode . eglot-ensure)
-           (c-mode . eglot-ensure)
-           (c++-mode . eglot-ensure)
-           (js-mode . eglot-ensure)
-           (python-mode . eglot-ensure)
-           (sh-mode . eglot-ensure))))
+    :hook
+    ((gdscript-mode . eglot-ensure)
+     (go-mode . eglot-ensure)
+     (c-mode . eglot-ensure)
+     (c++-mode . eglot-ensure)
+     (js-mode . eglot-ensure)
+     (python-mode . eglot-ensure)
+     (sh-mode . eglot-ensure))
+    :init
+    (setq eglot-workspace-configuration
+          '((pyls
+             (plugins
+              (mccabe
+               (enabled . nil))
+              (pycodestyle
+               (enabled . nil))
+              (pydocstyle
+               (enabled . t))
+              (jedi_completion
+               (fuzzy . t)
+               (follow_builtin_imports . :json-false))))))))
 
 ;;; h-lsp.el ends here
