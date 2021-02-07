@@ -48,6 +48,14 @@
 ;; https://github.com/abo-abo/swiper / https://melpa.org/#/counsel
 (use-package counsel :defer t :straight t)
 
+(unless "EMACS_NO_DIMMER"
+  ;; Interactively highlight which buffer is active by dimming the others.
+  ;; https://github.com/gonewest818/dimmer.el
+  (use-package dimmer
+    :straight t
+    :config
+    (dimmer-mode t)))
+
 ;; A minor mode that guesses the indentation offset originally used for
 ;; creating source code files and transparently adjusts the corresponding
 ;; settings in Emacs, making it more convenient to edit foreign files
