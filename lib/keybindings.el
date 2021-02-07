@@ -37,6 +37,7 @@
 (global-set-key (kbd "C-x C-v") 'clipboard-yank)
 (global-set-key (kbd "C-^") 'enlarge-window)
 (global-set-key (kbd "C-c g l") 'goto-line)
+(global-set-key (kbd "C-c e d") 'eldoc-doc-buffer)
 
 (defun toggle-fc-and-ws ()
   "Toggle displaying the fill column indicator and `whitespace-mode' in one handy function."
