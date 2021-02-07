@@ -55,7 +55,7 @@
     :straight t
     :config
     (setq
-     dimmer-fraction 0.40
+     dimmer-fraction 0.25
      dimmer-watch-frame-focus-events nil)
     (dimmer-mode t)))
 
