@@ -10,11 +10,11 @@
       (use-package lsp-mode
         :straight t
         :hook ((gdscript-mode . lsp-deferred)
-               (go-mode .
-                        (lsp-deferred (lambda ()
+               (go-mode . lsp-deferred )
+               (go-mode . (lambda ()
                                         (lsp-register-custom-settings
                                          '(("gopls.completeUnimported" t t)
-                                           ("gopls.staticcheck" t t))))))
+                                           ("gopls.staticcheck" t t)))))
                (c-mode . lsp-deferred)
                (c++-mode . lsp-deferred)
                (js-mode . lsp-deferred)
@@ -41,14 +41,6 @@
            (c++-mode . eglot-ensure)
            (js-mode . eglot-ensure)
            (python-mode . eglot-ensure)
-           (sh-mode . eglot-ensure))
-    :init
-    (setq
-     lsp-clients-python-library-directories
-     (concat (getenv "HOME") ".local/lib/python3.8/site-packages"))
-    :config
-    ;; Disable python "features" that are useless to me
-    (setq lsp-pyls-plugins-mccabe-enabled nil
-          lsp-pyls-plugins-pycodestyle-enabled nil)))
+           (sh-mode . eglot-ensure))))
 
 ;;; h-lsp.el ends here
