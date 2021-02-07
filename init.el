@@ -16,7 +16,7 @@
  custom-file (or (getenv "EMACS_CUSTOM_FILE")
                  (concat user-emacs-directory "/my-custom.el")))
 
-;; https://github.com/raxod502/straight.el/blob/a7f94876b2bf96d2595706270be6630ecc94f0d3/README.md#getting-started
+;; https://github.com/raxod502/straight.el/blob/2d407bccd9378f1d5218f8ba2ae85c6be73fbaf1/README.md#getting-started
 (defvar bootstrap-version)
 (let ((bootstrap-file
        (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
@@ -24,13 +24,13 @@
   (unless (file-exists-p bootstrap-file)
     (with-current-buffer
         (url-retrieve-synchronously
-         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+         "https://raw.githubusercontent.com/raxod502/straight.el/2d407bccd9378f1d5218f8ba2ae85c6be73fbaf1/install.el"
          'silent 'inhibit-cookies)
       (goto-char (point-max))
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 
-;; https://github.com/raxod502/straight.el/blob/a7f94876b2bf96d2595706270be6630ecc94f0d3/README.md#integration-with-use-package
+;; https://github.com/raxod502/straight.el/blob/2d407bccd9378f1d5218f8ba2ae85c6be73fbaf1/README.md#integration-with-use-package
 (straight-use-package 'use-package)
 
 ;; Diminished modes are minor modes with no modeline display
