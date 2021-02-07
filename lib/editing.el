@@ -100,6 +100,10 @@
 ;; TODO: https://old.reddit.com/r/emacs/comments/its1jd/ido_mode_autocompletes_and_doesnt_allow_me_to/g5gefz5/
 (use-package ido :config (ido-mode t) :straight t)
 
+;; marginalia.el - Marginalia in the minibuffer
+;; https://github.com/minad/marginalia
+(use-package marginalia :straight t :init (marginalia-mode))
+
 ;; Emacs rainbow delimiters mode
 ;; https://github.com/Fanael/rainbow-delimiters
 (use-package rainbow-delimiters
