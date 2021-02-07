@@ -48,7 +48,7 @@
 ;; https://github.com/abo-abo/swiper / https://melpa.org/#/counsel
 (use-package counsel :defer t :straight t)
 
-(unless "EMACS_NO_DIMMER"
+(unless (getenv "EMACS_NO_DIMMER")
   ;; Interactively highlight which buffer is active by dimming the others.
   ;; https://github.com/gonewest818/dimmer.el
   (use-package dimmer
@@ -83,8 +83,21 @@
   (add-to-list 'grep-find-ignored-directories ".cache")
   (add-to-list 'grep-find-ignored-directories "vendor"))
 
+(unless (getenv "EMACS_NO_HL_TODO")
+  ;; Highlight TODO keywords
+  ;; https://github.com/tarsius/hl-todo
+  (use-package hl-todo
+    :straight t
+    :config
+    (setq hl-todo-keyword-faces
+      '(("TODO"   . "#ffff00")))
+    (global-hl-todo-mode t)))
+
 ;; Interactively Do Things
 ;; http://emacswiki.org/emacs/InteractivelyDoThings
+;; TODO: https://old.reddit.com/r/emacs/comments/its1jd/ido_mode_autocompletes_and_doesnt_allow_me_to/g5gyofx/
+;; TODO: https://old.reddit.com/r/emacs/comments/its1jd/ido_mode_autocompletes_and_doesnt_allow_me_to/g5gg76k/
+;; TODO: https://old.reddit.com/r/emacs/comments/its1jd/ido_mode_autocompletes_and_doesnt_allow_me_to/g5gefz5/
 (use-package ido :config (ido-mode t) :straight t)
 
 ;; Emacs rainbow delimiters mode
