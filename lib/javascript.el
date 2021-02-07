@@ -3,9 +3,6 @@
 ;; Packages related to javascript.
 ;;; Code:
 
-(use-package javascript-mode
-  :no-require t
-  :init
-  (add-hook 'js-mode-hook 'lsp-deferred))
+(use-package javascript-mode :no-require t :defer t)
 
 ;;; javascript.el ends here

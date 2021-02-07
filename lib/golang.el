@@ -29,7 +29,6 @@
             (lambda ()
               (lsp-register-custom-settings
                '(("gopls.completeUnimported" t t)
-                 ("gopls.staticcheck" t t)))))
-  (add-hook 'go-mode-hook 'lsp-deferred))
+                 ("gopls.staticcheck" t t))))))
 
 ;;; golang.el ends here

@@ -34,7 +34,7 @@
         (lsp))))
 
   (add-hook 'before-save-hook 'h/gdscript-format-buffer-save-hook)
-  (add-hook 'gdscript-mode-hook 'lsp-deferred)
+
   (setq auto-mode-alist (append '(("\\.godot$" . conf-toml-mode))
                                 '(("\\.tres$" . conf-toml-mode))
                                 '(("\\.tscn$" . conf-toml-mode))

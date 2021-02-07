@@ -38,8 +38,6 @@
       (goto-char (posn-point es))
       (pydoc-at-point)))
 
-  (add-hook 'python-mode-hook 'blacken-mode)
-  ;; Python configuration for lsp-mode done in lsp.el...
-  (add-hook 'python-mode-hook 'lsp-deferred))
+  (add-hook 'python-mode-hook 'blacken-mode))
 
 ;;; h-python.el ends here
