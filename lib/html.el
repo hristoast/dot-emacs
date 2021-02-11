@@ -7,13 +7,12 @@
 ;; https://www.gnu.org/software/emacs/manual/html_node/emacs/HTML-Mode.html
 (use-package html-mode
   :no-require t
-  :init (add-hook 'html-mode-hook 'skewer-html-mode))
+  :hook (web-mode . skewer-html-mode))
 
 ;; Live web development in Emacs
 ;; https://github.com/skeeto/skewer-mode
 (use-package skewer-mode
   :straight t
-  :defer t
   :init
   (setq-default httpd-root (concat user-emacs-directory "/httpd"))
   :bind

@@ -19,8 +19,8 @@
 (use-package company
   :straight t
   :diminish company-mode
+  :hook (after-init . global-company-mode)
   :config
-  (add-hook 'after-init-hook 'global-company-mode)
   (setq
    company-echo-delay 0
    company-idle-delay 0.2
@@ -108,17 +108,16 @@
 ;; https://github.com/Fanael/rainbow-delimiters
 (use-package rainbow-delimiters
   :straight t
-  :init (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
+  :hook (prog-mode . rainbow-delimiters-mode))
 
 ;; Rainbow mode - #000 #fff #f00 #ff0 #00f #0f0 #800080 #00ffff #ff00ff
 ;; https://julien.danjou.info/projects/emacs-packages
 (use-package rainbow-mode
   :straight t
   :diminish rainbow-mode
-  :config
-  (add-hook 'css-mode-hook 'rainbow-mode)
-  (add-hook 'html-mode-hook 'rainbow-mode)
-  (add-hook 'prog-mode-hook 'rainbow-mode))
+  :hook ((css-mode . rainbow-mode)
+         (html-mode . rainbow-mode)
+         (prog-mode . rainbow-mode)))
 
 ;; Provides language-aware editing commands based on source code parsers.
 ;; http://www.gnu.org/software/emacs/manual/html_node/emacs/Semantic.html
@@ -196,8 +195,7 @@
 (use-package ws-butler
   :straight t
   :diminish ws-butler-mode
-  :config
-  (add-hook 'prog-mode-hook 'ws-butler-mode))
+  :hook (prog-mode . ws-butler-mode))
 
 ;; Yet another snippet extension
 ;; http://capitaomorte.github.io/yasnippet/

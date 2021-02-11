@@ -8,11 +8,8 @@
 ;; TODO: don't always load company-ansible
 (use-package yaml-mode
   :straight t
-  :defer t
-  :config
-  (add-hook 'yaml-mode-hook
-            (lambda ()
-              (when (derived-mode-p 'yaml-mode)
-                (add-to-list 'company-backends 'company-ansible)))))
+  :hook (yaml-mode . (lambda ()
+                       (when (derived-mode-p 'yaml-mode)
+                         (add-to-list 'company-backends 'company-ansible)))))
 
 ;;; yaml.el ends here

@@ -13,6 +13,7 @@
              :type git
              :host github
              :repo "GDQuest/emacs-gdscript-mode")
+  :hook (before-save . h/gdscript-format-buffer-save-hook)
   :init
   (bind-key "C-x r s" 'h/godot-run-current-scene-debug)
 
@@ -32,8 +33,6 @@
         (gdscript-format-buffer)
         ;; Gotta run this to get things going again...
         (lsp))))
-
-  (add-hook 'before-save-hook 'h/gdscript-format-buffer-save-hook)
 
   (setq auto-mode-alist (append '(("\\.godot$" . conf-toml-mode))
                                 '(("\\.tres$" . conf-toml-mode))

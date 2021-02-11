@@ -17,9 +17,9 @@
   ("C-c l" . org-store-link)
   ("C-c a" . org-agenda)
   :defer t
+  :hook (org-mode . org-roam-mode)
   :init (setq-default
          org-startup-truncated nil
-         org-support-shift-select t)
-  (add-hook 'org-mode-hook 'org-roam-mode))
+         org-support-shift-select t))
 
 ;;; orgmode.el ends here
