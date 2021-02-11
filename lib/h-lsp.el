@@ -23,6 +23,7 @@
                (sh-mode . lsp-deferred))
         :init
         (setq
+         lsp-prefer-flymake nil
          lsp-clients-python-library-directories
          (concat (getenv "HOME") ".local/lib/python3.8/site-packages"))
         :config
