@@ -44,6 +44,7 @@
      (c++-mode . eglot-ensure)
      (js-mode . eglot-ensure)
      (python-mode . eglot-ensure)
+     (ruby-mode . eglot-ensure)
      (sh-mode . eglot-ensure))
     :init
     (setq eglot-workspace-configuration
