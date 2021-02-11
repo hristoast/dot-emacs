@@ -12,13 +12,14 @@
         :hook ((gdscript-mode . lsp-deferred)
                (go-mode . lsp-deferred )
                (go-mode . (lambda ()
-                                        (lsp-register-custom-settings
-                                         '(("gopls.completeUnimported" t t)
-                                           ("gopls.staticcheck" t t)))))
+                            (lsp-register-custom-settings
+                             '(("gopls.completeUnimported" t t)
+                               ("gopls.staticcheck" t t)))))
                (c-mode . lsp-deferred)
                (c++-mode . lsp-deferred)
                (js-mode . lsp-deferred)
                (python-mode . lsp-deferred)
+               (ruby-mode . lsp-deferred)
                (sh-mode . lsp-deferred))
         :init
         (setq
