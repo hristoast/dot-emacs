@@ -7,37 +7,8 @@
 ;; https://github.com/proofit404/blacken
 (use-package blacken :defer t :straight t)
 
-;; Navigate Python documentation
-;; https://github.com/statmobile/pydoc
-(use-package pydoc :defer t :straight t)
-
 ;; Built into Emacs
 ;; https://www.emacswiki.org/emacs/PythonProgrammingInEmacs
-(use-package python-mode
-  ;; Void package: python3-language-server
-  ;; PyPI packages: pydocstyle==5.0.2 rope==0.17.0 pyls-black==0.4.4
-  :bind
-  ("<S-mouse-1>" . goto-definition-at-point)
-  ("<S-mouse-3>" . quick-pydoc)
-  :init
-  (defun goto-definition-at-point (event)
-    "Move the point to the clicked position
-     and jedi:goto-definition the thing at point."
-    (interactive "e")
-    (let ((es (event-start event)))
-      (select-window (posn-window es))
-      (goto-char (posn-point es))
-      (lsp-goto-implementation)))
-
-  (defun quick-pydoc (event)
-    "Move the point to the clicked position
-     and pydoc the thing at point."
-    (interactive "e")
-    (let ((es (event-start event)))
-      (select-window (posn-window es))
-      (goto-char (posn-point es))
-      (pydoc-at-point)))
-
-  (add-hook 'python-mode-hook 'blacken-mode))
+(use-package python-mode :hook (python-mode . blacken-mode))
 
 ;;; h-python.el ends here
