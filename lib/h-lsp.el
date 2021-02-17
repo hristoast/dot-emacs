@@ -24,6 +24,9 @@
                (ruby-mode . lsp-deferred)
                (sh-mode . lsp-deferred))
         :init
+        ;; Knob to disable the headerline breadcrum stuff
+        (if (getenv "EMACS_LSP_NO_HEADERLINE_BREADCRUMB")
+            (lsp-headerline-breadcrumb-mode 0))
         (setq
          lsp-prefer-flymake nil
          lsp-clients-python-library-directories
@@ -33,6 +36,8 @@
         (setq lsp-pyls-plugins-mccabe-enabled nil
               lsp-pyls-plugins-pycodestyle-enabled nil))
 
+      ;; UI integrations for lsp-mode
+      ;; https://emacs-lsp.github.io/lsp-ui/
       (use-package lsp-ui :straight t))
 
   ;; Emacs Polyglot: an Emacs LSP client that stays out of your way:
