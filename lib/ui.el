@@ -72,8 +72,11 @@
        dashboard-set-heading-icons t
        dashboard-startup-banner (gethash (or (getenv "EMACS_DASHBOARD_BANNER")
                                              h/dashboard/default-banner)
-                                         h/dashboard/banners nil)
-       initial-buffer-choice (lambda () (get-buffer "*dashboard*"))))))
+                                         h/dashboard/banners nil))
+      ;; Don't setup the dashboard when Emacs is started with files as command-line arguments.
+      ;; https://github.com/emacs-dashboard/emacs-dashboard/issues/115#issuecomment-478167057
+      (if (< (length command-line-args) 2)
+          (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))))))
 
 (unless (getenv "EMACS_NO_ALL_THE_ICONS")
   (progn
