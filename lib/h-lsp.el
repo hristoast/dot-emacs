@@ -3,8 +3,35 @@
 ;; Packages related to lsp-mode
 ;;; Code:
 
-(if (getenv "EMACS_LSP_MODE")
-    (progn
+(if (getenv "EMACS_EGLOT")
+  ;; Emacs Polyglot: an Emacs LSP client that stays out of your way:
+  ;; https://github.com/joaotavora/eglot
+  (use-package eglot :straight t
+    ;; Hook into modes that I always want LSP functionality in.
+    :hook
+    ((gdscript-mode . eglot-ensure)
+     (go-mode . eglot-ensure)
+     (c-mode . eglot-ensure)
+     (c++-mode . eglot-ensure)
+     (js-mode . eglot-ensure)
+     (python-mode . eglot-ensure)
+     (ruby-mode . eglot-ensure)
+     (sh-mode . eglot-ensure))
+    :init
+    (setq eglot-workspace-configuration
+          '((pyls
+             (plugins
+              (mccabe
+               (enabled . nil))
+              (pycodestyle
+               (enabled . nil))
+              (pydocstyle
+               (enabled . t))
+              (jedi_completion
+               (fuzzy . t)
+               (follow_builtin_imports . :json-false)))))))
+
+  (progn
       ;; Emacs client/library for the Language Server Protocol
       ;; https://github.com/emacs-lsp/lsp-mode
       (use-package lsp-mode
@@ -37,33 +64,6 @@
 
       ;; UI integrations for lsp-mode
       ;; https://emacs-lsp.github.io/lsp-ui/
-      (use-package lsp-ui :straight t))
-
-  ;; Emacs Polyglot: an Emacs LSP client that stays out of your way:
-  ;; https://github.com/joaotavora/eglot
-  (use-package eglot :straight t
-    ;; Hook into modes that I always want LSP functionality in.
-    :hook
-    ((gdscript-mode . eglot-ensure)
-     (go-mode . eglot-ensure)
-     (c-mode . eglot-ensure)
-     (c++-mode . eglot-ensure)
-     (js-mode . eglot-ensure)
-     (python-mode . eglot-ensure)
-     (ruby-mode . eglot-ensure)
-     (sh-mode . eglot-ensure))
-    :init
-    (setq eglot-workspace-configuration
-          '((pyls
-             (plugins
-              (mccabe
-               (enabled . nil))
-              (pycodestyle
-               (enabled . nil))
-              (pydocstyle
-               (enabled . t))
-              (jedi_completion
-               (fuzzy . t)
-               (follow_builtin_imports . :json-false))))))))
+      (use-package lsp-ui :straight t)))
 
 ;;; h-lsp.el ends here
