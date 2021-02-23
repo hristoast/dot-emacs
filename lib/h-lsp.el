@@ -15,8 +15,7 @@
                               (lsp-deferred)
                               (lsp-register-custom-settings
                                '(("gopls.completeUnimported" t t)
-                                 ("gopls.staticcheck" t t)
-                                 ("gopls.codelenses" nil nil))))))
+                                 ("gopls.staticcheck" t t))))))
                (c-mode . lsp-deferred)
                (c++-mode . lsp-deferred)
                (js-mode . lsp-deferred)
