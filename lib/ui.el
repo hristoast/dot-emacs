@@ -34,6 +34,56 @@
     :config
     (global-diff-hl-mode)))
 
+(unless (getenv "EMACS_NO_DASHBOARD")
+  ;; An extensible emacs startup screen showing you what’s most important.
+  ;; https://github.com/emacs-dashboard/emacs-dashboard
+  (use-package dashboard
+    :straight t
+    :config
+    (dashboard-setup-startup-hook)
+    ;; Allow banner customization through an environment variable
+    (let ((h/dashboard/banners
+           #s(hash-table
+              size 5
+              test equal
+              data
+              ("official" official
+               "logo" logo
+               "1" 1
+               "2" 2
+               "3" 3)))
+          (h/dashboard/default-banner "logo"))
+      (setq
+       dashboard-banner-logo-title (or (getenv "EMACS_DASHBOARD_TITLE")
+                                       "Welcome to Hristos' Emacs")
+       dashboard-footer-messages '("Check out: https://mousikofidi.info/"
+                                   "Check out: https://openmw.org/"
+                                   "Check out: https://soupault.app/"
+                                   "Check out: https://sr.ht/"
+                                   "Don't forget to smile!"
+                                   "Hristos is proud of you!"
+                                   "Keep excited and hack on!"
+                                   "Pssst, try: M-x fireplace"
+                                   "Smile at a stranger today.")
+       dashboard-items '((recents  . 10)
+                         (bookmarks . 10)
+                         (agenda . 10))
+       dashboard-set-file-icons t
+       dashboard-set-heading-icons t
+       dashboard-startup-banner (gethash (or (getenv "EMACS_DASHBOARD_BANNER")
+                                             h/dashboard/default-banner)
+                                         h/dashboard/banners nil)
+       initial-buffer-choice (lambda () (get-buffer "*dashboard*"))))))
+
+(unless (getenv "EMACS_NO_ALL_THE_ICONS")
+  (progn
+    ;; A utility package to collect various Icon Fonts and propertize them within Emacs.
+    ;; https://github.com/domtronn/all-the-icons.el
+    (use-package all-the-icons :straight t)
+    (use-package all-the-icons-dired
+      :straight t
+      :hook (dired-mode . all-the-icons-dired-mode))))
+
 ;; https://github.com/akreisher/eshell-syntax-highlighting/
 (unless (getenv "EMACS_NO_ESHELL_SYNTAX")
   (use-package eshell-syntax-highlighting :straight t :defer t))
