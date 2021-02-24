@@ -71,6 +71,7 @@
       "EMACS_NO_LUA" "lua"
       "EMACS_NO_MARKDOWN" "markdown"
       "EMACS_NO_NGINX" "nginx"
+      "EMACS_NO_OCAML" "h-ocaml"
       "EMACS_NO_ORGMODE" "orgmode"
       "EMACS_NO_PYTHON" "h-python"
       "EMACS_NO_RACKET" "racket"
