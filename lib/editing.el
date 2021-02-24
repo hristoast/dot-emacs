@@ -93,7 +93,9 @@
     :straight t
     :config
     (setq hl-todo-keyword-faces
-      '(("TODO"   . "#ffff00")))
+      '(("FIXME"   . "#ffff00")
+        ("TODO"   . "#ffff00")
+        ("XXX"   . "#ffff00")))
     (global-hl-todo-mode t)))
 
 ;; Interactively Do Things
