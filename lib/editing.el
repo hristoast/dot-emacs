@@ -100,7 +100,12 @@
 
 ;; Interactively Do Things
 ;; http://emacswiki.org/emacs/InteractivelyDoThings
-(use-package ido :config (ido-mode t) :straight t)
+(use-package ido
+  :straight t
+  :config
+  (ido-mode t)
+  ;; https://git.sr.ht/~technomancy/better-defaults/tree/4c5409406ee35c5ba46880c6cfe98df4b14dc631/item/better-defaults.el#L48
+  (setq ido-enable-flex-matching t))
 
 ;; marginalia.el - Marginalia in the minibuffer
 ;; https://github.com/minad/marginalia

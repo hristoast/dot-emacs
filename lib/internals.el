@@ -30,8 +30,14 @@
  inhibit-splash-screen t
  ;; No default scratch
  initial-scratch-message nil
+ ;; https://git.sr.ht/~technomancy/better-defaults/tree/4c5409406ee35c5ba46880c6cfe98df4b14dc631/item/better-defaults.el#L85
+ load-prefer-newer t
+ ;; https://git.sr.ht/~technomancy/better-defaults/tree/4c5409406ee35c5ba46880c6cfe98df4b14dc631/item/better-defaults.el#L82
+ mouse-yank-at-point t
  ;; Show five lines from the previous page when paging up or down
  next-screen-context-lines 5
+ ;; https://git.sr.ht/~technomancy/better-defaults/tree/4c5409406ee35c5ba46880c6cfe98df4b14dc631/item/better-defaults.el#L83
+ require-final-newline t
  ;; Jive with the system clipboard
  select-enable-clipboard t
  coding-system-for-read 'utf-8
@@ -44,7 +50,9 @@
     (load-file custom-file))
 
 (setq-default
-;; Which browser to open links in
+ ;; https://git.sr.ht/~technomancy/better-defaults/tree/4c5409406ee35c5ba46880c6cfe98df4b14dc631/item/better-defaults.el#L81
+ apropos-do-all t
+ ;; Which browser to open links in
  browse-url-browser-function 'browse-url-generic
  browse-url-generic-program "firefox"
  ;; display-time-mode options
@@ -67,6 +75,10 @@
  tab-width 4
  ;; As advised by https://www.emacswiki.org/emacs/TrampMode
  tramp-default-method "ssh")
+
+(unless (getenv "EMACS_NO_SAVE_PLACE")
+  ;; https://git.sr.ht/~technomancy/better-defaults/tree/4c5409406ee35c5ba46880c6cfe98df4b14dc631/item/better-defaults.el#L65-66
+  (save-place-mode 1))
 
 ;; Enable the disabled things
 (put 'downcase-region 'disabled nil)
