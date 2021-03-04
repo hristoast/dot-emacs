@@ -18,8 +18,10 @@
   ("C-c a" . org-agenda)
   :defer t
   :hook (org-mode . org-roam-mode)
-  :init (setq-default
-         org-startup-truncated nil
-         org-support-shift-select t))
+  :init
+  (setq-default
+   org-log-done t
+   org-startup-truncated nil
+   org-support-shift-select t))
 
 ;;; orgmode.el ends here
