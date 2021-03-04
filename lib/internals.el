@@ -3,7 +3,11 @@
 ;; Tweaks to various Emacs internals.
 ;;; Code:
 
-(defconst default-org-file "~/src/org/home.org")
+;; This is here because it needs to happen before org mode is loaded
+(let ((h/org-file (or (getenv "EMACS_DEFAULT_ORG_FILE")
+                      "~/src/org/org_home.org")))
+  (when (file-exists-p h/org-file)
+      (defconst default-org-file h/org-file)))
 
 (defvar whitespace-style
   '(spaces tabs newline space-mark tab-mark newline-mark face))
@@ -66,15 +70,16 @@
  frame-title-format '("%f [%m]")
  ;; Don't automatically 'fix' files with DOS line endings
  inhibit-eol-conversion t
- ;; Org mode stuff
- org-log-done t
- org-agenda-files (list default-org-file)
  ;; No tabs
  indent-tabs-mode nil
  ;; "Tabs" are 4 spaces
  tab-width 4
  ;; As advised by https://www.emacswiki.org/emacs/TrampMode
  tramp-default-method "ssh")
+
+;; Set the default org file when it's bound
+(when (boundp 'default-org-file)
+  (setq-default org-agenda-files (list default-org-file)))
 
 (unless (getenv "EMACS_NO_SAVE_PLACE")
   ;; https://git.sr.ht/~technomancy/better-defaults/tree/4c5409406ee35c5ba46880c6cfe98df4b14dc631/item/better-defaults.el#L65-66
