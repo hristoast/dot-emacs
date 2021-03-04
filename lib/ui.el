@@ -64,7 +64,12 @@
                                    "Hristos is proud of you!"
                                    "Keep excited and hack on!"
                                    "Pssst, try: M-x fireplace"
-                                   "Smile at a stranger today.")
+                                   "Smile at a stranger today."
+                                   "Read about available tweaks here: https://man.sr.ht/~hristoast/dot-emacs/config.md#tweaks"
+                                   "Set these environment variables for a light theme: EMACS_MATERIAL_THEME=light EMACS_SML_THEME=light"
+                                   "Set these environment variables for no extra themes: EMACS_NO_SMART_MODE_LINE=t EMACS_NO_STATUS_EMOJII=t EMACS_NO_THEME=t"
+                                   "Set this environment variable for the dark blue material theme: EMACS_MATERIAL_THEME_BLUE=t"
+                                   "Set this environment variable to change the default org file: EMACS_DEFAULT_ORG_FILE=/path/to/file.org")
        dashboard-items '((recents  . 10)
                          (bookmarks . 10)
                          (agenda . 10))
@@ -130,7 +135,7 @@
         (setq
          sml/shorten-directory t
          sml/theme
-         (gethash (or (getenv "EMACS_USE_SML_THEME") h/sml/default-theme)
+         (gethash (or (getenv "EMACS_SML_THEME") h/sml/default-theme)
                   h/sml/themes nil))
 
         (if (getenv "EMACS_TRUST_SML_THEMES")
@@ -143,17 +148,28 @@
 (unless (getenv "EMACS_NO_THEME") ;; Don't load a theme.
   ;; Color Theme for emacs based on material design colors
   ;; https://github.com/cpaulik/emacs-material-theme
-  ;; TODO: How to use darker grey vs blue colors?
-  ;; Also, allow for using different themes;
-  ;; from a list or perhaps an arbitrary one.
+  ;; But use my fork that always selects grey colors over darkblue.
   (use-package material-theme
-    :straight t
+    :straight (material-theme
+               :type git
+               :host nil
+               :repo "https://git.sr.ht/~hristoast/emacs-material-theme")
     :config
     (if (getenv "EMACS_TRUST_THEMES")
         (setq h/trust-themes t)
       (setq h/trust-themes nil))
 
-    (load-theme 'material h/trust-themes)))
+    (let ((h/material/themes #s(hash-table
+                                size 8
+                                test equal
+                                data
+                                ("dark" material
+                                 "light" material-light)))
+          (h/material/default "dark"))
+      (setq-default h/material/theme (gethash (or (getenv "EMACS_MATERIAL_THEME") h/material/default)
+                                              h/material/themes nil)))
+
+    (load-theme h/material/theme h/trust-themes)))
 
 (if (getenv "EMACS_LINUM")
     ;; http://is.gd/Mw5KiS

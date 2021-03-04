@@ -2,7 +2,7 @@
 
 ## About
 
-My Emacs configuration.  I use it on Emacs 27.1, but it should run fine on Emacs 24 or higher (with some warnings.)  It sports the [Material Theme for Emacs](https://github.com/cpaulik/emacs-material-theme) and [Smart Mode Line](https://github.com/Malabarba/smart-mode-line) with the Dark theme.  I recommend running this configuration in daemon mode - it's great for GUI Emacs or terminal Emacs.
+My Emacs configuration.  I use it on Emacs 27.1, but it should run fine on Emacs 24 or higher (with some warnings.)  It sports [my fork](https://git.sr.ht/~hristoast/emacs-material-theme) of the [Material Theme for Emacs](https://github.com/cpaulik/emacs-material-theme) and [Smart Mode Line](https://github.com/Malabarba/smart-mode-line) with the Dark theme.  I recommend running this configuration in daemon mode - it's great for GUI Emacs or terminal Emacs.
 
 It sets up Emacs with support for a wide variety of languages, as well as other more opinionated things like: color themes, many aspects of Emacs internals, code completion, and much much more.
 
@@ -36,6 +36,6 @@ Large portions of the overall configuration are toggle-able.  See [the config pa
 
 ## Issues/Notes
 
-* When installing, this configuration should not be ran in daemon mode for the first run.
+* When installing, this configuration should not be ran in daemon mode for the first run (you will need to trust themes that are loaded).
 * Some of my keybindings might not work well with terminal Emacs.  If that's an issue, don't load them (see [the config wiki page](https://man.sr.ht/%7Ehristoast/dot-emacs/config.md)).
-* You can view the startup time in the `*Messages*` buffer, look for a line starting with `[STARTUP] Loading ...`.
+* You can view the startup time in the `*Messages*` buffer, look for a line starting with `[STARTUP] Loading ...`, or in the dashboard (unless you disable that).
