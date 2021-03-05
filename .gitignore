@@ -9,3 +9,8 @@ tramp
 elpa/
 snippets/
 my-custom.el
+recentf
+straight/build-cache.el
+straight/build/
+straight/repos/
+transient/
