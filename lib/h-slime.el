@@ -16,9 +16,10 @@
 ;; C-c C-q Invoke slime-close-parens-at-point
 (use-package slime
   :straight t
-  :config
+  :hook
   ;; This breaks the default coloring of SLIME.  Net gain in my opinion.
-  (add-hook 'slime-repl-mode-hook #'rainbow-delimiters-mode)
+  (slime-repl-mode . rainbow-delimiters-mode)
+  :config
   (setq inferior-lisp-program (executable-find "sbcl")
         slime-contribs '(slime-company slime-fancy)
         slime-net-coding-system 'utf-8-unix))
