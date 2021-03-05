@@ -11,6 +11,7 @@
     :hook
     ((gdscript-mode . eglot-ensure)
      (go-mode . eglot-ensure)
+     (web-mode . eglot-ensure)
      (c-mode . eglot-ensure)
      (c++-mode . eglot-ensure)
      (js-mode . eglot-ensure)
@@ -45,6 +46,7 @@
                                  ("gopls.staticcheck" t t))))))
                (c-mode . lsp-deferred)
                (c++-mode . lsp-deferred)
+               (web-mode . lsp-deferred)
                (js-mode . lsp-deferred)
                (python-mode . lsp-deferred)
                (ruby-mode . lsp-deferred)
