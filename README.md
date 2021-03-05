@@ -30,6 +30,8 @@ ln -sv ~/src/hristoast-dot-emacs/{init.el,lib,straight} ~/.emacs.d/
 
 If you're an Emacs daemon user, your first run should not be in daemon mode so that you can accept the theme (if you choose to use that).  After completing the first successful startup, where all packages and etc are installed, you may start the daemon.
 
+After the first run is completed, before closing Emacs be sure to run `M-x all-the-icons-install-fonts RET` so that you get your fonts installed (unless you're not using that).
+
 ## Configuring
 
 Large portions of the overall configuration are toggle-able.  See [the config page](https://man.sr.ht/%7Ehristoast/dot-emacs/config.md) on the wiki for more information.
