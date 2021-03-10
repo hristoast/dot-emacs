@@ -89,14 +89,14 @@
 ;; Maybe load everything. Not loading everything is useful for
 ;; when you want plain Emacs with straight.el and use-package.
 (when (not (getenv "EMACS_VANILLA_SETUP"))
-           (maphash
-            (lambda (env-var filename)
-              (unless (getenv env-var)
-                (let ((el-file (concat user-emacs-directory "lib/" filename ".el")))
-                  (if (file-exists-p el-file)
-                      (load el-file)
-                    (message (concat "Could not load the file: " el-file))))))
-            h/modules))
+  (maphash
+   (lambda (env-var filename)
+     (unless (getenv env-var)
+       (let ((el-file (concat user-emacs-directory "lib/" filename ".el")))
+         (if (file-exists-p el-file)
+             (load el-file)
+           (message (concat "Could not load the file: " el-file))))))
+   h/modules))
 
 ;; How long did we take to load?
 (let ((elapsed
