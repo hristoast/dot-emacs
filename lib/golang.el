@@ -24,7 +24,9 @@
 
       ;; eglot
       (progn
-        (call-interactively 'eglot-format-buffer)
+        ;; TODO: This is apparently wrong
+        ;; Error: (wrong-type-argument commandp eglot-format-buffer)
+        ;; (call-interactively 'eglot-format-buffer)
         (call-interactively 'eglot-code-action-organize-imports))))
   :hook (before-save . h/golang-before-save))
 
