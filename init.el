@@ -40,7 +40,7 @@
 ;; Module definitions
 (defvar h/modules
   #s(hash-table
-     size 39
+     size 40
      data
      ;; "Env var that disables loading if present" "file name in lib/ minus the extension"
      ;; Be sure to check `list-load-path-shadows' every so often!
@@ -57,6 +57,7 @@
       "EMACS_NO_CLOJURE" "clojure"
       "EMACS_NO_CSS" "css"
       "EMACS_NO_DOCKER" "docker"
+      "EMACS_NO_EXTRAS" "h-extras"
       "EMACS_NO_FENNEL" "fennel"
       "EMACS_NO_FISH" "fish"
       "EMACS_NO_GIT" "git"
