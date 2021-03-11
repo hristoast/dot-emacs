@@ -77,6 +77,14 @@
  ;; As advised by https://www.emacswiki.org/emacs/TrampMode
  tramp-default-method "ssh")
 
+;; Exclude files that are commonly visited through non-editing actions.
+(use-package recentf
+  :config
+  (add-to-list 'recentf-exclude ".*src\\/org\\/org_home\\.org$")
+  (add-to-list 'recentf-exclude ".*src\\/org\\/elfeed-dashboard\\.org$")
+  (add-to-list 'recentf-exclude ".*\\.elfeed\\/index$")
+  (add-to-list 'recentf-exclude ".*\\.emacs\\.d\\/bookmarks$"))
+
 ;; Set the default org file when it's bound
 (when (boundp 'default-org-file)
   (setq-default org-agenda-files (list default-org-file)))
