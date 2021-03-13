@@ -40,7 +40,7 @@
 ;; Module definitions
 (defvar h/modules
   #s(hash-table
-     size 40
+     size 39
      data
      ;; "Env var that disables loading if present" "file name in lib/ minus the extension"
      ;; Be sure to check `list-load-path-shadows' every so often!
@@ -77,7 +77,6 @@
       "EMACS_NO_PYTHON" "h-python"
       "EMACS_NO_RACKET" "racket"
       "EMACS_NO_RUBY" "ruby"
-      "EMACS_NO_RUST" "rust"
       "EMACS_NO_SHADERS" "shaders"
       "EMACS_NO_SLIME" "h-slime"
       "EMACS_NO_SYSTEMD" "h-systemd"
