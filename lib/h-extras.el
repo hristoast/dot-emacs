@@ -38,4 +38,9 @@
   (setq rmh-elfeed-org-files (list (or (getenv "EMACS_ELFEED_ORG_FILE")
                                        "~/src/org/elfeed.org"))))
 
+;; A GNU Emacs major mode that acts as a front end to mpc.
+;; https://github.com/jorenvo/simple-mpc
+(unless (getenv "EMACS_NO_MPD")
+  (use-package simple-mpc :straight t :defer t))
+
 ;;; h-extras.el ends here

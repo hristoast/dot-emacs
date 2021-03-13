@@ -83,7 +83,8 @@
   (add-to-list 'recentf-exclude ".*src\\/org\\/org_home\\.org$")
   (add-to-list 'recentf-exclude ".*src\\/org\\/elfeed-dashboard\\.org$")
   (add-to-list 'recentf-exclude ".*\\.elfeed\\/index$")
-  (add-to-list 'recentf-exclude ".*\\.emacs\\.d\\/bookmarks$"))
+  (add-to-list 'recentf-exclude ".*\\.emacs\\.d\\/bookmarks$")
+  (add-to-list 'recentf-exclude "^.*simple-mpc-autoloads\\.el$"))
 
 ;; Set the default org file when it's bound
 (when (boundp 'default-org-file)
