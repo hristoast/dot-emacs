@@ -7,6 +7,7 @@
 (use-package org-roam
   :straight t
   :defer t
+  :diminish org-roam
   :config
   (setq org-roam-directory "~/src/org"))
 
