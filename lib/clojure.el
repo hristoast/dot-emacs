@@ -1,8 +1,9 @@
 ;;; clojure.el -- for clojure functionality
-
 ;;; Commentary:
 ;; Require this from init.el to enable Clojure functionality.
-
+;;
+;; NOTE: I don't use these very often, so they may or may not be up to date.
+;;
 ;;; Code:
 ;; CIDER is a Clojure Interactive Development Environment that Rocks for Emacs
 ;; https://github.com/clojure-emacs/cider

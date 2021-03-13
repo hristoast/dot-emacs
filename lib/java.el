@@ -1,6 +1,9 @@
 ;;; java.el --- Load java packages
 ;;; Commentary:
 ;; Packages related to java.
+;;
+;; NOTE: I don't use this very often, so it may or may not be up to date.
+;;
 ;;; Code:
 
 ;; A Better Java Development Environment for Emacs

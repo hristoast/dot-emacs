@@ -1,6 +1,9 @@
 ;;; terraform.el --- Load terraform packages
 ;;; Commentary:
 ;; Packages related to terraform.
+;;
+;; NOTE: I don't use these very often, so they may or may not be up to date.
+;;
 ;;; Code:
 
 ;; https://github.com/rafalcieslak/emacs-company-terraform
