@@ -13,7 +13,6 @@
 ;; Better comment-toggling
 (global-set-key (kbd "M-/") 'toggle-comment)
 ;; Make text bigger
-(global-set-key (kbd "M-+") 'text-scale-increase)
 (global-set-key (kbd "M-=") 'text-scale-increase)
 (global-set-key (kbd "<f9>") 'text-scale-increase)
 ;; Ctrl-mouse scroll up to make text bigger
@@ -36,7 +35,6 @@
 (global-set-key (kbd "C-x t m") 'menu-bar-mode)
 (global-set-key (kbd "TAB") 'indent-appropriately)
 (global-set-key (kbd "C-x C-v") 'clipboard-yank)
-(global-set-key (kbd "C-^") 'enlarge-window)
 (global-set-key (kbd "C-S-^") 'enlarge-window)
 (global-set-key (kbd "C-%") 'shrink-window)
 (global-set-key (kbd "C-c g l") 'goto-line)
