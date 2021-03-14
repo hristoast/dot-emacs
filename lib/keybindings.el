@@ -14,6 +14,7 @@
 (global-set-key (kbd "M-/") 'toggle-comment)
 ;; Make text bigger
 (global-set-key (kbd "M-+") 'text-scale-increase)
+(global-set-key (kbd "M-=") 'text-scale-increase)
 (global-set-key (kbd "<f9>") 'text-scale-increase)
 ;; Ctrl-mouse scroll up to make text bigger
 (global-set-key (kbd "<C-mouse-4>") 'text-scale-increase)
