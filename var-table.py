@@ -20,8 +20,11 @@ def main():
     for var_dict in var_list:
         el_file = os.path.join(this_dir, "lib", var_dict["file"] + ".el")
         pkg_list = []
-        with open(el_file, "r") as f:
-            lines = f.readlines()
+        try:
+            with open(el_file, "r") as f:
+                lines = f.readlines()
+        except FileNotFoundError:
+            break
 
         var_dict.update({"comment": lines[0].split("---")[-1].strip().rstrip()})
 
@@ -53,10 +56,16 @@ def main():
                 )
             )
         else:
-            print("`{var}` | {desc}".format(var=v["var"], desc=v["comment"]))
+            try:
+                print("`{var}` | {desc}".format(var=v["var"], desc=v["comment"]))
+            except KeyError:
+                pass
 
     for v in pkg_specific_list:
-        print("`{var}` | {desc}".format(var=v["var"], desc=v["comment"]))
+        try:
+            print("`{var}` | {desc}".format(var=v["var"], desc=v["comment"]))
+        except KeyError:
+            pass
 
 
 if __name__ == "__main__":
