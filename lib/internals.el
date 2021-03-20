@@ -80,10 +80,13 @@
 ;; Exclude files that are commonly visited through non-editing actions.
 (use-package recentf
   :config
+  (defvar recentf-exclude)
   (add-to-list 'recentf-exclude ".*src\\/org\\/org_home\\.org$")
   (add-to-list 'recentf-exclude ".*src\\/org\\/elfeed-dashboard\\.org$")
   (add-to-list 'recentf-exclude ".*\\.elfeed\\/index$")
   (add-to-list 'recentf-exclude ".*\\.emacs\\.d\\/bookmarks$")
+  (add-to-list 'recentf-exclude ".*\\.emacs\\.d\\/games\\/tetris-scores$")
+  (add-to-list 'recentf-exclude ".*\\.emacs\\.d\\/games\\/snake-scores$")
   (add-to-list 'recentf-exclude "^.*simple-mpc-autoloads\\.el$"))
 
 ;; Set the default org file when it's bound
