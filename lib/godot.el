@@ -13,11 +13,12 @@
              :type git
              :host github
              :repo "GDQuest/emacs-gdscript-mode")
-  :hook (before-save . h/gdscript-format-buffer-save-hook)
+  :hook
+  (before-save . hristoast-gdscript-format-buffer-save-hook)
   :init
-  (bind-key "C-x r s" 'h/godot-run-current-scene-debug)
+  (bind-key "C-x r s" 'hristoast-godot-run-current-scene-debug)
 
-  (defun h/godot-run-current-scene-debug ()
+  (defun hristoast-godot-run-current-scene-debug ()
     "Run the current scene in debug mode and switch to the output buffer."
     (interactive)
     (progn
@@ -27,7 +28,7 @@
         (gdscript-godot-run-current-scene-debug)
         (switch-to-buffer-other-window godot-buffer))))
 
-  (defun h/gdscript-format-buffer-save-hook ()
+  (defun hristoast-gdscript-format-buffer-save-hook ()
     (when (eq major-mode 'gdscript-mode)
       (progn
         (gdscript-format-buffer)

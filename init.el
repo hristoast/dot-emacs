@@ -38,7 +38,7 @@
 (use-package diminish :straight t)
 
 ;; Module definitions
-(defvar h/modules
+(defvar hristoast-modules
   #s(hash-table
      size 39
      data
@@ -96,7 +96,7 @@
          (if (file-exists-p el-file)
              (load el-file)
            (message (concat "Could not load the file: " el-file))))))
-   h/modules))
+   hristoast-modules))
 
 ;; How long did we take to load?
 (let ((elapsed

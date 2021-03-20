@@ -19,15 +19,15 @@
   :config
   (advice-add 'elfeed-search-quit-window :after #'elfeed-dashboard-update-links)
   :init
-  (let ((h/elfeed-dashboard-file (or (getenv "EMACS_ELFEED_DASHBOARD_FILE")
+  (let ((hristoast-elfeed-dashboard-file (or (getenv "EMACS_ELFEED_DASHBOARD_FILE")
                                      "~/src/org/elfeed-dashboard.org")))
-    (setq elfeed-dashboard-file h/elfeed-dashboard-file)
+    (setq elfeed-dashboard-file hristoast-elfeed-dashboard-file)
     (unless (getenv "EMACS_ELFEED_DASHBOARD_NO_DL")
-      (when (not (file-exists-p h/elfeed-dashboard-file))
+      (when (not (file-exists-p hristoast-elfeed-dashboard-file))
         (shell-command
          (concat
           "curl https://raw.githubusercontent.com/Manoj321/elfeed-dashboard/main/elfeed-dashboard.org -o "
-          h/elfeed-dashboard-file))))))
+          hristoast-elfeed-dashboard-file))))))
 
 ;; Configure the Elfeed RSS reader with an Orgmode file
 ;; https://github.com/remyhonig/elfeed-org

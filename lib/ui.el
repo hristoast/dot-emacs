@@ -9,7 +9,7 @@
   (use-package alert
     :straight t
     :config
-    (let ((h/alert/styles
+    (let ((hristoast-alert-styles
            #s(hash-table
               size 8
               test equal
@@ -22,9 +22,9 @@
                "notifications" notifications
                "osx-notifier" osx-notifier
                "x11" x11)))
-          (h/alert/default-style "libnotify"))
-      (setq-default alert-default-style (gethash (or (getenv "EMACS_ALERT_STYLE") h/alert/default-style)
-                                                 h/alert/styles nil)))))
+          (hristoast-alert-default-style "libnotify"))
+      (setq-default alert-default-style (gethash (or (getenv "EMACS_ALERT_STYLE") hristoast-alert-default-style)
+                                                 hristoast-alert-styles nil)))))
 
 (unless (getenv "EMACS_NO_DIFF_HL") ;; Don't use diff-hl.
   ;; diff-hl - highlight changes/diffs
@@ -42,7 +42,7 @@
     :config
     (dashboard-setup-startup-hook)
     ;; Allow banner customization through an environment variable
-    (let ((h/dashboard/banners
+    (let ((hristoast-dashboard-banners
            #s(hash-table
               size 5
               test equal
@@ -52,8 +52,8 @@
                "1" 1
                "2" 2
                "3" 3)))
-          (h/dashboard/default-banner "logo"))
-      (setq
+          (hristoast-dashboard-default-banner "logo"))
+      (setq-default
        dashboard-banner-logo-title (or (getenv "EMACS_DASHBOARD_TITLE")
                                        "Welcome to Hristos' Emacs")
        dashboard-footer-messages '("Check out: https://mousikofidi.info/"
@@ -76,8 +76,8 @@
        dashboard-set-file-icons t
        dashboard-set-heading-icons t
        dashboard-startup-banner (gethash (or (getenv "EMACS_DASHBOARD_BANNER")
-                                             h/dashboard/default-banner)
-                                         h/dashboard/banners nil))
+                                             hristoast-dashboard-default-banner)
+                                         hristoast-dashboard-banners nil))
       ;; Don't setup the dashboard when Emacs is started with files as command-line arguments.
       ;; https://github.com/emacs-dashboard/emacs-dashboard/issues/115#issuecomment-478167057
       (if (< (length command-line-args) 2)
@@ -97,7 +97,7 @@
   (use-package eshell-syntax-highlighting :straight t :defer t))
 
 (unless (getenv "EMACS_NO_FIREPLACE") ;; Don't allow Emacs to be a warm cozy fireplace.
-;;; Warm cozy fireplace -- https://github.com/johanvts/emacs-fireplace
+  ;; Warm cozy fireplace -- https://github.com/johanvts/emacs-fireplace
   (use-package fireplace
     :straight t
     :init (defvar fireplace-mode-map)
@@ -119,7 +119,7 @@
     ;; A powerful and beautiful mode-line for Emacs.
     ;; https://github.com/Malabarba/smart-mode-line
     ;; TODO: Possibly add support for extra themes (e.g. powerline and solarized)
-    (let ((h/sml/themes
+    (let ((hristoast-sml-themes
            #s(hash-table
               size 3
               test equal
@@ -127,7 +127,7 @@
               ("dark" dark
                "light" light
                "respectful" respectful)))
-          (h/sml/default-theme "dark"))
+          (hristoast-sml-default-theme "dark"))
 
       (use-package smart-mode-line
         :straight t
@@ -135,13 +135,13 @@
         (setq
          sml/shorten-directory t
          sml/theme
-         (gethash (or (getenv "EMACS_SML_THEME") h/sml/default-theme)
-                  h/sml/themes nil))
+         (gethash (or (getenv "EMACS_SML_THEME") hristoast-sml-default-theme)
+                  hristoast-sml-themes nil))
 
         (if (getenv "EMACS_TRUST_SML_THEMES")
             ;; This isn't totally cool but here's an option for it anyways:
             ;; https://github.com/Malabarba/smart-mode-line/blob/f53e380c9aadcba42ed2d4ed6ebc508b5e006519/README.org#installation-issues-faq
-            (setq sml/no-confirm-load-theme t))
+            (setq sml-no-confirm-load-theme t))
 
         (sml/setup))))
 
@@ -156,20 +156,21 @@
                :repo "https://git.sr.ht/~hristoast/emacs-material-theme")
     :config
     (if (getenv "EMACS_TRUST_THEMES")
-        (setq h/trust-themes t)
-      (setq h/trust-themes nil))
+        (setq hristoast-trust-themes t)
+      (setq hristoast-trust-themes nil))
 
-    (let ((h/material/themes #s(hash-table
+    (let ((hristoast-material-themes #s(hash-table
                                 size 8
                                 test equal
                                 data
                                 ("dark" material
                                  "light" material-light)))
-          (h/material/default "dark"))
-      (setq-default h/material/theme (gethash (or (getenv "EMACS_MATERIAL_THEME") h/material/default)
-                                              h/material/themes nil)))
+          (hristoast-material-default "dark"))
+      (setq-default hristoast-material-theme
+                    (gethash (or (getenv "EMACS_MATERIAL_THEME") hristoast-material-default)
+                             hristoast-material-themes nil)))
 
-    (load-theme h/material/theme h/trust-themes)))
+    (load-theme hristoast-material-theme hristoast-trust-themes)))
 
 (if (getenv "EMACS_LINUM")
     ;; http://is.gd/Mw5KiS

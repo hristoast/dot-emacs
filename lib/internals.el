@@ -4,10 +4,10 @@
 ;;; Code:
 
 ;; This is here because it needs to happen before org mode is loaded
-(let ((h/org-file (or (getenv "EMACS_DEFAULT_ORG_FILE")
+(let ((hristoast-org-file (or (getenv "EMACS_DEFAULT_ORG_FILE")
                       "~/src/org/org_home.org")))
-  (when (file-exists-p h/org-file)
-      (defconst default-org-file h/org-file)))
+  (when (file-exists-p hristoast-org-file)
+      (defconst default-org-file hristoast-org-file)))
 
 (defvar whitespace-style
   '(spaces tabs newline space-mark tab-mark newline-mark face))
