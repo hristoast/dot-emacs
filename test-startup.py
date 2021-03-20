@@ -6,16 +6,7 @@
 import subprocess
 
 
-initial_startup = """
-(let ((debug-on-error t)
-      (url-show-status nil)
-      (user-emacs-directory default-directory)
-      (user-init-file (expand-file-name "init.el"))
-      (load-path (delq default-directory load-path)))
-  (load-file user-init-file)
-  (run-hooks (quote after-init-hook)))"""
-
-secondary_startup = """
+startup_lisp = """
 (let ((debug-on-error t)
       (url-show-status nil)
       (user-emacs-directory default-directory)
@@ -37,8 +28,7 @@ def start_emacs(title, eval_str):
 try:
     subprocess.check_call(["emacs", "--version"])
     print()
-    start_emacs("initial startup", initial_startup)
-    start_emacs("secondary startup", secondary_startup)
+    start_emacs("initial startup", startup_lisp)
 except subprocess.CalledProcessError as e:
     exit(e.returncode)
 else:
