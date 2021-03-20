@@ -7,9 +7,9 @@
 (use-package org-roam
   :straight t
   :defer t
-  :diminish org-roam
+  :diminish org-roam-mode
   :config
-  (setq org-roam-directory "~/src/org"))
+  (setq-default org-roam-directory "~/src/org"))
 
 ;; https://orgmode.org/elpa.html
 (use-package org-plus-contrib
