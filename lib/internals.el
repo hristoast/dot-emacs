@@ -12,6 +12,8 @@
 (defvar whitespace-style
   '(spaces tabs newline space-mark tab-mark newline-mark face))
 
+(use-package eldoc :diminish eldoc-mode)
+
 ;; Emacs highlights misspellings only in comments or strings
 (flyspell-prog-mode)
 ;; http://www.gnu.org/software/emacs/manual/html_node/emacs/Autorevert.html
