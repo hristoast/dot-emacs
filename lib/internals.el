@@ -113,13 +113,14 @@
     ;; No bell/beeping by default.
     (setq ring-bell-function 'ignore)))
 
-;; "zoning out" can use a lot of CPU, so it may be desireable to not do that.
-(unless (getenv "EMACS_NO_ZONE_OUT")
-  (use-package zone
-    :straight t
-    :bind
-    ("C-c z z" . zone)
-    :config
+(use-package zone
+  :straight t
+  :bind
+  ("C-c z z" . zone)
+  :config
+  ;; "zoning out" can use a lot of CPU,
+  ;; don't do the timeout thing by default.
+  (when (getenv "EMACS_ZONE_OUT")
     (let ((timeout-env-var (getenv "EMACS_ZONE_TIMEOUT")))
       ;; The env var could be nil, so test for it
       ;; before trying to turn it into a number.
