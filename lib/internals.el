@@ -113,6 +113,28 @@
     ;; No bell/beeping by default.
     (setq ring-bell-function 'ignore)))
 
+(unless (getenv "EMACS_NO_PULSE")
+  ;; THANKS: https://karthinks.com/software/batteries-included-with-emacs/
+  (defun pulse-line (&rest _)
+    "Pulse the current line."
+    (pulse-momentary-highlight-one-line (point)))
+
+  (dolist (command '(scroll-up-command
+                     scroll-down-command
+                     recenter-top-bottom
+                     other-window
+                     ;; TODO: CTRLF places point in the minibuffer, so it isn't very useful to pulse.
+                     ;; TODO: Figure out how to get that, and pulse it.
+                     ;; ctrlf-backward-default
+                     ;; ctrlf-forward-default
+                     isearch-repeat-backward
+                     isearch-repeat-forward
+                     windmove-left
+                     windmove-right
+                     windmove-up
+                     windmove-down))
+    (advice-add command :after #'pulse-line)))
+
 (use-package zone
   :straight t
   :bind
