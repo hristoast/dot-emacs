@@ -33,7 +33,8 @@
   (setq
    lsp-prefer-flymake nil
    lsp-clients-python-library-directories
-   (concat (getenv "HOME") ".local/lib/python3.8/site-packages"))
+   ;;TODO: Dehardcode this path
+   (concat (getenv "HOME") ".local/lib/python3.9/site-packages"))
   :config
   ;; Disable python "features" that are useless to me
   (setq lsp-pyls-plugins-mccabe-enabled nil
