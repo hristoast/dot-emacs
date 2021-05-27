@@ -89,6 +89,10 @@
   (add-to-list 'recentf-exclude ".*\\.emacs\\.d\\/bookmarks$")
   (add-to-list 'recentf-exclude ".*\\.emacs\\.d\\/games\\/tetris-scores$")
   (add-to-list 'recentf-exclude ".*\\.emacs\\.d\\/games\\/snake-scores$")
+  (add-to-list 'recentf-exclude ".*\\.emacs\\.d\\/straight\\/build\\/ctrlf\\/ctrlf-autoloads.el$")
+  (add-to-list 'recentf-exclude ".*\\.emacs\\.d\\/straight\\/build\\/selectrum-prescient\\/selectrum-prescient-autoloads.el$")
+  (add-to-list 'recentf-exclude ".*\\.emacs\\.d\\/straight\\/build\\/selectrum\\/selectrum-autoloads.el$")
+  (add-to-list 'recentf-exclude ".*\\.emacs\\.d\\/straight\\/build\\/prescient\\/prescient-autoloads.el$")
   (add-to-list 'recentf-exclude "^.*simple-mpc-autoloads\\.el$"))
 
 ;; Set the default org file when it's bound
@@ -134,6 +138,22 @@
                      windmove-up
                      windmove-down))
     (advice-add command :after #'pulse-line)))
+
+;; ⌨ Emacs finally learns how to ctrl+F.
+;; https://github.com/raxod502/ctrlf
+(use-package ctrlf
+  :straight t
+  :config
+  (ctrlf-mode +1))
+
+;; 🔔 Better solution for incremental narrowing in Emacs.
+;; https://github.com/raxod502/selectrum
+(use-package selectrum-prescient
+  :straight t
+  :config
+  (selectrum-mode +1)
+  (selectrum-prescient-mode +1)
+  (prescient-persist-mode +1))
 
 (use-package zone
   :straight t

@@ -44,10 +44,6 @@
   (set-face-attribute
    'company-tooltip-common-selection nil :foreground "black" :weight 'bold))
 
-;; Various completion functions using Ivy
-;; https://github.com/abo-abo/swiper / https://melpa.org/#/counsel
-(use-package counsel :defer t :straight t)
-
 (unless (getenv "EMACS_NO_DIMMER")
   ;; Interactively highlight which buffer is active by dimming the others.
   ;; https://github.com/gonewest818/dimmer.el
