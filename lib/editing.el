@@ -150,9 +150,7 @@
   (smartparens-global-mode 1)
   ;; Fix usage of ' in Lisp modes
   ;; THANKS: https://github.com/Fuco1/smartparens/issues/286#issuecomment-32324743
-  ;; (eval) is used as a hack to quiet Flycheck errors about (sp-with-modes)
-  (eval
-   '(sp-with-modes sp-lisp-modes
+  (sp-with-modes sp-lisp-modes
       ;; disable ', it's the quote character!
       (sp-local-pair "'" nil :actions nil)
       ;; also only use the pseudo-quote inside strings where it serve as
@@ -164,15 +162,10 @@
                                     ((equal ms "'")
                                      (or (sp--org-skip-markup ms mb me)
                                          (not (sp-point-in-string-or-comment))))
-                                    (t (not (sp-point-in-string-or-comment))))))))
+                                    (t (not (sp-point-in-string-or-comment)))))))
   ;; Don't pair { in web-mode
-  (eval
-   '(sp-with-modes 'web-mode
-      (sp-local-pair "\{" nil :actions nil))))
-
-;;  Emacs isearch with an overview. Oh, man!
-;; https://github.com/abo-abo/swiper
-(use-package swiper :straight t)
+  (sp-with-modes 'web-mode
+    (sp-local-pair "\{" nil :actions nil)))
 
 ;; undo-tree.el --- Treat undo history as a tree
 ;; http://www.dr-qubit.org/undo-tree/undo-tree.el
