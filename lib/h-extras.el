@@ -6,6 +6,7 @@
 
 ;; TODO: https://github.com/pashky/restclient.el
 ;; TODO: https://github.com/rnkn/fountain-mode
+;; TODO: https://github.com/skuro/plantuml-mode
 
 ;; An Emacs web feeds client
 ;; https://github.com/skeeto/elfeed

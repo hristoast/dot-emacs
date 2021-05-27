@@ -113,6 +113,8 @@
   :straight t
   :hook (prog-mode . rainbow-delimiters-mode))
 
+;; TODO: https://github.com/karthink/popper
+
 ;; "Semantic Highlighting" for Emacs
 ;; https://github.com/Fanael/rainbow-identifiers
 ;; (when (getenv "EMACS_SEMANTIC_HIGHLIGHTING")
