@@ -113,6 +113,13 @@
   :straight t
   :hook (prog-mode . rainbow-delimiters-mode))
 
+;; "Semantic Highlighting" for Emacs
+;; https://github.com/Fanael/rainbow-identifiers
+;; (when (getenv "EMACS_SEMANTIC_HIGHLIGHTING")
+;;   (use-package rainbow-identifiers
+;;     :straight t
+;;     :hook (prog-mode . rainbow-identifiers-mode)))
+
 ;; Rainbow mode - #000 #fff #f00 #ff0 #00f #0f0 #800080 #00ffff #ff00ff
 ;; https://julien.danjou.info/projects/emacs-packages
 (use-package rainbow-mode
