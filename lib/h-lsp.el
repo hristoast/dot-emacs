@@ -31,6 +31,9 @@
   (if (getenv "EMACS_LSP_NO_HEADERLINE_BREADCRUMB")
       (lsp-headerline-breadcrumb-mode 0))
   (setq
+   ;; https://emacs-lsp.github.io/lsp-mode/page/performance/
+   gc-cons-threshold 25600000
+   read-process-output-max (* 1024 1024)
    lsp-prefer-flymake nil
    lsp-clients-python-library-directories
    ;;TODO: Dehardcode this path
