@@ -92,9 +92,14 @@
       :straight t
       :hook (dired-mode . all-the-icons-dired-mode))))
 
+;; Syntax highlighting for Eshell
 ;; https://github.com/akreisher/eshell-syntax-highlighting/
 (unless (getenv "EMACS_NO_ESHELL_SYNTAX")
-  (use-package eshell-syntax-highlighting :straight t :defer t))
+  (use-package eshell-syntax-highlighting
+    :after esh-mode
+    :straight t
+    :config
+    (eshell-syntax-highlighting-global-mode +1)))
 
 ;; Display some system information when launching Eshell
 ;; https://github.com/Phundrak/eshell-info-banner.el
