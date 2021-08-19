@@ -107,6 +107,11 @@
 ;; https://github.com/minad/marginalia
 (use-package marginalia :straight t :init (marginalia-mode))
 
+;; Enable code-folding for prog-mode modes
+(use-package prog-mode
+  :straight nil
+  :hook (prog-mode . hs-minor-mode))
+
 ;; Emacs rainbow delimiters mode
 ;; https://github.com/Fanael/rainbow-delimiters
 (use-package rainbow-delimiters

@@ -39,6 +39,12 @@
 (global-set-key (kbd "C-%") 'shrink-window)
 (global-set-key (kbd "C-c g l") 'goto-line)
 (global-set-key (kbd "C-c e d") 'eldoc-doc-buffer)
+;; Code folding
+(global-set-key (kbd "C-x C-a f") 'hs-hide-all)
+(global-set-key (kbd "C-x C-a c") 'hs-show-all)
+(global-set-key (kbd "<backtab>") 'hs-show-all)
+(global-set-key (kbd "C-x f") 'hs-hide-block)
+(global-set-key (kbd "C-x c") 'hs-show-block)
 
 (defun toggle-fc-and-ws ()
   "Toggle displaying the fill column indicator and `whitespace-mode' in one handy function."
