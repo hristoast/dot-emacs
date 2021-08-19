@@ -22,6 +22,7 @@
   :init
   (setq-default
    org-log-done t
+   org-startup-folded nil
    org-startup-truncated nil
    org-support-shift-select t))
 
