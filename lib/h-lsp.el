@@ -9,7 +9,8 @@
 (use-package lsp-mode
   :straight t
   :hook
-  ((gdscript-mode . lsp-deferred)
+  ((lsp-mode . lsp-enable-which-key-integration)
+   (gdscript-mode . lsp-deferred)
    (go-mode . (lambda ()
                 (progn
                   (lsp-deferred)
