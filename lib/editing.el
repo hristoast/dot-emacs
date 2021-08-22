@@ -46,6 +46,7 @@
 
 (unless (getenv "EMACS_NO_COMPANY_ICONS")
   (use-package company-box
+    :diminish company-box-mode
     :straight t
     :hook (company-mode . company-box-mode)))
 
@@ -111,6 +112,8 @@
 ;; marginalia.el - Marginalia in the minibuffer
 ;; https://github.com/minad/marginalia
 (use-package marginalia :straight t :init (marginalia-mode))
+
+(use-package hideshow :straight nil :diminish hs-minor-mode)
 
 ;; Enable code-folding for prog-mode modes
 (use-package prog-mode
