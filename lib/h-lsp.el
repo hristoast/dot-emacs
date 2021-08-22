@@ -32,7 +32,8 @@
       (lsp-headerline-breadcrumb-mode 0))
   (setq
    ;; https://emacs-lsp.github.io/lsp-mode/page/performance/
-   gc-cons-threshold 25600000
+   gc-cons-threshold (* 100 1024 1024)
+   lsp-idle-delay 0.1
    read-process-output-max (* 1024 1024)
    lsp-prefer-flymake nil
    lsp-clients-python-library-directories
