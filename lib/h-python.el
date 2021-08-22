@@ -15,4 +15,7 @@
 ;; https://github.com/microsoft/pyright
 (use-package lsp-pyright :straight t :defer t)
 
+;; TODO: required system-level package:
+;; pip install python-lsp-server
+
 ;;; h-python.el ends here
