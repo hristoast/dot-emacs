@@ -31,6 +31,7 @@
  ("emacs-gdscript-mode" . "b7bfa6a3b294039f5093f85e4ff809ff05333abd")
  ("emacs-hcl-mode" . "c3d1158ad1a64f06aa8986ab1cdea6b7fbdd4bf7")
  ("emacs-web-server" . "22ce66ea43e0eadb9ec1d691a35d9695fc29cee6")
+ ("emacs-which-key" . "7a10ff66154c03f277a009aab8861889cbbe2618")
  ("emacsmirror-mirror" . "cf4385804420024f63f41b1bc39c6e2c51e51a20")
  ("emacsql" . "9dca5996168c4963eb67e61c7f17fdcb8228e314")
  ("emacsql-sqlite3" . "50aa9bdd76b0d18bf80526cff13a69fe306ee29c")

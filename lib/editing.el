@@ -199,6 +199,13 @@
    undo-tree-visualizer-timestamps t)
   (global-undo-tree-mode))
 
+;; Emacs package that displays available keybindings in popup
+;; https://github.com/justbur/emacs-which-key/
+(use-package which-key
+  :diminish which-key
+  :straight t
+  :config (which-key-mode))
+
 ;; windmove, built into Emacs: http://is.gd/63r6U0
 (use-package windmove
   :straight t
