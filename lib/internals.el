@@ -89,10 +89,7 @@
   (add-to-list 'recentf-exclude ".*\\.emacs\\.d\\/bookmarks$")
   (add-to-list 'recentf-exclude ".*\\.emacs\\.d\\/games\\/tetris-scores$")
   (add-to-list 'recentf-exclude ".*\\.emacs\\.d\\/games\\/snake-scores$")
-  (add-to-list 'recentf-exclude ".*\\.emacs\\.d\\/straight\\/build\\/ctrlf\\/ctrlf-autoloads.el$")
-  (add-to-list 'recentf-exclude ".*\\.emacs\\.d\\/straight\\/build\\/selectrum-prescient\\/selectrum-prescient-autoloads.el$")
-  (add-to-list 'recentf-exclude ".*\\.emacs\\.d\\/straight\\/build\\/selectrum\\/selectrum-autoloads.el$")
-  (add-to-list 'recentf-exclude ".*\\.emacs\\.d\\/straight\\/build\\/prescient\\/prescient-autoloads.el$")
+  (add-to-list 'recentf-exclude ".*\\.emacs\\.d\\/straight\\/build\\/.*$")
   (add-to-list 'recentf-exclude "^.*simple-mpc-autoloads\\.el$"))
 
 ;; Set the default org file when it's bound
