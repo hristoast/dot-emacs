@@ -44,6 +44,11 @@
   (set-face-attribute
    'company-tooltip-common-selection nil :foreground "black" :weight 'bold))
 
+(unless (getenv "EMACS_NO_COMPANY_ICONS")
+  (use-package company-box
+    :straight t
+    :hook (company-mode . company-box-mode)))
+
 (unless (getenv "EMACS_NO_DIMMER")
   ;; Interactively highlight which buffer is active by dimming the others.
   ;; https://github.com/gonewest818/dimmer.el
