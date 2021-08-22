@@ -35,11 +35,14 @@
     (global-diff-hl-mode)))
 
 (unless (getenv "EMACS_NO_DASHBOARD")
+  (use-package page-break-lines :straight t :defer t)
+
   ;; An extensible emacs startup screen showing you what’s most important.
   ;; https://github.com/emacs-dashboard/emacs-dashboard
   (use-package dashboard
     :straight t
     :config
+    ;; (page-break-lines-mode)
     (dashboard-setup-startup-hook)
     ;; Allow banner customization through an environment variable
     (let ((hristoast-dashboard-banners
