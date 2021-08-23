@@ -33,7 +33,7 @@
      (line-beginning-position)
      (line-end-position))))
 
-(defun hristoast-run-async-shell-command-in-dir-maybe-with-env (cmd env-key env-val)
+(defun hristoast-run-async-shell-command-maybe-with-env (cmd env-key env-val)
   "Asyncronously run CMD with ENV-KEY=ENV-VAL set beforehand if need be."
   (progn
     (when (and env-key env-val)
@@ -43,7 +43,7 @@
 (defun hristoast-generate-openmw-compile-commands-json ()
   "A helper for generating a compile-commands.json file for using LSP with OpenMW."
   (interactive)
-  (hristoast-run-async-shell-command-in-dir-maybe-with-env
+  (hristoast-run-async-shell-command-maybe-with-env
    (concat "cd ~/src/openmw && rm -rf build && mkdir build && cd build && cmake -DCMAKE_BUILD_TYPE=Debug .."
            (concat " && bear make -j" (number-to-string (+ 1 (string-to-number (shell-command-to-string "nproc")))))
            " && mv -fv compile_commands.json ..")
@@ -52,7 +52,7 @@
 (defun hristoast-compile-openmw-debug ()
   "A helper for compiling a debug build of OpenMW."
   (interactive)
-  (hristoast-run-async-shell-command-in-dir-maybe-with-env
+  (hristoast-run-async-shell-command-maybe-with-env
    (concat "cd ~/src/openmw && rm -rf build && mkdir build && cd build && cmake -DCMAKE_BUILD_TYPE=Debug .."
            (concat " && make -j" (number-to-string (+ 1 (string-to-number (shell-command-to-string "nproc"))))))
    nil nil))
