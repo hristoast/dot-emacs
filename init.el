@@ -40,7 +40,7 @@
 ;; Module definitions
 (defvar hristoast-modules
   #s(hash-table
-     size 39
+     size 42
      data
      ;; "Env var that disables loading if present" "file name in lib/ minus the extension"
      ;; Be sure to check `list-load-path-shadows' every so often!
@@ -50,6 +50,8 @@
       "EMACS_NO_KEYBINDINGS_TWEAKS" "keybindings"
       "EMACS_NO_UI_TWEAKS" "ui"
 
+      "EMACS_NO_COMPANY" "h-company"
+      "EMACS_NO_FLYCHECK" "h-flycheck"
       "EMACS_NO_LSP" "h-lsp"
       "EMACS_NO_ANSIBLE" "ansible"
       "EMACS_NO_C_CPP" "c-cpp"
