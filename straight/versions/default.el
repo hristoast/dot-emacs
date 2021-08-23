@@ -5,7 +5,6 @@
  ("blacken" . "784da60033fe3743336d1da0f33239f1bf514266")
  ("caml-mode" . "118fade8fac4477226f2f2db134397416afb63a2")
  ("cider" . "2a579b94fb3c10f230aa4898a17d9c4300713756")
- ("clang-format" . "e48ff8ae18dc7ab6118c1f6752deb48cb1fc83ac")
  ("clean-aindent-mode" . "a97bcae8f43a9ff64e95473e4ef0d8bafe829211")
  ("clojure-mode" . "da9f1ec717dac1194404b4a4562dba6bd9a4ee3a")
  ("clojure-snippets" . "6068dca90467a0f4ebc2cd39338a173d6f5ddc04")
