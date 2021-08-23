@@ -33,30 +33,29 @@
      (line-beginning-position)
      (line-end-position))))
 
-(defun export-compile-commands (project)
-  "Generate a `compile_commands.json' file for a give project.
-Select the appropriate cmake invocation via the `PROJECT' arg."
-  ;; TODO: define project commands in a .dir-locals.el file.
-  (interactive (list (read-from-minibuffer "project name: " nil nil nil nil)))
-  (cond ((string= project "tes3mp")
-         (let ((default-directory "~/src/openmw-tes3mp"))
-           (shell-command
-            "cmake -DDESIRED_QT_VERSION=5 -DRakNet_INCLUDES=/opt/morrowind/src/raknet/include -DLIBUNSHIELD_INCLUDE_DIR=/usr/include -DBullet_BulletCollision_LIBRARY=/usr/lib/libBulletCollision.so -DBullet_INCLUDE_DIR=/usr/include/bullet -DBullet_LinearMath_LIBRARY=/usr/lib/libLinearMath.so -DCMAKE_EXPORT_COMPILE_COMMANDS=1 .")))
-        ((string= project "openmw")
-         (let ((default-directory "~/src/openmw"))
-           (shell-command
-            "cmake -DDESIRED_QT_VERSION=5 -DLIBUNSHIELD_INCLUDE_DIR=/usr/include -DBullet_BulletCollision_LIBRARY=/usr/lib/libBulletCollision.so -DBullet_INCLUDE_DIR=/usr/include/bullet -DBullet_LinearMath_LIBRARY=/usr/lib/libLinearMath.so -DCMAKE_EXPORT_COMPILE_COMMANDS=1 .")))
-        (t (shell-command "echo The given project name was not recognized."))))
+(defun hristoast-run-async-shell-command-in-dir-maybe-with-env (cmd env-key env-val)
+  "Asyncronously run CMD with ENV-KEY=ENV-VAL set beforehand if need be."
+  (progn
+    (when (and env-key env-val)
+      (setenv env-key env-val))
+    (async-shell-command cmd)))
 
-(defun export-compile-commands-openmw ()
-  "Shortcut for calling export-compile-commands for OpenMW."
+(defun hristoast-generate-openmw-compile-commands-json ()
+  "A helper for generating a compile-commands.json file for using LSP with OpenMW."
   (interactive)
-  (export-compile-commands "openmw"))
+  (hristoast-run-async-shell-command-in-dir-maybe-with-env
+   (concat "cd ~/src/openmw && rm -rf build && mkdir build && cd build && cmake -DCMAKE_BUILD_TYPE=Debug .."
+           (concat " && bear make -j" (number-to-string (+ 1 (string-to-number (shell-command-to-string "nproc")))))
+           " && mv -fv compile_commands.json ..")
+   "CMAKE_PREFIX_PATH" "/opt/build-openmw/osg-openmw:/opt/build-openmw/bullet"))
 
-(defun export-compile-commands-tes3mp ()
-  "Shortcut for calling export-compile-commands for TES3MP."
+(defun hristoast-compile-openmw-debug ()
+  "A helper for compiling a debug build of OpenMW."
   (interactive)
-  (export-compile-commands "tes3mp"))
+  (hristoast-run-async-shell-command-in-dir-maybe-with-env
+   (concat "cd ~/src/openmw && rm -rf build && mkdir build && cd build && cmake -DCMAKE_BUILD_TYPE=Debug .."
+           (concat " && make -j" (number-to-string (+ 1 (string-to-number (shell-command-to-string "nproc"))))))
+   nil nil))
 
 (defun launch-thing (thing)
   "Open 'THING', which should be some sort of X program."
