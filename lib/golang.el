@@ -13,13 +13,11 @@
 
 (use-package go-mode
   :straight t
-  :init
-  (defun hristoast-golang-before-save ()
-    "Do the right thing whether it's lsp-mode or eglot."
-        (progn
-          (lsp-format-buffer)
-          (lsp-organize-imports)))
   :hook
-  (before-save . hristoast-golang-before-save))
+  (before-save . (lambda ()
+                   (when (eq major-mode 'go-mode)
+                     (progn
+                       (lsp-format-buffer)
+                       (lsp-organize-imports))))))
 
 ;;; golang.el ends here
