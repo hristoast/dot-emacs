@@ -57,6 +57,8 @@
                "3" 3)))
           (hristoast-dashboard-default-banner "logo"))
       (setq-default
+       ;; For the page break lines
+       dashboard-page-separator "\n\f\n"
        dashboard-banner-logo-title (or (getenv "EMACS_DASHBOARD_TITLE")
                                        "Welcome to Hristos' Emacs")
        dashboard-footer-messages '("Check out: https://mousikofidi.info/"
