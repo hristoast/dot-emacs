@@ -51,6 +51,7 @@
 ;; https://github.com/jorenvo/simple-mpc
 (unless (getenv "EMACS_NO_MPD")
   (use-package simple-mpc
+    ;; :ensure-system-package (mpc mpd)
     :straight t
     :bind ("C-c s m" . simple-mpc)))
 

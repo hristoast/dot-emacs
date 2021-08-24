@@ -10,6 +10,7 @@
 ;; A Git Porcelain inside Emacs
 ;; https://magit.vc/
 (use-package magit
+  ;; :ensure-system-package git
   :straight t
   :bind
   ("C-c g d" . magit-diff-range)

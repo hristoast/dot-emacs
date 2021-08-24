@@ -12,6 +12,7 @@
   (add-to-list 'exec-path (concat (getenv "GOPATH") "/bin")))
 
 (use-package go-mode
+  ;; :ensure-system-package (go gopls)
   :straight t
   :hook
   (before-save . (lambda ()

@@ -3,6 +3,9 @@
 ;; Packages related to javascript.
 ;;; Code:
 
-(use-package javascript-mode :no-require t :defer t)
+(use-package javascript-mode
+  ;; :ensure-system-package (tern . "npm i -g tern")
+  :straight nil
+  :defer t)
 
 ;;; javascript.el ends here

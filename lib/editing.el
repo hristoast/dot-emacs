@@ -25,24 +25,6 @@
      dimmer-watch-frame-focus-events nil)
     (dimmer-mode t)))
 
-;; A minor mode that guesses the indentation offset originally used for
-;; creating source code files and transparently adjusts the corresponding
-;; settings in Emacs, making it more convenient to edit foreign files
-;; https://github.com/jscheid/dtrt-indent
-;; TODO: remove this, perhaps?
-(use-package dtrt-indent
-  :straight t
-  :config
-  (setq global-mode-string (remove 'dtrt-indent-mode-line-info global-mode-string))
-  (dtrt-indent-mode 1))
-
-;; Ignore "vendor" directories when rgrepping. Useful for some go projects I've worked on.
-(use-package grep
-  :straight nil
-  :config
-  (add-to-list 'grep-find-ignored-directories ".cache")
-  (add-to-list 'grep-find-ignored-directories "vendor"))
-
 (unless (getenv "EMACS_NO_HL_TODO")
   ;; Highlight TODO keywords
   ;; https://github.com/tarsius/hl-todo
@@ -55,24 +37,14 @@
         ("XXX"   . "#ffff00")))
     (global-hl-todo-mode t)))
 
-;; Interactively Do Things
-;; http://emacswiki.org/emacs/InteractivelyDoThings
-(use-package ido
-  :straight t
-  :config
-  (ido-mode t)
-  ;; https://git.sr.ht/~technomancy/better-defaults/tree/4c5409406ee35c5ba46880c6cfe98df4b14dc631/item/better-defaults.el#L48
-  (setq ido-enable-flex-matching t))
-
 ;; marginalia.el - Marginalia in the minibuffer
 ;; https://github.com/minad/marginalia
 (use-package marginalia :straight t :init (marginalia-mode))
 
-(use-package hideshow :straight nil :diminish hs-minor-mode)
-
 ;; Enable code-folding for prog-mode modes
-(use-package prog-mode
+(use-package hideshow
   :straight nil
+  :diminish hs-minor-mode
   :hook (prog-mode . hs-minor-mode))
 
 ;; Emacs rainbow delimiters mode
@@ -83,13 +55,6 @@
 
 ;; TODO: https://github.com/karthink/popper
 
-;; "Semantic Highlighting" for Emacs
-;; https://github.com/Fanael/rainbow-identifiers
-;; (when (getenv "EMACS_SEMANTIC_HIGHLIGHTING")
-;;   (use-package rainbow-identifiers
-;;     :straight t
-;;     :hook (prog-mode . rainbow-identifiers-mode)))
-
 ;; Rainbow mode - #000 #fff #f00 #ff0 #00f #0f0 #800080 #00ffff #ff00ff
 ;; https://julien.danjou.info/projects/emacs-packages
 (use-package rainbow-mode
@@ -98,16 +63,6 @@
   :hook ((css-mode . rainbow-mode)
          (html-mode . rainbow-mode)
          (prog-mode . rainbow-mode)))
-
-;; Provides language-aware editing commands based on source code parsers.
-;; http://www.gnu.org/software/emacs/manual/html_node/emacs/Semantic.html
-(use-package semantic
-  :straight t
-  :commands semantic-mode
-  :config
-  (global-semanticdb-minor-mode 1)
-  (global-semantic-idle-scheduler-mode 1)
-  (semantic-mode 1))
 
 ;; Minor mode for Emacs that deals with parens
 ;; pairs and tries to be smart about it
