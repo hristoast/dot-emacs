@@ -6,12 +6,12 @@
 ;; Insert a newline, then indent according to major mode
 (global-set-key (kbd "RET") 'newline-and-indent)
 ;; Build, compile, that stuff
-(global-set-key (kbd "<f5>") 'build-project)
+(global-set-key (kbd "<f5>") 'hristoast-build-project)
 ;; Make undo work like other editors
 (global-unset-key (kbd "C-/"))
 (global-set-key (kbd "M-z") 'undo)
 ;; Better comment-toggling
-(global-set-key (kbd "M-/") 'toggle-comment)
+(global-set-key (kbd "M-/") 'hristoast-toggle-comment)
 ;; Make text bigger
 (global-set-key (kbd "M-=") 'text-scale-increase)
 (global-set-key (kbd "<f9>") 'text-scale-increase)
@@ -31,7 +31,7 @@
 (global-set-key (kbd "C-c u w") 'upcase-word)
 (global-set-key (kbd "C-x u") 'upcase-region)
 (global-set-key (kbd "C-x t m") 'menu-bar-mode)
-(global-set-key (kbd "TAB") 'indent-appropriately)
+(global-set-key (kbd "TAB") 'hristoast-indent-appropriately)
 (global-set-key (kbd "C-x C-v") 'clipboard-yank)
 (global-set-key (kbd "C-S-^") 'enlarge-window)
 (global-set-key (kbd "C-%") 'shrink-window)
@@ -43,14 +43,7 @@
 (global-set-key (kbd "<backtab>") 'hs-show-all)
 (global-set-key (kbd "C-x f") 'hs-hide-block)
 (global-set-key (kbd "C-x c") 'hs-show-block)
-
-(defun toggle-fc-and-ws ()
-  "Toggle displaying the fill column indicator and `whitespace-mode' in one handy function."
-  (interactive)
-  (display-fill-column-indicator-mode 'toggle)
-  (whitespace-mode 'toggle))
-
-(global-set-key (kbd "<f11>") 'toggle-fc-and-ws)
+(global-set-key (kbd "<f11>") 'hristoast-toggle-fc-and-ws)
 
 ;; Kill this buffer!
 (substitute-key-definition 'kill-buffer 'kill-buffer-and-window global-map)
