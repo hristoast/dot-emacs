@@ -18,7 +18,6 @@
  ("diminish.el" . "6ec6ebc391371418efc6c98d70b013f34af5a2ee")
  ("dimmer.el" . "8559fb73a2c96755cb30f560be82191164014b43")
  ("dockerfile-mode" . "ad06a41259ff2961d603bf23a3a8fbd22dde2161")
- ("dtrt-indent" . "9714f2c5f1c9b7c21e732df8c15a870a88caba84")
  ("el-get" . "ec47ecf257bf010cf1f3061e2061c26f78e61540")
  ("elfeed" . "243add9e74003cd5718f33482b7bb8b4fe140fb5")
  ("elfeed-dashboard" . "b143f8453aed2053e8fc6f05cef6233797408546")
