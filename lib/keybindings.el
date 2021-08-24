@@ -25,8 +25,6 @@
 ;; Toggle whitespace-mode
 (global-set-key (kbd "C-c w") 'whitespace-mode)
 ;; Extra keybindings that make life great
-(global-set-key (kbd "C-c r") 'rgrep)
-(global-set-key (kbd "<f13>") 'rgrep) ;; Nice for macs
 (global-set-key (kbd "C-x r b") 'revert-buffer)
 (global-set-key (kbd "C-c q q q") 'save-buffers-kill-emacs)
 (global-set-key (kbd "C-c d w") 'downcase-word)

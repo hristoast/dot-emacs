@@ -33,18 +33,16 @@
 ;; https://github.com/raxod502/straight.el/blob/2d407bccd9378f1d5218f8ba2ae85c6be73fbaf1/README.md#integration-with-use-package
 (straight-use-package 'use-package)
 
-;; Diminished modes are minor modes with no modeline display
-;; http://www.eskimo.com/~seldon/diminish.el
-(use-package diminish :straight t)
-
 ;; Module definitions
 (defvar hristoast-modules
   #s(hash-table
-     size 42
+     size 44
      data
      ;; "Env var that disables loading if present" "file name in lib/ minus the extension"
      ;; Be sure to check `list-load-path-shadows' every so often!
-     ("EMACS_NO_EDITING_TWEAKS" "editing"
+     ("EMACS_NO_EDITING_TWEAKS" "h-system"
+      "EMACS_NO_EDITING_TWEAKS" "editing"
+      "EMACS_NO_SEARCH_TWEAKS" "h-search"
       "EMACS_NO_EXTRA_FUNCTIONS" "functions"
       "EMACS_NO_INTERNALS_TWEAKS" "internals"
       "EMACS_NO_KEYBINDINGS_TWEAKS" "keybindings"
