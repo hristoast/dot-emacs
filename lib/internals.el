@@ -60,10 +60,10 @@
  apropos-do-all t
  ;; Which browser to open links in
  browse-url-browser-function 'browse-url-generic
- browse-url-generic-program "firefox"
+ browse-url-generic-program (or (getenv "EMACS_BROWSER") "firefox")
  ;; display-time-mode options
  display-time-24hr-format t
- display-time-format "%T"
+ display-time-format (or (getenv "EMACS_DISPLAY_TIME_FORMAT") "%T")
  display-time-interval 1
  ;; https://emacs.stackexchange.com/a/16836
  ;; TODO: When Emacs is iconified/minimized the title reverts to the default.
@@ -77,7 +77,7 @@
  ;; "Tabs" are 4 spaces
  tab-width 4
  ;; As advised by https://www.emacswiki.org/emacs/TrampMode
- tramp-default-method "ssh")
+ tramp-default-method (or (getenv "EMACS_TRAMP_DEFAULT_METHOD") "ssh"))
 
 ;; Exclude files that are commonly visited through non-editing actions.
 (use-package recentf
