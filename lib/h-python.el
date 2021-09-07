@@ -20,7 +20,4 @@
   :straight t
   :defer t)
 
-;; TODO: required system-level package:
-;; pip install python-lsp-server
-
 ;;; h-python.el ends here
