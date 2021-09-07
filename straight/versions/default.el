@@ -14,6 +14,7 @@
  ("company-box" . "156f65cfbf690ed84e0e84f90277d665d873ff24")
  ("company-lua" . "29f6819de4d691e5fd0b62893a9f4fbc1c6fcb52")
  ("company-mode" . "87825c7891ccf4aefb88b9d49c7ff074cc74c53a")
+ ("ctrlf" . "dbe83710d06bc39315f1455f6f21479f3747c0aa")
  ("dash.el" . "2675596b9ac1c4b9d47b93e227f06f8ec6755ec6")
  ("diff-hl" . "dbd46bf23c2efc466a640a7e398ca39a51c1145e")
  ("diminish.el" . "6ec6ebc391371418efc6c98d70b013f34af5a2ee")

@@ -136,14 +136,12 @@
                      windmove-down))
     (advice-add command :after #'pulse-line)))
 
-;; Only use CTRLF if it's requested.
-(if (getenv "EMACS_CTRLF")
-  ;; ⌨ Emacs finally learns how to ctrl+F.
-  ;; https://github.com/raxod502/ctrlf
-  (use-package ctrlf
-    :straight t
-    :config
-    (ctrlf-mode +1)))
+;; ⌨ Emacs finally learns how to ctrl+F.
+;; https://github.com/raxod502/ctrlf
+(use-package ctrlf
+  :straight t
+  :config
+  (ctrlf-mode +1))
 
 ;; 🔔 Better solution for incremental narrowing in Emacs.
 ;; https://github.com/raxod502/selectrum
