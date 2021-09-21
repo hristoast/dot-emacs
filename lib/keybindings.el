@@ -44,6 +44,9 @@
 (global-set-key (kbd "C-x f") 'hs-hide-block)
 (global-set-key (kbd "C-x c") 'hs-show-block)
 (global-set-key (kbd "<f11>") 'hristoast-toggle-fc-and-ws)
+;; More movement
+(global-set-key (kbd "M-n") '(lambda () (interactive) (scroll-up 4)))
+(global-set-key (kbd "M-p") '(lambda () (interactive) (scroll-down 4)))
 
 ;; Kill this buffer!
 (substitute-key-definition 'kill-buffer 'kill-buffer-and-window global-map)
