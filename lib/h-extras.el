@@ -7,6 +7,7 @@
 ;; TODO: https://github.com/pashky/restclient.el
 ;; TODO: https://github.com/rnkn/fountain-mode
 ;; TODO: https://github.com/skuro/plantuml-mode
+;; TODO: https://github.com/emacs-eaf/eaf-browser
 
 ;; An Emacs web feeds client
 ;; https://github.com/skeeto/elfeed
@@ -38,6 +39,14 @@
   (elfeed-org)
   (setq rmh-elfeed-org-files (list (or (getenv "EMACS_ELFEED_ORG_FILE")
                                        "~/src/org/elfeed.org"))))
+
+;; One-frame-per-action GIF recording for optimal quality/size ratio
+;; https://gitlab.com/ambrevar/emacs-gif-screencast
+(use-package gif-screencast
+  :straight t
+  :bind (("ESC g r" . gif-screencast-start-or-stop)
+         ("ESC g p" . gif-screencast-pause)
+         ("ESC g s" . gif-screencast-stop)))
 
 ;; Imbue Emacs with power!
 ;; https://github.com/elizagamedev/power-mode.el#power-modeel
