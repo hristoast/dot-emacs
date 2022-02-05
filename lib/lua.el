@@ -39,7 +39,9 @@
 (use-package lua-mode
   :straight t
   :interpreter "lua"
-  ;; :hook (lua-mode . set-company-backends-for-lua)
+  :hook
+  ;; Keep the stock C-l behavior, please!
+  (lua-mode . (lambda () (local-unset-key (kbd "C-l"))))
   :init
   (setq lua-indent-level 4)
   (setq lua-indent-string-contents t)
