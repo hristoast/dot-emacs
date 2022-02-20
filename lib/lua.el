@@ -41,7 +41,9 @@
   :interpreter "lua"
   :hook
   ;; Keep the stock C-l behavior, please!
-  (lua-mode . (lambda () (local-unset-key (kbd "C-l"))))
+  (lua-mode . (lambda ()
+                (local-unset-key (kbd "C-f"))
+                (local-unset-key (kbd "C-l"))))
   :init
   (setq lua-indent-level 4)
   (setq lua-indent-string-contents t)
