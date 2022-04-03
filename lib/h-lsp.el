@@ -24,9 +24,6 @@
                    (lsp-deferred)
                    (lsp-register-custom-settings
                     '(("Lua.telemetry.enable" nil))))))
-   (nginx-mode . lsp-deferred)
-   (toml-mode . lsp-deferred)
-   (ansible-mode . lsp-deferred)
    (web-mode . lsp-deferred)
    (js-mode . lsp-deferred)
    (json-mode . lsp-deferred)
