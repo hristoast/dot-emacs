@@ -7,32 +7,6 @@
 ;; https://github.com/ptrv/company-lua
 (use-package company-lua :defer t :straight t)
 
-;; I don't find the LSP stuff for lua to be better than plain old lua-mode, so disable this by default.
-(if (getenv "EMACS_LUA_LSP")
-    (progn
-      ;; https://github.com/EmmyLua/EmmyLua-LanguageServer/blob/58ac70f40d84cf7ce0e31fd3aba2f021d9d18c72/readme.md#adding-to-emacs
-      (defun set-company-backends-for-lua()
-        "Set lua company backend."
-        (setq-local company-backends
-                    '((company-lsp
-                       company-lua
-                       company-keywords
-                       company-gtags
-                       company-yasnippet)
-                      company-capf
-                      company-dabbrev-code
-                      company-files)))
-      ;; https://github.com/phenix3443/lsp-lua-emmy
-      (use-package lsp-lua-emmy
-        :demand
-        :straight (lsp-lua-emmy :type git :host github :repo "phenix3443/lsp-lua-emmy")
-        :hook (lua-mode . lsp)
-        :init
-        ;; TODO: make this configurable
-        (setq lsp-lua-emmy-jar-path
-              (expand-file-name "EmmyLua-LS-all-ac977d4.jar"
-                                (concat (getenv "HOME") "/src/EmmyLua-LanguageServer"))))))
-
 ;; Emacs major mode for editing Lua
 ;; http://immerrr.github.io/lua-mode/
 ;; TODO: require a `luacheck' install
