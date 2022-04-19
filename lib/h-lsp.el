@@ -41,14 +41,7 @@
    gc-cons-threshold (* 100 1024 1024)
    lsp-idle-delay 0.1
    read-process-output-max (* 1024 1024)
-   lsp-prefer-flymake nil
-   lsp-clients-python-library-directories
-   ;;TODO: Dehardcode this path
-   (concat (getenv "HOME") ".local/lib/python3.9/site-packages"))
-  :config
-  ;; Disable python "features" that are useless to me
-  (setq lsp-pyls-plugins-mccabe-enabled nil
-        lsp-pyls-plugins-pycodestyle-enabled nil))
+   lsp-prefer-flymake nil))
 
 ;; UI integrations for lsp-mode
 ;; https://emacs-lsp.github.io/lsp-ui/
