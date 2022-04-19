@@ -24,9 +24,6 @@
   (setq lua-prefix-key nil))
 
 ;; Use lua-mode for PICO-8 source files
-;; TODO: document that this is here, or make a separate pico8.el file.
-(setq auto-mode-alist (append '(("\\.p8$" . lua-mode))
-                              auto-mode-alist))
-
+(add-to-list 'auto-mode-alist '("\\.p8$" . lua-mode))
 
 ;;; lua.el ends here
