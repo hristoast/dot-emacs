@@ -103,5 +103,9 @@
        (float-time (time-subtract (current-time) emacs-start-time))))
   (message "[STARTUP] Loading %s ... done (%.3fs)" load-file-name elapsed))
 
+(when (fboundp 'alert)
+  (alert "Emacs has started."
+         :title "Ready to go!"))
+
 (provide 'init)
 ;;; init.el ends here
