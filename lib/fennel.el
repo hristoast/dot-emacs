@@ -13,6 +13,21 @@
                           (compile-command "make"))
                       (call-interactively 'compile)))))
   :init
+  ;; THANKS: https://emacs.stackexchange.com/a/9421
+  (defun hristoast--bury-compile-buffer-if-successful (buffer string)
+    "Bury a compilation buffer if succeeded without warnings "
+    (if (and
+         (string-match "compilation" (buffer-name buffer))
+         (string-match "finished" string)
+         (not
+          (with-current-buffer buffer
+            (search-forward "warning" nil t))))
+        (run-with-timer 0 nil
+                        (lambda (buf)
+                          (bury-buffer buf)
+                          (switch-to-prev-buffer (get-buffer-window buf) 'kill))
+                        buffer)))
+  (add-hook 'compilation-finish-functions 'hristoast--bury-compile-buffer-if-successful)
   (add-to-list 'auto-mode-alist '("\\.fnl\\'" . fennel-mode)))
 
 ;;; fennel.el ends here
