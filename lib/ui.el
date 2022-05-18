@@ -97,25 +97,6 @@
       :straight t
       :hook (dired-mode . all-the-icons-dired-mode))))
 
-;; Syntax highlighting for Eshell
-;; https://github.com/akreisher/eshell-syntax-highlighting/
-(unless (getenv "EMACS_NO_ESHELL_SYNTAX")
-  (use-package eshell-syntax-highlighting
-    :after esh-mode
-    :straight t
-    :config
-    (eshell-syntax-highlighting-global-mode +1)))
-
-;; Display some system information when launching Eshell
-;; https://github.com/Phundrak/eshell-info-banner.el
-(unless (getenv "EMACS_NO_ESHELL_BANNER")
-  (use-package eshell-info-banner
-    :defer t
-    :straight (eshell-info-banner :type git
-                                  :host github
-                                  :repo "phundrak/eshell-info-banner.el")
-    :hook (eshell-banner-load . eshell-info-banner-update-banner)))
-
 (unless (getenv "EMACS_NO_FIREPLACE") ;; Don't allow Emacs to be a warm cozy fireplace.
   ;; Warm cozy fireplace -- https://github.com/johanvts/emacs-fireplace
   (use-package fireplace
