@@ -16,8 +16,6 @@
    company-minimum-prefix-length 1
    company-tooltip-align-annotations t
    company-tooltip-limit 20)
-  ;; Default colors are awful - borrowed these from gocode (thanks!):
-  ;; https://github.com/nsf/gocode/tree/master/emacs-company#color-customization
   ;; See: M-x list-colors-display
   ;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Colors.html
   (set-face-attribute

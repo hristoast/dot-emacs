@@ -200,8 +200,6 @@
 
 ;; TODO: Make the below things toggle-able
 
-(display-time-mode)
-
 ;; https://www.emacswiki.org/emacs/HighlightCurrentLine
 (global-hl-line-mode t)
 
