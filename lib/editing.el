@@ -149,4 +149,7 @@
   :straight t
   :bind ("C-x 1" . zygospore-toggle-delete-other-windows))
 
+;; https://www.masteringemacs.org/article/text-expansion-hippie-expand
+(global-set-key [remap dabbrev-expand] 'hippie-expand)
+
 ;;; editing.el ends here

@@ -11,7 +11,7 @@
 (global-unset-key (kbd "C-/"))
 (global-set-key (kbd "M-z") 'undo)
 ;; Better comment-toggling
-(global-set-key (kbd "M-/") 'hristoast-toggle-comment)
+(global-set-key (kbd "C-;") 'hristoast-toggle-comment)
 ;; Make text bigger
 (global-set-key (kbd "M-=") 'text-scale-increase)
 (global-set-key (kbd "<f9>") 'text-scale-increase)
