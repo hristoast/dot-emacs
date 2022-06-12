@@ -31,7 +31,8 @@
                     (require 'lsp-pyright)
                     (lsp-deferred)))
    (ruby-mode . lsp-deferred)
-   (sh-mode . lsp-deferred))
+   (sh-mode . lsp-deferred)
+   (yaml-mode . lsp-deferred))
   :init
   ;; Knob to disable the headerline breadcrum stuff
   (if (getenv "EMACS_LSP_NO_HEADERLINE_BREADCRUMB")
