@@ -31,9 +31,6 @@
   (defun eshell/XXX ()
     (eshell/exit))
 
-  (defun eshell/openmw ()
-    (start-process "OpenMW" "*eshell*" "prime-run" "/opt/build-openmw/openmw/bin/openmw"))
-
   ;; Settings
   (setq eshell-history-size 2048)
 
@@ -55,9 +52,10 @@
 (unless (getenv "EMACS_NO_ESHELL_BANNER")
   (use-package eshell-info-banner
     :defer t
-    :straight (eshell-info-banner :type git
-                                  :host github
-                                  :repo "phundrak/eshell-info-banner.el")
+    :straight
+    (eshell-info-banner :type git
+                        :host github
+                        :repo "phundrak/eshell-info-banner.el")
     :hook (eshell-banner-load . eshell-info-banner-update-banner)))
 
 ;;; h-eshell.el ends here
