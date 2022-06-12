@@ -77,6 +77,7 @@
       "EMACS_NO_ORGMODE" "orgmode"
       "EMACS_NO_PYTHON" "h-python"
       "EMACS_NO_RACKET" "racket"
+      "EMACS_NO_READING" "h-reading"
       "EMACS_NO_RUBY" "ruby"
       "EMACS_NO_SHADERS" "shaders"
       "EMACS_NO_SLIME" "h-slime"
