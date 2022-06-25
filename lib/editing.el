@@ -95,6 +95,19 @@
   (sp-with-modes 'web-mode
     (sp-local-pair "\{" nil :actions nil)))
 
+;; Tree-sitter bindings for Emacs Lisp
+;; https://github.com/emacs-tree-sitter/elisp-tree-sitter
+(use-package tree-sitter
+  :straight t
+  :hook (tree-sitter-after-on-hook . tree-sitter-hl-mode)
+  :config (global-tree-sitter-mode))
+
+;; Language bundle for Emacs's tree-sitter package
+;; https://github.com/emacs-tree-sitter/tree-sitter-langs
+(use-package tree-sitter-langs
+  :straight t
+  :after tree-sitter)
+
 ;; undo-tree.el --- Treat undo history as a tree
 ;; http://www.dr-qubit.org/undo-tree/undo-tree.el
 ;; https://www.emacswiki.org/emacs/UndoTree
