@@ -7,4 +7,7 @@
 ;; https://github.com/spotify/dockerfile-mode
 (use-package dockerfile-mode :defer t :straight t)
 
+;; https://earthly.dev/get-earthly
+(use-package earthfile-mode :defer t :straight t)
+
 ;;; docker.el ends here
