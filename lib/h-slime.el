@@ -15,11 +15,7 @@
 ;; C-c C-k Compile and load current buffer
 ;; C-c C-q Invoke slime-close-parens-at-point
 (use-package slime
-  ;; :ensure-system-package sbcl
   :straight t
-  :hook
-  ;; This breaks the default coloring of SLIME.  Net gain in my opinion.
-  (slime-repl-mode . rainbow-delimiters-mode)
   :config
   (setq inferior-lisp-program (executable-find "sbcl")
         slime-contribs '(slime-company slime-fancy)
