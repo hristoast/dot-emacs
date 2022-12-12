@@ -178,19 +178,25 @@
     (global-linum-mode t))
 
 (defvar h-font-height)
-(if (getenv "RETINA_DISPLAY")
-    (setq h-font-height 170)
+(if (getenv "EMACS_TALLER_FONT")
+    (setq h-font-height 140)
   (setq h-font-height 100))
 
-;; TODO: Support different fonts
-(unless (getenv "EMACS_NO_HACK_FONT")
-  ;; Hack - http://sourcefoundry.org/hack/
-  (if (or (file-exists-p (concat (getenv "HOME") "/.fonts/Hack-Regular.ttf"))
-          (file-exists-p "/usr/share/fonts/TTF/Hack-Regular.ttf"))
-      (set-face-attribute 'default nil
-                          :family "Hack"
-                          :height h-font-height
-                          :weight 'normal)))
+(if (eq system-type 'windows-nt)
+        ;; Use Cascadia Mono on Windows, it looks nice
+        (set-face-attribute 'default nil
+                            :family "Cascadia Mono"
+                            :height h-font-height
+                            :weight 'normal)
+
+        (unless (getenv "EMACS_NO_HACK_FONT")
+          ;; Hack - http://sourcefoundry.org/hack/
+          (if (or (file-exists-p (concat (getenv "HOME") "/.fonts/Hack-Regular.ttf"))
+                  (file-exists-p "/usr/share/fonts/TTF/Hack-Regular.ttf"))
+              (set-face-attribute 'default nil
+                                  :family "Hack"
+                                  :height h-font-height
+                                  :weight 'normal))))
 
 (unless (getenv "EMACS_NO_NOTO_EMOJI")
   ;; I don't work on macOS much anymore.. but if i do:
