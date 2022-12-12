@@ -24,7 +24,6 @@
                    (lsp-deferred)
                    (lsp-register-custom-settings
                     '(("Lua.telemetry.enable" "false" nil))))))
-   (web-mode . lsp-deferred)
    (js-mode . lsp-deferred)
    (json-mode . lsp-deferred)
    (python-mode . (lambda ()
