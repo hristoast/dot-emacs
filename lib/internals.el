@@ -143,6 +143,10 @@
   :config
   (ctrlf-mode +1))
 
+;; prescient.el: simple but effective sorting and filtering for Emacs.
+;; https://github.com/radian-software/prescient.el
+(use-package prescient :straight t :config)
+
 ;; vertico.el - VERTical Interactive COmpletion
 ;; https://github.com/minad/vertico/wiki/Migrating-from-Selectrum-to-Vertico
 (use-package vertico
