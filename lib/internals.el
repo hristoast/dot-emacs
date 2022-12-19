@@ -143,14 +143,21 @@
   :config
   (ctrlf-mode +1))
 
-;; 🔔 Better solution for incremental narrowing in Emacs.
-;; https://github.com/raxod502/selectrum
-(use-package selectrum-prescient
-  :straight t
+;; vertico.el - VERTical Interactive COmpletion
+;; https://github.com/minad/vertico/wiki/Migrating-from-Selectrum-to-Vertico
+(use-package vertico
+  :straight (:files (:defaults "extensions/*"))
+  :init
+  (vertico-mode)
   :config
-  (selectrum-mode +1)
-  (selectrum-prescient-mode +1)
-  (prescient-persist-mode +1))
+  ;; https://github.com/minad/vertico/wiki#using-prescientel-filtering-and-sorting
+  (vertico-prescient-mode 1)
+  (setq prescient-filter-method '(literal initialism prefix regexp)
+        prescient-use-char-folding t
+        prescient-use-case-folding 'smart
+        prescient-sort-full-matches-first t ; Works well with `initialism'.
+        prescient-sort-length-enable t)
+  (prescient-persist-mode 1))
 
 (use-package zone
   :straight t
