@@ -99,7 +99,7 @@
  ("smart-mode-line" . "744ee1a9479a7901cedd6f0d59e6c6c86b20a78d")
  ("smartparens" . "22794b5b3773504610127c5f011629402dfec20c")
  ("spinner" . "34905eae12a236753fa88abc831eff1e41e8576e")
- ("straight.el" . "af5437f2afd00936c883124d6d3098721c2d306c")
+ ("straight.el" . "3eca39dfc6797243ec7d1c6a7d45142407f73f88")
  ("systemd-mode" . "51c148e09a129ddf33d95276aa0e89d4ef6f8dd2")
  ("terraform-mode" . "2967e7bdc05d15617e121052f6e43c61439b9070")
  ("toml-mode.el" . "f6c61817b00f9c4a3cab1bae9c309e0fc45cdd06")
