@@ -48,7 +48,7 @@
  ("flycheck-status-emoji" . "4bd113ab42dec9544b66e0a27ed9008ce8148433")
  ("frame-local" . "7ee1106c3bcd4022f48421f8cb1ef4f995da816e")
  ("git-modes" . "433e1c57a63c88855fc41a942e29d7bc8c9c16c7")
- ("glsl-mode" . "b07112016436d9634cd4ef747f9af6b01366d136")
+ ("glsl-mode" . "9b2e5f28e489a1f73c4aed734105618ac0dc0c43")
  ("gntp.el" . "767571135e2c0985944017dc59b0be79af222ef5")
  ("gnu-elpa-mirror" . "8ce05c546573f36c39b1e4a921de4fbf8613a98a")
  ("go-mode.el" . "3273fcece5d9ab7edd4f15b2d6bce61f4e5a0666")
