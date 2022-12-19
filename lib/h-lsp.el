@@ -19,11 +19,7 @@
                      ("gopls.staticcheck" t t))))))
    (c-mode . lsp-deferred)
    (c++-mode . lsp-deferred)
-   (lua-mode . (lambda ()
-                 (progn
-                   (lsp-deferred)
-                   (lsp-register-custom-settings
-                    '(("Lua.telemetry.enable" "false" nil))))))
+   (lua-mode . lsp-deferred)
    (js-mode . lsp-deferred)
    (json-mode . lsp-deferred)
    (python-mode . (lambda ()
