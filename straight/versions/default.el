@@ -85,7 +85,7 @@
  ("pkg-info" . "76ba7415480687d05a4353b27fea2ae02b8d9d61")
  ("pos-tip" . "179cc126b363f72ca12fab1e0dc462ce0ee79742")
  ("power-mode.el" . "82fb4a73f177360e8ef04dae53436d0d5b51a759")
- ("prescient.el" . "c5295a9eecbd2935bb57684a4422638e03bf738c")
+ ("prescient.el" . "35cf5d36132c3e96db9a9e4d1902dcfa207e7baa")
  ("queue" . "52206c0f78afc0dfb9a287cb928c1e725103336d")
  ("racket-mode" . "0f1efa4a3cdcd26de1d2b002868ffc851cff25ac")
  ("rainbow-delimiters" . "d576e6694ad3a3e88b2bb1363305b38fa364c149")
@@ -116,4 +116,4 @@
  ("yaml-mode" . "fc5e1c58f94472944c4aa838f00f6adcac6fa992")
  ("yasnippet" . "5cbdbf0d2015540c59ed8ee0fcf4788effdf75b6")
  ("zygospore.el" . "1af5ee663f5a7aa08d96a77cacff834dcdf55ea8"))
-:beta
+:gamma

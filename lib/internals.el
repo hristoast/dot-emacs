@@ -145,21 +145,21 @@
 
 ;; prescient.el: simple but effective sorting and filtering for Emacs.
 ;; https://github.com/radian-software/prescient.el
-(use-package prescient :straight t :config)
+(use-package vertico-prescient :straight t :config)
 
 ;; vertico.el - VERTical Interactive COmpletion
 ;; https://github.com/minad/vertico/wiki/Migrating-from-Selectrum-to-Vertico
 (use-package vertico
-  :straight (:files (:defaults "extensions/*"))
+  :straight t
   :init
   (vertico-mode)
   :config
   ;; https://github.com/minad/vertico/wiki#using-prescientel-filtering-and-sorting
   (vertico-prescient-mode 1)
-  (setq prescient-filter-method '(literal initialism prefix regexp)
+  (setq prescient-filter-method '(fuzzy literal initialism prefix regexp)
         prescient-use-char-folding t
         prescient-use-case-folding 'smart
-        prescient-sort-full-matches-first t ; Works well with `initialism'.
+        prescient-sort-full-matches-first t
         prescient-sort-length-enable t)
   (prescient-persist-mode 1))
 
