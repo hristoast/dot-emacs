@@ -19,6 +19,11 @@
   (corfu-cycle t)           ;; Enable cycling for `corfu-next/previous'
   (corfu-preselect 'prompt) ;; Always preselect the prompt
 
+  :hook
+  (eshell-mode . (lambda ()
+                   (setq-local corfu-auto nil)
+                   (corfu-mode)))
+
   ;; Use TAB for cycling, default is `corfu-complete'.
   :bind
   (:map corfu-map
