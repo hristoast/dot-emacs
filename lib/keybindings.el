@@ -31,7 +31,6 @@
 (global-set-key (kbd "C-c u w") 'upcase-word)
 (global-set-key (kbd "C-x u") 'upcase-region)
 (global-set-key (kbd "C-x t m") 'menu-bar-mode)
-(global-set-key (kbd "TAB") 'hristoast-indent-appropriately)
 (global-set-key (kbd "C-x C-v") 'clipboard-yank)
 (global-set-key (kbd "C-S-^") 'enlarge-window)
 (global-set-key (kbd "C-%") 'shrink-window)

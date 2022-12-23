@@ -48,10 +48,9 @@
       "EMACS_NO_KEYBINDINGS_TWEAKS" "keybindings"
       "EMACS_NO_UI_TWEAKS" "ui"
 
-      "EMACS_NO_COMPANY" "h-company"
+      "EMACS_NO_CORFU" "h-corfu"
       "EMACS_NO_FLYCHECK" "h-flycheck"
       "EMACS_NO_LSP" "h-lsp"
-      "EMACS_NO_ANSIBLE" "ansible"
       "EMACS_NO_C_CPP" "c-cpp"
       "EMACS_NO_CALC" "h-calc"
       "EMACS_NO_CLOJURE" "clojure"

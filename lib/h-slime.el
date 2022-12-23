@@ -3,10 +3,6 @@
 ;; Packages related to slime.
 ;;; Code:
 
-;; SLIME company goodness
-;; https://github.com/anwyn/slime-company
-(use-package slime-company :defer t :straight t)
-
 ;; Superior LISP Interaction Mode for Emacs
 ;; https://common-lisp.net/project/slime/
 ;; Cool keybindings to remember:
@@ -18,7 +14,7 @@
   :straight t
   :config
   (setq inferior-lisp-program (executable-find "sbcl")
-        slime-contribs '(slime-company slime-fancy)
+        slime-contribs '(slime-fancy)
         slime-net-coding-system 'utf-8-unix))
 
 ;;; h-slime.el ends here

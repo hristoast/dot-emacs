@@ -17,18 +17,11 @@
         (funcall func point mark)
       (funcall func mark point))))
 
-(defun hristoast-indent-appropriately ()
-  "Appropriately indent the current line or region."
-  (interactive)
-  (if mark-active
-      (hristoast--do-func-to-marked-region 'indent-region)
-    (indent-according-to-mode)))
-
 (defun hristoast-toggle-comment ()
   "Toggle comments on the current line or highlighted region."
   (interactive)
   (if mark-active
-    (hristoast--do-func-to-marked-region 'comment-or-uncomment-region)
+      (hristoast--do-func-to-marked-region 'comment-or-uncomment-region)
     (comment-or-uncomment-region
      (line-beginning-position)
      (line-end-position))))

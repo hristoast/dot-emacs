@@ -3,10 +3,6 @@
 ;; Packages related to lua.
 ;;; Code:
 
-;; company-mode completion backend for Lua
-;; https://github.com/ptrv/company-lua
-(use-package company-lua :defer t :straight t)
-
 ;; Emacs major mode for editing Lua
 ;; http://immerrr.github.io/lua-mode/
 ;; TODO: require a `luacheck' install
