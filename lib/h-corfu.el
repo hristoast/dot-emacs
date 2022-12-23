@@ -9,7 +9,7 @@
 ;; https://github.com/emacs-straight/corfu/tree/1d8b6030c9022a5b9ad784b8cba2a284b8093ecb#tab-and-go-completion
 (use-package corfu
   :straight t
-  :after corfu-echo corfu-history corfu-info corfu-popupinfo
+  :after corfu-echo corfu-history corfu-info
   ;; TAB-and-Go customizations
   :custom
   (corfu-auto t)
