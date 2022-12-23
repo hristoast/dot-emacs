@@ -14,8 +14,7 @@
   (corfu-auto t)
   (corfu-quit-no-match 'separator)
   (corfu-auto-delay 0)
-  (corfu-auto-prefix 0)
-  ;; (completion-styles '(basic))
+  (corfu-auto-prefix 1)
 
   (corfu-cycle t)           ;; Enable cycling for `corfu-next/previous'
   (corfu-preselect 'prompt) ;; Always preselect the prompt
