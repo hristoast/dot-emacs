@@ -27,7 +27,7 @@
      (line-end-position))))
 
 (defun hristoast-toggle-fc-and-ws ()
-  "Toggle displaying the fill column indicator and `whitespace-mode' in one handy function."
+  "Toggle displaying fill column indicator and `whitespace-mode' in one function."
   (interactive)
   (display-fill-column-indicator-mode 'toggle)
   (whitespace-mode 'toggle))
@@ -56,7 +56,7 @@
    nil nil))
 
 (defun hristoast-regenerate-openmw-compile-commands-json ()
-  "A helper for incrementally generating a compile-commands.json file for using LSP with OpenMW."
+  "A compile-commands.json file helper for OpenMW."
   (interactive)
   (hristoast-run-async-shell-command-maybe-with-env
    (concat "cd ~/src/openmw/build && cmake -DCMAKE_BUILD_TYPE=Debug .."
