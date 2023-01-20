@@ -9,6 +9,21 @@
 ;; TODO: https://github.com/skuro/plantuml-mode
 ;; TODO: https://github.com/emacs-eaf/eaf-browser
 
+;; A d2 extension for Emacs. This was heavily inspired of Mermaid Mode.
+;; https://github.com/andorsk/d2-mode
+;; Requires: https://github.com/terrastruct/d2
+(use-package d2-mode
+  :straight t
+  :defer t
+  :init
+  (add-to-list 'auto-mode-alist '("\\.d2$" . d2-mode)))
+
+;; A guitar fretboard visualization in Emacs.
+;; https://github.com/vifon/fretboard.el#fretboardel
+(use-package fretboard
+  :straight (:host github :repo "vifon/fretboard.el")
+  :defer t)
+
 ;; An Emacs web feeds client
 ;; https://github.com/skeeto/elfeed
 (use-package elfeed :straight t :defer t)
