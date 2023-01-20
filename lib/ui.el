@@ -235,6 +235,7 @@ Assumes that the frame is only split into two."
 (scroll-bar-mode -1)
 
 ;; Maximize Emacs when it's opened
-(add-to-list 'default-frame-alist '(fullscreen . maximized))
+(unless (getenv "EMACS_NO_MAXIMIZE")
+  (add-to-list 'default-frame-alist '(fullscreen . maximized)))
 
 ;;; ui.el ends here
