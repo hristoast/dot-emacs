@@ -65,7 +65,6 @@
       "EMACS_NO_GOLANG" "golang"
       "EMACS_NO_GROOVY" "groovy"
       "EMACS_NO_HTML" "html"
-      "EMACS_NO_JAVA" "java"
       "EMACS_NO_JAVASCRIPT" "javascript"
       "EMACS_NO_JINJA2" "jinja2"
       "EMACS_NO_JSON" "h-json"
