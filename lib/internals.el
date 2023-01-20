@@ -35,6 +35,10 @@
 ;; Delete highlighted text when you type
 (delete-selection-mode t)
 
+;; Prevent Emacs from splitting horizontally on higher resolution displays (I usually don't want that)
+(when (getenv "EMACS_LARGER_SCREEN")
+  (setq split-height-threshold 160))
+
 (setq
  ;; Backup files ...
  backup-directory-alist `(("." . "~/.emacs.d/backups"))
