@@ -7,7 +7,6 @@
 (global-set-key (kbd "RET") 'newline-and-indent)
 ;; Build, compile, that stuff
 (global-set-key (kbd "<f5>") 'hristoast-build-project)
-;; Make undo work like other editors
 (global-unset-key (kbd "C-/"))
 (global-set-key (kbd "M-z") 'undo)
 ;; Better comment-toggling
@@ -32,7 +31,7 @@
 (global-set-key (kbd "C-x u") 'upcase-region)
 (global-set-key (kbd "C-x t m") 'menu-bar-mode)
 (global-set-key (kbd "C-x C-v") 'clipboard-yank)
-(global-set-key (kbd "C-S-^") 'enlarge-window)
+(global-set-key (kbd "C-^") 'enlarge-window)
 (global-set-key (kbd "C-%") 'shrink-window)
 (global-set-key (kbd "C-c g l") 'goto-line)
 (global-set-key (kbd "C-c e d") 'eldoc-doc-buffer)
