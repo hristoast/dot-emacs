@@ -30,9 +30,11 @@
    (sh-mode . lsp-deferred)
    (yaml-mode . lsp-deferred))
   :init
-  ;; Knob to disable the headerline breadcrum stuff
-  (if (getenv "EMACS_LSP_NO_HEADERLINE_BREADCRUMB")
-      (lsp-headerline-breadcrumb-mode 0))
+  ;; Knob to ensable the headerline breadcrum stuff
+  (lsp-headerline-breadcrumb-mode -1)
+  (if (not (getenv "EMACS_LSP_HEADERLINE_BREADCRUMB"))
+      (setq lsp-headerline-breadcrumb-enable nil))
+
   (setq
    ;; https://emacs-lsp.github.io/lsp-mode/page/performance/
    gc-cons-threshold (* 100 1024 1024)
