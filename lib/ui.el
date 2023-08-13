@@ -41,6 +41,7 @@
   ;; https://github.com/emacs-dashboard/emacs-dashboard
   (use-package dashboard
     :straight t
+    :init (page-break-lines-mode)
     :config
     ;; (page-break-lines-mode)
     (dashboard-setup-startup-hook)
