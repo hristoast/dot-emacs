@@ -19,6 +19,7 @@
                      ("gopls.staticcheck" t t))))))
    (c-mode . lsp-deferred)
    (c++-mode . lsp-deferred)
+   (dockerfile-mode . lsp-deferred)
    (lua-mode . lsp-deferred)
    (js-mode . lsp-deferred)
    (json-mode . lsp-deferred)
