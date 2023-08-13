@@ -61,20 +61,7 @@
        dashboard-page-separator "\n\f\n"
        dashboard-banner-logo-title (or (getenv "EMACS_DASHBOARD_TITLE")
                                        "Welcome to Hristos' Emacs")
-       dashboard-footer-messages '("Check out: https://mousikofidi.info/"
-                                   "Check out: https://openmw.org/"
-                                   "Check out: https://soupault.app/"
-                                   "Check out: https://sr.ht/"
-                                   "Don't forget to smile!"
-                                   "Hristos is proud of you!"
-                                   "Keep excited and hack on!"
-                                   "Pssst, try: M-x fireplace"
-                                   "Smile at a stranger today."
-                                   "Read about available tweaks here: https://man.sr.ht/~hristoast/dot-emacs/config.md#tweaks"
-                                   "Set these environment variables for a light theme: EMACS_MATERIAL_THEME=light EMACS_SML_THEME=light"
-                                   "Set these environment variables for no extra themes: EMACS_NO_SMART_MODE_LINE=t EMACS_NO_STATUS_EMOJII=t EMACS_NO_THEME=t"
-                                   "Set this environment variable for the dark blue material theme: EMACS_MATERIAL_THEME_BLUE=t"
-                                   "Set this environment variable to change the default org file: EMACS_DEFAULT_ORG_FILE=/path/to/file.org")
+       dashboard-footer-messages '("hristos.co")
        dashboard-items '((recents  . 20)
                          (bookmarks . 20)
                          (agenda . 20))
