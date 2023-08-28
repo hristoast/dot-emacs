@@ -26,6 +26,7 @@
  ("elfeed-dashboard" . "b143f8453aed2053e8fc6f05cef6233797408546")
  ("elfeed-org" . "268efdd0121fa61f63b722c30e0951c5d31224a4")
  ("elisp-tree-sitter" . "3cfab8a0e945db9b3df84437f27945746a43cc71")
+ ("emacs-ansible" . "d89ac0ee57742cca0f0e0a3453d9dcc521575690")
  ("emacs-dashboard" . "0cae7b872552c73da2ff61de6623b8c3196f1937")
  ("emacs-fireplace" . "f6c23e259349922aae25cf2898ba815a7d8f2527")
  ("emacs-fish" . "a7c953b1491ac3a3e00a7b560f2c9f46b3cb5c04")

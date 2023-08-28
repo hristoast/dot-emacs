@@ -17,6 +17,7 @@
                   (lsp-register-custom-settings
                    '(("gopls.completeUnimported" t t)
                      ("gopls.staticcheck" t t))))))
+   (ansible-mode . lsp-deferred)
    (c-mode . lsp-deferred)
    (c++-mode . lsp-deferred)
    (dockerfile-mode . lsp-deferred)
