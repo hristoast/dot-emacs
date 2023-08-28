@@ -49,7 +49,6 @@
 
       "EMACS_NO_ANSIBLE" "h-ansible"
       "EMACS_NO_CORFU" "h-corfu"
-      "EMACS_USE_LSP_MODE" "h-flycheck"
       "EMACS_NO_LSP" "h-lsp"
       "EMACS_NO_C_CPP" "c-cpp"
       "EMACS_NO_CALC" "h-calc"
