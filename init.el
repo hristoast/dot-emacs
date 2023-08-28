@@ -30,8 +30,6 @@
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 
-;; https://github.com/radian-software/straight.el/blob/3eca39dfc6797243ec7d1c6a7d45142407f73f88/README.md#integration-with-use-package
-(straight-use-package 'use-package)
 
 ;; Module definitions
 (defvar hristoast-modules
