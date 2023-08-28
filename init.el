@@ -30,6 +30,7 @@
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 
+;;TODO: https://github.com/jwiegley/use-package#use-package-ensure-system-package
 
 ;; Module definitions
 (defvar hristoast-modules
@@ -48,7 +49,7 @@
 
       "EMACS_NO_ANSIBLE" "h-ansible"
       "EMACS_NO_CORFU" "h-corfu"
-      "EMACS_NO_FLYCHECK" "h-flycheck"
+      "EMACS_USE_LSP_MODE" "h-flycheck"
       "EMACS_NO_LSP" "h-lsp"
       "EMACS_NO_C_CPP" "c-cpp"
       "EMACS_NO_CALC" "h-calc"
