@@ -21,14 +21,17 @@
    (c-mode . lsp-deferred)
    (c++-mode . lsp-deferred)
    (dockerfile-mode . lsp-deferred)
-   (lua-mode . lsp-deferred)
+   (html-mode . lsp-deferred)
    (js-mode . lsp-deferred)
    (json-mode . lsp-deferred)
+   (lua-mode . lsp-deferred)
+   (nginx-mode . lsp-deferred)
    (python-mode . (lambda ()
                     (require 'lsp-pyright)
                     (lsp-deferred)))
    (ruby-mode . lsp-deferred)
    (sh-mode . lsp-deferred)
+   (toml-mode . lsp-deferred)
    (yaml-mode . lsp-deferred))
   :init
   ;; Knob to ensable the headerline breadcrum stuff
