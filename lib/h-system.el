@@ -8,6 +8,12 @@
 ;; Load this early on.
 (use-package diminish :straight t)
 
+;; https://github.com/jwiegley/use-package#use-package-ensure-system-package
+;; (use-package use-package-ensure-system-package :straight nil)
+
+;; https://gitlab.com/jabranham/system-packages
+;; (use-package system-packages :straight t)
+
 ;; TODO: This causes a hang on my system, figure out why..
 ;; https://github.com/jwiegley/use-package/tree/a7422fb8ab1baee19adb2717b5b47b9c3812a84c#use-package-ensure-system-package
 ;; (use-package use-package-ensure-system-package :straight t)

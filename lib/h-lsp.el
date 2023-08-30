@@ -7,6 +7,13 @@
 (use-package eglot
   :straight nil
   :defer t
+  ;; :ensure-system-package
+  ;; ((ccls)
+  ;;  (gopls)
+  ;;  (lua-language-server)
+  ;;  (python3-lsp-server . pylsp)
+  ;;  (bash-language-server)
+  ;;  (terraform-ls))
   :config
   (add-to-list 'eglot-server-programs
                '(nginx-mode . ("nginx-language-server")))
