@@ -7,6 +7,11 @@
 (use-package eglot
   :straight nil
   :defer t
+  :config
+  (add-to-list 'eglot-server-programs
+               '(terraform-mode . ("terraform-ls" "serve")))
+  (add-to-list 'eglot-server-programs
+               '(toml-mode . ("taplo" "lsp" "stdio")))
   :hook
   ((ansible-mode . eglot-ensure)
    (c-mode . eglot-ensure)
@@ -22,7 +27,7 @@
    (python-mode . eglot-ensure)
    (ruby-mode . eglot-ensure)
    (sh-mode . eglot-ensure)
-   ;;TODO: https://joaotavora.github.io/eglot/#Setting-Up-LSP-Servers
+   (terraform-mode . eglot-ensure)
    ;; https://github.com/tamasfe/taplo/releases/tag/0.8.1
    (toml-mode . eglot-ensure)
    ;; https://github.com/redhat-developer/yaml-language-server
