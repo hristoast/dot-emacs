@@ -2,7 +2,7 @@
 
 ## About
 
-My Emacs configuration.  I use it on Emacs 27.1, but it should run fine on Emacs 24 or higher (with some warnings.)  It sports [my fork](https://git.sr.ht/~hristoast/emacs-material-theme) of the [Material Theme for Emacs](https://github.com/cpaulik/emacs-material-theme) and [Smart Mode Line](https://github.com/Malabarba/smart-mode-line) with the Dark theme.  I recommend running this configuration in daemon mode - it's great for GUI Emacs or terminal Emacs.
+My Emacs configuration.  Requires Emacs 29.1 or newer. It sports [my fork](https://git.sr.ht/~hristoast/emacs-material-theme) of the [Material Theme for Emacs](https://github.com/cpaulik/emacs-material-theme) and [Smart Mode Line](https://github.com/Malabarba/smart-mode-line) with the Dark theme.  I recommend running this configuration in daemon mode - it's great for GUI Emacs or terminal Emacs.
 
 It sets up Emacs with support for a wide variety of languages, as well as other more opinionated things like: color themes, many aspects of Emacs internals, code completion, and much much more.
 
