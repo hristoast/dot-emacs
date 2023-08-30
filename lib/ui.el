@@ -95,14 +95,6 @@
                 ("s" . fireplace-toggle-smoke)
                 ("u" . fireplace-up))))
 
-(unless (getenv "EMACS_NO_STATUS_EMOJI") ;; Don't use emoji for Flycheck's status.
-  ;; Flycheck Status Emoji
-  ;; https://github.com/liblit/flycheck-status-emoji
-  (use-package flycheck-status-emoji
-    :straight t
-    :config
-    (flycheck-status-emoji-mode)))
-
 (or (getenv "EMACS_NO_SMART_MODE_LINE")
     (getenv "EMACS_NO_THEME")
     ;; A powerful and beautiful mode-line for Emacs.
