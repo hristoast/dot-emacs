@@ -30,7 +30,8 @@
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 
-;;TODO: https://github.com/jwiegley/use-package#use-package-ensure-system-package
+;; TODO: https://github.com/jwiegley/use-package#use-package-ensure-system-package
+;; (use-package use-package-ensure-system-package :ensure t)
 
 ;; Module definitions
 (defvar hristoast-modules
