@@ -14,6 +14,9 @@
   ;;  (python3-lsp-server . pylsp)
   ;;  (bash-language-server)
   ;;  (terraform-ls))
+  :bind
+  (("C-c e n" . flymake-goto-next-error)
+   ("C-c e p" . flymake-goto-prev-error))
   :config
   (add-to-list 'eglot-server-programs
                '(nginx-mode . ("nginx-language-server")))
