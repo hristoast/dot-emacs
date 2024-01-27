@@ -154,7 +154,9 @@
 
 (if (getenv "EMACS_LINUM")
     ;; http://is.gd/Mw5KiS
-    (global-linum-mode t))
+    (if (fboundp 'global-linum-mode)
+        (global-linum-mode t)
+      (display-line-numbers-mode)))
 
 (defvar h-font-height)
 (if (getenv "EMACS_TALLER_FONT")
