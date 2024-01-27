@@ -16,9 +16,7 @@
   :straight t
   :hook
   (before-save . (lambda ()
-                   (when (eq major-mode 'go-mode)
-                     (progn
-                       (lsp-format-buffer)
-                       (lsp-organize-imports))))))
+                   (gofmt-before-save)
+                   (eglot-code-action-organize-imports (point-min) (point-max)))))
 
 ;;; golang.el ends here
