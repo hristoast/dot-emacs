@@ -43,7 +43,6 @@
     :straight t
     :init (page-break-lines-mode)
     :config
-    ;; (page-break-lines-mode)
     (dashboard-setup-startup-hook)
     ;; Allow banner customization through an environment variable
     (let ((hristoast-dashboard-banners
