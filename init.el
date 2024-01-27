@@ -79,7 +79,7 @@
       "EMACS_NO_SYSTEMD" "h-systemd"
       "EMACS_NO_TERRAFORM" "terraform"
       "EMACS_NO_TOML" "toml"
-      "EMACS_NO_VISUAL_BASIC" "vbscript"
+      ;; "EMACS_NO_WINDOWS_STUFF" "windows"
       "EMACS_NO_YAML" "yaml"
       "EMACS_NO_CUSTOMIZE" "customize")))
 
