@@ -3,6 +3,9 @@
 ;; Packages related to orgmode.
 ;;; Code:
 
+;; Needed for org-roam
+(use-package emacsql :straight t)
+
 ;; https://www.orgroam.com/
 (use-package org-roam
   :straight t
@@ -15,8 +18,6 @@
 (use-package org-roam-ui
   :straight t
   :after org-roam
-  ;;TODO: I'm not hooking into this, should I?
-  ;; :hook (after-init . org-roam-ui-mode)
   :config
   (setq org-roam-ui-sync-theme t
         org-roam-ui-follow t
