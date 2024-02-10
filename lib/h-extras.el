@@ -55,6 +55,10 @@
   (setq rmh-elfeed-org-files (list (or (getenv "EMACS_ELFEED_ORG_FILE")
                                        "~/src/org/elfeed.org"))))
 
+;; https://www.masteringemacs.org/article/securely-generating-totp-tokens-emacs
+;; https://github.com/juergenhoetzel/emacs-totp
+(use-package totp :straight t :defer t)
+
 ;; One-frame-per-action GIF recording for optimal quality/size ratio
 ;; https://gitlab.com/ambrevar/emacs-gif-screencast
 (use-package gif-screencast
