@@ -30,6 +30,11 @@
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 
+;; Configure use-package to use straight.el by default
+(use-package straight
+  :custom
+  (straight-use-package-by-default t))
+
 ;; Module definitions
 (defvar hristoast-modules
   #s(hash-table

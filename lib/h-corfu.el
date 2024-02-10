@@ -8,7 +8,6 @@
 ;; https://github.com/emacs-straight/corfu/tree/1d8b6030c9022a5b9ad784b8cba2a284b8093ecb#auto-completion
 ;; https://github.com/emacs-straight/corfu/tree/1d8b6030c9022a5b9ad784b8cba2a284b8093ecb#tab-and-go-completion
 (use-package corfu
-  :straight t
   :after corfu-echo corfu-history corfu-info
   ;; TAB-and-Go customizations
   :custom
@@ -45,12 +44,15 @@
 ;; Corfu Extensions - these have to load before corfu itself.
 ;; https://github.com/emacs-straight/corfu/tree/1d8b6030c9022a5b9ad784b8cba2a284b8093ecb#extensions
 (use-package corfu-echo
+  :straight nil
   :load-path "straight/repos/corfu/extensions")
 
 (use-package corfu-history
+  :straight nil
   :load-path "straight/repos/corfu/extensions")
 
 (use-package corfu-info
+  :straight nil
   :load-path "straight/repos/corfu/extensions")
 
 ;; TODO: This was pretty buggy but I love the idea.
@@ -60,7 +62,6 @@
 ;; This emacs package adds configurable icon or text-based completion prefixes based on the :company-kind property that many completion backends (such as lsp-mode and Emacs 28's elisp-mode) provide.
 ;; https://github.com/jdtsmith/kind-icon
 (use-package kind-icon
-  :straight t
   :after corfu
   :custom
   (kind-icon-default-face 'corfu-default) ; to compute blended backgrounds correctly
