@@ -9,7 +9,6 @@
 ;; Clean auto-indent and backspace unindent
 ;; https://github.com/pmarinov/clean-aindent-mode
 (use-package clean-aindent-mode
-  :straight t
   :config
   (electric-indent-mode -1)
   (setq clean-aindent-is-simple-indent t))
@@ -18,8 +17,7 @@
   ;; Interactively highlight which buffer is active by dimming the others.
   ;; https://github.com/gonewest818/dimmer.el
   (use-package dimmer
-    :straight t
-    :config
+      :config
     (setq
      dimmer-fraction 0.25
      dimmer-watch-frame-focus-events nil)
@@ -29,8 +27,7 @@
   ;; Highlight TODO keywords
   ;; https://github.com/tarsius/hl-todo
   (use-package hl-todo
-    :straight t
-    :config
+      :config
     (setq hl-todo-keyword-faces
       '(("FIXME"   . "#ffff00")
         ("TODO"   . "#ffff00")
@@ -50,7 +47,6 @@
 ;; Emacs rainbow delimiters mode
 ;; https://github.com/Fanael/rainbow-delimiters
 (use-package rainbow-delimiters
-  :straight t
   :hook (prog-mode . rainbow-delimiters-mode))
 
 ;; TODO: https://github.com/karthink/popper
@@ -58,7 +54,6 @@
 ;; Rainbow mode - #000 #fff #f00 #ff0 #00f #0f0 #800080 #00ffff #ff00ff
 ;; https://julien.danjou.info/projects/emacs-packages
 (use-package rainbow-mode
-  :straight t
   :diminish rainbow-mode
   :hook ((css-mode . rainbow-mode)
          (html-mode . rainbow-mode)
@@ -68,7 +63,6 @@
 ;; pairs and tries to be smart about it
 ;; https://github.com/Fuco1/smartparens
 (use-package smartparens
-  :straight t
   :diminish smartparens-mode
   :config
   (setq
@@ -98,27 +92,25 @@
 ;; Tree-sitter bindings for Emacs Lisp
 ;; https://github.com/emacs-tree-sitter/elisp-tree-sitter
 (use-package tree-sitter
-  :straight t
   :hook (tree-sitter-after-on-hook . tree-sitter-hl-mode)
   :config (global-tree-sitter-mode))
 
 ;; Language bundle for Emacs's tree-sitter package
 ;; https://github.com/emacs-tree-sitter/tree-sitter-langs
 (use-package tree-sitter-langs
-  :straight t
   :after tree-sitter)
 
 ;; undo-tree.el --- Treat undo history as a tree
 ;; http://www.dr-qubit.org/undo-tree/undo-tree.el
 ;; https://www.emacswiki.org/emacs/UndoTree
 (use-package undo-tree
-  :straight t
   :diminish undo-tree-mode
   :config
   (setq
    ;; TODO: make a special dir for these.
    ;; undo-tree-auto-save-history t
    undo-tree-visualizer-diff t
+   undo-tree-auto-save-history nil
    undo-tree-visualizer-timestamps t)
   (global-undo-tree-mode))
 
@@ -126,12 +118,10 @@
 ;; https://github.com/justbur/emacs-which-key/
 (use-package which-key
   :diminish which-key-mode
-  :straight t
   :config (which-key-mode))
 
 ;; windmove, built into Emacs: http://is.gd/63r6U0
 (use-package windmove
-  :straight t
   :bind
   ("M-e" . windmove-left)
   ("M-u" . windmove-right)
@@ -141,14 +131,12 @@
 ;; Unobtrusively trim extraneous whitespace *ONLY* in lines edited
 ;; https://github.com/lewang/ws-butler
 (use-package ws-butler
-  :straight t
   :diminish ws-butler-mode
   :hook (prog-mode . ws-butler-mode))
 
 ;; Yet another snippet extension
 ;; http://capitaomorte.github.io/yasnippet/
 (use-package yasnippet
-  :straight t
   :diminish yas-minor-mode
   :init
   ;; Shut yas up! Disables startup noise
@@ -159,7 +147,6 @@
 ;; zygospore: Reversible C-x 1
 ;; https://github.com/LouisKottmann/zygospore.el
 (use-package zygospore
-  :straight t
   :bind ("C-x 1" . zygospore-toggle-delete-other-windows))
 
 ;; https://www.masteringemacs.org/article/text-expansion-hippie-expand
