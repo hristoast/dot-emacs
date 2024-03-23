@@ -1,5 +1,4 @@
-(("ag.el" . "ed7e32064f92f1315cecbfc43f120bbc7508672c")
- ("alert" . "7774b5fd2feb98d4910ff06435d08c19fba93e26")
+(("alert" . "7774b5fd2feb98d4910ff06435d08c19fba93e26")
  ("all-the-icons-dired" . "e157f0668f22ed586aebe0a2c0186ab07702986c")
  ("all-the-icons.el" . "ee414384938ccf2ce93c77d717b85dc5538a257d")
  ("blacken" . "722ecbbcb71bfd517e2fc851e30c112e66ab621b")
