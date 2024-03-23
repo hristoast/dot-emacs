@@ -7,8 +7,8 @@
 (global-set-key (kbd "RET") 'newline-and-indent)
 ;; Build, compile, that stuff
 (global-set-key (kbd "<f5>") 'hristoast-build-project)
-(global-unset-key (kbd "C-/"))
 (global-set-key (kbd "M-z") 'undo)
+(global-set-key (kbd "C-z") 'undo)
 ;; Better comment-toggling
 (global-set-key (kbd "C-;") 'hristoast-toggle-comment)
 ;; Make text bigger
