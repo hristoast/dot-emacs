@@ -55,6 +55,12 @@
   (setq rmh-elfeed-org-files (list (or (getenv "EMACS_ELFEED_ORG_FILE")
                                        "~/src/org/elfeed.org"))))
 
+;; https://sr.ht/~jagrg/metronome/
+(use-package metronome
+  :straight t
+  :defer t
+  :bind ("ESC m" . metronome))
+
 ;; https://www.masteringemacs.org/article/securely-generating-totp-tokens-emacs
 ;; https://github.com/juergenhoetzel/emacs-totp
 (use-package totp :straight t :defer t)
