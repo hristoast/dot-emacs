@@ -42,15 +42,7 @@
      data
      ;; "Env var that disables loading if present" "file name in lib/ minus the extension"
      ;; Be sure to check `list-load-path-shadows' every so often!
-     ("EMACS_NO_EDITING_TWEAKS" "h-system"
-      "EMACS_NO_EDITING_TWEAKS" "editing"
-      "EMACS_NO_SEARCH_TWEAKS" "h-search"
-      "EMACS_NO_EXTRA_FUNCTIONS" "functions"
-      "EMACS_NO_INTERNALS_TWEAKS" "internals"
-      "EMACS_NO_KEYBINDINGS_TWEAKS" "keybindings"
-      "EMACS_NO_UI_TWEAKS" "ui"
-
-      "EMACS_NO_ANSIBLE" "h-ansible"
+     ("EMACS_NO_ANSIBLE" "h-ansible"
       "EMACS_NO_CORFU" "h-corfu"
       "EMACS_NO_LSP" "h-lsp"
       "EMACS_NO_C_CPP" "c-cpp"
@@ -86,6 +78,15 @@
       "EMACS_NO_TOML" "toml"
       ;; "EMACS_NO_WINDOWS_STUFF" "windows"
       "EMACS_NO_YAML" "yaml"
+
+      "EMACS_NO_EDITING_TWEAKS" "h-system"
+      "EMACS_NO_EDITING_TWEAKS" "editing"
+      "EMACS_NO_SEARCH_TWEAKS" "h-search"
+      "EMACS_NO_EXTRA_FUNCTIONS" "functions"
+      "EMACS_NO_INTERNALS_TWEAKS" "internals"
+      "EMACS_NO_KEYBINDINGS_TWEAKS" "keybindings"
+      "EMACS_NO_UI_TWEAKS" "ui"
+
       "EMACS_NO_CUSTOMIZE" "customize")))
 
 ;; Maybe load everything. Not loading everything is useful for
