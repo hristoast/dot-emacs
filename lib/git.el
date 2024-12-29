@@ -19,6 +19,9 @@
   (unless (getenv "EMACS_MAGIT_HIDE_UNPUSHED")
     (setf (alist-get 'unpushed magit-section-initial-visibility-alist) 'show))
 
+  (unless (getenv "EMACS_MAGIT_HIDE_UNTRACKED")
+    (setf (alist-get 'untracked magit-section-initial-visibility-alist) 'show))
+
   (unless (getenv "EMACS_MAGIT_HIDE_STASHES")
     (setf (alist-get 'stashes magit-section-initial-visibility-alist) 'show)))
 
