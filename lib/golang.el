@@ -17,8 +17,6 @@
   :hook
   (before-save . (lambda ()
                    (gofmt-before-save)
-                   (eglot-code-action-organize-imports (point-min) (point-max))))
-  (go-mode . (lambda ()
-               (local-set-key (kbd "M-.") #'godef-jump))))
+                   (eglot-code-action-organize-imports (point-min) (point-max)))))
 
 ;;; golang.el ends here
