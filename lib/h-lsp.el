@@ -15,7 +15,8 @@
   ;;  (bash-language-server)
   ;;  (terraform-ls))
   :bind
-  (("C-c e n" . flymake-goto-next-error)
+  (("C-c e c a" . eglot-code-actions)
+   ("C-c e n" . flymake-goto-next-error)
    ("C-c e p" . flymake-goto-prev-error))
   :config
   (add-to-list 'eglot-server-programs
