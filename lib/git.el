@@ -35,5 +35,11 @@
   (unless (getenv "EMACS_MAGIT_HIDE_STASHES")
     (setf (alist-get 'stashes magit-section-initial-visibility-alist) 'show)))
 
+;; Needed for Forge
+(use-package cond-let
+  :straight (:host github :repo "tarsius/cond-let"))
+
+;; https://github.com/magit/forge
+(use-package forge :straight t :after magit)
 
 ;;; git.el ends here
