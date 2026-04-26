@@ -12,4 +12,10 @@
   :hook
   (terraform-mode . terraform-format-on-save-mode))
 
+(use-package hcl-mode
+  :straight t
+  :defer t
+  :hook
+  (hcl-mode . terraform-format-on-save-mode))
+
 ;;; terraform.el ends here
