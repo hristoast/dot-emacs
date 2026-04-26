@@ -13,15 +13,18 @@
   (electric-indent-mode -1)
   (setq clean-aindent-is-simple-indent t))
 
-(unless (getenv "EMACS_NO_DIMMER")
-  ;; Interactively highlight which buffer is active by dimming the others.
-  ;; https://github.com/gonewest818/dimmer.el
-  (use-package dimmer
-      :config
-    (setq
-     dimmer-fraction 0.25
-     dimmer-watch-frame-focus-events nil)
-    (dimmer-mode t)))
+;;TODO: This package is broken atm
+;;TODO: Error in post-command-hook (dimmer-command-handler): (wrong-type-argument stringp reset)
+;; (unless (getenv "EMACS_NO_DIMMER")
+;;   ;; Interactively highlight which buffer is active by dimming the others.
+;;   ;; https://github.com/gonewest818/dimmer.el
+;;   (use-package dimmer
+;;     :config
+;;     (setq
+;;      dimmer-fraction 0.25
+;;      dimmer-watch-frame-focus-events nil)
+;;     (dimmer-configure-which-key)
+;;     (dimmer-mode t)))
 
 (unless (getenv "EMACS_NO_HL_TODO")
   ;; Highlight TODO keywords
