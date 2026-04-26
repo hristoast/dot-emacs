@@ -3,6 +3,16 @@
 ;; Packages related to git.
 ;;; Code:
 
+;; https://github.com/Wilfred/difftastic
+;; https://github.com/pkryger/difftastic.el
+(use-package difftastic
+  :defer t
+  :straight
+  (difftastic :type git
+              :host github
+              :repo "pkryger/difftastic.el")
+  :hook (magit-mode . difftastic-bindings-mode))
+
 ;; Emacs mode for .gitignore files
 ;; https://github.com/magit/git-modes/blob/master/gitignore-mode.el
 (use-package git-modes :defer t :straight t)
