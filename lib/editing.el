@@ -132,6 +132,7 @@
 ;; https://github.com/lewang/ws-butler
 (use-package ws-butler
   :diminish ws-butler-mode
+  :straight (:host github :repo "lewang/ws-butler" :branch "master")
   :hook (prog-mode . ws-butler-mode))
 
 ;; Yet another snippet extension
