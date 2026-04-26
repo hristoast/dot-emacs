@@ -106,6 +106,10 @@
 (use-package undo-tree
   :diminish undo-tree-mode
   :config
+  ;; https://github.com/apchamberlain/undo-tree.el#compressing-undo-history
+  (defadvice undo-tree-make-history-save-file-name
+      (after undo-tree activate)
+    (setq ad-return-value (concat ad-return-value ".gz")))
   (setq
    ;; TODO: make a special dir for these.
    ;; undo-tree-auto-save-history t
