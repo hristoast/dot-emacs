@@ -3,6 +3,15 @@
 ;; Stuff to customize eshell and make it cooler.
 ;;; Code:
 
+(use-package eat
+  :straight nil
+  :config
+  (setq eat-shell "/usr/bin/fish")
+  (defun eat-home ()
+    (interactive)
+    (let ((default-directory (getenv "HOME")))
+      (eat))))
+
 (use-package eshell
   :straight nil
   :config
