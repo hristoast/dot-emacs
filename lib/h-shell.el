@@ -4,13 +4,21 @@
 ;;; Code:
 
 (use-package eat
-  :straight nil
-  :config
-  (setq eat-shell "/usr/bin/fish")
-  (defun eat-home ()
-    (interactive)
-    (let ((default-directory (getenv "HOME")))
-      (eat))))
+  :straight
+  (eat :type git
+       :host codeberg
+       :repo "akib/emacs-eat"
+       :files ("*.el" ("term" "term/*.el") "*.texi"
+               "*.ti" ("terminfo/e" "terminfo/e/*")
+               ("terminfo/65" "terminfo/65/*")
+               ("integration" "integration/*")
+               (:exclude ".dir-locals.el" "*-tests.el")))
+  ;; :hook (eat-exec . eat-emacs-mode)
+  :init (defun eat-home ()
+          (interactive)
+          (let ((default-directory (getenv "HOME")))
+            (eat)))
+  :config (setq eat-shell "/usr/bin/fish"))
 
 (use-package eshell
   :straight nil
