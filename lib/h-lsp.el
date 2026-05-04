@@ -19,6 +19,9 @@
    ("C-c e n" . flymake-goto-next-error)
    ("C-c e p" . flymake-goto-prev-error))
   :config
+  (with-eval-after-load 'eglot
+    (add-to-list 'eglot-server-programs
+                 '(python-base-mode . ("ty" "server"))))
   (add-to-list 'eglot-server-programs
                '(nginx-mode . ("nginx-language-server")))
   (add-to-list 'eglot-server-programs
@@ -44,7 +47,7 @@
    ;; https://github.com/pappasam/nginx-language-server
    (nginx-mode . eglot-ensure)
    ;; system package: python3-lsp-server
-   (python-mode . eglot-ensure)
+   (python-base-mode . eglot-ensure)
    ;; https://github.com/Shopify/ruby-lsp
    ;; https://github.com/castwide/solargraph
    (ruby-mode . eglot-ensure)
