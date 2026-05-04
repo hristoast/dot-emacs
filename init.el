@@ -50,7 +50,7 @@
       "EMACS_NO_CLOJURE" "clojure"
       "EMACS_NO_CSS" "css"
       "EMACS_NO_DOCKER" "docker"
-      "EMACS_NO_ESHELL" "h-eshell"
+      "EMACS_NO_SHELL" "h-shell"
       "EMACS_NO_EXTRAS" "h-extras"
       "EMACS_NO_FENNEL" "fennel"
       "EMACS_NO_FISH" "fish"
