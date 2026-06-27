@@ -208,8 +208,8 @@ Assumes that the frame is only split into two."
 ;; No toolbar, please.
 (tool-bar-mode -1)
 
-;; Or menu bar...
-(menu-bar-mode -1)
+(if (getenv "EMACS_NO_MENU_BAR")
+    (menu-bar-mode -1))
 
 ;; Or scroll bar.
 (scroll-bar-mode -1)
