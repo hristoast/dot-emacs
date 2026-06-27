@@ -94,36 +94,35 @@
                 ("s" . fireplace-toggle-smoke)
                 ("u" . fireplace-up))))
 
-(or (getenv "EMACS_NO_SMART_MODE_LINE")
-    (getenv "EMACS_NO_THEME")
-    ;; A powerful and beautiful mode-line for Emacs.
-    ;; https://github.com/Malabarba/smart-mode-line
-    ;; TODO: Possibly add support for extra themes (e.g. powerline and solarized)
-    (let ((hristoast-sml-themes
-           #s(hash-table
-              size 3
-              test equal
-              data
-              ("dark" dark
-               "light" light
-               "respectful" respectful)))
-          (hristoast-sml-default-theme "dark"))
-
-      (use-package smart-mode-line
-        :straight t
-        :config
-        (setq
-         sml/shorten-directory t
-         sml/theme
-         (gethash (or (getenv "EMACS_SML_THEME") hristoast-sml-default-theme)
-                  hristoast-sml-themes nil))
-
-        (if (getenv "EMACS_TRUST_SML_THEMES")
-            ;; This isn't totally cool but here's an option for it anyways:
-            ;; https://github.com/Malabarba/smart-mode-line/blob/f53e380c9aadcba42ed2d4ed6ebc508b5e006519/README.org#installation-issues-faq
-            (setq sml-no-confirm-load-theme t))
-
-        (sml/setup))))
+;; Small tweaks to the vanilla modeline
+(unless (or (getenv "EMACS_NO_MODELINE_STYLE")
+            (getenv "EMACS_NO_THEME"))
+  ;; golden branch name
+  (advice-add 'vc-mode-line :after
+              (lambda (&rest _)
+                (when (stringp vc-mode)
+                  (setq vc-mode (propertize vc-mode 'face '(:foreground "goldenrod"))))))
+  ;; Shuffle things around just a bit
+  (setq-default mode-line-format
+                '("%e"
+                  "%l:%c " ;; Native escapes are fast and update asynchronously
+                  (:propertize "%p " face (:foreground "gray60"))
+                  mode-line-front-space
+                  (:propertize ("" mode-line-mule-info
+                                mode-line-client
+                                mode-line-modified
+                                mode-line-remote
+                                mode-line-window-dedicated)
+                               display (min-width (6.0)))
+                  mode-line-frame-identification
+                  (:propertize mode-line-buffer-identification face (:foreground "light blue"))
+                  "   "
+                  (project-mode-line project-mode-line-format)
+                  (vc-mode vc-mode)
+                  "  "
+                  (:eval (replace-regexp-in-string "[()]" "" (format-mode-line mode-line-modes)))
+                  mode-line-misc-info
+                  mode-line-end-spaces)))
 
 (unless (getenv "EMACS_NO_THEME") ;; Don't load a theme.
   ;; Color Theme for emacs based on material design colors
