@@ -3,6 +3,9 @@
 ;; User interface changes.
 ;;; Code:
 
+;; I don't really need to see this
+(setq eldoc-minor-mode-string nil)
+
 (unless (getenv "EMACS_NO_ALERT")
   ;; https://github.com/jwiegley/alert
   ;; A Growl-like alerts notifier for Emacs
