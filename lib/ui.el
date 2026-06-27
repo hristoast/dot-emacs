@@ -82,6 +82,7 @@
   (progn
     ;; A utility package to collect various Icon Fonts and propertize them within Emacs.
     ;; https://github.com/domtronn/all-the-icons.el
+    ;; M-x all-the-icons-install-fonts
     (use-package all-the-icons :straight t)
     (use-package all-the-icons-dired
       :straight t
@@ -131,6 +132,7 @@
   ;; Color Theme for emacs based on material design colors
   ;; https://github.com/cpaulik/emacs-material-theme
   ;; But use my fork that always selects grey colors over darkblue.
+  ;;TODO: some faces still use the blueish theme...
   (use-package material-theme
     :straight (material-theme
                :type git
@@ -142,11 +144,11 @@
       (setq hristoast-trust-themes nil))
 
     (let ((hristoast-material-themes #s(hash-table
-                                size 8
-                                test equal
-                                data
-                                ("dark" material
-                                 "light" material-light)))
+                                        size 8
+                                        test equal
+                                        data
+                                        ("dark" material
+                                         "light" material-light)))
           (hristoast-material-default "dark"))
       (setq-default hristoast-material-theme
                     (gethash (or (getenv "EMACS_MATERIAL_THEME") hristoast-material-default)
@@ -166,20 +168,20 @@
   (setq h-font-height 100))
 
 (if (eq system-type 'windows-nt)
-        ;; Use Cascadia Mono on Windows, it looks nice
-        (set-face-attribute 'default nil
-                            :family "Cascadia Mono"
-                            :height h-font-height
-                            :weight 'normal)
+    ;; Use Cascadia Mono on Windows, it looks nice
+    (set-face-attribute 'default nil
+                        :family "Cascadia Mono"
+                        :height h-font-height
+                        :weight 'normal)
 
-        (unless (getenv "EMACS_NO_HACK_FONT")
-          ;; Hack - http://sourcefoundry.org/hack/
-          (if (or (file-exists-p (concat (getenv "HOME") "/.fonts/Hack-Regular.ttf"))
-                  (file-exists-p "/usr/share/fonts/TTF/Hack-Regular.ttf"))
-              (set-face-attribute 'default nil
-                                  :family "Hack"
-                                  :height h-font-height
-                                  :weight 'normal))))
+  (unless (getenv "EMACS_NO_HACK_FONT")
+    ;; Hack - http://sourcefoundry.org/hack/
+    (if (or (file-exists-p (concat (getenv "HOME") "/.fonts/Hack-Regular.ttf"))
+            (file-exists-p "/usr/share/fonts/TTF/Hack-Regular.ttf"))
+        (set-face-attribute 'default nil
+                            :family "Hack"
+                            :height h-font-height
+                            :weight 'normal))))
 
 (unless (getenv "EMACS_NO_NOTO_EMOJI")
   ;; I don't work on macOS much anymore.. but if i do:
