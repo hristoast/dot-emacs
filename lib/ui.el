@@ -109,8 +109,9 @@
   ;; Shuffle things around just a bit
   (setq-default mode-line-format
                 '("%e"
-                  "%l:%c " ;; Native escapes are fast and update asynchronously
-                  (:propertize "%p " face (:foreground "gray60"))
+                   ;; Native escapes are fast and update asynchronously
+                  (:propertize "%l:%c" face nil display (min-width (8.0)))
+                  (:propertize "%p" face (:foreground "gray60") display (min-width (7.0)))
                   mode-line-front-space
                   (:propertize ("" mode-line-mule-info
                                 mode-line-client
