@@ -65,14 +65,6 @@
 ;; https://github.com/juergenhoetzel/emacs-totp
 (use-package totp :straight t :defer t)
 
-;; One-frame-per-action GIF recording for optimal quality/size ratio
-;; https://gitlab.com/ambrevar/emacs-gif-screencast
-(use-package gif-screencast
-  :straight t
-  :bind (("ESC g r" . gif-screencast-start-or-stop)
-         ("ESC g p" . gif-screencast-pause)
-         ("ESC g s" . gif-screencast-stop)))
-
 ;; A GNU Emacs major mode that acts as a front end to mpc.
 ;; https://github.com/jorenvo/simple-mpc
 (unless (getenv "EMACS_NO_MPD")
