@@ -6,6 +6,10 @@
 (when (treesit-available-p)
   (use-package treesit-auto
     :straight t
-    :config (global-treesit-auto-mode)))
+    :config
+    ;; I really don't love the syntax highlighting changes
+    ;; that treesit brings to Go..
+    (setq treesit-auto-langs (remove 'go treesit-auto-langs))
+    (global-treesit-auto-mode)))
 
 ;;; h-ts.el ends here
