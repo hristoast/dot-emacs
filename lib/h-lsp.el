@@ -19,6 +19,13 @@
    ("C-c e n" . flymake-goto-next-error)
    ("C-c e p" . flymake-goto-prev-error))
   :config
+  (let ((lsp-lib (expand-file-name "games/openmw/Mods/Tools/LSP/0.51.0/luaLS"
+                                   (getenv "HOME"))))
+    (when (file-directory-p lsp-lib)
+      (setq-default eglot-workspace-configuration
+                    `((:Lua . (:runtime (:version "Lua 5.4")
+                                        :workspace (:library [,lsp-lib])
+                                        :diagnostics (:globals ["require"])))))))
   (with-eval-after-load 'eglot
     (add-to-list 'eglot-server-programs
                  '(python-base-mode . ("ty" "server"))))
