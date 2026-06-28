@@ -3,17 +3,9 @@
 ;; Packages related to eglot
 ;;; Code:
 
-;;TODO: also configure Flymake here
 (use-package eglot
   :straight nil
   :defer t
-  ;; :ensure-system-package
-  ;; ((ccls)
-  ;;  (gopls)
-  ;;  (lua-language-server)
-  ;;  (python3-lsp-server . pylsp)
-  ;;  (bash-language-server)
-  ;;  (terraform-ls))
   :bind
   (("C-c e c a" . eglot-code-actions)
    ("C-c e n" . flymake-goto-next-error)
@@ -38,7 +30,7 @@
     (add-to-list 'eglot-server-programs
                  '((toml-mode toml-ts-mode) . ("taplo" "lsp" "stdio"))))
   :hook
-  ;; https://emacs-lsp.github.io/lsp-mode/page/lsp-ansible/
+  ;; system package: ansible-language-server
   ((ansible-mode . eglot-ensure)
    ;; system package: ccls
    (c-mode . eglot-ensure)
@@ -62,7 +54,7 @@
    (lua-ts-mode . eglot-ensure)
    ;; https://github.com/pappasam/nginx-language-server
    (nginx-mode . eglot-ensure)
-   ;; system package: python3-lsp-server
+   ;; system package: ty
    (python-base-mode . eglot-ensure)
    (python-ts-mode . eglot-ensure)
    ;; https://github.com/Shopify/ruby-lsp
@@ -74,7 +66,7 @@
    (bash-ts-mode . eglot-ensure)
    ;; system package: terraform-ls
    (terraform-mode . eglot-ensure)
-   ;; https://github.com/tamasfe/taplo/releases/tag/0.8.1
+   ;; system package: taplo
    (toml-mode . eglot-ensure)
    (toml-ts-mode . eglot-ensure)
    ;; system package: yaml-language-server
