@@ -73,14 +73,6 @@
          ("ESC g p" . gif-screencast-pause)
          ("ESC g s" . gif-screencast-stop)))
 
-;; Imbue Emacs with power!
-;; https://github.com/elizagamedev/power-mode.el#power-modeel
-(use-package power-mode
-  :straight (power-mode
-               :type git
-               :host github
-               :repo "elizagamedev/power-mode.el"))
-
 ;; A GNU Emacs major mode that acts as a front end to mpc.
 ;; https://github.com/jorenvo/simple-mpc
 (unless (getenv "EMACS_NO_MPD")
