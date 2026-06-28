@@ -45,6 +45,7 @@
      ("EMACS_NO_ANSIBLE" "h-ansible"
       "EMACS_NO_CORFU" "h-corfu"
       "EMACS_NO_LSP" "h-lsp"
+      "EMACS_NO_TREESIT" "h-ts"
       "EMACS_NO_C_CPP" "c-cpp"
       "EMACS_NO_CALC" "h-calc"
       "EMACS_NO_CLOJURE" "clojure"
